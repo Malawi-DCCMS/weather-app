@@ -31,6 +31,7 @@ const GPSLocation = () => {
 
   return (
     <View>
+      <Text>Your location:</Text>
       <Text>{text}</Text>
     </View>
   );
