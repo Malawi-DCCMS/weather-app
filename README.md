@@ -1,1 +1,2 @@
-# DCCMS weather app
+# weather-app
+An app to show the weather.
