@@ -3,7 +3,7 @@
  * 
  * Ensures that a uses agent is set on each request.
  */
-class Forecaster {
+export class Forecaster {
     readonly userAgent: string;
     readonly baseURL: string = "https://api.met.no/weatherapi/locationforecast/2.0/";
 
@@ -29,7 +29,7 @@ class Forecaster {
     }
 }
 
-interface WeatherForecast {
+export interface WeatherForecast {
     type: string
     geometry: {
         type: "Point",
@@ -88,5 +88,3 @@ export interface ForecastTimestep {
         }
     }
 }
-
-export {Forecaster, WeatherForecast}

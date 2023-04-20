@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { WeatherIcon } from './src/weathericon';
-import { Forecaster } from './src/locationforecast';
 import { useEffect, useState } from 'react';
+import { Forecaster, WeatherForecast } from './src/locationforecast';
+import { ForecastSummary } from './src/forecast';
 
 export default function App() {
+
   const [forecast, setForecast] = useState<WeatherForecast|undefined>(undefined);
 
   const updateForecast = async () => {
@@ -19,8 +20,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Open up ApP.js to start working on your app!</Text>
-      <WeatherIcon size={256} symbol_code='lightsnow' />
+      <ForecastSummary forecast={forecast} size={256} />
       <StatusBar style="auto" />
     </View>
   );
