@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
@@ -9,10 +9,24 @@ import {
   ScreenHeaderBtn,
   Welcome,
 } from "../components";
+import { Forecaster, WeatherForecast } from "../src/locationforecast";
+import { ForecastSummary } from "../src/forecast";
 
 const Home = () => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [forecast, setForecast] = useState<WeatherForecast | undefined>(undefined);
+
+  const updateForecast = async () => {
+    let forecaster = new Forecaster("met_malawi")
+    const f = await forecaster.getForecast(-15.7861, 35.0058)
+    setForecast(f)
+  }
+
+  useEffect(() => {
+    updateForecast()
+  }, [])
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -29,6 +43,8 @@ const Home = () => {
           headerTitle: "",
         }}
       />
+
+      <ForecastSummary forecast={forecast} size={256} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
