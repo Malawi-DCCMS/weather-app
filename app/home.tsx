@@ -9,8 +9,8 @@ import {
   ScreenHeaderBtn,
   Welcome,
 } from "../components";
-import { Forecaster, WeatherForecast } from "../src/locationforecast";
-import { ForecastSummary } from "../src/forecast";
+import { Forecaster, WeatherForecast } from "../utils/locationforecast";
+import ForecastSummary from "../components/home/forecast/ForecastSummary";
 
 const Home = () => {
   const router = useRouter()

@@ -13,19 +13,25 @@ export class Forecaster {
             this.baseURL = baseURL;
     }
 
-    async getForecast(latitude: number, longitude: number, altitude?: number): Promise<WeatherForecast> {
+    async getForecast(latitude: number, longitude: number, altitude?: number): Promise<WeatherForecast | undefined> {
         let url = this.baseURL + "?lat=" + latitude.toFixed(4) + "&lon=" + longitude.toFixed(4)
         if (altitude != undefined)
             url += "&altitude=" + altitude.toFixed(0);
 
         console.log(url)
 
-        let response = await fetch(url, {
-            headers: {
-                "User-Agent": this.userAgent
-            }
-        })
-        return await response.json()
+        try {
+            let response = await fetch(url, {
+                headers: {
+                    "User-Agent": this.userAgent
+                }
+            })
+            return await response.json();
+        }
+        catch (err) {
+            console.log(err);
+            return undefined;
+        }
     }
 }
 
