@@ -1,7 +1,5 @@
 {
   "expo": {
-    "name": "weather-app",
-    "slug": "weather-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,8 +21,20 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "scheme": "acme",
     "web": {
       "favicon": "./assets/favicon.png"
-    }
-  }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
+      "bundler": "metro"
+    },
+    "name": "weather-app",
+    "slug": "com.dccms.weatherapp"
 }
