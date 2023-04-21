@@ -12,6 +12,8 @@ import {
 import { Forecaster, WeatherForecast } from "../utils/locationforecast";
 import ForecastSummary from "../components/home/forecast/ForecastSummary";
 
+import PlaceTitle from "../src/placetitle";
+
 const Home = () => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,6 +64,7 @@ const Home = () => {
               }
             }}
           />
+          <PlaceTitle />
 
           <Popularjobs />
           <Nearbyjobs />
