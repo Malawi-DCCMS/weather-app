@@ -2,7 +2,7 @@ import {View, Text} from 'react-native'
 import {useState, useEffect} from 'react'
 import * as Location from 'expo-location';
 
-import { SnapToPlace } from '../utils/places';
+import { SnapToPlace } from '../../../utils/places';
 
 export default function PlaceTitle() {
     const [place, setPlace] = useState("");

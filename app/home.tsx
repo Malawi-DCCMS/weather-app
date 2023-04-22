@@ -12,7 +12,7 @@ import {
 import { Forecaster, WeatherForecast } from "../utils/locationforecast";
 import ForecastSummary from "../components/home/forecast/ForecastSummary";
 
-import PlaceTitle from "../src/placetitle";
+import PlaceTitle from "../components/home/place/PlaceTitle";
 
 const Home = () => {
   const router = useRouter()
