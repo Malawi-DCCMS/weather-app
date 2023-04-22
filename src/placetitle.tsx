@@ -29,8 +29,8 @@ export default function PlaceTitle() {
     }, []);
 
     return (
-        <View>
-            <Text>{ place }</Text>
+        <View style={{ marginTop: 10 }}>
+            <Text style={{ fontSize: 26 }}>Position: { place }</Text>
         </View>
     )
 }
