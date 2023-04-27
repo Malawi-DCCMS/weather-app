@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -24,6 +24,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {Forecaster, WeatherForecast} from './utils/locationforecast';
+import ForecastSummary from './components/forecast/ForecastSummary';
+import GPSLocation from './src/gpslocation';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -62,6 +65,20 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const [forecast, setForecast] = useState<WeatherForecast | undefined>(
+    undefined,
+  );
+
+  const updateForecast = async () => {
+    let forecaster = new Forecaster('met_malawi');
+    const f = await forecaster.getForecast(-15.7913986, 35.0120414);
+    setForecast(f);
+  };
+
+  useEffect(() => {
+    updateForecast();
+  }, []);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -76,6 +93,12 @@ function App(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Section title="Forecast">
+            <ForecastSummary forecast={forecast} size={256} />
+          </Section>
+          <Section title="GPS Location">
+            <GPSLocation />
+          </Section>
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
