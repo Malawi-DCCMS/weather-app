@@ -40,7 +40,7 @@ export const ForecastSearch = ({location, setLocation}: SearchProps) => {
         initialValue={{id: '9_000_000', title: location}}
         onSelectItem={handleSelect}
         dataSet={dataset}
-        containerStyle={styles.searchBar}
+        inputContainerStyle={styles.searchBar}
       />
     </Container>
   );
@@ -49,12 +49,10 @@ export const ForecastSearch = ({location, setLocation}: SearchProps) => {
 const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: 'white',
-    height: '50',
-    margin: '12',
-    padding: '15',
+    height: 50,
+    paddingTop: 5,
     borderRadius: 20,
     width: '95%',
-    maxWidth: '700px',
   },
 });
 
