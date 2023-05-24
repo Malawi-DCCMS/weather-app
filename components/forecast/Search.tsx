@@ -1,46 +1,66 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components/native';
+import {StyleSheet} from 'react-native';
+import {
+  AutocompleteDropdown,
+  TAutocompleteDropdownItem,
+} from 'react-native-autocomplete-dropdown';
+
+import {getGeonames} from '../../src/services/geonames.service';
 
 type SearchProps = {
-  city: string;
-  setCity: React.Dispatch<React.SetStateAction<string>>;
-  fetchLatLongHandler: Function;
+  location: string;
+  setLocation: Function;
 };
 
-export const ForecastSearch = ({
-  city,
-  setCity,
-  fetchLatLongHandler,
-}: SearchProps) => {
-  const handleSubmit = () => {
-    fetchLatLongHandler();
+export const ForecastSearch = ({location, setLocation}: SearchProps) => {
+  const geonames = useMemo(() => getGeonames(), []);
+  const map = geonames.reduce(
+    (acc: Record<string, Geoname>, val) => ((acc[val.name] = val), acc),
+    {},
+  );
+
+  const dataset = geonames.map((val, idx) => ({
+    id: idx.toString(),
+    title: val.name,
+  }));
+
+  const handleSelect = (item: TAutocompleteDropdownItem) => {
+    if (item && item.title !== null) {
+      setLocation(map[item.title]);
+    }
   };
 
   return (
     <Container>
-      <SearchCity
-        onChangeText={setCity}
-        value={city}
-        placeholder={'Search by city'}
-        onSubmitEditing={handleSubmit}
+      <AutocompleteDropdown
+        clearOnFocus={false}
+        closeOnBlur={true}
+        closeOnSubmit={false}
+        initialValue={{id: '9_000_000', title: location}}
+        onSelectItem={handleSelect}
+        dataSet={dataset}
+        containerStyle={styles.searchBar}
       />
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  searchBar: {
+    backgroundColor: 'white',
+    height: '50',
+    margin: '12',
+    padding: '15',
+    borderRadius: 20,
+    width: '95%',
+    maxWidth: '700px',
+  },
+});
 
 const Container = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 35px;
-`;
-
-const SearchCity = styled.TextInput`
-  height: 50px;
-  margin: 12px;
-  background-color: white;
-  padding: 15px;
-  border-radius: 10px;
-  width: 95%;
-  max-width: 700px;
 `;
