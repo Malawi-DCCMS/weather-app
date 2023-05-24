@@ -13,7 +13,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1C36B17EC5F7AC0FBA373580 /* libPods-weatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED4B2B042EE20570B60C065 /* libPods-weatherApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		B457EED0BC79C7BF313A02F0 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2B1DE78AF91B4D43564456 /* ExpoModulesProvider.swift */; };
 		C87977C4E690004862B61EAE /* libPods-weatherApp-weatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB06303B6477D0595AB607C4 /* libPods-weatherApp-weatherAppTests.a */; };
 		E6195E8A2E9DFDC6A517AA1D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2E8AEABE48FDF02D77D28D /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
@@ -445,7 +444,6 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				B457EED0BC79C7BF313A02F0 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
