@@ -76,6 +76,7 @@ export const CurrentForecast = ({
               °C
             </CurrentDegrees>
           </CurrentTempView>
+          <Description>{locationName}</Description>
           <Description>{moment().format('ddd, DD MMM')}</Description>
         </MainInfoContainer>
         <SecondaryInfoContainer>
