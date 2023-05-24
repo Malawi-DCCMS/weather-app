@@ -17,10 +17,6 @@ const Home = ({navigation}: HomeProps) => {
     position: {lat: -15.786111, long: 35.005833},
   });
 
-  const [_city, setCity] = useState(place.name);
-  const [_lat, setLat] = useState(43.6532);
-  const [_long, setLong] = useState(-79.3832);
-
   useEffect(() => {
     getCurrentPosition()
       .then(location => {
@@ -37,19 +33,17 @@ const Home = ({navigation}: HomeProps) => {
       });
   }, [setPlace]);
 
-  const fetchLatLongHandler = () => {
-    setLat(-15.791399);
-    setLong(35.012041);
+  const setLocation = (location: Geoname) => {
+    setPlace({
+      name: location.name,
+      position: {lat: location.lat, long: location.long},
+    });
   };
 
   return (
     <Container>
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
-        <ForecastSearch
-          city={place.name}
-          setCity={setCity}
-          fetchLatLongHandler={fetchLatLongHandler}
-        />
+        <ForecastSearch location={place.name} setLocation={setLocation} />
         <CurrentForecast
           navigation={navigation}
           lat={place.position.lat}
