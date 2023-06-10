@@ -30,8 +30,6 @@ export class Forecaster {
       url += '&altitude=' + altitude.toFixed(0);
     }
 
-    console.log(url);
-
     try {
       let response = await fetch(url, {
         headers: {
@@ -70,6 +68,24 @@ export interface WeatherForecast {
   };
 }
 
+export interface WeatherDetails {
+  air_temperature_min?: number;
+  air_temperature_max?: number;
+  precipitation_amount?: number;
+  precipitation_amount_max?: number;
+  precipitation_amount_min?: number;
+  probability_of_precipitation?: number;
+  probability_of_thunder?: number;
+  ultraviolet_index_clear_sky_max?: number;
+}
+
+export interface TimestepForecast {
+  details?: WeatherDetails;
+  summary?: {
+    symbol_code?: string;
+  };
+}
+
 export interface ForecastTimestep {
   time: string;
   data: {
@@ -83,26 +99,8 @@ export interface ForecastTimestep {
         wind_speed?: number;
       };
     };
-    next_1_hours?: {
-      details?: {
-        precipitation_amount?: number;
-      };
-      summary?: {
-        symbol_code: string | null;
-      };
-    } | null;
-    next_6_hours?: {
-      details?: {
-        precipitation_amount?: number;
-      };
-      summary?: {
-        symbol_code: string | undefined;
-      };
-    };
-    next_12_hours?: {
-      summary?: {
-        symbol_code: string;
-      };
-    };
+    next_1_hours?: TimestepForecast;
+    next_6_hours?: TimestepForecast;
+    next_12_hours?: TimestepForecast;
   };
 }
