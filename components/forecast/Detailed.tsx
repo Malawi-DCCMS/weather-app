@@ -2,12 +2,40 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {ScrollView, StyleSheet, ImageBackground} from 'react-native';
 import moment from 'moment';
+import {maxBy} from 'lodash';
 
-import {Hourly} from './Hourly';
 import backgroundImage from '../../assets/6.png';
 import {ForecastTimestep} from '../../utils/locationforecast';
+import {Daily} from './Daily';
+
+type GroupedForecasts = Record<string, Array<ForecastTimestep>>;
+function groupForecastsByDay(
+  forecasts: Array<ForecastTimestep>,
+): GroupedForecasts {
+  return forecasts.reduce((acc: GroupedForecasts, val) => {
+    const key = moment(val.time).format('YYYY-MM-DD');
+    !acc[key] && (acc[key] = []);
+    acc[key].push(val);
+    return acc;
+  }, {});
+}
+
+function getLatestForecastForEachDay(
+  forecasts: GroupedForecasts,
+): Record<string, ForecastTimestep> {
+  return Object.entries(forecasts).reduce(
+    (acc: Record<string, ForecastTimestep>, [k, v]) => (
+      (acc[k] = maxBy(v, 'time') as ForecastTimestep), acc
+    ),
+    {},
+  );
+}
 
 const Detailed = (props: Record<string, any>) => {
+  const forecasts = props.route.params.forecast as Array<ForecastTimestep>;
+  const grouped = groupForecastsByDay(forecasts);
+  const recents = getLatestForecastForEachDay(grouped);
+
   return (
     <Container>
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
@@ -15,17 +43,11 @@ const Detailed = (props: Record<string, any>) => {
           <CurrentView>
             <Location>{props.route.params.location}</Location>
             <SecondaryInfoContainer>
-              {props.route.params.forecast.map(
-                (val: ForecastTimestep, idx: number) => {
-                  return (
-                    <Hourly
-                      key={idx}
-                      hour={moment(val.time).format('HH:mm')}
-                      forecast={val.data.next_6_hours}
-                    />
-                  );
-                },
-              )}
+              {Object.entries(recents)
+                .slice(0, 7)
+                .map(([day, forecast], idx) => {
+                  return <Daily key={idx} day={day} forecast={forecast} />;
+                })}
             </SecondaryInfoContainer>
           </CurrentView>
         </ScrollView>

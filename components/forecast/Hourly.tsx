@@ -25,24 +25,20 @@ export const Hourly = (props: HourlyProps) => {
         ) : null}
       </IconTempView>
       <IconTempView>
-        <Degree>
-          {Math.round(props.forecast?.details?.precipitation_amount_min || 0)}°C
-        </Degree>
+        <Temperature>
+          {Math.round(props.forecast?.details?.air_temperature_min || 0)}/
+          {Math.round(props.forecast?.details?.air_temperature_max || 0)}°
+        </Temperature>
       </IconTempView>
       <IconTempView>
-        <Degree>
-          {Math.round(props.forecast?.details?.air_temperature_max || 0)}°C
-        </Degree>
-      </IconTempView>
-      <IconTempView>
-        <Degree>
+        <Precipitation>
           {Math.round(props.forecast?.details?.precipitation_amount_min || 0)}mm
-        </Degree>
+        </Precipitation>
       </IconTempView>
       <IconTempView>
-        <Degree>
+        <Precipitation>
           {Math.round(props.forecast?.details?.precipitation_amount_max || 0)}mm
-        </Degree>
+        </Precipitation>
       </IconTempView>
     </HourlyContainer>
   );
@@ -86,6 +82,12 @@ const WeatherIcon = styled.Image`
   height: 40px;
 `;
 
-const Degree = styled.Text`
+const Temperature = styled.Text`
   font-size: 12px;
+  color: red;
+`;
+
+const Precipitation = styled.Text`
+  font-size: 12px;
+  color: #87ceeb;
 `;
