@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import moment from 'moment';
 import {ScrollView} from 'react-native';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
 import weatherIcons from '../../constants/weathericons';
 import {ForecastTimestep, WeatherForecast} from '../../utils/locationforecast';
 import {Hourly} from './Hourly';
-import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import {CAP} from './Cap';
 
 type CurrentProps = {
   navigation: NavigationProp<ParamListBase>;
@@ -130,6 +131,7 @@ export const CurrentForecast = ({
             />
           </DaysView>
         </SecondaryInfoContainer>
+        <CAP lat={lat} lon={long} />
         <SecondaryInfoContainer>
           <Hourly hour={'1 hr'} forecast={timestap?.data.next_1_hours} />
           <Hourly hour={'6 hrs'} forecast={timestap?.data.next_6_hours} />
