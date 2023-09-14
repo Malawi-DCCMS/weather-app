@@ -23,12 +23,13 @@ export const CAP = ({lat, lon}: CapProps) => {
   return (
     <SecondaryInfoContainer>
       <Row>
-        {alerts.length?
-          alerts.map((alert, idx) => (
-            <DetailsBox key={idx}>
-              <Details>{alert.alert.info.description}</Details>
-            </DetailsBox>
-          )): null}
+        {alerts.length
+          ? alerts.map((alert, idx) => (
+              <DetailsBox key={idx}>
+                <Details>{alert.alert.info.description}</Details>
+              </DetailsBox>
+            ))
+          : null}
       </Row>
     </SecondaryInfoContainer>
   );
