@@ -64,3 +64,5 @@ yarn-error.log
 
 # ignore .env file
 .env
+# testing
+/coverage
