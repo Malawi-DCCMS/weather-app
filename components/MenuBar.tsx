@@ -5,8 +5,8 @@ const MenuBar = () => (
   <Appbar.Header>
     <Appbar.BackAction onPress={() => {}} />
     <Appbar.Content title="Title" />
-    <Appbar.Action icon="calendar" onPress={() => {}} />
     <Appbar.Action icon="magnify" onPress={() => {}} />
+    <Appbar.Action icon="menu" onPress={() => {}} />
   </Appbar.Header>
 );
 
