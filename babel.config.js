@@ -14,5 +14,6 @@ module.exports = {
         verbose: false,
       },
     ],
+    ['react-native-paper/babel']
   ],
 };

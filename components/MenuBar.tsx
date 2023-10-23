@@ -1,0 +1,13 @@
+import * as React from 'react';
+import { Appbar } from 'react-native-paper';
+
+const MenuBar = () => (
+  <Appbar.Header>
+    <Appbar.BackAction onPress={() => {}} />
+    <Appbar.Content title="Title" />
+    <Appbar.Action icon="magnify" onPress={() => {}} />
+    <Appbar.Action icon="menu" onPress={() => {}} />
+  </Appbar.Header>
+);
+
+export default MenuBar;
