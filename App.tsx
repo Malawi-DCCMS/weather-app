@@ -1,16 +1,33 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AutocompleteDropdownContextProvider} from 'react-native-autocomplete-dropdown';
-import Home from './components/Home';
-import Detailed from './components/forecast/Detailed';
-import MenuBar from './components/MenuBar';
+import React, { useEffect, useState } from 'react';
+import {Alert} from 'react-native';
 
-const Stack = createNativeStackNavigator();
+import { getCurrentPosition } from './src/services/location.service';
+import { snapToPlace } from './utils/places';
+
+import MenuBar from './components/MenuBar';
+import { DEFAULT_PLACE } from './src/common';
 
 function App(): JSX.Element {
+  const [place, setPlace] = useState<Place>(DEFAULT_PLACE);
+
+  useEffect(() => {
+    getCurrentPosition()
+      .then(location => {
+        const closestPlace = snapToPlace({
+          name: '',
+          position: {lat: location.lat, long: location.long},
+        });
+        if (closestPlace?.name.length) {
+          setPlace(closestPlace);
+        }
+      })
+      .catch(error => {
+        Alert.alert(error.message);
+      });
+  }, [setPlace]);
+
   return (
-    <MenuBar />
+    <MenuBar location={place.name}/>
   );
 }
 
