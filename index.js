@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import { AppRegistry } from 'react-native';
 import { MD3LightTheme as DefaultTheme, PaperProvider, configureFonts } from 'react-native-paper';
@@ -8,9 +9,9 @@ import App from './App';
 const fontConfig = {
   notoHeader: {
     fontFamily: Platform.select({
-      web: 'NotoSans',
-      ios: 'NotoSans',
-      default: 'NotoSans',
+      web: 'Noto Sans',
+      ios: 'Noto Sans',
+      default: 'Noto Sans',
     }),
     fontWeight: '400',
     letterSpacing: 0.5,
