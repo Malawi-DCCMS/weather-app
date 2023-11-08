@@ -6,20 +6,6 @@ import { MD3LightTheme as DefaultTheme, PaperProvider, configureFonts } from 're
 import { name as appName } from './app.json';
 import App from './App';
 
-const fontConfig = {
-  notoHeader: {
-    fontFamily: Platform.select({
-      web: 'Noto Sans',
-      ios: 'Noto Sans',
-      default: 'Noto Sans',
-    }),
-    fontWeight: '400',
-    letterSpacing: 0.5,
-    lineHeight: 22,
-    fontSize: 20,
-  }
-};
-
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -27,7 +13,6 @@ const theme = {
     primary: 'tomato',
     secondary: 'yellow',
   },
-  fonts: configureFonts({config: fontConfig, isV3: true}),
 };
 
 export default function Main() {
