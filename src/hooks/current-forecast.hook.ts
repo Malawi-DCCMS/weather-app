@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
 
 import { WeatherForecast } from '../utils/locationforecast';
 
-export function useCurrentForecast(latitude: number, longitude: number): WeatherForecast {
+type ReturnType = [
+  loading: boolean,
+  forecast?: WeatherForecast,
+  error?: Error,
+];
+
+export function useForecast(latitude: number, longitude: number): ReturnType {
   const [forecast, setForecast] = useState<WeatherForecast>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error>();
+
   const API_URL = 'https://api.met.no/weatherapi/locationforecast/2.0';
   const USER_AGENT = 'met_malawi';
 
@@ -16,9 +24,12 @@ export function useCurrentForecast(latitude: number, longitude: number): Weather
       },
     )
       .then(res => res.json())
-      .then(setForecast)
-      .catch(error => Alert.alert(error.message));
+      .then(data => {
+        setLoading(false);
+        setForecast(data);
+      })
+      .catch(setError);
   }, [latitude, longitude]);
 
-  return forecast as WeatherForecast;
+  return [loading, forecast, error];
 }
