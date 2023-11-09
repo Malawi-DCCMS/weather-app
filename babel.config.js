@@ -14,6 +14,7 @@ module.exports = {
         verbose: false,
       },
     ],
-    ['react-native-paper/babel']
+    ['react-native-paper/babel'],
+    ['react-native-reanimated/plugin']
   ],
 };

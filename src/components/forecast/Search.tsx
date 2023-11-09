@@ -6,7 +6,7 @@ import {
   TAutocompleteDropdownItem,
 } from 'react-native-autocomplete-dropdown';
 
-import {getGeonames} from '../../src/services/geonames.service';
+import {getGeonames} from '../../services/geonames.service';
 
 type SearchProps = {
   location: string;

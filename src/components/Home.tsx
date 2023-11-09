@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ImageBackground, StyleSheet, Alert} from 'react-native';
 import styled from 'styled-components/native';
 
-import {getCurrentPosition} from '../src/services/location.service';
+import {getCurrentPosition} from '../services/location.service';
 import {CurrentForecast} from './forecast/Current';
 import {ForecastSearch} from './forecast/Search';
 import backgroundImage from '../assets/6.png';

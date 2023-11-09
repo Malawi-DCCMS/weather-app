@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 
-import {CAPClient, LOGGER} from '../../src/lib';
-import {CAPAlert} from '../../src/types/cap-feed.type';
+import {CAPClient, LOGGER} from '../../lib';
+import {CAPAlert} from '../../types/cap-feed.type';
 
 type CapProps = {
   lat: number;
