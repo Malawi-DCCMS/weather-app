@@ -6,6 +6,8 @@ This is a [**React Native**](https://reactnative.dev) project, bootstrapped usin
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup?guide=native) instructions till "Creating a new application" step, before proceeding.
 
+Install at least version `v20.9.0` of node before proceeding.
+
 ## Step 0: Download the code
 
 ```bash
