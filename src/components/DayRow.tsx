@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Icon, Paragraph, Text } from "react-native-paper";
 import moment from "moment";
 
-import weatherIcons from '../constants/weathericons';
+import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
 import { ForecastTimestep } from "../utils/locationforecast";
 
@@ -25,11 +25,11 @@ function getWeatherIcon(timesteps: Array<ForecastTimestep>): string | undefined 
   return icon;
 }
 
-type DailyForecastRowProps = {
+type DayRowProps = {
   day: string;
   forecast: Array<ForecastTimestep>;
 }
-const DailyForecastRow = (props: DailyForecastRowProps) => {
+const DayRow = (props: DayRowProps) => {
   const day = moment(props.day).format('ddd');
   const { forecast } = props;
 
@@ -40,7 +40,7 @@ const DailyForecastRow = (props: DailyForecastRowProps) => {
   const icon = getWeatherIcon(forecast);
 
   return (
-    <View style={styles.dailyForecastRow}>
+    <View style={styles.dayRow}>
       <Paragraph style={{ flex: 2 }}>
         <Text>{day}</Text>
       </Paragraph>
@@ -50,21 +50,21 @@ const DailyForecastRow = (props: DailyForecastRowProps) => {
       <Paragraph style={{ flex: 2 }}>
         <Icon source={weatherIcons[icon || 'fair_day']} size={19} />
       </Paragraph>
-      <Paragraph style={{ flex: 3, justifyContent: 'space-evenly' }}>
-        <Text>{minTemp}&deg; - {maxTemp}&deg;</Text>
+      <Paragraph style={{ flex: 3 }}>
+        <Text>{Math.round(minTemp)}&deg; - {Math.round(maxTemp)}&deg;</Text>
       </Paragraph>
-      <Paragraph style={{ flex: 2, textAlign: 'right' }}><Text>{windSpeed} km/h</Text></Paragraph>
+      <Paragraph style={{ flex: 2 }}><Text>{windSpeed} km/h</Text></Paragraph>
     </View>
   )
 };
 
 const styles = StyleSheet.create({
-  dailyForecastRow: {
+  dayRow: {
     fontFamily: 'NotoSans-Regular',
     backgroundColor: 'white',
     width: '100%',
-    borderRadius: 16,
-    padding: 10,
+    borderRadius: 4,
+    padding: 15,
     marginTop: 8,
     flexDirection: 'row',
     fontSize: 16,
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DailyForecastRow;
+export default DayRow;

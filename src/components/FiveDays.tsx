@@ -4,7 +4,7 @@ import { Text } from 'react-native-paper';
 import moment from 'moment';
 
 import { ForecastTimestep, WeatherForecast } from '../utils/locationforecast';
-import DailyForecastRow from '../components/DailyForecastRow';
+import DayRow from './DayRow';
 
 type GroupedForecasts = Record<string, Array<ForecastTimestep>>;
 function groupForecastsByDay(
@@ -21,7 +21,7 @@ function groupForecastsByDay(
 type DailyForecastProps = {
     forecast?: WeatherForecast;
 }
-function DailyForecast(props: DailyForecastProps): JSX.Element {
+function FiveDays(props: DailyForecastProps): JSX.Element {
     if (props.forecast) {
         const { timeseries } = props.forecast.properties;
         const today = moment().format('YYYY-MM-DD');
@@ -29,7 +29,7 @@ function DailyForecast(props: DailyForecastProps): JSX.Element {
         const grouped = groupForecastsByDay(filtered);
         const fiveDayForecast = Object.entries(grouped).slice(0, 5);
         return <View style={{ paddingLeft: 12, paddingRight: 12, marginTop: 40 }}>
-            {fiveDayForecast.map(([k, val]) => <DailyForecastRow key={k} day={k} forecast={val} />)}
+            {fiveDayForecast.map(([k, val]) => <DayRow key={k} day={k} forecast={val} />)}
         </View>
     }
 
@@ -40,4 +40,4 @@ function DailyForecast(props: DailyForecastProps): JSX.Element {
     );
 };
 
-export default DailyForecast;
+export default FiveDays;
