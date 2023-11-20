@@ -1,5 +1,5 @@
 import { ImageSourcePropType } from 'react-native';
-import weatherIcons from '../constants/weathericons';
+import weatherIcons from '../constants/weathericons.constant';
 
 export const DEFAULT_PLACE: Place = {
   name: 'Blantyre',
