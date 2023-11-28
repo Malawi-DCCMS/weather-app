@@ -2,34 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>MaterialCommunityIcons.ttf</string>
-		<string>MaterialIcons.ttf</string>
-		<string>NotoSans-Black.ttf</string>
-		<string>NotoSans-BlackItalic.ttf</string>
-		<string>NotoSans-Bold.ttf</string>
-		<string>NotoSans-BoldItalic.ttf</string>
-		<string>NotoSans-ExtraBold.ttf</string>
-		<string>NotoSans-ExtraBoldItalic.ttf</string>
-		<string>NotoSans-ExtraLight.ttf</string>
-		<string>NotoSans-ExtraLightItalic.ttf</string>
-		<string>NotoSans-Italic.ttf</string>
-		<string>NotoSans-Light.ttf</string>
-		<string>NotoSans-LightItalic.ttf</string>
-		<string>NotoSans-Medium.ttf</string>
-		<string>NotoSans-MediumItalic.ttf</string>
-		<string>NotoSans-Regular.ttf</string>
-		<string>NotoSans-SemiBold.ttf</string>
-		<string>NotoSans-SemiBoldItalic.ttf</string>
-		<string>NotoSans-Thin.ttf</string>
-		<string>NotoSans-ThinItalic.ttf</string>
-		<string>Rajdhani-Bold.ttf</string>
-		<string>Rajdhani-Light.ttf</string>
-		<string>Rajdhani-Medium.ttf</string>
-		<string>Rajdhani-Regular.ttf</string>
-		<string>Rajdhani-SemiBold.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -74,6 +46,34 @@
 	<string>Allow $(PRODUCT_NAME) to use your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to use your location</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>NotoSans-Black.ttf</string>
+		<string>NotoSans-BlackItalic.ttf</string>
+		<string>NotoSans-Bold.ttf</string>
+		<string>NotoSans-BoldItalic.ttf</string>
+		<string>NotoSans-ExtraBold.ttf</string>
+		<string>NotoSans-ExtraBoldItalic.ttf</string>
+		<string>NotoSans-ExtraLight.ttf</string>
+		<string>NotoSans-ExtraLightItalic.ttf</string>
+		<string>NotoSans-Italic.ttf</string>
+		<string>NotoSans-Light.ttf</string>
+		<string>NotoSans-LightItalic.ttf</string>
+		<string>NotoSans-Medium.ttf</string>
+		<string>NotoSans-MediumItalic.ttf</string>
+		<string>NotoSans-Regular.ttf</string>
+		<string>NotoSans-SemiBold.ttf</string>
+		<string>NotoSans-SemiBoldItalic.ttf</string>
+		<string>NotoSans-Thin.ttf</string>
+		<string>NotoSans-ThinItalic.ttf</string>
+		<string>Rajdhani-Bold.ttf</string>
+		<string>Rajdhani-Light.ttf</string>
+		<string>Rajdhani-Medium.ttf</string>
+		<string>Rajdhani-Regular.ttf</string>
+		<string>Rajdhani-SemiBold.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
