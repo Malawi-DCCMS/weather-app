@@ -1,4 +1,4 @@
-import {GEONAMES} from '../../assets/geonames';
+import { GEONAMES } from '../../assets/geonames';
 
 function placeFromGeoname(value: string): Geoname | undefined {
   const fields = value.split(/\t/);

@@ -1,23 +1,26 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-paper';
+import { ParamListBase } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import { WEATHER_WARNINGS } from '../common';
+import { SCREENS } from '../constants/screens.constant';
 
-type AppBarProps = { location: string };
+type AppBarProps = { location: string, navigation: DrawerNavigationProp<ParamListBase>; };
 
 const AppBar = (props: AppBarProps) => {
   const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 15)}...` : props.location;
+  const fmtLocation = tooLong ? `${props.location?.slice(0, 12)}...` : props.location;
   return (
     <View style={styles.appBar}>
-      <View style={styles.appTitleContainer}>
+      <View onTouchEnd={() => props.navigation.navigate(SCREENS.home)} style={styles.appTitleContainer}>
         <Text style={styles.appTitle}>{fmtLocation}</Text>
         <Icon size={24} source={WEATHER_WARNINGS.yellow} />
       </View>
       <View style={styles.appNav}>
-        <View style={styles.items}><Icon size={24} source="magnify" /></View>
-        <View><Icon size={24} source="menu" /></View>
+        <View style={styles.items} onTouchStart={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></View>
+        <View onTouchStart={() => props.navigation.openDrawer()}><Icon size={24} source="menu" /></View>
       </View>
     </View>
   );

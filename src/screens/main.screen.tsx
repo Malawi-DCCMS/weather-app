@@ -1,44 +1,76 @@
-import * as React from 'react';
-import { Alert, ImageBackground, StyleSheet, Text, View, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { ImageBackground, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ParamListBase } from '@react-navigation/native';
 
-import { useCurrentPlace } from '../hooks/current-place.hook';
 import appBackground from '../../assets/app-bg-normal.png';
 import AppBar from '../components/AppBar';
-import { useForecast } from '../hooks/current-forecast.hook';
 import Today from '../components/Today';
 import FiveDays from '../components/FiveDays';
+import type { AppDispatch, RootState } from '../store'
+import { SCREENS } from '../constants/screens.constant';
+import { getPreciseLocation } from '../store/location.slice';
+import { getLocationForecast } from '../store/forecast.slice';
 
-const MainScreen = () => {
-  const place = useCurrentPlace();
-  const [, forecast, error] = useForecast(place.position.lat, place.position.long);
+type ScreenProps = {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}
+const MainScreen = ({ navigation }: ScreenProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { name, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
+  const { forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
-  if (error) {
-    Alert.alert(error.message);
-    return <></>
+  useEffect(() => {
+    dispatch(getPreciseLocation());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getLocationForecast({ lat, lon }));
+  }, [name]);
+
+  useEffect(() => {
+    navigation.navigate(SCREENS.nolocation);
+  }, [locationError]);
+
+  if (forecastError) {
+    <SafeAreaView>
+      <View style={styles.wrapper}>
+        <ImageBackground source={appBackground}>
+          <AppBar location={name} navigation={navigation} />
+          <Text>There was a problem getting the weather.</Text>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
   }
 
   if (forecast) {
     return (
-      <View style={styles.wrapper}>
-        <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location={place.name} />
-          <ScrollView>
-            <Today forecast={forecast} />
-            <FiveDays forecast={forecast} />
-          </ScrollView>
+      <SafeAreaView>
+        <View style={styles.wrapper}>
+          <ImageBackground source={appBackground} style={styles.bg}>
+            <AppBar location={name} navigation={navigation} />
+            <ScrollView>
+              <Today forecast={forecast} detailsHandler={() => navigation.navigate(SCREENS.hourly, { forecast, name })} />
+              <FiveDays forecast={forecast} />
+            </ScrollView>
 
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={styles.wrapper}>
-      <ImageBackground source={appBackground}>
-        <AppBar location={place.name} />
-        <Text>Loading...</Text>
-      </ImageBackground>
-    </View>
+    <SafeAreaView>
+      <View style={styles.wrapper}>
+        <ImageBackground source={appBackground}>
+          <AppBar location={name} navigation={navigation} />
+          <Text>Loading...</Text>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -55,4 +87,4 @@ const styles = StyleSheet.create({
   bg: {
     height: '100%',
   }
-})
+});

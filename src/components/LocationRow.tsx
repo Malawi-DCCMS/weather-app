@@ -1,9 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Icon, Text } from 'react-native-paper';
 import moment from 'moment';
+
 import { ForecastTimestep, WeatherForecast } from '../utils/locationforecast';
-import { getForecastDescription } from '../utils/forecast.utils';
+import { useForecast } from '../hooks/current-forecast.hook';
+import { District } from '../constants/districts.constant';
+import weatherIcons from '../constants/weathericons.constant';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 function getTodaysTimesteps(forecast: WeatherForecast): Array<ForecastTimestep> {
   const floor = moment(`${moment().subtract(1, 'days').format('YYYY-MM-DD')} 22:00:00`);
@@ -56,67 +61,79 @@ function getTodaysForecast(timesteps: Array<ForecastTimestep>): TodaysForecast {
   };
 }
 
-type TodaysForecastProps = {
-  forecast: WeatherForecast;
-  detailsHandler: () => void;
+type LocationRowProps = {
+  district: District;
 };
-function Today(props: TodaysForecastProps): JSX.Element {
-  const timesteps = sortTimesteps(getTodaysTimesteps(props.forecast));
-  const today = getTodaysForecast(timesteps);
+function LocationRow(props: LocationRowProps): JSX.Element {
+  const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
 
-  return (
-    <View style={styles.wrapper} onTouchStart={props.detailsHandler}>
-      <View style={styles.today}>
-        <View><Text style={styles.todaysHeader}>Today &gt;</Text></View>
-        <View><Text style={styles.large}>{today.temp || 0}&deg;</Text></View>
-      </View>
-      <View style={styles.temps}>
-        <View>
-          <Text style={styles.small}>
-            &uarr; {Math.round(today.maxTemp)}&deg; &darr; {Math.round(today.minTemp)}&deg;
-          </Text>
-        </View>
-        <View>
-          <Text style={styles.small}>
-            {today.description ? getForecastDescription(today.description) : 'Not available'}
-          </Text>
-        </View>
-      </View>
+  if (error) {
+    <View style={styles.wrapper}>
+      <Text>Not available...</Text>
     </View>
-  );
+  }
+
+  if (forecast) {
+    const timesteps = sortTimesteps(getTodaysTimesteps(forecast));
+    const today = getTodaysForecast(timesteps);
+
+    return (
+      <View style={styles.wrapper}>
+        <View style={styles.left}>
+          <View>
+            <Text style={styles.header}>{props.district.name}</Text>
+          </View>
+          <View style={styles.smallContainer}>
+            <Text style={styles.small}>&uarr;{Math.round(today.maxTemp)}&deg;  &darr;{Math.round(today.minTemp)}&deg;</Text>
+          </View>
+        </View>
+        <View style={styles.right}>
+          <Icon source={weatherIcons[getForecastSymbol(timesteps) || 'fair_day']} size={60} />
+        </View>
+      </View>
+    );
+  }
+
+  return <View style={styles.wrapper}>
+    <Text>Loading...</Text>
+  </View>;
 };
 
 const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
+    width: '90%',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 60,
+    marginTop: 20,
+    paddingRight: 17,
+    paddingLeft: 17,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#F5F5F0',
+    borderRadius: 4,
   },
-  today: {
+  left: {
+    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start'
+    alignItems: 'flex-start',
   },
-  temps: {
-    flexDirection: 'column',
+  right: {
+    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'flex-end',
-    paddingTop: 35,
-    marginLeft: 10,
+    alignItems: 'center',
   },
-  todaysHeader: {
+  header: {
     fontSize: 24,
-    fontFamily: 'Rajdhani-Regular',
-    marginBottom: -15,
-    marginLeft: 8,
-  },
-  large: {
-    fontSize: 96,
-    fontFamily: 'Rajdhani-Regular',
+    fontFamily: 'NotoSans-Regular',
   },
   small: {
     fontSize: 16,
-    fontFamily: 'Rajdhani-Light',
+    fontFamily: 'NotoSans-Regular',
+  },
+  smallContainer: {
+    marginTop: 5,
   }
 });
 
-export default Today;
+export default LocationRow;

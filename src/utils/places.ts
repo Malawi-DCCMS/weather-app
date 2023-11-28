@@ -1,4 +1,4 @@
-import {GEONAMES} from '../../assets/geonames';
+import { GEONAMES } from '../../assets/geonames';
 
 export function snapToPlace(place: Place): Place | undefined {
   if (!insideMalawi(place.position)) {
