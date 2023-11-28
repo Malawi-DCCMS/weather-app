@@ -58,15 +58,16 @@ function getTodaysForecast(timesteps: Array<ForecastTimestep>): TodaysForecast {
 
 type TodaysForecastProps = {
   forecast: WeatherForecast;
+  detailsHandler: () => void;
 };
 function Today(props: TodaysForecastProps): JSX.Element {
   const timesteps = sortTimesteps(getTodaysTimesteps(props.forecast));
   const today = getTodaysForecast(timesteps);
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.wrapper} onTouchStart={props.detailsHandler}>
       <View style={styles.today}>
-        <View><Text style={styles.todaysHeader} onPress={() => { }}>Today &gt;</Text></View>
+        <View><Text style={styles.todaysHeader}>Today &gt;</Text></View>
         <View><Text style={styles.large}>{today.temp || 0}&deg;</Text></View>
       </View>
       <View style={styles.temps}>
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 60,
+    marginTop: 60,
   },
   today: {
     flexDirection: 'column',
