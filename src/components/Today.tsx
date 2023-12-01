@@ -68,7 +68,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
     <View style={styles.wrapper} onTouchStart={props.detailsHandler}>
       <View style={styles.today}>
         <View><Text style={styles.todaysHeader}>Today &gt;</Text></View>
-        <View><Text style={styles.large}>{today.temp || 0}&deg;</Text></View>
+        <View><Text style={styles.large}>{today.temp ? Math.round(today.temp) : 0}&deg;</Text></View>
       </View>
       <View style={styles.temps}>
         <View>
