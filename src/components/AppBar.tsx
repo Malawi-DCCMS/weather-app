@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Icon } from 'react-native-paper';
+import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
@@ -11,18 +11,41 @@ type AppBarProps = { location: string, navigation: DrawerNavigationProp<ParamLis
 
 const AppBar = (props: AppBarProps) => {
   const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 12)}...` : props.location;
+  const fmtLocation = tooLong ? `${props.location?.slice(0, 18)}...` : props.location;
+  const [visible, setVisible] = React.useState(false);
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
+
   return (
-    <View style={styles.appBar}>
-      <View onTouchEnd={() => props.navigation.navigate(SCREENS.home)} style={styles.appTitleContainer}>
-        <Text style={styles.appTitle}>{fmtLocation}</Text>
-        <Icon size={24} source={WEATHER_WARNINGS.yellow} />
+    <>
+      <View style={styles.appBar}>
+        <View onTouchEnd={() => props.navigation.navigate(SCREENS.home)} style={styles.appTitleContainer}>
+          <Text style={styles.appTitle}>{fmtLocation}</Text>
+          <Icon size={24} source={WEATHER_WARNINGS.yellow} />
+        </View>
+
+        <View style={styles.appNav}>
+          <View style={styles.items} onTouchStart={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <Menu
+              visible={visible}
+              onDismiss={closeMenu} anchor={<View onTouchStart={() => openMenu()}><Icon size={24} source="menu" /></View>}
+              contentStyle={{ backgroundColor: 'white', marginTop: 25 }}
+            >
+              <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Favourites" />
+              <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="About the app" />
+              <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Settings" />
+              <Menu.Item onPress={() => { props.navigation.navigate(SCREENS.feedback); closeMenu(); }} style={styles.menuItem} title="Give feedback" />
+              <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Help" />
+            </Menu>
+          </View>
+        </View>
       </View>
-      <View style={styles.appNav}>
-        <View style={styles.items} onTouchStart={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></View>
-        <View onTouchStart={() => props.navigation.openDrawer()}><Icon size={24} source="menu" /></View>
-      </View>
-    </View>
+    </>
   );
 }
 
@@ -57,5 +80,9 @@ const styles = StyleSheet.create({
   },
   items: {
     paddingRight: 15,
+  },
+  menuItem: {
+    paddingRight: 50,
+    paddingLeft: 20,
   }
 });
