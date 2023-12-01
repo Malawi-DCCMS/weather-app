@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import moment from 'moment';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerScreenProps } from '@react-navigation/drawer';
