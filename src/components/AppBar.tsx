@@ -1,31 +1,42 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
-import { ParamListBase } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { WEATHER_WARNINGS } from '../common';
 import { SCREENS } from '../constants/screens.constant';
+import backAndroid from '../../assets/icons8-arrow-back-48.png';
+import backIOS from '../../assets/icons8-left-50.png';
 
-type AppBarProps = { location: string, navigation: DrawerNavigationProp<ParamListBase>; };
+type AppBarProps = {
+  location: string,
+  navigation: NativeStackNavigationProp<ParamListBase>,
+  route?: RouteProp<ParamListBase>
+};
 
 const AppBar = (props: AppBarProps) => {
   const tooLong = props.location.length > 15;
   const fmtLocation = tooLong ? `${props.location?.slice(0, 18)}...` : props.location;
+
+  const showSearch = useRoute().name !== SCREENS.search;
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
+  const backArrow = Platform.OS === 'ios' ? backIOS : backAndroid;
+  const stackNotEmpty = props.navigation.canGoBack();
 
   return (
     <>
       <View style={styles.appBar}>
-        <View onTouchEnd={() => props.navigation.navigate(SCREENS.home)} style={styles.appTitleContainer}>
+        <View style={styles.appTitleContainer}>
+          {stackNotEmpty && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 10 }}><Icon size={24} source={backArrow} /></TouchableOpacity>}
           <Text style={styles.appTitle}>{fmtLocation}</Text>
           <Icon size={24} source={WEATHER_WARNINGS.yellow} />
         </View>
 
         <View style={styles.appNav}>
-          <View style={styles.items} onTouchStart={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></View>
+          {showSearch && <View style={styles.items} onTouchStart={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></View>}
           <View
             style={{
               flexDirection: 'row',
@@ -33,7 +44,7 @@ const AppBar = (props: AppBarProps) => {
             }}>
             <Menu
               visible={visible}
-              onDismiss={closeMenu} anchor={<View onTouchStart={() => openMenu()}><Icon size={24} source="menu" /></View>}
+              onDismiss={closeMenu} anchor={<View onTouchStart={() => openMenu()}><Icon size={24} source={visible ? "close" : "menu"} /></View>}
               contentStyle={{ backgroundColor: 'white', marginTop: 25 }}
             >
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Favourites" />
