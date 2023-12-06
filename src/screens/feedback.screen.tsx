@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, View, ScrollView, TextInput } from 'react-native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,7 +18,7 @@ import { RootState } from '../store';
 import { LOGGER } from '../lib';
 
 type ScreenProps = {
-  navigation: DrawerNavigationProp<ParamListBase>;
+  navigation: NativeStackNavigationProp<ParamListBase>;
 }
 const FeedbackScreen = ({ navigation }: ScreenProps) => {
   const { name } = useSelector((state: RootState) => state.location);
