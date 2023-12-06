@@ -24,13 +24,13 @@ const AppBar = (props: AppBarProps) => {
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
   const backArrow = Platform.OS === 'ios' ? backIOS : backAndroid;
-  const stackNotEmpty = props.navigation.canGoBack();
+  const canGoBack = () => props.navigation.canGoBack();
 
   return (
     <>
       <View style={styles.appBar}>
         <View style={styles.appTitleContainer}>
-          {stackNotEmpty && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 10 }}><Icon size={24} source={backArrow} /></TouchableOpacity>}
+          {canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 10 }}><Icon size={24} source={backArrow} /></TouchableOpacity>}
           <Text style={styles.appTitle}>{fmtLocation}</Text>
           <Icon size={24} source={WEATHER_WARNINGS.yellow} />
         </View>
