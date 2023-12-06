@@ -57,12 +57,12 @@ const getClosestPlace = (lat: number, lon: number): Place|undefined => {
   return snapToPlace(place);
 }
 
-export const getPreciseLocation = createAsyncThunk('location/getPreciseLocation', async (_, { rejectWithValue }): Promise<Place> => {
+export const getPreciseLocation = createAsyncThunk('location/getPreciseLocation', async (): Promise<Place> => {
   Platform.OS === 'ios' ? await requestIOS() : await requestAndroid();
   const location = await queryLocation();
   const closest = getClosestPlace(location.lat, location.lon);
   if (!closest) {
-    rejectWithValue('Failed to get closest location.');
+    throw new Error('Failed to get closest location.');
   }
 
   return closest as Place;
