@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import moment from 'moment';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { DrawerScreenProps } from '@react-navigation/drawer';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import appBackground from '../../assets/app-bg-faded.png';
 import AppBar from '../components/AppBar';
@@ -20,7 +20,7 @@ function sortTimesteps(timesteps: Array<ForecastTimestep>): Array<ForecastTimest
   return timesteps.sort((first, second) => moment(first.time).isBefore(moment(second.time)) ? -1 : 1);
 }
 
-type ScreenProps = DrawerScreenProps<RootDrawerParamList, 'Hourly'>;
+type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
   const { forecast, name } = route.params;
   const timesteps = getTodaysTimesteps(forecast);
