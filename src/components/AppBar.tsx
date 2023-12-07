@@ -30,13 +30,13 @@ const AppBar = (props: AppBarProps) => {
     <>
       <View style={styles.appBar}>
         <View style={styles.appTitleContainer}>
-          {canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 10 }}><Icon size={24} source={backArrow} /></TouchableOpacity>}
+          {canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} source={backArrow} /></TouchableOpacity>}
           <Text style={styles.appTitle}>{fmtLocation}</Text>
-          <Icon size={24} source={WEATHER_WARNINGS.yellow} />
+          <TouchableOpacity style={styles.weatherWarning}><Icon size={24} source={WEATHER_WARNINGS.yellow} /></TouchableOpacity>
         </View>
 
         <View style={styles.appNav}>
-          {showSearch && <View style={styles.items} onTouchStart={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></View>}
+          {showSearch && <TouchableOpacity style={styles.items} onPress={() => props.navigation.navigate(SCREENS.search)}><Icon size={24} source="magnify" /></TouchableOpacity>}
           <View
             style={{
               flexDirection: 'row',
@@ -44,7 +44,7 @@ const AppBar = (props: AppBarProps) => {
             }}>
             <Menu
               visible={visible}
-              onDismiss={closeMenu} anchor={<View onTouchStart={() => openMenu()}><Icon size={24} source={visible ? "close" : "menu"} /></View>}
+              onDismiss={closeMenu} anchor={<TouchableOpacity onPress={() => openMenu()}><Icon size={24} source={visible ? "close" : "menu"} /></TouchableOpacity>}
               contentStyle={{ backgroundColor: 'white', marginTop: 25 }}
             >
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Favourites" />
@@ -95,5 +95,8 @@ const styles = StyleSheet.create({
   menuItem: {
     paddingRight: 50,
     paddingLeft: 20,
-  }
+  },
+  weatherWarning: {
+    paddingLeft: 12,
+  },
 });
