@@ -13,13 +13,13 @@ function getWeatherIcon(timesteps: Array<ForecastTimestep>): string | undefined 
   let icon = undefined;
 
   if (timeIsAfter4) {
-      const timestep = timesteps.find(t => t.time = `${today} 04:00:00Z`);
-      icon = timestep?.data.next_12_hours?.summary?.symbol_code;
+    const timestep = timesteps.find(t => t.time = `${today} 04:00:00Z`);
+    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
   }
 
   if (timeIsAfter6) {
-      const timestep = timesteps.find(t => t.time = `${today} 06:00:00Z`);
-      icon = timestep?.data.next_12_hours?.summary?.symbol_code;
+    const timestep = timesteps.find(t => t.time = `${today} 06:00:00Z`);
+    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
   }
 
   return icon;
