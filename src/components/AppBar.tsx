@@ -50,7 +50,7 @@ const AppBar = (props: AppBarProps) => {
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Favourites" />
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="About the app" />
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Settings" />
-              <Menu.Item onPress={() => { props.navigation.navigate(SCREENS.feedback); closeMenu(); }} style={styles.menuItem} title="Give feedback" />
+              <Menu.Item onPress={() => { closeMenu(); props.navigation.navigate(SCREENS.feedback); }} style={styles.menuItem} title="Give feedback" />
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Help" />
             </Menu>
           </View>
