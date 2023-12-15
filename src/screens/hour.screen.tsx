@@ -22,7 +22,7 @@ function sortTimesteps(timesteps: Array<ForecastTimestep>): Array<ForecastTimest
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { forecast, name } = route.params;
+  const { forecast, name, title } = route.params;
   const timesteps = getTodaysTimesteps(forecast);
   const sorted = sortTimesteps(timesteps);
   return (
@@ -30,7 +30,7 @@ function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={name} navigation={navigation} />
-          <HourlyTable forecast={sorted} />
+          <HourlyTable forecast={sorted} title={title}/>
         </ImageBackground>
       </View>
     </SafeAreaView>
