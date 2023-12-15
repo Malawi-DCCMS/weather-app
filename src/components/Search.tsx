@@ -39,7 +39,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
         onSelectItem={handleSelect}
         dataSet={dataset}
         inputContainerStyle={styles.searchBar}
-        debounce={600}
+        debounce={3000}
         showChevron={true}
         showClear={true}
       />
