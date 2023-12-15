@@ -8,12 +8,13 @@ import { ForecastTimestep } from '../utils/locationforecast';
 
 type HourlyTableProps = {
   forecast: Array<ForecastTimestep>;
+  title: string;
 };
 
 function HourlyTable(props: HourlyTableProps): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Hourly today</Text>
+      <Text style={styles.header}>{props.title}</Text>
       <View style={{ paddingLeft: 12, paddingRight: 12, marginTop: 5 }}>
         <DataTable>
           <DataTable.Header>
@@ -23,7 +24,7 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             <DataTable.Title numeric>Rain mm</DataTable.Title>
             <DataTable.Title numeric>Wind km/h</DataTable.Title>
           </DataTable.Header>
-          <ScrollView>
+          <ScrollView snapToStart={false}>
             {props.forecast.map((hour) => (
               <DataTable.Row key={hour.time}>
                 <DataTable.Cell>{moment(hour.time).format('HH:mm')}</DataTable.Cell>
