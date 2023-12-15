@@ -13,6 +13,7 @@ import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
 import { getLocationForecast } from '../store/forecast.slice';
+import { ForecastTimestep } from '../utils/locationforecast';
 
 type ScreenProps = {
   navigation: NativeStackNavigationProp<ParamListBase>;
@@ -36,6 +37,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
+  const onClick = (name: string) => (forecast: Array<ForecastTimestep>) => navigation.navigate(SCREENS.day, { name, forecast });
+
   if (forecastError) {
     <SafeAreaView>
       <View style={styles.wrapper}>
@@ -54,8 +57,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
           <ImageBackground source={appBackground} style={styles.bg}>
             <AppBar location={name} navigation={navigation} />
             <ScrollView>
-              <TouchableOpacity onPress={() => navigation.navigate(SCREENS.hourly, { forecast, name })}><Today forecast={forecast} /></TouchableOpacity>
-              <FiveDays forecast={forecast} />
+              <TouchableOpacity onPress={() => navigation.navigate(SCREENS.hourly, { forecast, name, title: 'Hourly Today' })}><Today forecast={forecast} /></TouchableOpacity>
+              <FiveDays name={name} forecast={forecast} onClick={onClick(name)} />
             </ScrollView>
           </ImageBackground>
         </View>

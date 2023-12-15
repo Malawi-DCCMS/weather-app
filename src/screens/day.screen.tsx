@@ -6,31 +6,24 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import appBackground from '../../assets/app-bg-faded.png';
 import AppBar from '../components/AppBar';
-import { ForecastTimestep, WeatherForecast } from '../utils/locationforecast';
+import { ForecastTimestep } from '../utils/locationforecast';
 import HourlyTable from '../components/HourlyTable';
 import { RootDrawerParamList } from '../common';
-
-function getTodaysTimesteps(forecast: WeatherForecast): Array<ForecastTimestep> {
-  const floor = moment(`${moment().subtract(1, 'days').format('YYYY-MM-DD')} 22:00:00`);
-  const ceiling = moment(`${moment().format('YYYY-MM-DD')} 21:00:00`);
-  return forecast.properties.timeseries.filter(f => moment(f.time).isBetween(floor, ceiling));
-}
 
 function sortTimesteps(timesteps: Array<ForecastTimestep>): Array<ForecastTimestep> {
   return timesteps.sort((first, second) => moment(first.time).isBefore(moment(second.time)) ? -1 : 1);
 }
 
-type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
-function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { forecast, name, title } = route.params;
-  const timesteps = getTodaysTimesteps(forecast);
-  const sorted = sortTimesteps(timesteps);
+type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Day'>;
+function DayScreen({ route, navigation }: ScreenProps): JSX.Element {
+  const { forecast, name } = route.params;
+  const sorted = sortTimesteps(forecast);
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={name} navigation={navigation} />
-          <HourlyTable forecast={sorted} title={title}/>
+          <HourlyTable forecast={sorted} title={moment(forecast[0].time).format('dddd')} />
         </ImageBackground>
       </View>
     </SafeAreaView>
@@ -44,6 +37,7 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 0,
     padding: 0,
+    overflow: 'scroll',
   },
   bg: {
     height: '100%',
@@ -61,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HourScreen;
+export default DayScreen;

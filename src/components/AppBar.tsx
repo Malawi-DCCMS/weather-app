@@ -16,8 +16,8 @@ type AppBarProps = {
 };
 
 const AppBar = (props: AppBarProps) => {
-  const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 18)}...` : props.location;
+  const tooLong = props.location.length > 12;
+  const fmtLocation = tooLong ? `${props.location?.slice(0, 12)}...` : props.location;
 
   const showSearch = useRoute().name !== SCREENS.search;
   const [visible, setVisible] = React.useState(false);
@@ -50,7 +50,7 @@ const AppBar = (props: AppBarProps) => {
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Favourites" />
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="About the app" />
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Settings" />
-              <Menu.Item onPress={() => { props.navigation.navigate(SCREENS.feedback); closeMenu(); }} style={styles.menuItem} title="Give feedback" />
+              <Menu.Item onPress={() => { closeMenu(); props.navigation.navigate(SCREENS.feedback); }} style={styles.menuItem} title="Give feedback" />
               <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} title="Help" />
             </Menu>
           </View>
