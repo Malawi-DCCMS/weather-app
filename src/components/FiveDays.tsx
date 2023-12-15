@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import moment from 'moment';
 
@@ -20,6 +20,8 @@ function groupForecastsByDay(
 
 type DailyForecastProps = {
     forecast?: WeatherForecast;
+    name: string;
+    onClick: (forecast: Array<ForecastTimestep>) => void;
 }
 function FiveDays(props: DailyForecastProps): JSX.Element {
     if (props.forecast) {
@@ -29,7 +31,7 @@ function FiveDays(props: DailyForecastProps): JSX.Element {
         const grouped = groupForecastsByDay(filtered);
         const fiveDayForecast = Object.entries(grouped).slice(0, 5);
         return <View style={{ paddingLeft: 12, paddingRight: 12, marginTop: 40 }}>
-            {fiveDayForecast.map(([k, val]) => <DayRow key={k} day={k} forecast={val} />)}
+            {fiveDayForecast.map(([k, val]) => <TouchableOpacity key={k} onPress={() => props.onClick(val)}><DayRow day={k} forecast={val} /></TouchableOpacity>)}
         </View>
     }
 
