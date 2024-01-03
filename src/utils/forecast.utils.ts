@@ -11,7 +11,11 @@ export function getForecastDescription(key: string): string {
  * Select a weather symbol to show at a given time. 
  * This is meant to be used to get a single weather symbol to show for today.
  * 
- * @param t The time at which we want to present the weather symbol (typically moment.moment())
+ * * Before 06 local time: 12h symbol valid 06-18 
+ * * Between 06 and 12 local time: 6h symbol valid 12-18 
+ * * After 12 local time: 1h symbol valid from the first time step 
+ * 
+ * @param t The time at which we want to present the weather symbol (typically moment())
  * @param timesteps The forecast timesteps
  * @returns A weather symobl text, or undefined if unable to find a symbol to show.
  */
