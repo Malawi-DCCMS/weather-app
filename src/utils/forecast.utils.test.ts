@@ -1,5 +1,5 @@
 import moment from "moment";
-import { getForecastSymbolAtTime } from "./forecast.utils";
+import { getForecastSymbolAtTime, getWeatherIconAtDay } from "./forecast.utils";
 import { ForecastTimestep } from './locationforecast';
 
 
@@ -25,6 +25,30 @@ describe("select correct weather symbol for today's forecast", () => {
         const symbol = getForecastSymbolAtTime(moment.utc('2023-12-29T00:00:00'), forecast)
         expect(symbol).toBe('12h@4')
     })
+})
+
+describe("select correct weather symbol for a single day", () => {
+    let forecast = sampleForecast()
+    test('normal case', () => {
+        expect(getWeatherIconAtDay(forecast)).toBe('12h@6')
+    })
+    test('missing 12h forecast', () => {
+        forecast[6].data.next_12_hours = undefined
+        expect(getWeatherIconAtDay(forecast)).toBe('6h@6')
+    })
+    test('missing 12h and 6h forecast', () => {
+        forecast[6].data.next_6_hours = undefined
+        expect(getWeatherIconAtDay(forecast)).toBe('6h@12')
+    })
+    test('missing all 12h and 6h forecast', () => {
+        forecast[12].data.next_6_hours = undefined
+        expect(getWeatherIconAtDay(forecast)).toBe('1h@12')
+    })
+    test('missing all relevant symbols', () => {
+        forecast[12].data.next_1_hours = undefined
+        expect(getWeatherIconAtDay(forecast)).toBeUndefined()
+    })
+    
 })
 
 /**

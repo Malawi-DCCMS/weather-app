@@ -34,24 +34,32 @@ export function getForecastSymbolAtTime(t: moment.Moment, timesteps: Array<Forec
 /**
  * Get a weather symbol representing an entire day.
  * 
- * @param timesteps All timesteps for a single day
+ * * 12h symbol valid 06-18 or 08-20 local time, if not available use the ones below:
+ * * 6h symbol valid 08-14 or 14-20 local time
+ * * 1h symbol valid 14 local time
+ * 
+ * Note that for now, we ignore local time - we just use directly utc time. 
+ * This is because the delivered forecast has a better chance of having a valid 12. or 6-hour symbol at utc hours divisible by 6.
+ * 
+ * @param timesteps All available timesteps for a single day. 
  * @returns A weather icon representing the weather for this particular day, or undefined if unable to determine the weather symbol.
  */
 export function getWeatherIconAtDay(timesteps: Array<ForecastTimestep>): string | undefined {
-  const today = moment().format('YYYY-MM-DD');
-  const timeIsAfter4 = moment().isAfter(moment(`${today} 04:00:00Z`));
-  const timeIsAfter6 = moment().isAfter(moment(`${today} 06:00:00Z`));
-  let icon = undefined;
+  const wantedTimestep = timesteps[0].time.substring(0, 10) + "T06:00:00Z";
+  const timestep = timesteps.find(timestep => timestep.time == wantedTimestep);
+  let symbol = timestep?.data.next_12_hours?.summary?.symbol_code;
 
-  if (timeIsAfter4) {
-    const timestep = timesteps.find(t => t.time = `${today} 04:00:00Z`);
-    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
+  if (symbol === undefined) {
+    symbol = timestep?.data.next_6_hours?.summary?.symbol_code;
+  }
+  if (symbol === undefined) {
+    const wantedTimestep = timesteps[0].time.substring(0, 10) + "T12:00:00Z";
+    const timestep = timesteps.find(timestep => timestep.time == wantedTimestep);
+    symbol = timestep?.data.next_6_hours?.summary?.symbol_code;
+    if (symbol === undefined) {
+      symbol = timestep?.data.next_1_hours?.summary?.symbol_code;
+    }
   }
 
-  if (timeIsAfter6) {
-    const timestep = timesteps.find(t => t.time = `${today} 06:00:00Z`);
-    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
-  }
-
-  return icon;
+  return symbol
 }
