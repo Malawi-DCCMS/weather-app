@@ -30,3 +30,28 @@ export function getForecastSymbolAtTime(t: moment.Moment, timesteps: Array<Forec
   const timestep = timesteps.find(timestep => timestep.time == t.format('YYYY-MM-DDTHH') + ':00:00Z');
   return timestep?.data.next_1_hours?.summary?.symbol_code;
 }
+
+/**
+ * Get a weather symbol representing an entire day.
+ * 
+ * @param timesteps All timesteps for a single day
+ * @returns A weather icon representing the weather for this particular day, or undefined if unable to determine the weather symbol.
+ */
+export function getWeatherIconAtDay(timesteps: Array<ForecastTimestep>): string | undefined {
+  const today = moment().format('YYYY-MM-DD');
+  const timeIsAfter4 = moment().isAfter(moment(`${today} 04:00:00Z`));
+  const timeIsAfter6 = moment().isAfter(moment(`${today} 06:00:00Z`));
+  let icon = undefined;
+
+  if (timeIsAfter4) {
+    const timestep = timesteps.find(t => t.time = `${today} 04:00:00Z`);
+    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
+  }
+
+  if (timeIsAfter6) {
+    const timestep = timesteps.find(t => t.time = `${today} 06:00:00Z`);
+    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
+  }
+
+  return icon;
+}
