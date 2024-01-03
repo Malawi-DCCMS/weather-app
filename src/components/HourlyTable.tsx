@@ -12,6 +12,10 @@ type HourlyTableProps = {
 };
 
 function HourlyTable(props: HourlyTableProps): JSX.Element {
+  const fallbackSymbolCode = (hour: ForecastTimestep) => {
+    console.log('unable to find weather symbol at ' + hour.time)
+    return 'fair_day' // TODO: find out how to handle this
+  } 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{props.title}</Text>
@@ -28,7 +32,7 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             {props.forecast.map((hour) => (
               <DataTable.Row key={hour.time}>
                 <DataTable.Cell>{moment(hour.time).format('HH:mm')}</DataTable.Cell>
-                <DataTable.Cell><Icon source={weatherIcons[hour.data.next_1_hours?.summary?.symbol_code || 'fair_day']} size={25} /></DataTable.Cell>
+                <DataTable.Cell><Icon source={weatherIcons[hour.data.next_1_hours?.summary?.symbol_code || fallbackSymbolCode(hour)]} size={25} /></DataTable.Cell>
                 <DataTable.Cell numeric>{hour.data.instant.details.air_temperature}&deg;</DataTable.Cell>
                 <DataTable.Cell numeric>{hour.data.next_1_hours?.details?.precipitation_amount}</DataTable.Cell>
                 <DataTable.Cell numeric>{hour.data.instant.details.wind_speed}</DataTable.Cell>
