@@ -5,25 +5,8 @@ import moment from "moment";
 import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
 import { ForecastTimestep } from "../utils/locationforecast";
+import { getWeatherIconAtDay } from "../utils/forecast.utils";
 
-function getWeatherIcon(timesteps: Array<ForecastTimestep>): string | undefined {
-  const today = moment().format('YYYY-MM-DD');
-  const timeIsAfter4 = moment().isAfter(moment(`${today} 04:00:00Z`));
-  const timeIsAfter6 = moment().isAfter(moment(`${today} 06:00:00Z`));
-  let icon = undefined;
-
-  if (timeIsAfter4) {
-    const timestep = timesteps.find(t => t.time = `${today} 04:00:00Z`);
-    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
-  }
-
-  if (timeIsAfter6) {
-    const timestep = timesteps.find(t => t.time = `${today} 06:00:00Z`);
-    icon = timestep?.data.next_12_hours?.summary?.symbol_code;
-  }
-
-  return icon;
-}
 
 type DayRowProps = {
   day: string;
@@ -37,7 +20,7 @@ const DayRow = (props: DayRowProps) => {
   const minTemp = Math.min(...temps);
   const maxTemp = Math.max(...temps);
   const windSpeed = Math.max(...(forecast.map(t => t.data.instant.details.wind_speed || 0)));
-  const icon = getWeatherIcon(forecast);
+  const icon = getWeatherIconAtDay(forecast);
 
   return (
     <View style={styles.dayRow}>
