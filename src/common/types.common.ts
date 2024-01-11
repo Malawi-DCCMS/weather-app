@@ -1,8 +1,7 @@
-import { ForecastTimestep, WeatherForecast } from "../utils/locationforecast";
+import { DaySummary } from "../utils/weatherData";
 
 export type RootDrawerParamList = {
-  Hourly: { name: string, forecast: WeatherForecast, title: string };
-  Day: { name: string, forecast: Array<ForecastTimestep> };
+  Hourly: { location: string, daySummary: DaySummary, title: string };
   NoLocation: undefined;
   Search: undefined;
   Home: undefined;

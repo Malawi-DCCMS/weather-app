@@ -1,21 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { DataTable, Icon } from 'react-native-paper';
-import moment from 'moment';
+import { DateTime } from "luxon";
 
 import weatherIcons from '../constants/weathericons.constant';
-import { ForecastTimestep } from '../utils/locationforecast';
+import { DaySummary } from '../utils/weatherData';
 
 type HourlyTableProps = {
-  forecast: Array<ForecastTimestep>;
   title: string;
+  daySummary: DaySummary;
+  day: DateTime;
 };
 
+/**
+ * Get today's forecast
+ */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
-  const fallbackSymbolCode = (hour: ForecastTimestep) => {
-    console.log('unable to find weather symbol at ' + hour.time)
+  const fallbackSymbolCode = (when: DateTime) => {
+    console.log('unable to find weather symbol at ' + when.toLocaleString())
     return 'fair_day' // TODO: find out how to handle this
   } 
+
+  // for (const step of props.daySummary.steps) {
+  //   console.log(step.time, step.weatherSymbol_1h, step.temperature, step.precipitation_1h, step.windSpeed)
+  // }
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{props.title}</Text>
@@ -29,13 +38,13 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             <DataTable.Title numeric>Wind km/h</DataTable.Title>
           </DataTable.Header>
           <ScrollView snapToStart={false}>
-            {props.forecast.map((hour) => (
-              <DataTable.Row key={hour.time}>
-                <DataTable.Cell>{moment(hour.time).format('HH:mm')}</DataTable.Cell>
-                <DataTable.Cell><Icon source={weatherIcons[hour.data.next_1_hours?.summary?.symbol_code || fallbackSymbolCode(hour)]} size={25} /></DataTable.Cell>
-                <DataTable.Cell numeric>{hour.data.instant.details.air_temperature}&deg;</DataTable.Cell>
-                <DataTable.Cell numeric>{hour.data.next_1_hours?.details?.precipitation_amount}</DataTable.Cell>
-                <DataTable.Cell numeric>{hour.data.instant.details.wind_speed}</DataTable.Cell>
+            { props.daySummary.steps.map((step) => (
+              <DataTable.Row key={step.time.toISO()}>
+                <DataTable.Cell>{step.time.toLocaleString(DateTime.TIME_24_SIMPLE)}</DataTable.Cell>
+                <DataTable.Cell><Icon source={weatherIcons[step.weatherSymbol_1h || fallbackSymbolCode(step.time)]} size={25} /></DataTable.Cell>
+                <DataTable.Cell numeric>{step.temperature}&deg;</DataTable.Cell>
+                <DataTable.Cell numeric>{step.precipitation_1h}</DataTable.Cell>
+                <DataTable.Cell numeric>{step.windSpeed}</DataTable.Cell>
               </DataTable.Row>
             ))}
           </ScrollView>
