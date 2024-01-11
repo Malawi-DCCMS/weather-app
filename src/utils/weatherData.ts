@@ -3,6 +3,11 @@ import { ForecastTimestep, WeatherForecast } from "./locationforecast";
 
 const timeZone = 'Africa/Blantyre'
 
+/**
+ * Prepared forecast data. 
+ * The purpose of this class is to move all logic related to selecting forecast data to show into a single location.
+ * Presentation code should just call method or read data from here instead of making their own aggregations/selections of data.
+ */
 export class Forecast {
     timeSteps: ForecastStep[]
 
@@ -15,6 +20,11 @@ export class Forecast {
         }
     }
 
+    /**
+     * Get a list of all days we have data for.
+     * 
+     * @returns A list of dates for which we have data, all with the clock set to 00:00
+     */
     days(): DateTime[] {
         let ret = [this.timeSteps[0].time.startOf('day')]
         for (const step of this.timeSteps) {
@@ -25,6 +35,12 @@ export class Forecast {
         return ret
     }
 
+    /**
+     * Get a summary of the forecast for a single day.
+     * 
+     * @param day The day to get a summary for. Only the date part of this argument will be considered.
+     * @returns A summary of the forecast for the given day.
+     */
     atDay(day: DateTime): DaySummary {
         day = day.setZone(timeZone).startOf('day')
 
@@ -46,6 +62,10 @@ export class Forecast {
     }
 }
 
+/**
+ * Weather data for a single time step.
+ * Note that a time step is not neccessarily one hour - it can also be six hours.
+ */
 export class ForecastStep {
     time: DateTime
 
@@ -69,6 +89,9 @@ export class ForecastStep {
     }
 }
 
+/**
+ * Summary of the weather for a single day
+ */
 export interface DaySummary {
     day: DateTime
     weatherSymbol?: string
