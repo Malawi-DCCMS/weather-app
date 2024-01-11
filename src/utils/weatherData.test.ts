@@ -1,0 +1,36 @@
+import { WeatherForecast } from "./locationforecast"
+import { Forecast } from "./weatherData"
+
+describe('interpret forecast', () => {
+
+    const sampleForecast: WeatherForecast = require("./weatherData.test.json")
+
+    test('get days', () => {
+        const f = new Forecast(sampleForecast)
+        const days = f.days()
+        expect(days.length).toBe(10)
+        expect(days[0].setZone('Africa/Blantyre').toISO()).toBe("2024-01-11T00:00:00.000+02:00")
+        expect(days[1].setZone('Africa/Blantyre').toISO()).toBe("2024-01-12T00:00:00.000+02:00")
+        expect(days[2].setZone('Africa/Blantyre').toISO()).toBe("2024-01-13T00:00:00.000+02:00")
+        expect(days[3].setZone('Africa/Blantyre').toISO()).toBe("2024-01-14T00:00:00.000+02:00")
+        expect(days[4].setZone('Africa/Blantyre').toISO()).toBe("2024-01-15T00:00:00.000+02:00")
+        expect(days[5].setZone('Africa/Blantyre').toISO()).toBe("2024-01-16T00:00:00.000+02:00")
+        expect(days[6].setZone('Africa/Blantyre').toISO()).toBe("2024-01-17T00:00:00.000+02:00")
+        expect(days[7].setZone('Africa/Blantyre').toISO()).toBe("2024-01-18T00:00:00.000+02:00")
+        expect(days[8].setZone('Africa/Blantyre').toISO()).toBe("2024-01-19T00:00:00.000+02:00")
+        expect(days[9].setZone('Africa/Blantyre').toISO()).toBe("2024-01-20T00:00:00.000+02:00")
+    })
+    test('extract day', () => {
+        const f = new Forecast(sampleForecast)
+        const summary = f.atDay(f.days()[1])
+        expect(summary.day.toISO()).toBe("2024-01-12T00:00:00.000+02:00")
+        expect(summary.minTemperature).toBe(18.7)
+        expect(summary.maxTemperature).toBe(26.9)
+        expect(summary.weatherSymbol).toBe("rain")
+        expect(summary.windSpeed).toBe(4.2)
+        expect(summary.steps.length).toBe(24)
+
+        expect(summary.steps[0].time.toISO()).toBe("2024-01-12T00:00:00.000+02:00")
+        expect(summary.steps[9].time.toISO()).toBe("2024-01-12T09:00:00.000+02:00")
+    })
+})
