@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
+import { DateTime } from "luxon";
 
 import appBackground from '../../assets/app-bg-normal.png';
 import AppBar from '../components/AppBar';
@@ -13,14 +14,14 @@ import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
 import { getLocationForecast } from '../store/forecast.slice';
-import { ForecastTimestep } from '../utils/locationforecast';
+import { Forecast } from '../utils/weatherData';
 
 type ScreenProps = {
   navigation: NativeStackNavigationProp<ParamListBase>;
 }
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { name, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
+  const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
   const { forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
   useEffect(() => {
     dispatch(getLocationForecast({ lat, lon }));
-  }, [name]);
+  }, [location]);
 
   useEffect(() => {
     if (locationError) {
@@ -37,13 +38,12 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
-  const onClick = (name: string) => (forecast: Array<ForecastTimestep>) => navigation.navigate(SCREENS.day, { name, forecast });
 
   if (forecastError) {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground}>
-          <AppBar location={name} navigation={navigation} />
+          <AppBar location={location} navigation={navigation} />
           <Text>There was a problem getting the weather.</Text>
         </ImageBackground>
       </View>
@@ -51,14 +51,34 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }
 
   if (forecast) {
+    const preparedForecast = new Forecast(forecast)
+
+    const onSelectToday = () =>
+      navigation.navigate(SCREENS.hourly, {
+        location: location,
+        daySummary: preparedForecast.atDay(today),
+        title: 'Hourly Today'
+      })
+    const onSelectDay = (location: string) =>
+      (day: DateTime, preparedForecast: Forecast) =>
+        navigation.navigate(SCREENS.hourly, {
+          location: location,
+          daySummary: preparedForecast.atDay(day),
+          title: day.toLocaleString({ weekday: 'long' })
+        });
+
+    const today = DateTime.now()
+
     return (
       <SafeAreaView>
         <View style={styles.wrapper}>
           <ImageBackground source={appBackground} style={styles.bg}>
-            <AppBar location={name} navigation={navigation} />
+            <AppBar location={location} navigation={navigation} />
             <ScrollView>
-              <TouchableOpacity onPress={() => navigation.navigate(SCREENS.hourly, { forecast, name, title: 'Hourly Today' })}><Today forecast={forecast} /></TouchableOpacity>
-              <FiveDays name={name} forecast={forecast} onClick={onClick(name)} />
+              <TouchableOpacity onPress={onSelectToday}>
+                <Today daySummary={preparedForecast.atDay(today)} />
+              </TouchableOpacity>
+              <FiveDays name={location} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
             </ScrollView>
           </ImageBackground>
         </View>
@@ -70,7 +90,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground}>
-          <AppBar location={name} navigation={navigation} />
+          <AppBar location={location} navigation={navigation} />
           <Text>Loading...</Text>
         </ImageBackground>
       </View>

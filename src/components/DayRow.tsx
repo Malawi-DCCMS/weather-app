@@ -1,37 +1,31 @@
 import { StyleSheet, View } from "react-native";
 import { Icon, Paragraph, Text } from "react-native-paper";
-import moment from "moment";
-
 import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
-import { ForecastTimestep } from "../utils/locationforecast";
-import { getWeatherIconAtDay } from "../utils/forecast.utils";
+import { DaySummary } from "../utils/weatherData";
 
 
 type DayRowProps = {
-  day: string;
-  forecast: Array<ForecastTimestep>;
+  summary: DaySummary;
 }
 const DayRow = (props: DayRowProps) => {
-  const day = moment(props.day).format('ddd');
-  const { forecast } = props;
+  const { summary } = props;
 
-  const temps = forecast.map(t => t.data.instant.details.air_temperature || 0);
-  const minTemp = Math.min(...temps);
-  const maxTemp = Math.max(...temps);
-  const windSpeed = Math.max(...(forecast.map(t => t.data.instant.details.wind_speed || 0)));
-  const icon = getWeatherIconAtDay(forecast);
+  const minTemp = summary.maxTemperature || 0;
+  const maxTemp = summary.minTemperature || 0;
+  const windSpeed = summary.windSpeed || 0;
+  const icon = summary.weatherSymbol || 'fair_day'
 
   return (
     <View style={styles.dayRow}>
       <Paragraph style={{ flex: 2 }}>
-        <Text>{day}</Text>
+        <Text>{summary.day.toLocaleString({weekday: "short"})}</Text>
       </Paragraph>
       <Paragraph style={{ flex: 2 }}>
         <Icon source={WEATHER_WARNINGS['yellow']} size={19} />
       </Paragraph>
       <Paragraph style={{ flex: 2 }}>
-        <Icon source={weatherIcons[icon || 'fair_day']} size={19} />
+        <Icon source={weatherIcons[icon]} size={19} />
       </Paragraph>
       <Paragraph style={{ flex: 3 }}>
         <Text>{Math.round(minTemp)}&deg; - {Math.round(maxTemp)}&deg;</Text>

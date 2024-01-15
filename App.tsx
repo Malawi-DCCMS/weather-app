@@ -10,7 +10,6 @@ import SearchScreen from './src/screens/search.screen';
 import { SCREENS } from './src/constants/screens.constant';
 import FeedbackScreen from './src/screens/feedback.screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DayScreen from './src/screens/day.screen';
 
 const Drawer = createNativeStackNavigator();
 
@@ -24,7 +23,6 @@ function App(): JSX.Element {
         <Drawer.Screen name={SCREENS.feedback} component={FeedbackScreen} />
         <Drawer.Screen name={SCREENS.nolocation} component={NoLocationScreen} />
         <Drawer.Screen name={SCREENS.hourly} component={HourScreen} />
-        <Drawer.Screen name={SCREENS.day} component={DayScreen} />
         <Drawer.Screen name={SCREENS.search} component={SearchScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
