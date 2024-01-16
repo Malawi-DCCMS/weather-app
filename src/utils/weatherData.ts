@@ -72,6 +72,7 @@ export class ForecastStep {
     temperature?: number
     windSpeed?: number
     precipitation_1h?: number
+    precipitation_6h?: number
     weatherSymbol_1h?: string
     weatherSymbol_6h?: string
     weatherSymbol_12h?: string
@@ -80,12 +81,35 @@ export class ForecastStep {
         this.time = DateTime.fromISO(timestep.time).setZone(timeZone)
         this.temperature = timestep.data.instant.details.air_temperature
         this.precipitation_1h = timestep.data.next_1_hours?.details?.precipitation_amount
+        this.precipitation_6h = timestep.data.next_6_hours?.details?.precipitation_amount
         this.windSpeed = timestep.data.instant.details.wind_speed
         this.weatherSymbol_1h = timestep.data.next_1_hours?.summary?.symbol_code
         this.weatherSymbol_6h = timestep.data.next_6_hours?.summary?.symbol_code
         this.weatherSymbol_12h = timestep.data.next_12_hours?.summary?.symbol_code
 
         // console.log(this)
+    }
+
+    /**
+     * Get the precipitation amount for this time step - either for the next hour or for the next six hours.
+     */
+    precipitation(): number | "??" {
+        if (this.precipitation_1h !== undefined)
+            return this.precipitation_1h
+        if (this.precipitation_6h !== undefined)
+            return this.precipitation_6h
+        return "??"
+    }
+
+    /**
+     * Get the weather symbol for this time step - either for the next hour or for the next six hours.
+     */
+    weatherSymbol(): string {
+        if (this.weatherSymbol_1h !== undefined) 
+            return this.weatherSymbol_1h
+        if (this.weatherSymbol_6h !== undefined) 
+            return this.weatherSymbol_6h
+        return "??"
     }
 }
 

@@ -14,7 +14,7 @@ const DayRow = (props: DayRowProps) => {
   const minTemp = summary.maxTemperature || 0;
   const maxTemp = summary.minTemperature || 0;
   const windSpeed = summary.windSpeed || 0;
-  const icon = summary.weatherSymbol || 'fair_day'
+  const icon = summary.weatherSymbol || 'snow'
 
   return (
     <View style={styles.dayRow}>
