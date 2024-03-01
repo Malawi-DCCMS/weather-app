@@ -1,8 +1,8 @@
-export const SCREENS: { [k: string]: "Home" | "Hourly" | "NoLocation" | "Search" | "Feedback" | "Day" } = {
-  home: 'Home',
-  nolocation: 'NoLocation',
-  hourly: 'Hourly',
-  search: 'Search',
-  feedback: 'Feedback',
-  day: 'Day',
+export enum SCREENS {
+  Home = 'Home',
+  NoLocation = 'NoLocation',
+  Hourly = 'Hourly',
+  Search = 'Search',
+  Feedback = 'Feedback',
+  AboutUs = 'AboutUs',
 };
