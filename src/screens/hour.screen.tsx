@@ -2,23 +2,23 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import appBackground from '../../assets/app-bg-faded.png';
+import { DateTime } from "luxon";
+
+import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
 import AppBar from '../components/AppBar';
 import HourlyTable from '../components/HourlyTable';
 import { RootDrawerParamList } from '../common';
-import { DateTime } from "luxon";
-
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { location, daySummary, title} = route.params;
+  const { location, daySummary, title } = route.params;
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
-          <HourlyTable daySummary={daySummary} day={DateTime.now()} title={title}/>
+          <HourlyTable daySummary={daySummary} day={DateTime.now()} title={title} />
         </ImageBackground>
       </View>
     </SafeAreaView>
