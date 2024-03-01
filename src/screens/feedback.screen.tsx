@@ -32,8 +32,10 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
     clear();
   }, []);
 
+  const DEFAULT_TEXT = 'Write here...';
+
   const submit = () => {
-    if ((!loved && !notLoved) || text === 'Write here...') {
+    if ((!loved && !notLoved) || text === DEFAULT_TEXT) {
       setShowValidationError(true);
       return;
     }
@@ -41,25 +43,21 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
     setSuccess(true);
     LOGGER.info('Submitting...', loved, notLoved, text);
   };
-  const cancel = () => {
-    setLoved(false);
-    setNotLoved(false);
-    setText('Write here...');
-    setSuccess(false);
-    navigation.goBack();
-  };
-  const close = () => {
-    setLoved(false);
-    setNotLoved(false);
-    setText('Write here...');
-    setSuccess(false);
-    navigation.navigate(SCREENS.Home);
-  };
+
   const clear = () => {
     setLoved(false);
     setNotLoved(false);
-    setText('Write here...');
+    setText(DEFAULT_TEXT);
     setSuccess(false);
+  };
+
+  const cancel = () => {
+    clear();
+    navigation.goBack();
+  };
+  const close = () => {
+    clear();
+    navigation.navigate(SCREENS.Home);
   };
 
   return (
