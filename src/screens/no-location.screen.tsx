@@ -1,52 +1,32 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, ScrollView } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ParamListBase } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
 
-import appBackground from '../../assets/app-bg-normal.png';
+import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
 import AppBar from '../components/AppBar';
 import LocationRow from '../components/LocationRow';
-import { Search } from '../components/Search';
-import { SCREENS } from '../constants/screens.constant';
 import { DISTRICTS } from '../constants/districts.constant';
-import { AppDispatch, RootState } from '../store';
-import { setName, setLat, setLon } from '../store/location.slice';
+import { RootState } from '../store';
+import { RootDrawerParamList } from '../common';
 
-type ScreenProps = {
-  navigation: NativeStackNavigationProp<ParamListBase>;
-}
+type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'NoLocation'>;
 const NoLocationScreen = ({ navigation }: ScreenProps) => {
-  const dispatch = useDispatch<AppDispatch>();
   const { name } = useSelector((state: RootState) => state.location);
 
   return (
     <SafeAreaView>
-      <AutocompleteDropdownContextProvider>
-        <View style={styles.wrapper}>
-          <ImageBackground source={appBackground} style={styles.bg}>
-            <AppBar location={name} navigation={navigation} />
-            <Search
-              location={name}
-              setLocation={
-                place => {
-                  dispatch(setName(place.name));
-                  dispatch(setLat(place.lat));
-                  dispatch(setLon(place.long));
-                  navigation.navigate(SCREENS.home);
-                }
-              }
-            />
-            <ScrollView contentContainerStyle={styles.container}>
-              {
-                DISTRICTS.map((district, idx) => <LocationRow key={idx} district={district} />)
-              }
-            </ScrollView>
-          </ImageBackground>
-        </View>
-      </AutocompleteDropdownContextProvider>
+      <View style={styles.wrapper}>
+        <ImageBackground source={appBackground} style={styles.bg}>
+          <AppBar location={name} navigation={navigation} />
+          <ScrollView contentContainerStyle={styles.container}>
+            {
+              DISTRICTS.map((district, idx) => <LocationRow key={idx} district={district} />)
+            }
+          </ScrollView>
+        </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 }
@@ -64,7 +44,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 30,
+    marginLeft: 18,
+    marginRight: 18,
   },
   bg: {
     height: '100%',

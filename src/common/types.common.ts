@@ -5,4 +5,6 @@ export type RootDrawerParamList = {
   NoLocation: undefined;
   Search: undefined;
   Home: undefined;
+  AboutUs: undefined;
+  Feedback: undefined;
 };
