@@ -1,8 +1,10 @@
 import { StyleSheet, View } from "react-native";
 import { Icon, Paragraph, Text } from "react-native-paper";
+
 import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
 import { DaySummary } from "../utils/weatherData";
+import { GlassView } from '../components/GlassView';
 
 
 type DayRowProps = {
@@ -17,34 +19,42 @@ const DayRow = (props: DayRowProps) => {
   const icon = summary.weatherSymbol || 'snow'
 
   return (
-    <View style={styles.dayRow}>
-      <Paragraph style={{ flex: 2 }}>
-        <Text>{summary.day.toLocaleString({weekday: "short"})}</Text>
-      </Paragraph>
-      <Paragraph style={{ flex: 2 }}>
-        <Icon source={WEATHER_WARNINGS['yellow']} size={19} />
-      </Paragraph>
-      <Paragraph style={{ flex: 2 }}>
-        <Icon source={weatherIcons[icon]} size={19} />
-      </Paragraph>
-      <Paragraph style={{ flex: 3 }}>
-        <Text>{Math.round(minTemp)}&deg; - {Math.round(maxTemp)}&deg;</Text>
-      </Paragraph>
-      <Paragraph style={{ flex: 2 }}><Text>{windSpeed} km/h</Text></Paragraph>
-    </View>
+    <GlassView glassStyle={styles.dayRow} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+      <View style={styles.opacity}>
+        <Paragraph style={{ flex: 2 }}>
+          <Text style={styles.whiteText}>{summary.day.toLocaleString({ weekday: "short" })}</Text>
+        </Paragraph>
+        <Paragraph style={{ flex: 2 }}>
+          <Icon source={WEATHER_WARNINGS['yellow']} size={28} />
+        </Paragraph>
+        <Paragraph style={{ flex: 2 }}>
+          <Icon source={weatherIcons[icon]} size={28} />
+        </Paragraph>
+        <Paragraph style={{ flex: 5 }}>
+          <Text style={styles.whiteText}>{Math.round(minTemp)}&deg; - {Math.round(minTemp)}&deg;</Text>
+        </Paragraph>
+        <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>{windSpeed}</Text></Paragraph>
+      </View>
+    </GlassView>
   )
 };
 
 const styles = StyleSheet.create({
   dayRow: {
     fontFamily: 'NotoSans-Regular',
-    backgroundColor: 'white',
     width: '100%',
+    marginTop: 9,
     borderRadius: 4,
-    padding: 15,
-    marginTop: 8,
-    flexDirection: 'row',
+  },
+  whiteText: {
+    color: 'white',
     fontSize: 16,
+  },
+  opacity: {
+    backgroundColor: 'rgba(217, 217, 217, .5)',
+    width: '100%',
+    padding: 15,
+    flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
 });
