@@ -13,8 +13,8 @@ type DayRowProps = {
 const DayRow = (props: DayRowProps) => {
   const { summary } = props;
 
-  const minTemp = summary.maxTemperature || 0;
-  const maxTemp = summary.minTemperature || 0;
+  const minTemp = summary.minTemperature || 0;
+  const maxTemp = summary.maxTemperature || 0;
   const windSpeed = summary.windSpeed || 0;
   const icon = summary.weatherSymbol || 'snow'
 
