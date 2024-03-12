@@ -37,7 +37,6 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
-
   if (forecastError) {
     <SafeAreaView>
       <View style={styles.wrapper}>
@@ -49,57 +48,58 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     </SafeAreaView>
   }
 
-  if (forecast) {
-    const preparedForecast = new Forecast(forecast)
-
-    const onSelectToday = () =>
-      navigation.navigate(SCREENS.Hourly, {
-        location: location,
-        daySummary: preparedForecast.atDay(today),
-        title: 'Hourly Today'
-      })
-    const onSelectDay = (location: string) =>
-      (day: DateTime, preparedForecast: Forecast) =>
-        navigation.navigate(SCREENS.Hourly, {
-          location: location,
-          daySummary: preparedForecast.atDay(day),
-          title: day.toLocaleString({ weekday: 'long' })
-        });
-
-    const today = DateTime.now()
-
+  if (!forecast) {
     return (
       <SafeAreaView>
         <View style={styles.wrapper}>
-          <ImageBackground source={appBackground} style={styles.bg}>
+          <ImageBackground source={appBackground}>
             <AppBar location={location} navigation={navigation} />
-            <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
-                <View style={styles.opacity}>
-                  <TouchableOpacity onPress={onSelectToday}>
-                    <Today daySummary={preparedForecast.atDay(today)} />
-                  </TouchableOpacity>
-                  <FiveDays name={location} startDate={today.plus({days:1})} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
-                </View>
-              </GlassView>
-            </ScrollView>
+            <Text>Loading...</Text>
           </ImageBackground>
         </View>
       </SafeAreaView>
     );
   }
 
+  const preparedForecast = new Forecast(forecast)
+  const today = DateTime.now()
+  const todaysForecast = preparedForecast.atDay(today)
+
+  const onSelectToday = () =>
+    navigation.navigate(SCREENS.Hourly, {
+      location: location,
+      daySummary: preparedForecast.atDay(today),
+      title: 'Hourly Today'
+    })
+  const onSelectDay = (location: string) =>
+    (day: DateTime, preparedForecast: Forecast) =>
+      navigation.navigate(SCREENS.Hourly, {
+        location: location,
+        daySummary: preparedForecast.atDay(day),
+        title: day.toLocaleString({ weekday: 'long' })
+      });
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
-        <ImageBackground source={appBackground}>
+        <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
-          <Text>Loading...</Text>
+          <ScrollView>
+            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+              <View style={styles.opacity}>
+                <TouchableOpacity onPress={onSelectToday}>
+                  <Today daySummary={todaysForecast} />
+                </TouchableOpacity>
+                <FiveDays name={location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
+              </View>
+            </GlassView>
+          </ScrollView>
         </ImageBackground>
       </View>
     </SafeAreaView>
   );
 }
+
 
 export default MainScreen;
 

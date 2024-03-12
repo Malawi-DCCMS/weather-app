@@ -23,6 +23,8 @@ describe('interpret forecast', () => {
     test('extract day', () => {
         const f = new Forecast(sampleForecast)
         const summary = f.atDay(f.days()[1])
+        if (!summary)
+            fail("could not get daily summary")
         expect(summary.day.toISO()).toBe("2024-01-12T00:00:00.000+02:00")
         expect(summary.minTemperature).toBe(18.7)
         expect(summary.maxTemperature).toBe(26.9)
