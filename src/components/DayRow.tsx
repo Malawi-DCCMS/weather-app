@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
 import { Icon, Paragraph, Text } from "react-native-paper";
+import { BlurView } from "@react-native-community/blur";
 
 import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
 import { DaySummary } from "../utils/weatherData";
-import { GlassView } from '../components/GlassView';
 
 
 type DayRowProps = {
@@ -19,7 +19,7 @@ const DayRow = (props: DayRowProps) => {
   const icon = summary.weatherSymbol || 'snow'
 
   return (
-    <GlassView glassStyle={styles.dayRow} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+    <View style={styles.dayRow}>
       <View style={styles.opacity}>
         <Paragraph style={{ flex: 2 }}>
           <Text style={styles.whiteText}>{summary.day.toLocaleString({ weekday: "short" })}</Text>
@@ -31,11 +31,12 @@ const DayRow = (props: DayRowProps) => {
           <Icon source={weatherIcons[icon]} size={28} />
         </Paragraph>
         <Paragraph style={{ flex: 5 }}>
-          <Text style={styles.whiteText}>{Math.round(minTemp)}&deg; - {Math.round(minTemp)}&deg;</Text>
+          <Text style={styles.whiteText}>{Math.round(minTemp)}&deg; - {Math.round(maxTemp)}&deg;</Text>
         </Paragraph>
         <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>{windSpeed}</Text></Paragraph>
       </View>
-    </GlassView>
+      <BlurView blurAmount={8} blurType="light" />
+    </View>
   )
 };
 
@@ -44,11 +45,11 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Regular',
     width: '100%',
     marginTop: 9,
-    borderRadius: 4,
   },
   whiteText: {
     color: 'white',
     fontSize: 16,
+    zIndex: 1,
   },
   opacity: {
     backgroundColor: 'rgba(217, 217, 217, .5)',
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    borderRadius: 4,
   },
 });
 

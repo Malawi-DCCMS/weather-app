@@ -27,10 +27,10 @@ function FiveDays(props: DailyForecastProps): JSX.Element {
                         <Text style={styles.transparentText}>Sun</Text>
                     </Paragraph>
                     <Paragraph style={{ flex: 2 }}>
-                        <Icon source={WEATHER_WARNINGS['yellow']} color='transparent' size={28} />
+                        <Icon source={WEATHER_WARNINGS['yellow']} color='rgba(255, 255, 255, 0)' size={28} />
                     </Paragraph>
                     <Paragraph style={{ flex: 2 }}>
-                        <Icon source={weatherIcons['fair_day']} color='transparent' size={28} />
+                        <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
                     </Paragraph>
                     <Paragraph style={{ flex: 5 }}>
                         <Text style={styles.whiteText}>Min     Max</Text>
