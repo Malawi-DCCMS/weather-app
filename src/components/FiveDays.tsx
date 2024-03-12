@@ -9,7 +9,7 @@ import { WEATHER_WARNINGS } from '../common';
 import weatherIcons from '../constants/weathericons.constant';
 
 type DailyForecastProps = {
-    startDate: DateTime
+    startDate: DateTime;
     preparedForecast?: Forecast;
     name: string;
     onClick: (day: DateTime, preparedForecast: Forecast) => void;
