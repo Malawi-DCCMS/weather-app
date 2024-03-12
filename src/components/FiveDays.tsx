@@ -9,17 +9,29 @@ import { WEATHER_WARNINGS } from '../common';
 import weatherIcons from '../constants/weathericons.constant';
 
 type DailyForecastProps = {
+    startDate: DateTime
     preparedForecast?: Forecast;
     name: string;
     onClick: (day: DateTime, preparedForecast: Forecast) => void;
 }
 function FiveDays(props: DailyForecastProps): JSX.Element {
-
-    const { preparedForecast } = props
+    const { startDate, preparedForecast } = props
 
     if (preparedForecast) {
-        const days = Array.from(preparedForecast.days()).slice(1, 6)
+        const allDays = preparedForecast.days()
+        const startIndex = allDays.findIndex(day => startDate.hasSame(day, "day"))
 
+        if (startIndex == -1) {
+            return (
+                <View style={{ paddingLeft: 12, paddingRight: 12, marginTop: 40 }}>
+                    <Text style={{ fontFamily: 'NotoSans-Regular' }}>
+                        Forecast not available at the moment. Please try again later.
+                    </Text>
+                </View>
+            );
+        }
+
+        const fiveDays = allDays.slice(startIndex, startIndex+5)
         return <View style={{ paddingLeft: 27, paddingRight: 26, marginTop: 60, paddingBottom: 50 }}>
             <View style={styles.dayRow}>
                 <View style={styles.opacity}>
@@ -38,7 +50,7 @@ function FiveDays(props: DailyForecastProps): JSX.Element {
                     <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
                 </View>
             </View>
-            {days.map(day =>
+            {fiveDays.map(day =>
                 <TouchableOpacity key={day.toLocaleString()} onPress={() => props.onClick(day, preparedForecast)}>
                     <DayRow summary={preparedForecast.atDay(day)} />
                 </TouchableOpacity>

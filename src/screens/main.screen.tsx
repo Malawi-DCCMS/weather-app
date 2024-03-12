@@ -79,7 +79,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
                   <TouchableOpacity onPress={onSelectToday}>
                     <Today daySummary={preparedForecast.atDay(today)} />
                   </TouchableOpacity>
-                  <FiveDays name={location} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
+                  <FiveDays name={location} startDate={today.plus({days:1})} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
                 </View>
               </GlassView>
             </ScrollView>
