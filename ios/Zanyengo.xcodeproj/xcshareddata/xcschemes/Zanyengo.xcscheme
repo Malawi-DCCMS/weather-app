@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "weatherApp.app"
-               BlueprintName = "weatherApp"
-               ReferencedContainer = "container:weatherApp.xcodeproj">
+               BuildableName = "Zanyengo.app"
+               BlueprintName = "Zanyengo"
+               ReferencedContainer = "container:Zanyengo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "weatherAppTests.xctest"
-               BlueprintName = "weatherAppTests"
-               ReferencedContainer = "container:weatherApp.xcodeproj">
+               BuildableName = "ZanyengoTests.xctest"
+               BlueprintName = "ZanyengoTests"
+               ReferencedContainer = "container:Zanyengo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "weatherApp.app"
-            BlueprintName = "weatherApp"
-            ReferencedContainer = "container:weatherApp.xcodeproj">
+            BuildableName = "Zanyengo.app"
+            BlueprintName = "Zanyengo"
+            ReferencedContainer = "container:Zanyengo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "weatherApp.app"
-            BlueprintName = "weatherApp"
-            ReferencedContainer = "container:weatherApp.xcodeproj">
+            BuildableName = "Zanyengo.app"
+            BlueprintName = "Zanyengo"
+            ReferencedContainer = "container:Zanyengo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
