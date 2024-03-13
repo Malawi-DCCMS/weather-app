@@ -29,7 +29,6 @@ const AppBar = (props: AppBarProps) => {
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle}>{fmtLocation}</Text>
-        <TouchableOpacity style={styles.weatherWarning}><Icon size={33} source={WEATHER_WARNINGS.yellow} /></TouchableOpacity>
       </View>
 
       <View style={styles.appNav}>
