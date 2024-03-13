@@ -28,7 +28,13 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }, []);
 
   useEffect(() => {
-    dispatch(getLocationForecast({ lat, lon }));
+    const getForecast = async () => {
+      dispatch(getLocationForecast({ lat, lon }));
+    };
+
+    getForecast()
+    const t = setInterval(getForecast, 21600000);
+    return () => clearInterval(t);
   }, [location]);
 
   useEffect(() => {
@@ -36,18 +42,6 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       navigation.navigate(SCREENS.NoLocation);
     }
   }, [locationError]);
-
-
-  if (forecastError) {
-    <SafeAreaView>
-      <View style={styles.wrapper}>
-        <ImageBackground source={appBackground}>
-          <AppBar location={location} navigation={navigation} />
-          <Text>There was a problem getting the weather.</Text>
-        </ImageBackground>
-      </View>
-    </SafeAreaView>
-  }
 
   if (forecast) {
     const preparedForecast = new Forecast(forecast)
@@ -74,6 +68,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
           <ImageBackground source={appBackground} style={styles.bg}>
             <AppBar location={location} navigation={navigation} />
             <ScrollView>
+              {forecastError && <Text>There was a problem getting a forecast update.</Text>}
               <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
                 <View style={styles.opacity}>
                   <TouchableOpacity onPress={onSelectToday}>
@@ -87,6 +82,19 @@ const MainScreen = ({ navigation }: ScreenProps) => {
         </View>
       </SafeAreaView>
     );
+  }
+
+  if (forecastError){
+    return (
+      <SafeAreaView>
+        <View style={styles.wrapper}>
+          <ImageBackground source={appBackground}>
+            <AppBar location={location} navigation={navigation} />
+            <Text>There was a problem getting the forecast.</Text>
+          </ImageBackground>
+        </View>
+      </SafeAreaView>
+    )
   }
 
   return (
