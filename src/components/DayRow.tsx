@@ -5,13 +5,27 @@ import { BlurView } from "@react-native-community/blur";
 import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
 import { DaySummary } from "../utils/weatherData";
+import React from "react";
 
 
 type DayRowProps = {
-  summary: DaySummary;
+  summary: DaySummary | undefined;
 }
 const DayRow = (props: DayRowProps) => {
   const { summary } = props;
+
+  if (!summary) {
+    return (
+      <View style={styles.dayRow}>
+        <View style={styles.opacity}>
+          <Paragraph style={{ flex: 2 }}>
+            <Text style={styles.whiteText}>Forecast unavailable</Text>
+          </Paragraph>
+        </View>
+      </View>
+    )
+  }
+
 
   const minTemp = summary.minTemperature || 0;
   const maxTemp = summary.maxTemperature || 0;
@@ -21,17 +35,17 @@ const DayRow = (props: DayRowProps) => {
   return (
     <View style={styles.dayRow}>
       <View style={styles.opacity}>
-        <Paragraph style={{ flex: 2 }}>
+        <Paragraph style={{ flex: 3 }}>
           <Text style={styles.whiteText}>{summary.day.toLocaleString({ weekday: "short" })}</Text>
         </Paragraph>
-        <Paragraph style={{ flex: 2 }}>
-          <Icon source={WEATHER_WARNINGS['yellow']} size={28} />
-        </Paragraph>
-        <Paragraph style={{ flex: 2 }}>
+        <Paragraph style={{ flex: 3 }}>
           <Icon source={weatherIcons[icon]} size={28} />
         </Paragraph>
-        <Paragraph style={{ flex: 5 }}>
-          <Text style={styles.whiteText}>{Math.round(minTemp)}&deg; - {Math.round(maxTemp)}&deg;</Text>
+        <Paragraph style={{ flex: 3 }}>
+          <Text style={styles.whiteText}>{Math.round(minTemp)}&deg;</Text>
+        </Paragraph>
+        <Paragraph style={{ flex: 3 }}>
+          <Text style={styles.whiteText}>{Math.round(maxTemp)}&deg;</Text>
         </Paragraph>
         <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>{windSpeed}</Text></Paragraph>
       </View>

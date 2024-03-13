@@ -66,7 +66,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     return (
       <SafeAreaView>
         <View style={styles.wrapper}>
-          <ImageBackground source={appBackground} style={styles.bg}>
+          <ImageBackground source={appBackground}>
             <AppBar location={location} navigation={navigation} />
             <ScrollView>
               <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
@@ -101,7 +101,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
-        <ImageBackground source={appBackground}>
+        <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
         </ImageBackground>
       </View>

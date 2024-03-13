@@ -21,34 +21,50 @@ function LocationRow(props: LocationRowProps): JSX.Element {
     </View>
   }
 
-  if (forecast) {
-    const today = new Forecast(forecast).atDay(DateTime.now())
+  if (!forecast) {
+    return (
+      <View style={styles.wrapper}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 
+  const today = new Forecast(forecast).atDay(DateTime.now())
+  if (!today) {
     return (
       <View style={styles.wrapper}>
         <GlassView containerStyle={styles.glassWrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
           <View style={styles.opacity}>
             <View style={styles.left}>
-              <View>
-                <Text style={styles.header}>{props.district.name}</Text>
-              </View>
-              <View style={styles.smallContainer}>
-                <Text style={styles.small}>&uarr;{Math.round(today.maxTemperature || 0)}&deg;  &darr;{Math.round(today.minTemperature || 0)}&deg;</Text>
-              </View>
-            </View>
-            <View style={styles.right}>
-              <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
+              <Text>Forecast unavailable</Text>
             </View>
           </View>
         </GlassView>
       </View>
-    );
+    )
   }
 
-  return <View style={styles.wrapper}>
-    <Text>Loading...</Text>
-  </View>;
-};
+  return (
+    <View style={styles.wrapper}>
+      <GlassView containerStyle={styles.glassWrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+        <View style={styles.opacity}>
+          <View style={styles.left}>
+            <View>
+              <Text style={styles.header}>{props.district.name}</Text>
+            </View>
+            <View style={styles.smallContainer}>
+              <Text style={styles.small}>&uarr;{Math.round(today.maxTemperature || 0)}&deg;  &darr;{Math.round(today.minTemperature || 0)}&deg;</Text>
+            </View>
+          </View>
+          <View style={styles.right}>
+            <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
+          </View>
+        </View>
+      </GlassView>
+    </View>
+  );
+}
+
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -7,8 +7,11 @@ import { WeatherForecast } from '../utils/locationforecast';
 type ForecastPayload = { lat: number, lon: number };
 export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<WeatherForecast> => {
   const API_URL = 'https://api.met.no/weatherapi/locationforecast/2.0';
-  const USER_AGENT = 'dccms';
-  const { data } = await Axios.get(`${API_URL}?lat=${lat}&lon=${lon}`, { headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
+  // const API_URL = 'http://10.0.2.2/forecast'
+  const USER_AGENT = 'met_malawi';
+  const url = `${API_URL}?lat=${lat}&lon=${lon}`
+  LOGGER.info(url)
+  const { data } = await Axios.get(url, { headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
   return data;
 });
 

@@ -29,7 +29,6 @@ const AppBar = (props: AppBarProps) => {
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle}>{fmtLocation}</Text>
-        <TouchableOpacity style={styles.weatherWarning}><Icon size={33} source={WEATHER_WARNINGS.yellow} /></TouchableOpacity>
       </View>
 
       <View style={styles.appNav}>
@@ -44,11 +43,24 @@ const AppBar = (props: AppBarProps) => {
             onDismiss={closeMenu} anchor={<TouchableOpacity onPress={() => openMenu()}><Icon size={24} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
             contentStyle={{ backgroundColor: 'rgba(217, 217, 217, 0.7)', marginTop: 25 }}
           >
-            <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} titleStyle={styles.menuItemTitle} title="Favourites" />
-            <Menu.Item onPress={() => { closeMenu(); props.navigation.navigate(SCREENS.AboutUs); }} style={styles.menuItem} titleStyle={styles.menuItemTitle} title="About the app" />
-            <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} titleStyle={styles.menuItemTitle} title="Settings" />
-            <Menu.Item onPress={() => { closeMenu(); props.navigation.navigate(SCREENS.Feedback); }} style={styles.menuItem} titleStyle={styles.menuItemTitle} title="Give feedback" />
-            <Menu.Item onPress={() => { closeMenu(); }} style={styles.menuItem} titleStyle={styles.menuItemTitle} title="Help" />
+            <Menu.Item
+              onPress={() => {
+                closeMenu();
+                props.navigation.navigate(SCREENS.AboutUs);
+              }}
+              style={styles.menuItem}
+              titleStyle={styles.menuItemTitle}
+              title="About the app"
+            />
+            <Menu.Item
+              onPress={() => {
+                closeMenu();
+                props.navigation.navigate(SCREENS.Feedback);
+              }}
+              style={styles.menuItem}
+              titleStyle={styles.menuItemTitle}
+              title="Give feedback"
+            />
           </Menu>
         </View>
       </View>
