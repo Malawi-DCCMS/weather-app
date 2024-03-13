@@ -5,13 +5,27 @@ import { BlurView } from "@react-native-community/blur";
 import weatherIcons from '../constants/weathericons.constant';
 import { WEATHER_WARNINGS } from "../common";
 import { DaySummary } from "../utils/weatherData";
+import React from "react";
 
 
 type DayRowProps = {
-  summary: DaySummary;
+  summary: DaySummary | undefined;
 }
 const DayRow = (props: DayRowProps) => {
   const { summary } = props;
+
+  if (!summary) {
+    return (
+      <View style={styles.dayRow}>
+        <View style={styles.opacity}>
+          <Paragraph style={{ flex: 2 }}>
+            <Text style={styles.whiteText}>Forecast unavailable</Text>
+          </Paragraph>
+        </View>
+      </View>
+    )
+  }
+
 
   const minTemp = summary.minTemperature || 0;
   const maxTemp = summary.maxTemperature || 0;

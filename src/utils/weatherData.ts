@@ -41,11 +41,14 @@ export class Forecast {
      * @param day The day to get a summary for. Only the date part of this argument will be considered.
      * @returns A summary of the forecast for the given day.
      */
-    atDay(day: DateTime): DaySummary {
+    atDay(day: DateTime): DaySummary|undefined {
         day = day.setZone(timeZone).startOf('day')
 
         const relevantSteps = this.timeSteps.
             filter(step => step.time.year == day.year && step.time.month == day.month && step.time.day == day.day)
+
+        if (relevantSteps.length == 0)
+            return undefined
 
         const temperature = getMinMaxTemperature(relevantSteps);
         const windSpeed = getMaxWindSpeed(relevantSteps);

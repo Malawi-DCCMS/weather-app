@@ -9,10 +9,21 @@ import { GlassView } from '../components/GlassView';
 
 
 type TodaysForecastProps = {
-  daySummary: DaySummary;
+  daySummary: DaySummary|undefined;
 };
 function Today(props: TodaysForecastProps): JSX.Element {
   const { daySummary } = props
+
+  if (!daySummary) {
+    return (
+      <GlassView containerStyle={styles.wrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+        <View style={styles.today}>
+          <Text style={styles.todaysHeader}>Forecast unavailable</Text>
+        </View>
+      </GlassView>
+    )
+  }
+
   return (
     <GlassView containerStyle={styles.wrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
       <View style={styles.opacity}>

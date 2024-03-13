@@ -1,7 +1,7 @@
 import { DaySummary } from "../utils/weatherData";
 
 export type RootDrawerParamList = {
-  Hourly: { location: string, daySummary: DaySummary, title: string };
+  Hourly: { location: string, daySummary: DaySummary|undefined, title: string };
   NoLocation: undefined;
   Search: undefined;
   Home: undefined;
