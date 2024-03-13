@@ -27,6 +27,8 @@ const forecastSlice = createSlice({
   name: 'forecast',
   initialState,
   reducers: {
+    setForecast: (state, action) => { state.forecast = action.payload },
+    setForecastError: (state, action) => { state.error = action.payload}
   },
   extraReducers(builder) {
     builder.addCase(getLocationForecast.pending, state => {
@@ -46,4 +48,5 @@ const forecastSlice = createSlice({
   },
 })
 
+export const { setForecast, setForecastError } = forecastSlice.actions;
 export const { reducer: forecastReducer } = forecastSlice;

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Banner } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
-
+import { IconButton } from 'react-native-paper'; 
 import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
 import AppBar from '../components/AppBar';
 import Today from '../components/Today';
@@ -12,7 +13,7 @@ import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
-import { getLocationForecast } from '../store/forecast.slice';
+import { getLocationForecast, setForecastError } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
@@ -68,7 +69,6 @@ const MainScreen = ({ navigation }: ScreenProps) => {
           <ImageBackground source={appBackground} style={styles.bg}>
             <AppBar location={location} navigation={navigation} />
             <ScrollView>
-              {forecastError && <Text>There was a problem getting a forecast update.</Text>}
               <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
                 <View style={styles.opacity}>
                   <TouchableOpacity onPress={onSelectToday}>
@@ -77,6 +77,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
                   <FiveDays name={location} startDate={today.plus({days:1})} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
                 </View>
               </GlassView>
+              {forecastError && <ErrorNotification message={"Update of forecast failed."} onClose={() => dispatch(setForecastError(undefined))} />}
             </ScrollView>
           </ImageBackground>
         </View>
@@ -102,12 +103,23 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <Text>Loading...</Text>
         </ImageBackground>
       </View>
     </SafeAreaView>
   );
 }
+
+const ErrorNotification = ({ message, onClose }) => {
+  return (
+    <View>
+      <TouchableOpacity style={styles.error} onPress={onClose}>
+        <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
+        <Text style={styles.errorText}>{message}</Text>
+        <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default MainScreen;
 
@@ -138,4 +150,21 @@ const styles = StyleSheet.create({
   opacity: {
     backgroundColor: 'rgba(0, 0, 0, .3)',
   },
+  error: {
+    backgroundColor: '#BFBFBF',
+    padding: 6,
+    marginRight: 19,
+    marginLeft: 19,
+    marginTop: 0,
+    marginBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+    justifyContent: 'space-between',
+
+  },
+  errorText: {
+    color: 'white',
+    fontSize: 16,
+  }
 });
