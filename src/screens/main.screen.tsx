@@ -65,7 +65,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     return (
       <SafeAreaView>
         <View style={styles.wrapper}>
-          <ImageBackground source={appBackground}>
+          <ImageBackground style={styles.bg} source={appBackground}>
             <AppBar location={location} navigation={navigation} />
             <ScrollView>
               <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
@@ -88,7 +88,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     return (
       <SafeAreaView>
         <View style={styles.wrapper}>
-          <ImageBackground source={appBackground}>
+          <ImageBackground source={appBackground} style={styles.bg}>
             <AppBar location={location} navigation={navigation} />
             <Text>There was a problem getting the forecast.</Text>
           </ImageBackground>
@@ -115,9 +115,13 @@ type ErrorNotificationProps = {
 const ErrorNotification = ({ message, onClose }: ErrorNotificationProps) => {
   return (
     <View style={styles.error}>
-      <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
-      <Text style={styles.errorText}>{message}</Text>
-      <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
+        <Text style={styles.errorText}>{message}</Text>
+      </View>
+      <View>
+        <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
+      </View>
     </View>
   );
 };
@@ -127,12 +131,14 @@ export default MainScreen;
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
+    flex: 1,
     height: '100%',
     width: '100%',
     margin: 0,
     padding: 0,
   },
   bg: {
+    flex: 1,
     height: '100%',
   },
   glassWrapper: {
@@ -153,13 +159,11 @@ const styles = StyleSheet.create({
   },
   error: {
     backgroundColor: '#BFBFBF',
-    padding: 6,
     marginRight: 19,
     marginLeft: 19,
     marginTop: -45,
     marginBottom: 5,
     flexDirection: 'row',
-    alignItems: 'flex-start',
     gap: 20,
     justifyContent: 'space-between',
   },
