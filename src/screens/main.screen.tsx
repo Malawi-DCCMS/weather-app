@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { Banner } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -109,14 +108,16 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   );
 }
 
-const ErrorNotification = ({ message, onClose }) => {
+type ErrorNotificationProps = {
+  message: string,
+  onClose: () => void,
+}
+const ErrorNotification = ({ message, onClose }: ErrorNotificationProps) => {
   return (
-    <View>
-      <TouchableOpacity style={styles.error} onPress={onClose}>
-        <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
-        <Text style={styles.errorText}>{message}</Text>
-        <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
-      </TouchableOpacity>
+    <View style={styles.error}>
+      <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
+      <Text style={styles.errorText}>{message}</Text>
+      <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
     </View>
   );
 };
@@ -155,13 +156,12 @@ const styles = StyleSheet.create({
     padding: 6,
     marginRight: 19,
     marginLeft: 19,
-    marginTop: 0,
+    marginTop: -45,
     marginBottom: 5,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 20,
     justifyContent: 'space-between',
-
   },
   errorText: {
     color: 'white',
