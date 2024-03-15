@@ -18,7 +18,7 @@ type HourlyTableProps = {
  */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
   return (
-    <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+    <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 25, blurType: 'light' }}>
       <View style={styles.opacity}>
         <DataTable style={styles.table}>
           <DataTable.Header>
@@ -32,7 +32,7 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             {props.daySummary.steps.map((step) => (
               <DataTable.Row key={step.time.toISO()}>
                 <DataTable.Cell><Text style={styles.whiteText}>{step.time.toLocaleString({ hour: '2-digit' })}</Text></DataTable.Cell>
-                <DataTable.Cell><Icon source={weatherIcons[step.weatherSymbol()]} size={36} /></DataTable.Cell>
+                <DataTable.Cell><Icon source={weatherIcons[step.weatherSymbol()]} size={34} /></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.temperature}&deg;</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.precipitation()}</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.windSpeed}</Text></DataTable.Cell>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   opacity: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, .1)',
+    backgroundColor: 'rgba(125, 125, 125, .1)',
   },
   whiteHeader: {
     color: 'white',
