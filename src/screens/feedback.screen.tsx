@@ -79,6 +79,8 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
     navigation.navigate(SCREENS.Home);
   };
 
+  const submitEnabled = loved || notLoved || text != ""
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
@@ -108,7 +110,14 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
                 </View>
                 <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'flex-start' }}>
                   <Button onPress={() => cancel()} style={styles.cancelButton} textColor='white'><Text style={styles.buttonText}>Cancel</Text></Button>
-                  <Button onPress={() => submit()} style={styles.sendButton} textColor='white'><Text style={styles.buttonText}>Send</Text></Button>
+                  <Button
+                    onPress={() => submit()}
+                    disabled={!submitEnabled}
+                    style={submitEnabled ? styles.sendButton : styles.disabledSendButton}
+                    textColor='white'
+                  >
+                    <Text style={submitEnabled ? styles.buttonText : styles.disabledButtonText}>Send</Text>
+                  </Button>
                 </View>
               </View>
             </GlassView>
@@ -259,6 +268,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 1,
   },
+  disabledSendButton: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    fontFamily: 'OpenSans',
+    borderRadius: 4,
+    lineHeight: 27,
+    fontSize: 20,
+    padding: 1,
+  },
   sendButton: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -274,4 +293,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white'
   },
+  disabledButtonText: {
+      fontSize: 20,
+      color: 'darkgray'
+  }
 })
