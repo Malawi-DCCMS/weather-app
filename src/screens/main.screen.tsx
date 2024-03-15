@@ -16,6 +16,11 @@ import { getLocationForecast } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
