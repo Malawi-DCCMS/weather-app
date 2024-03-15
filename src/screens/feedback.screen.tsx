@@ -105,7 +105,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
                     underlineColorAndroid={'transparent'}
                     defaultValue=""
                     placeholder='Write here...'
-                    placeholderTextColor={styles.saymore.placeHolderColor}
+                    placeholderTextColor='#E7E7E7'
                   />
                 </View>
                 <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'flex-start' }}>
@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
   saymore: {
     backgroundColor: 'rgba(255, 255, 255, 0.21)',
     color: 'white',
-    placeHolderColor: '#E7E7E7',
     width: '90%',
     margin: 10,
     borderRadius: 15,
