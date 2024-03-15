@@ -27,7 +27,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
   const [loved, setLoved] = useState<boolean>(false);
   const [notLoved, setNotLoved] = useState<boolean>(false);
   const [text, setText] = useState<string>('Write here...');
-  const [showValidationError, setShowValidationError] = useState<boolean>(false);
+  const [userError, setUserError] = useState<string|null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,10 +38,10 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
 
   const submit = async () => {
     if ((!loved && !notLoved) || text === DEFAULT_TEXT) {
-      setShowValidationError(true);
+      setUserError("Please make sure that you have filled the feedback form.");
       return;
     }
-    setShowValidationError(false);
+    setUserError(null);
 
     let summary = "neutral"
     if (loved)
@@ -60,7 +60,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
       setSuccess(true);
     } catch (e) {
       console.log(e)
-      setShowValidationError(true);
+      setUserError("There was a problem when submitting your feedback. Please try again later!");
     }
   };
 
@@ -115,13 +115,13 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
             </GlassView></FadeIn>)
             }
           </ScrollView>
-          <Dialog visible={showValidationError} onDismiss={() => setShowValidationError(false)}>
+          <Dialog visible={userError !== null} onDismiss={() => setUserError(null)}>
             <Dialog.Title>Error</Dialog.Title>
             <Dialog.Content>
-              <Text variant="bodyMedium">Please make sure that you have filled the feedback form.</Text>
+              <Text variant="bodyMedium">{userError}</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => setShowValidationError(false)}>Ok</Button>
+              <Button onPress={() => setUserError(null)}>Ok</Button>
             </Dialog.Actions>
           </Dialog>
         </ImageBackground>
