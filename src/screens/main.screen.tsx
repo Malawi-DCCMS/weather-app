@@ -33,6 +33,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     };
 
     getForecast()
+    /** Refresh forecast every 6 hours. Specified in milliseconds.  */
     const t = setInterval(getForecast, 21600000);
     return () => clearInterval(t);
   }, [location]);
