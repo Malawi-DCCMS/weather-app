@@ -18,6 +18,8 @@ import { RootDrawerParamList } from '../common';
 import { SCREENS } from '../constants/screens.constant';
 import { FadeIn } from '../components/FadeIn';
 import { GlassView } from '../components/GlassView';
+import axios from 'axios';
+
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Feedback'>;
 const FeedbackScreen = ({ navigation }: ScreenProps) => {
@@ -34,14 +36,32 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
 
   const DEFAULT_TEXT = 'Write here...';
 
-  const submit = () => {
+  const submit = async () => {
     if ((!loved && !notLoved) || text === DEFAULT_TEXT) {
       setShowValidationError(true);
       return;
     }
     setShowValidationError(false);
-    setSuccess(true);
-    LOGGER.info('Submitting...', loved, notLoved, text);
+
+    let summary = "neutral"
+    if (loved)
+      summary = "good"
+    else if (notLoved)
+      summary = "bad"
+
+    const FEEDBACK_URL = 'http://10.0.2.2/feedback'
+
+    try {
+      LOGGER.info('Submitting...', loved, notLoved, text);
+      await axios.post(FEEDBACK_URL, {
+        summary: summary,
+        free_text: text
+      })
+      setSuccess(true);
+    } catch (e) {
+      console.log(e)
+      setShowValidationError(true);
+    }
   };
 
   const clear = () => {
