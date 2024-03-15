@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
-
+import { IconButton } from 'react-native-paper'; 
 import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
 import AppBar from '../components/AppBar';
 import Today from '../components/Today';
@@ -12,7 +12,7 @@ import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
-import { getLocationForecast } from '../store/forecast.slice';
+import { getLocationForecast, setForecastError } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
@@ -28,7 +28,14 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }, []);
 
   useEffect(() => {
-    dispatch(getLocationForecast({ lat, lon }));
+    const getForecast = async () => {
+      dispatch(getLocationForecast({ lat, lon }));
+    };
+
+    getForecast()
+    /** Refresh forecast every 6 hours. Specified in milliseconds.  */
+    const t = setInterval(getForecast, 21600000);
+    return () => clearInterval(t);
   }, [location]);
 
   useEffect(() => {
@@ -37,69 +44,88 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
-  if (forecastError) {
-    <SafeAreaView>
-      <View style={styles.wrapper}>
-        <ImageBackground source={appBackground}>
-          <AppBar location={location} navigation={navigation} />
-          <Text>There was a problem getting the weather.</Text>
-        </ImageBackground>
-      </View>
-    </SafeAreaView>
-  }
+  if (forecast) {
+    const preparedForecast = new Forecast(forecast)
 
-  if (!forecast) {
+    const onSelectToday = () =>
+      navigation.navigate(SCREENS.Hourly, {
+        location: location,
+        daySummary: preparedForecast.atDay(today),
+        title: 'Hourly Today'
+      })
+    const onSelectDay = (location: string) =>
+      (day: DateTime, preparedForecast: Forecast) =>
+        navigation.navigate(SCREENS.Hourly, {
+          location: location,
+          daySummary: preparedForecast.atDay(day),
+          title: day.toLocaleString({ weekday: 'long' })
+        });
+
+    const today = DateTime.now()
+
     return (
       <SafeAreaView>
         <View style={styles.wrapper}>
-          <ImageBackground source={appBackground}>
+          <ImageBackground style={styles.bg} source={appBackground}>
             <AppBar location={location} navigation={navigation} />
-            <Text>Loading...</Text>
+            <ScrollView>
+              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+                <View style={styles.opacity}>
+                  <TouchableOpacity onPress={onSelectToday}>
+                    <Today daySummary={preparedForecast.atDay(today)} />
+                  </TouchableOpacity>
+                  <FiveDays name={location} startDate={today.plus({days:1})} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
+                </View>
+              </GlassView>
+              {/* { testErr && <ErrorNotification message="Forecast update failed." onClose={() => setTestErr(false)}/>} */}
+            </ScrollView>
           </ImageBackground>
         </View>
       </SafeAreaView>
     );
   }
 
-  const preparedForecast = new Forecast(forecast)
-  const today = DateTime.now()
-  const todaysForecast = preparedForecast.atDay(today)
-
-  const onSelectToday = () =>
-    navigation.navigate(SCREENS.Hourly, {
-      location: location,
-      daySummary: preparedForecast.atDay(today),
-      title: 'Hourly Today'
-    })
-  const onSelectDay = (location: string) =>
-    (day: DateTime, preparedForecast: Forecast) =>
-      navigation.navigate(SCREENS.Hourly, {
-        location: location,
-        daySummary: preparedForecast.atDay(day),
-        title: day.toLocaleString({ weekday: 'long' })
-      });
+  if (forecastError){
+    return (
+      <SafeAreaView>
+        <View style={styles.wrapper}>
+          <ImageBackground source={appBackground} style={styles.bg}>
+            <AppBar location={location} navigation={navigation} />
+            <Text>There was a problem getting the forecast.</Text>
+          </ImageBackground>
+        </View>
+      </SafeAreaView>
+    )
+  }
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
-          <ScrollView>
-            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
-              <View style={styles.opacity}>
-                <TouchableOpacity onPress={onSelectToday}>
-                  <Today daySummary={todaysForecast} />
-                </TouchableOpacity>
-                <FiveDays name={location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
-              </View>
-            </GlassView>
-          </ScrollView>
         </ImageBackground>
       </View>
     </SafeAreaView>
   );
 }
 
+type ErrorNotificationProps = {
+  message: string,
+  onClose: () => void,
+}
+const ErrorNotification = ({ message, onClose }: ErrorNotificationProps) => {
+  return (
+    <View style={styles.error}>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
+        <Text style={styles.errorText}>{message}</Text>
+      </View>
+      <View>
+        <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
+      </View>
+    </View>
+  );
+};
 
 export default MainScreen;
 
@@ -130,4 +156,18 @@ const styles = StyleSheet.create({
   opacity: {
     backgroundColor: 'rgba(0, 0, 0, .3)',
   },
+  error: {
+    backgroundColor: '#BFBFBF',
+    flexDirection: 'row',
+    marginRight: 19,
+    marginLeft: 19,
+    marginTop: -45,
+    marginBottom: 5,
+    gap: 20,
+    justifyContent: 'space-between',
+  },
+  errorText: {
+    color: 'white',
+    fontSize: 16,
+  }
 });

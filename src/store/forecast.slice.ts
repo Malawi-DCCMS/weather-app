@@ -11,7 +11,7 @@ export const getLocationForecast = createAsyncThunk('forecast/getLocationForecas
   const USER_AGENT = 'met_malawi';
   const url = `${API_URL}?lat=${lat}&lon=${lon}`
   LOGGER.info(url)
-  const { data } = await Axios.get(url, { headers: { 'User-Agent': USER_AGENT } });
+  const { data } = await Axios.get(url, { headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
   return data;
 });
 
@@ -30,6 +30,8 @@ const forecastSlice = createSlice({
   name: 'forecast',
   initialState,
   reducers: {
+    setForecast: (state, action) => { state.forecast = action.payload },
+    setForecastError: (state, action) => { state.error = action.payload}
   },
   extraReducers(builder) {
     builder.addCase(getLocationForecast.pending, state => {
@@ -49,4 +51,5 @@ const forecastSlice = createSlice({
   },
 })
 
+export const { setForecast, setForecastError } = forecastSlice.actions;
 export const { reducer: forecastReducer } = forecastSlice;

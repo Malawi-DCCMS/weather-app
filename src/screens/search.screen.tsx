@@ -11,6 +11,7 @@ import { Search } from '../components/Search';
 import { SCREENS } from '../constants/screens.constant';
 import { AppDispatch, RootState } from '../store';
 import { setName, setLat, setLon } from '../store/location.slice';
+import { setForecast } from '../store/forecast.slice';
 import { RootDrawerParamList } from '../common';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Search'>;
@@ -28,6 +29,7 @@ const SearchScreen = ({ navigation }: ScreenProps) => {
               location={name}
               setLocation={
                 place => {
+                  dispatch(setForecast(undefined))
                   dispatch(setName(place.name));
                   dispatch(setLat(place.lat));
                   dispatch(setLon(place.long));
