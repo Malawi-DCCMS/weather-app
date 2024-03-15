@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Paragraph, Text } from 'react-native-paper';
 
-import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
+import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   opacity: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, .1)',
+    backgroundColor: 'rgba(217, 217, 217, .1)',
   },
   whiteHeader: {
     color: 'white',

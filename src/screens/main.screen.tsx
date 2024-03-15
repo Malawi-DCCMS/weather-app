@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
-import { IconButton } from 'react-native-paper'; 
-import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
+import { IconButton } from 'react-native-paper';
+import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import Today from '../components/Today';
 import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
-import { getLocationForecast, setForecastError } from '../store/forecast.slice';
+import { getLocationForecast } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
@@ -69,7 +69,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
           <ImageBackground style={styles.bg} source={appBackground}>
             <AppBar location={location} navigation={navigation} />
             <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
                 <View style={styles.opacity}>
                   <TouchableOpacity onPress={onSelectToday}>
                     <Today daySummary={preparedForecast.atDay(today)} />
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, .6)',
   },
   opacity: {
-    backgroundColor: 'rgba(0, 0, 0, .3)',
+    backgroundColor: 'rgba(125, 125, 125, .10)',
   },
   error: {
     backgroundColor: '#BFBFBF',
