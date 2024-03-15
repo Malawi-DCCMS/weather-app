@@ -76,7 +76,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
                   <FiveDays name={location} startDate={today.plus({days:1})} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
                 </View>
               </GlassView>
-              {forecastError && <ErrorNotification message={"Update of forecast failed."} onClose={() => dispatch(setForecastError(undefined))} />}
+              {/* { testErr && <ErrorNotification message="Forecast update failed." onClose={() => setTestErr(false)}/>} */}
             </ScrollView>
           </ImageBackground>
         </View>
@@ -131,14 +131,12 @@ export default MainScreen;
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
-    flex: 1,
     height: '100%',
     width: '100%',
     margin: 0,
     padding: 0,
   },
   bg: {
-    flex: 1,
     height: '100%',
   },
   glassWrapper: {
@@ -159,11 +157,11 @@ const styles = StyleSheet.create({
   },
   error: {
     backgroundColor: '#BFBFBF',
+    flexDirection: 'row',
     marginRight: 19,
     marginLeft: 19,
     marginTop: -45,
     marginBottom: 5,
-    flexDirection: 'row',
     gap: 20,
     justifyContent: 'space-between',
   },
