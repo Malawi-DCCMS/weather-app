@@ -26,18 +26,17 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
   const { name } = useSelector((state: RootState) => state.location);
   const [loved, setLoved] = useState<boolean>(false);
   const [notLoved, setNotLoved] = useState<boolean>(false);
-  const [text, setText] = useState<string>('Write here...');
-  const [userError, setUserError] = useState<string|null>(null);
+  const [text, setText] = useState<string>("");
+  const [userError, setUserError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
     clear();
   }, []);
 
-  const DEFAULT_TEXT = 'Write here...';
-
   const submit = async () => {
-    if ((!loved && !notLoved) || text === DEFAULT_TEXT) {
+
+    if (!loved && !notLoved && text == "") {
       setUserError("Please make sure that you have filled the feedback form.");
       return;
     }
@@ -67,7 +66,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
   const clear = () => {
     setLoved(false);
     setNotLoved(false);
-    setText(DEFAULT_TEXT);
+    setText("");
     setSuccess(false);
   };
 
@@ -93,9 +92,19 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
                   <TouchableOpacity onPress={() => (setLoved(true), setNotLoved(false))}><View style={styles.smiley}><Icon source={loved ? loveActive : loveInactive} size={50} /></View></TouchableOpacity>
                   <TouchableOpacity onPress={() => (setNotLoved(true), setLoved(false))}><View style={styles.smiley}><Icon source={notLoved ? disableActive : disableInActive} size={60} /></View></TouchableOpacity>
                 </View>
-                <View><Text style={styles.headerSmall}>Anything you would like to tell add?</Text></View>
+                <View><Text style={styles.headerSmall}>Anything you would like to add?</Text></View>
                 <View style={{ width: '100%', alignItems: 'center' }}>
-                  <TextInput style={styles.saymore} multiline editable onChangeText={setText} underlineColorAndroid={'transparent'} placeholder='Write here...' defaultValue={text}></TextInput>
+                  <TextInput
+                    style={styles.saymore}
+                    multiline
+                    textAlignVertical="top"
+                    editable
+                    onChangeText={setText}
+                    underlineColorAndroid={'transparent'}
+                    defaultValue=""
+                    placeholder='Write here...'
+                    placeholderTextColor={styles.saymore.placeHolderColor}
+                  />
                 </View>
                 <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'flex-start' }}>
                   <Button onPress={() => cancel()} style={styles.cancelButton} textColor='white'><Text style={styles.buttonText}>Cancel</Text></Button>
@@ -216,6 +225,7 @@ const styles = StyleSheet.create({
   saymore: {
     backgroundColor: 'rgba(255, 255, 255, 0.21)',
     color: 'white',
+    placeHolderColor: '#E7E7E7',
     width: '90%',
     margin: 10,
     borderRadius: 15,
