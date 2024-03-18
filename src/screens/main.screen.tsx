@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
 import { IconButton } from 'react-native-paper';
+import { LogBox } from 'react-native';
+
 import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import Today from '../components/Today';
@@ -16,7 +18,6 @@ import { getLocationForecast } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
-import { LogBox } from 'react-native';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',

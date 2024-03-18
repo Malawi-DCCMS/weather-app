@@ -66,7 +66,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={name} navigation={navigation} />
           <ScrollView contentContainerStyle={styles.outer} snapToStart={false}>
-            {!success && <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+            {!success && <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
               <View style={styles.opacity}>
                 <View><Text style={styles.header}>Help us become better!</Text></View>
                 <View style={styles.smileys}>
@@ -84,7 +84,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
               </View>
             </GlassView>
             }
-            {success && (<FadeIn style={styles.fadeInContainer}><GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+            {success && (<FadeIn style={styles.fadeInContainer}><GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
               <View style={styles.opacity}>
                 <View style={styles.closeIcon}><TouchableOpacity onPress={() => close()}><Icon source='close' size={40} color='white' /></TouchableOpacity></View>
                 <View><Text style={styles.successHeader}>Thank you!</Text></View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, .1)',
     paddingBottom: 21,
   },
-  outer: { flexDirection: 'column', alignItems: 'center' },
+  outer: { flexDirection: 'column', alignItems: 'center', height: '100%' },
   bg: {
     height: '100%',
   },
