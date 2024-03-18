@@ -5,7 +5,6 @@ import { DateTime } from "luxon";
 
 import DayRow from './DayRow';
 import { Forecast } from '../utils/weatherData';
-import { WEATHER_WARNINGS } from '../common';
 import weatherIcons from '../constants/weathericons.constant';
 
 type DailyForecastProps = {

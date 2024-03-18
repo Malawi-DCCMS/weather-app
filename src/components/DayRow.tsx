@@ -1,9 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { Icon, Paragraph, Text } from "react-native-paper";
-import { BlurView } from "@react-native-community/blur";
 
 import weatherIcons from '../constants/weathericons.constant';
-import { WEATHER_WARNINGS } from "../common";
 import { DaySummary } from "../utils/weatherData";
 import React from "react";
 
@@ -49,7 +47,6 @@ const DayRow = (props: DayRowProps) => {
         </Paragraph>
         <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>{windSpeed}</Text></Paragraph>
       </View>
-      <BlurView blurAmount={8} blurType="light" />
     </View>
   )
 };

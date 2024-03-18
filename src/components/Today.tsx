@@ -6,10 +6,11 @@ import { getForecastDescription } from '../utils/forecast.utils';
 import { DaySummary } from '../utils/weatherData';
 import forwardArrow from '../../assets/icons8-forward-100.png';
 import { GlassView } from '../components/GlassView';
-
+import upArrow from '../../assets/Arrow-upward.png';
+import downArrow from '../../assets/Arrow-downward.png';
 
 type TodaysForecastProps = {
-  daySummary: DaySummary|undefined;
+  daySummary: DaySummary | undefined;
 };
 function Today(props: TodaysForecastProps): JSX.Element {
   const { daySummary } = props
@@ -25,7 +26,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
   }
 
   return (
-    <GlassView containerStyle={styles.wrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+    <View style={styles.wrapper}>
       <View style={styles.opacity}>
         <View style={styles.today}>
           <View><Text style={styles.todaysHeader}>Today <Icon size={24} color='white' source={forwardArrow} /></Text></View>
@@ -34,7 +35,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
         <View style={styles.temps}>
           <View>
             <Text style={styles.small}>
-              &uarr; {Math.round(daySummary.maxTemperature || 0)}&deg; &darr; {Math.round(daySummary.minTemperature || 0)}&deg;
+              <Icon size={15} color='white' source={upArrow} /> {Math.round(daySummary.maxTemperature || 0)}&deg; <Icon size={15} color='white' source={downArrow} /> {Math.round(daySummary.minTemperature || 0)}&deg;
             </Text>
           </View>
           <View>
@@ -44,7 +45,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
           </View>
         </View>
       </View>
-    </GlassView>
+    </View>
   );
 };
 
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    borderRadius: 4,
+    borderRadius: 8,
   },
   opacity: {
     flexDirection: 'row',

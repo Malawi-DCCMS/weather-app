@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Dialog, Icon, Text } from 'react-native-paper';
 
-import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
+import appBackground from '../../assets/appbackground.png';
 import loveActive from '../../assets/love-active.png';
 import loveInactive from '../../assets/love-inactive.png';
 import disableActive from '../../assets/disable-heart-active.png';

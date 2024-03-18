@@ -1,13 +1,11 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BlurView } from '@react-native-community/blur';
-
-import { WEATHER_WARNINGS } from '../common';
 import { SCREENS } from '../constants/screens.constant';
 import backArrow from '../../assets/icons8-back-100_2.png';
+import { GlassView } from './GlassView';
 
 type AppBarProps = {
   location: string,
@@ -25,7 +23,7 @@ const AppBar = (props: AppBarProps) => {
   const closeMenu = () => setVisible(false);
 
   return (
-    <View style={styles.appBar}>
+    <GlassView style={styles.appBar} glassStyle={styles.appBar} blurStyle={{ blurAmount: 25, blurType: 'light' }}>
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle}>{fmtLocation}</Text>
@@ -64,8 +62,7 @@ const AppBar = (props: AppBarProps) => {
           </Menu>
         </View>
       </View>
-      <BlurView blurAmount={50} blurType='light' style={styles.blurBar} />
-    </View>
+    </GlassView>
   );
 }
 

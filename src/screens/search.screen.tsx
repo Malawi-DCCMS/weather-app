@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
 
-import appBackground from '../../assets/MOBILE-craig-manners-dyWHuFsdfIo-unsplash.png';
+import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import { Search } from '../components/Search';
 import { SCREENS } from '../constants/screens.constant';

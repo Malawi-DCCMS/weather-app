@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
@@ -33,7 +33,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
   };
 
   return (
-    <GlassView containerStyle={styles.container} glassStyle={styles.glassCcontainer} blurStyle={{blurAmount: 20, blurType: 'light'}}>
+    <GlassView containerStyle={styles.container} glassStyle={styles.glassCcontainer} blurStyle={{blurAmount: 25, blurType: 'light'}}>
       <AutocompleteDropdown
         clearOnFocus={false}
         closeOnBlur={true}
