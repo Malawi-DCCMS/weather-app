@@ -40,7 +40,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
         closeOnSubmit={false}
         textInputProps={{ placeholder: 'Search location', placeholderTextColor: 'white', style: styles.textStyle }}
         onSelectItem={handleSelect}
-        dataSet={[{id: '9_000_000_000', title: location}, ...dataset]}
+        dataSet={[...dataset]}
         inputContainerStyle={styles.searchBar}
         debounce={3000}
         showChevron={false}
