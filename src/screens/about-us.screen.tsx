@@ -21,6 +21,11 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
               <ScrollView>
                 <View style={styles.content}>
                   <Paragraph>
+                    <Text style={styles.title}>
+                      Department of Climate Change and Meteorological Services (DCCMS)
+                    </Text>{"\n"}
+                  </Paragraph>
+                  <Paragraph>
                     <Text style={styles.whiteHeader}>How we started</Text>{"\n"}
                     <Text style={styles.whiteText}>
                       We began with volunteers and enthusiasts in the 1890s.
@@ -80,6 +85,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     lineHeight: 22,
+    fontFamily: 'OpenSans',
+  },
+  title: {
+    color: 'white',
+    fontSize: 21,
     fontFamily: 'OpenSans',
   },
   wrapper: {

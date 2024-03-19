@@ -49,7 +49,7 @@ const AppBar = (props: AppBarProps) => {
               }}
               style={styles.menuItem}
               titleStyle={styles.menuItemTitle}
-              title="About the app"
+              title="About us"
             />
             <Menu.Item
               onPress={() => {
