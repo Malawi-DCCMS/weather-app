@@ -32,12 +32,4 @@ export function getGeonames(): Record<string, Geoname> {
     },
     {},
   );
-
-  // return rawPlaces.reduce((acc: Array<Geoname>, val) => {
-  //   const place = placeFromGeoname(val);
-  //   if (place) {
-  //     acc.push(place);
-  //   }
-  //   return acc;
-  // }, []);
 }
