@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
+import { BlurView } from '@react-native-community/blur';
 
 import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { Forecast } from '../utils/weatherData';
-import { GlassView } from '../components/GlassView';
 
 type LocationRowProps = {
   district: District;
@@ -33,20 +33,21 @@ function LocationRow(props: LocationRowProps): JSX.Element {
   if (!today) {
     return (
       <View style={styles.wrapper}>
-        <GlassView containerStyle={styles.glassWrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+        <View style={styles.glassWrapper}>
           <View style={styles.opacity}>
             <View style={styles.left}>
               <Text>Forecast unavailable</Text>
             </View>
           </View>
-        </GlassView>
+          <BlurView blurAmount={25} blurType='light'/>
+        </View>
       </View>
     )
   }
 
   return (
     <View style={styles.wrapper}>
-      <GlassView containerStyle={styles.glassWrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+      <View style={styles.glassWrapper}>
         <View style={styles.opacity}>
           <View style={styles.left}>
             <View>
@@ -60,7 +61,8 @@ function LocationRow(props: LocationRowProps): JSX.Element {
             <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
           </View>
         </View>
-      </GlassView>
+        <BlurView blurAmount={25} blurType='light'/>
+      </View>
     </View>
   );
 }
@@ -77,8 +79,15 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 4,
   },
+  blurBar: {
+    position: 'absolute',
+    top: 0,
+    height: '100%',
+    width: '100%',
+    zIndex: 0,
+  },
   opacity: {
-    backgroundColor: 'rgba(217, 217, 217, 0.5)',
+    backgroundColor: 'rgba(193, 193, 193, 0.5)',
     flex: 1,
     flexDirection: 'row',
     width: '100%',
@@ -86,6 +95,8 @@ const styles = StyleSheet.create({
     paddingLeft: 17,
     paddingTop: 10,
     paddingBottom: 10,
+    zIndex: 1,
+    borderRadius: 4,
   },
   left: {
     flex: 1,
