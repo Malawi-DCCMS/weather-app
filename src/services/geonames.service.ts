@@ -1,4 +1,4 @@
-import { GEONAMES } from '../../assets/geonames';
+import { GEONAMESUNIQUE } from '../../assets/geonames-unique';
 
 function placeFromGeoname(value: string): Geoname | undefined {
   const fields = value.split(/\t/);
@@ -20,7 +20,7 @@ function parseGeonames(geonames: string): Array<string> {
 }
 
 export function getGeonames(): Array<Geoname> {
-  const rawPlaces = parseGeonames(GEONAMES);
+  const rawPlaces = parseGeonames(GEONAMESUNIQUE);
   return rawPlaces.reduce((acc: Array<Geoname>, val) => {
     const place = placeFromGeoname(val);
     if (place) {
