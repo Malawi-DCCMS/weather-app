@@ -53,7 +53,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
         debounce={3000}
         showChevron={false}
         showClear={false}
-        RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
+        // RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
         LeftComponent={<TouchableOpacity onPress={() => {}}><Icon source={'magnify'} color='white' size={24}/></TouchableOpacity>}
         useFilter={true}
         suggestionsListContainerStyle={styles.suggestionListStyle}
