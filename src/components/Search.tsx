@@ -14,21 +14,29 @@ type SearchProps = {
   location: string;
   setLocation: (place: Geoname) => void;
 };
+
+// type DataSetEntry = {
+//   id: string,
+//   title: string,
+// }
+
 export const Search = ({location, setLocation}: SearchProps) => {
   const geonames = useMemo(() => getGeonames(), []);
-  const map = geonames.reduce(
-    (acc: Record<string, Geoname>, val) => ((acc[val.name] = val), acc),
-    {},
-  );
+  const dataset = useMemo(() => getDataset(geonames), [])
 
-  const dataset = geonames.map((val, idx) => ({
-    id: idx.toString(),
-    title: val.name,
-  }));
+  // const map = geonames.reduce(
+  //   (acc: Record<string, Geoname>, val) => ((acc[val.name] = val), acc),
+  //   {},
+  // );
+
+  // const dataset = geonames.map((val, idx) => ({
+  //   id: idx.toString(),
+  //   title: val.name,
+  // }));
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
     if (item && item.title !== null) {
-      setLocation(map[item.title]);
+      setLocation(geonames[item.title]);
     }
   };
 
@@ -54,6 +62,18 @@ export const Search = ({location, setLocation}: SearchProps) => {
     </GlassView>
   );
 };
+
+function getDataset(geonames: Record<string, Geoname>) {
+  let dataset: Array<{ id: string, title: string }> = [];
+  for (const [key] of Object.entries(geonames)) {
+    dataset.push({
+      id: key,
+      title: key,
+    })
+  }
+
+  return dataset
+}
 
 const styles = StyleSheet.create({
   searchBar: {
