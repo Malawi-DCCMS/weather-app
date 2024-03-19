@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Icon, Text } from 'react-native-paper';
+import { ActivityIndicator, Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
 import { BlurView } from '@react-native-community/blur';
 
@@ -16,33 +16,59 @@ function LocationRow(props: LocationRowProps): JSX.Element {
   const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
 
   if (error) {
-    <View style={styles.wrapper}>
-      <Text>Not available...</Text>
-    </View>
-  }
-
-  if (!forecast) {
     return (
       <View style={styles.wrapper}>
-        <Text>Loading...</Text>
+      <View style={styles.glassWrapper}>
+        <View style={styles.opacity}>
+          <View style={styles.left}>
+            <View>
+              <Text style={styles.small}>There was an error getting the forecast.</Text>
+            </View>
+          </View>
+        </View>
+        <BlurView blurAmount={25} blurType='light' />
       </View>
+    </View>
     )
   }
 
-  const today = new Forecast(forecast).atDay(DateTime.now())
-  if (!today) {
+  if (forecast) {
+    const today = new Forecast(forecast).atDay(DateTime.now())
+    if (!today) {
+      return (
+        <View style={styles.wrapper}>
+          <View style={styles.glassWrapper}>
+            <View style={styles.opacity}>
+              <View style={styles.left}>
+                <Text>Forecast unavailable.</Text>
+              </View>
+            </View>
+            <BlurView blurAmount={25} blurType='light' />
+          </View>
+        </View>
+      )
+    }
+
     return (
       <View style={styles.wrapper}>
         <View style={styles.glassWrapper}>
           <View style={styles.opacity}>
             <View style={styles.left}>
-              <Text>Forecast unavailable</Text>
+              <View>
+                <Text style={styles.header}>{props.district.name}</Text>
+              </View>
+              <View style={styles.smallContainer}>
+                <Text style={styles.small}>&uarr;{Math.round(today.maxTemperature || 0)}&deg;  &darr;{Math.round(today.minTemperature || 0)}&deg;</Text>
+              </View>
+            </View>
+            <View style={styles.right}>
+              <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
             </View>
           </View>
-          <BlurView blurAmount={25} blurType='light'/>
+          <BlurView blurAmount={25} blurType='light' />
         </View>
       </View>
-    )
+    );
   }
 
   return (
@@ -51,20 +77,14 @@ function LocationRow(props: LocationRowProps): JSX.Element {
         <View style={styles.opacity}>
           <View style={styles.left}>
             <View>
-              <Text style={styles.header}>{props.district.name}</Text>
+              <ActivityIndicator animating={true} color={'white'} size={34} />
             </View>
-            <View style={styles.smallContainer}>
-              <Text style={styles.small}>&uarr;{Math.round(today.maxTemperature || 0)}&deg;  &darr;{Math.round(today.minTemperature || 0)}&deg;</Text>
-            </View>
-          </View>
-          <View style={styles.right}>
-            <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
           </View>
         </View>
-        <BlurView blurAmount={25} blurType='light'/>
+        <BlurView blurAmount={25} blurType='light' />
       </View>
     </View>
-  );
+  )
 }
 
 

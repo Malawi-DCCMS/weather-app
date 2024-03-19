@@ -28,7 +28,7 @@ export function useForecast(latitude: number, longitude: number): ReturnType {
         setLoading(false);
         setForecast(data);
       })
-      .catch(setError);
+      .catch(error => (setError(error), setLoading(false)));
   }, [latitude, longitude]);
 
   return [loading, forecast, error];
