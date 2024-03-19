@@ -44,13 +44,13 @@ export const Search = ({location, setLocation}: SearchProps) => {
     <GlassView containerStyle={styles.container} glassStyle={styles.glassCcontainer} blurStyle={{blurAmount: 25, blurType: 'light'}}>
       <AutocompleteDropdown
         clearOnFocus={false}
-        closeOnBlur={true}
+        closeOnBlur={false}
         closeOnSubmit={false}
         textInputProps={{ placeholder: 'Search location', placeholderTextColor: 'white', style: styles.textStyle }}
         onSelectItem={handleSelect}
         dataSet={[...dataset]}
         inputContainerStyle={styles.searchBar}
-        debounce={3000}
+        debounce={1500}
         showChevron={false}
         showClear={false}
         // RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
