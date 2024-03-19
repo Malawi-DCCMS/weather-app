@@ -45,7 +45,7 @@ const DayRow = (props: DayRowProps) => {
         <Paragraph style={{ flex: 3 }}>
           <Text style={styles.whiteText}>{Math.round(maxTemp)}&deg;</Text>
         </Paragraph>
-        <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>{windSpeed}</Text></Paragraph>
+        <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>{Math.round(windSpeed)}</Text></Paragraph>
       </View>
     </View>
   )
