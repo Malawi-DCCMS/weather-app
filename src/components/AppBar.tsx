@@ -16,7 +16,7 @@ type AppBarProps = {
 
 const AppBar = (props: AppBarProps) => {
   const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 10)}...` : props.location;
+  const fmtLocation = tooLong ? `${props.location?.slice(0, 18)}...` : props.location;
 
   const showSearch = useRoute().name !== SCREENS.Search;
   const [visible, setVisible] = React.useState(false);
