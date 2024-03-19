@@ -89,7 +89,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontSize: 21,
+    fontSize: 22,
+    lineHeight: 24,
+    fontWeight: "600",
     fontFamily: 'OpenSans',
   },
   wrapper: {
