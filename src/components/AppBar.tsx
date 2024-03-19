@@ -51,7 +51,7 @@ const AppBar = (props: AppBarProps) => {
               titleStyle={styles.menuItemTitle}
               title="About us"
             />
-            <Menu.Item
+            {/* <Menu.Item
               onPress={() => {
                 closeMenu();
                 props.navigation.navigate(SCREENS.Feedback);
@@ -59,7 +59,7 @@ const AppBar = (props: AppBarProps) => {
               style={styles.menuItem}
               titleStyle={styles.menuItemTitle}
               title="Give feedback"
-            />
+            /> */}
           </Menu>
         </View>
       </View>
