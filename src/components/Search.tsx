@@ -15,24 +15,9 @@ type SearchProps = {
   setLocation: (place: Geoname) => void;
 };
 
-// type DataSetEntry = {
-//   id: string,
-//   title: string,
-// }
-
 export const Search = ({location, setLocation}: SearchProps) => {
   const geonames = useMemo(() => getGeonames(), []);
   const dataset = useMemo(() => getDataset(geonames), [])
-
-  // const map = geonames.reduce(
-  //   (acc: Record<string, Geoname>, val) => ((acc[val.name] = val), acc),
-  //   {},
-  // );
-
-  // const dataset = geonames.map((val, idx) => ({
-  //   id: idx.toString(),
-  //   title: val.name,
-  // }));
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
     if (item && item.title !== null) {
