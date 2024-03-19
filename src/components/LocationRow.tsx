@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Icon, Text } from 'react-native-paper';
+import { ActivityIndicator, Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
 import { BlurView } from '@react-native-community/blur';
 
@@ -17,14 +17,32 @@ function LocationRow(props: LocationRowProps): JSX.Element {
 
   if (error) {
     <View style={styles.wrapper}>
-      <Text>Not available...</Text>
+      <View style={styles.glassWrapper}>
+        <View style={styles.opacity}>
+          <View style={styles.left}>
+            <View>
+              <Text style={styles.header}>There was an error getting the forecast.</Text>
+            </View>
+          </View>
+        </View>
+        <BlurView blurAmount={25} blurType='light' />
+      </View>
     </View>
   }
 
   if (!forecast) {
     return (
       <View style={styles.wrapper}>
-        <Text>Loading...</Text>
+        <View style={styles.glassWrapper}>
+          <View style={styles.opacity}>
+            <View style={styles.left}>
+              <View>
+                <ActivityIndicator animating={true} color={'white'} size={34} />
+              </View>
+            </View>
+          </View>
+          <BlurView blurAmount={25} blurType='light' />
+        </View>
       </View>
     )
   }
@@ -36,10 +54,10 @@ function LocationRow(props: LocationRowProps): JSX.Element {
         <View style={styles.glassWrapper}>
           <View style={styles.opacity}>
             <View style={styles.left}>
-              <Text>Forecast unavailable</Text>
+              <Text>Forecast unavailable.</Text>
             </View>
           </View>
-          <BlurView blurAmount={25} blurType='light'/>
+          <BlurView blurAmount={25} blurType='light' />
         </View>
       </View>
     )
@@ -61,7 +79,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
             <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
           </View>
         </View>
-        <BlurView blurAmount={25} blurType='light'/>
+        <BlurView blurAmount={25} blurType='light' />
       </View>
     </View>
   );
