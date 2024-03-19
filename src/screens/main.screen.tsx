@@ -119,17 +119,15 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <ScrollView>
-            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-              <View style={styles.opacity}>
-                <TouchableOpacity onPress={() => { }}>
-                  <View style={styles.loader}>
-                    <ActivityIndicator animating={true} color={'white'} size={34} />
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </GlassView>
-          </ScrollView>
+          <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+            <View style={styles.opacity}>
+              <TouchableOpacity onPress={() => { }}>
+                <View style={styles.loader}>
+                  <ActivityIndicator animating={true} color={'white'} size={34} />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </GlassView>
         </ImageBackground>
       </View>
     </SafeAreaView>
