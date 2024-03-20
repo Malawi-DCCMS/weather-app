@@ -22,7 +22,7 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
           <AppBar location={name} navigation={navigation} />
           <ScrollView contentContainerStyle={styles.container}>
             {
-              DISTRICTS.map((district, idx) => <LocationRow key={idx} district={district} />)
+              DISTRICTS.map((district, idx) => <LocationRow key={idx} district={district} navigation={navigation} />)
             }
           </ScrollView>
         </ImageBackground>
