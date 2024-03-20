@@ -85,7 +85,12 @@ export class ForecastStep {
         this.temperature = timestep.data.instant.details.air_temperature
         this.precipitation_1h = timestep.data.next_1_hours?.details?.precipitation_amount
         this.precipitation_6h = timestep.data.next_6_hours?.details?.precipitation_amount
-        this.windSpeed = timestep.data.instant.details.wind_speed
+        let windSpeed = timestep.data.instant.details.wind_speed 
+        if (windSpeed) {
+            // Convert to km/h
+            windSpeed *= 3.6
+        }
+        this.windSpeed = windSpeed
         this.weatherSymbol_1h = timestep.data.next_1_hours?.summary?.symbol_code
         this.weatherSymbol_6h = timestep.data.next_6_hours?.summary?.symbol_code
         this.weatherSymbol_12h = timestep.data.next_12_hours?.summary?.symbol_code

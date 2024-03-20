@@ -29,7 +29,7 @@ describe('interpret forecast', () => {
         expect(summary.minTemperature).toBe(18.7)
         expect(summary.maxTemperature).toBe(26.9)
         expect(summary.weatherSymbol).toBe("rain")
-        expect(summary.windSpeed).toBe(4.2)
+        expect(summary.windSpeed).toBe(4.2*3.6) // wind speed has been converted to km/h
         expect(summary.steps.length).toBe(24)
 
         expect(summary.steps[0].time.toISO()).toBe("2024-01-12T00:00:00.000+02:00")
