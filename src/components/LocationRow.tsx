@@ -8,20 +8,16 @@ import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { Forecast } from '../utils/weatherData';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
-import { ParamListBase } from '@react-navigation/native';
 import { WeatherForecast } from '../utils/locationforecast';
 
 
 type LocationRowProps = {
   district: District;
-  navigation: NativeStackNavigationProp<ParamListBase>
-  onPress: (forecast: WeatherForecast) => () => void
+  onPress: (forecast: WeatherForecast) => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
-  const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
+  const { district, onPress } = props;
+  const [, forecast, error] = useForecast(district.lat, district.lon);
 
   if (error) {
     return <ForecastError msg="There was an error getting the forecast." />
@@ -34,12 +30,12 @@ function LocationRow(props: LocationRowProps): JSX.Element {
     }
 
     return (
-      <TouchableOpacity style={styles.wrapper} onPress={props.onPress(forecast)}>
+      <TouchableOpacity style={styles.wrapper} onPress={() => onPress(forecast)}>
         <View style={styles.glassWrapper}>
           <View style={styles.opacity}>
             <View style={styles.left}>
               <View>
-                <Text style={styles.header}>{props.district.name}</Text>
+                <Text style={styles.header}>{district.name}</Text>
               </View>
               <View style={styles.smallContainer}>
                 <Text style={styles.small}>&uarr;{Math.round(today.maxTemperature || 0)}&deg;  &darr;{Math.round(today.minTemperature || 0)}&deg;</Text>

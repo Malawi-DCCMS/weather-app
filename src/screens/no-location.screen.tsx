@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import LocationRow from '../components/LocationRow';
-import { DISTRICTS } from '../constants/districts.constant';
+import { District, DISTRICTS } from '../constants/districts.constant';
 import { AppDispatch, RootState } from '../store';
 import { RootDrawerParamList } from '../common';
 import { setForecast } from '../store/forecast.slice';
@@ -20,7 +20,6 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
   const { name } = useSelector((state: RootState) => state.location);
   const dispatch = useDispatch<AppDispatch>();
 
-
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
@@ -28,21 +27,18 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
           <AppBar location={name} navigation={navigation} />
           <ScrollView contentContainerStyle={styles.container}>
             {
-              DISTRICTS.map((district, idx) => 
-              <LocationRow 
-                key={idx} 
-                district={district} 
-                navigation={navigation} 
-                onPress={(forecast: WeatherForecast) => 
-                  () => {
+              DISTRICTS.map((district, idx) =>
+                <LocationRow
+                  key={idx}
+                  district={district}
+                  onPress={(forecast: WeatherForecast): void => {
                     dispatch(setForecast(forecast))
                     dispatch(setName(district.name));
                     dispatch(setLat(district.lat));
                     dispatch(setLon(district.lon));
                     navigation.navigate(SCREENS.Home);
-                  }
-                }
-              />)
+                  }}
+                />)
             }
           </ScrollView>
         </ImageBackground>
