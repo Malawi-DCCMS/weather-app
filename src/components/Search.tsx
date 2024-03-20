@@ -14,21 +14,14 @@ type SearchProps = {
   location: string;
   setLocation: (place: Geoname) => void;
 };
+
 export const Search = ({location, setLocation}: SearchProps) => {
   const geonames = useMemo(() => getGeonames(), []);
-  const map = geonames.reduce(
-    (acc: Record<string, Geoname>, val) => ((acc[val.name] = val), acc),
-    {},
-  );
-
-  const dataset = geonames.map((val, idx) => ({
-    id: idx.toString(),
-    title: val.name,
-  }));
+  const dataset = useMemo(() => getDataset(geonames), [])
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
     if (item && item.title !== null) {
-      setLocation(map[item.title]);
+      setLocation(geonames[item.title]);
     }
   };
 
@@ -36,16 +29,16 @@ export const Search = ({location, setLocation}: SearchProps) => {
     <GlassView containerStyle={styles.container} glassStyle={styles.glassCcontainer} blurStyle={{blurAmount: 25, blurType: 'light'}}>
       <AutocompleteDropdown
         clearOnFocus={false}
-        closeOnBlur={true}
+        closeOnBlur={false}
         closeOnSubmit={false}
         textInputProps={{ placeholder: 'Search location', placeholderTextColor: 'white', style: styles.textStyle }}
         onSelectItem={handleSelect}
-        dataSet={[{id: '9_000_000_000', title: location}, ...dataset]}
+        dataSet={[...dataset]}
         inputContainerStyle={styles.searchBar}
-        debounce={3000}
+        debounce={100}
         showChevron={false}
         showClear={false}
-        RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
+        // RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
         LeftComponent={<TouchableOpacity onPress={() => {}}><Icon source={'magnify'} color='white' size={24}/></TouchableOpacity>}
         useFilter={true}
         suggestionsListContainerStyle={styles.suggestionListStyle}
@@ -54,6 +47,18 @@ export const Search = ({location, setLocation}: SearchProps) => {
     </GlassView>
   );
 };
+
+function getDataset(geonames: Record<string, Geoname>) {
+  let dataset: Array<{ id: string, title: string }> = [];
+  for (const [key] of Object.entries(geonames)) {
+    dataset.push({
+      id: key,
+      title: key,
+    })
+  }
+
+  return dataset
+}
 
 const styles = StyleSheet.create({
   searchBar: {
