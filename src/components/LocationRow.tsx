@@ -24,37 +24,13 @@ function LocationRow(props: LocationRowProps): JSX.Element {
   const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
 
   if (error) {
-    return (
-      <View style={styles.wrapper}>
-        <View style={styles.glassWrapper}>
-          <View style={styles.opacity}>
-            <View style={styles.left}>
-              <View>
-                <Text style={styles.small}>There was an error getting the forecast.</Text>
-              </View>
-            </View>
-          </View>
-          <BlurView blurAmount={25} blurType='light' />
-        </View>
-      </View>
-    )
+    return <ForecastError msg="There was an error getting the forecast." />
   }
 
   if (forecast) {
     const today = new Forecast(forecast).atDay(DateTime.now())
     if (!today) {
-      return (
-        <View style={styles.wrapper}>
-          <View style={styles.glassWrapper}>
-            <View style={styles.opacity}>
-              <View style={styles.left}>
-                <Text>Forecast unavailable.</Text>
-              </View>
-            </View>
-            <BlurView blurAmount={25} blurType='light' />
-          </View>
-        </View>
-      )
+      return <ForecastError msg="Forecast unavailable." />
     }
 
     return (
@@ -86,6 +62,24 @@ function LocationRow(props: LocationRowProps): JSX.Element {
           <View style={styles.left}>
             <View>
               <ActivityIndicator animating={true} color={'white'} size={34} />
+            </View>
+          </View>
+        </View>
+        <BlurView blurAmount={25} blurType='light' />
+      </View>
+    </View>
+  )
+}
+
+
+function ForecastError(props: { msg: string }): JSX.Element {
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.glassWrapper}>
+        <View style={styles.opacity}>
+          <View style={styles.left}>
+            <View>
+              <Text style={styles.small}>{props.msg}</Text>
             </View>
           </View>
         </View>
