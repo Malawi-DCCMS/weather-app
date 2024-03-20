@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
 import { BlurView } from '@react-native-community/blur';
@@ -8,49 +8,33 @@ import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { Forecast } from '../utils/weatherData';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { ParamListBase } from '@react-navigation/native';
+import { WeatherForecast } from '../utils/locationforecast';
+
 
 type LocationRowProps = {
   district: District;
+  navigation: NativeStackNavigationProp<ParamListBase>
+  onPress: (forecast: WeatherForecast) => () => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
   const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
 
   if (error) {
-    return (
-      <View style={styles.wrapper}>
-      <View style={styles.glassWrapper}>
-        <View style={styles.opacity}>
-          <View style={styles.left}>
-            <View>
-              <Text style={styles.small}>There was an error getting the forecast.</Text>
-            </View>
-          </View>
-        </View>
-        <BlurView blurAmount={25} blurType='light' />
-      </View>
-    </View>
-    )
+    return <ForecastError msg="There was an error getting the forecast." />
   }
 
   if (forecast) {
     const today = new Forecast(forecast).atDay(DateTime.now())
     if (!today) {
-      return (
-        <View style={styles.wrapper}>
-          <View style={styles.glassWrapper}>
-            <View style={styles.opacity}>
-              <View style={styles.left}>
-                <Text>Forecast unavailable.</Text>
-              </View>
-            </View>
-            <BlurView blurAmount={25} blurType='light' />
-          </View>
-        </View>
-      )
+      return <ForecastError msg="Forecast unavailable." />
     }
 
     return (
-      <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.wrapper} onPress={props.onPress(forecast)}>
         <View style={styles.glassWrapper}>
           <View style={styles.opacity}>
             <View style={styles.left}>
@@ -67,7 +51,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
           </View>
           <BlurView blurAmount={25} blurType='light' />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 
@@ -78,6 +62,24 @@ function LocationRow(props: LocationRowProps): JSX.Element {
           <View style={styles.left}>
             <View>
               <ActivityIndicator animating={true} color={'white'} size={34} />
+            </View>
+          </View>
+        </View>
+        <BlurView blurAmount={25} blurType='light' />
+      </View>
+    </View>
+  )
+}
+
+
+function ForecastError(props: { msg: string }): JSX.Element {
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.glassWrapper}>
+        <View style={styles.opacity}>
+          <View style={styles.left}>
+            <View>
+              <Text style={styles.small}>{props.msg}</Text>
             </View>
           </View>
         </View>
