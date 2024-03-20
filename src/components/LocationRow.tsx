@@ -13,7 +13,7 @@ import { WeatherForecast } from '../utils/locationforecast';
 
 type LocationRowProps = {
   district: District;
-  onPress: (district: District, forecast: WeatherForecast) => void
+  onPress: (forecast: WeatherForecast) => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
   const { district, onPress } = props;
@@ -30,7 +30,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
     }
 
     return (
-      <TouchableOpacity style={styles.wrapper} onPress={() => onPress(district, forecast)}>
+      <TouchableOpacity style={styles.wrapper} onPress={() => onPress(forecast)}>
         <View style={styles.glassWrapper}>
           <View style={styles.opacity}>
             <View style={styles.left}>
