@@ -8,27 +8,38 @@ import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { Forecast } from '../utils/weatherData';
+import { SCREENS } from '../constants/screens.constant';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store';
+import { setName, setLat, setLon } from '../store/location.slice';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { setForecast } from '../store/forecast.slice';
+import { ParamListBase } from '@react-navigation/native';
+
 
 type LocationRowProps = {
   district: District;
+  navigation: NativeStackNavigationProp<ParamListBase>
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
   const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
 
+  const dispatch = useDispatch<AppDispatch>();
+
   if (error) {
     return (
       <View style={styles.wrapper}>
-      <View style={styles.glassWrapper}>
-        <View style={styles.opacity}>
-          <View style={styles.left}>
-            <View>
-              <Text style={styles.small}>There was an error getting the forecast.</Text>
+        <View style={styles.glassWrapper}>
+          <View style={styles.opacity}>
+            <View style={styles.left}>
+              <View>
+                <Text style={styles.small}>There was an error getting the forecast.</Text>
+              </View>
             </View>
           </View>
+          <BlurView blurAmount={25} blurType='light' />
         </View>
-        <BlurView blurAmount={25} blurType='light' />
       </View>
-    </View>
     )
   }
 
@@ -52,7 +63,18 @@ function LocationRow(props: LocationRowProps): JSX.Element {
     return (
       <View style={styles.wrapper}>
         <View style={styles.glassWrapper}>
-          <View style={styles.opacity}>
+          <View
+            style={styles.opacity}
+            onTouchStart={() => console.log(props.district)}
+            onTouchEnd={() => {
+              dispatch(setForecast(forecast))
+              dispatch(setName(props.district.name));
+              dispatch(setLat(props.district.lat));
+              dispatch(setLon(props.district.lon));
+              props.navigation.navigate(SCREENS.Home);
+            }
+            }
+          >
             <View style={styles.left}>
               <View>
                 <Text style={styles.header}>{props.district.name}</Text>
