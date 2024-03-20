@@ -35,7 +35,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
         onSelectItem={handleSelect}
         dataSet={[...dataset]}
         inputContainerStyle={styles.searchBar}
-        debounce={1500}
+        debounce={200}
         showChevron={false}
         showClear={false}
         // RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
