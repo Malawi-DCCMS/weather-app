@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
 import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { LogBox } from 'react-native';
@@ -14,10 +14,12 @@ import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
-import { getLocationForecast } from '../store/forecast.slice';
+import { getLocationForecast, setForecast } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
+import { ParamListBase } from '@react-navigation/native';
+import { WeatherForecast } from '../utils/locationforecast';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -38,11 +40,12 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       dispatch(getLocationForecast({ lat, lon }));
     };
 
+    setForecast(undefined)
     getForecast()
     /** Refresh forecast every 6 hours. Specified in milliseconds.  */
     const t = setInterval(getForecast, 21600000);
     return () => clearInterval(t);
-  }, [location]);
+  }, [lat, lon]);
 
   useEffect(() => {
     if (locationError) {
@@ -50,75 +53,83 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
-  if (forecast) {
-    const preparedForecast = new Forecast(forecast)
-
-    const onSelectToday = () =>
-      navigation.navigate(SCREENS.Hourly, {
-        location: location,
-        daySummary: preparedForecast.atDay(today),
-        title: 'Hourly Today'
-      })
-    const onSelectDay = (location: string) =>
-      (day: DateTime, preparedForecast: Forecast) =>
-        navigation.navigate(SCREENS.Hourly, {
-          location: location,
-          daySummary: preparedForecast.atDay(day),
-          title: day.toLocaleString({ weekday: 'long' })
-        });
-
-    const today = DateTime.now()
-
-    return (
-      <SafeAreaView>
-        <View style={styles.wrapper}>
-          <ImageBackground style={styles.bg} source={appBackground}>
-            <AppBar location={location} navigation={navigation} />
-            <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-                <View style={styles.opacity}>
-                  <TouchableOpacity onPress={onSelectToday}>
-                    <Today daySummary={preparedForecast.atDay(today)} />
-                  </TouchableOpacity>
-                  <FiveDays name={location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
-                </View>
-              </GlassView>
-              {/* { testErr && <ErrorNotification message="Forecast update failed." onClose={() => setTestErr(false)}/>} */}
-            </ScrollView>
-          </ImageBackground>
-        </View>
-      </SafeAreaView>
-    );
-  }
-
   if (forecastError) {
-    return (
-      <SafeAreaView>
-        <View style={styles.wrapper}>
-          <ImageBackground style={styles.bg} source={appBackground}>
-            <AppBar location={location} navigation={navigation} />
-            <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-                <View style={styles.opacity}>
-                  <TouchableOpacity onPress={() => { }}>
-                    <View style={styles.errorLoader}>
-                      <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>There was a problem getting the forecast.</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              </GlassView>
-            </ScrollView>
-          </ImageBackground>
-        </View>
-      </SafeAreaView>
-    )
+    return <ForecastError location={location} navigation={navigation} />
   }
+  if (!forecast) {
+    return <Waiting location={location} navigation={navigation} />
+  }
+
+  return <ForecastPresentation forecast={forecast} navigation={navigation} location={location} />  
+}
+
+function ForecastPresentation(props: { forecast: WeatherForecast, location: string, navigation: NativeStackNavigationProp<ParamListBase> }): JSX.Element {
+  const preparedForecast = new Forecast(props.forecast);
+
+  const onSelectToday = () => props.navigation.navigate(SCREENS.Hourly, {
+    location: props.location,
+    daySummary: preparedForecast.atDay(today),
+    title: 'Hourly Today'
+  });
+  const onSelectDay = (location: string) => (day: DateTime, preparedForecast: Forecast) => props.navigation.navigate(SCREENS.Hourly, {
+    location: location,
+    daySummary: preparedForecast.atDay(day),
+    title: day.toLocaleString({ weekday: 'long' })
+  });
+
+  const today = DateTime.now();
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
-          <AppBar location={location} navigation={navigation} />
+          <AppBar location={props.location} navigation={props.navigation} />
+          <ScrollView>
+            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+              <View style={styles.opacity}>
+                <TouchableOpacity onPress={onSelectToday}>
+                  <Today daySummary={preparedForecast.atDay(today)} />
+                </TouchableOpacity>
+                <FiveDays name={props.location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(props.location)} />
+              </View>
+            </GlassView>
+          </ScrollView>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+function ForecastError(props: { location: string, navigation: NativeStackNavigationProp<ParamListBase> }): JSX.Element {
+  return (
+    <SafeAreaView>
+      <View style={styles.wrapper}>
+        <ImageBackground style={styles.bg} source={appBackground}>
+          <AppBar location={props.location} navigation={props.navigation} />
+          <ScrollView>
+            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+              <View style={styles.opacity}>
+                <TouchableOpacity onPress={() => { }}>
+                  <View style={styles.errorLoader}>
+                    <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>There was a problem getting the forecast.</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </GlassView>
+          </ScrollView>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
+  )
+}
+
+
+function Waiting(props: { location: string, navigation: NativeStackNavigationProp<ParamListBase> }): JSX.Element {
+  return (
+    <SafeAreaView>
+      <View style={styles.wrapper}>
+        <ImageBackground style={styles.bg} source={appBackground}>
+          <AppBar location={props.location} navigation={props.navigation} />
           <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
             <View style={styles.opacity}>
               <TouchableOpacity onPress={() => { }}>
@@ -133,6 +144,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     </SafeAreaView>
   );
 }
+
+
 
 type ErrorNotificationProps = {
   message: string,
