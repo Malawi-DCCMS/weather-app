@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
 import { BlurView } from '@react-native-community/blur';
@@ -61,7 +61,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
     }
 
     return (
-      <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.wrapper}>
         <View style={styles.glassWrapper}>
           <View
             style={styles.opacity}
@@ -89,7 +89,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
           </View>
           <BlurView blurAmount={25} blurType='light' />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 
