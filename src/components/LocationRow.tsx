@@ -8,23 +8,20 @@ import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { Forecast } from '../utils/weatherData';
-import { SCREENS } from '../constants/screens.constant';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
-import { setName, setLat, setLon } from '../store/location.slice';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
-import { setForecast } from '../store/forecast.slice';
 import { ParamListBase } from '@react-navigation/native';
+import { WeatherForecast } from '../utils/locationforecast';
 
 
 type LocationRowProps = {
   district: District;
   navigation: NativeStackNavigationProp<ParamListBase>
+  onPress: (forecast: WeatherForecast) => () => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
   const [, forecast, error] = useForecast(props.district.lat, props.district.lon);
-
-  const dispatch = useDispatch<AppDispatch>();
 
   if (error) {
     return (
@@ -61,20 +58,9 @@ function LocationRow(props: LocationRowProps): JSX.Element {
     }
 
     return (
-      <TouchableOpacity style={styles.wrapper}>
+      <TouchableOpacity style={styles.wrapper} onPress={props.onPress(forecast)}>
         <View style={styles.glassWrapper}>
-          <View
-            style={styles.opacity}
-            onTouchStart={() => console.log(props.district)}
-            onTouchEnd={() => {
-              dispatch(setForecast(forecast))
-              dispatch(setName(props.district.name));
-              dispatch(setLat(props.district.lat));
-              dispatch(setLon(props.district.lon));
-              props.navigation.navigate(SCREENS.Home);
-            }
-            }
-          >
+          <View style={styles.opacity}>
             <View style={styles.left}>
               <View>
                 <Text style={styles.header}>{props.district.name}</Text>
