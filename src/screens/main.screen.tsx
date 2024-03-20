@@ -141,25 +141,6 @@ const ErrorNotification = ({ message, onClose }: ErrorNotificationProps) => {
   );
 };
 
-
-const MainScreenForecastError = () =>{
-
-  return (
-    <SafeAreaView>
-        <View style={styles.wrapper}>
-          <ImageBackground style={styles.bg} source={appBackground}>
-            <AppBar location={location} navigation={navigation} />
-            <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-                
-              </GlassView>
-            </ScrollView>
-          </ImageBackground>
-        </View>
-      </SafeAreaView>
-  )
-}
-
 export default MainScreen;
 
 const styles = StyleSheet.create({
