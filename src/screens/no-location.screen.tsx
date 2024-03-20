@@ -31,7 +31,7 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
                 <LocationRow
                   key={idx}
                   district={district}
-                  onPress={(district: District, forecast: WeatherForecast): void => {
+                  onPress={(forecast: WeatherForecast): void => {
                     dispatch(setForecast(forecast))
                     dispatch(setName(district.name));
                     dispatch(setLat(district.lat));
