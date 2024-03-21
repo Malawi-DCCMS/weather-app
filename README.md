@@ -71,6 +71,20 @@ You've successfully run and modified your React Native App. :partying_face:
 
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
+# Building your app
+
+### Build a debug APK
+
+For immediate app testing and debugging, you can build a debug APK. The debug APK is signed with a debug key provided by the SDK tools.
+Open your project in Android Studio and follow these steps:
+1. Click **Build > Build Bundle/APKs**
+2. In the dropdown menu select **Build APK(s)**
+
+Android Studio will start the build task and take a moment. After it is done you'll get a notification.
+You can now found the built apk at **app/build/outputs/apk/debug/app-debug.apk**
+
+To learn more about building APKs using Android Studio please go [here](https://code.tutsplus.com/how-to-generate-apk-and-signed-apk-files-in-android-studio--cms-37927t).
+
 # Learn More
 
 To learn more about React Native, take a look at the following resources:
