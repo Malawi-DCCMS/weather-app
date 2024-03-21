@@ -23,7 +23,7 @@ export function useForecast(latitude: number, longitude: number): ReturnType {
       const url = `${API_URL}?lat=${latitude}&lon=${longitude}`
       try {
         const response = await Axios.get(url, { timeout: 20000, headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
-        setForecast(response.data.json())
+        setForecast(response.data)
         setLoading(false);
       
       } catch (error) {
