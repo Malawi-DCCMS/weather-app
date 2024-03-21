@@ -28,7 +28,6 @@ export const Search = ({location, setLocation}: SearchProps) => {
   return (
     <GlassView containerStyle={styles.container} glassStyle={styles.glassCcontainer} blurStyle={{blurAmount: 25, blurType: 'light'}}>
       <AutocompleteDropdown
-        matchFrom={"start"}
         clearOnFocus={false}
         closeOnBlur={false}
         closeOnSubmit={false}
