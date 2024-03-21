@@ -18,8 +18,6 @@ import { getLocationForecast, setForecast } from '../store/forecast.slice';
 import { Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
-import { ParamListBase } from '@react-navigation/native';
-import { WeatherForecast } from '../utils/locationforecast';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -29,7 +27,7 @@ type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
-  const { forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
+  const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   useEffect(() => {
     dispatch(getPreciseLocation());
@@ -53,117 +51,78 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
-  if (forecastError) {
-    return <ForecastError location={location} navigation={navigation} />
-  }
-  if (!forecast) {
-    return <Waiting location={location} navigation={navigation} />
-  }
-
-  return <ForecastPresentation forecast={forecast} navigation={navigation} location={location} />  
-}
-
-function ForecastPresentation(props: { forecast: WeatherForecast, location: string, navigation: NativeStackNavigationProp<ParamListBase> }): JSX.Element {
-  const preparedForecast = new Forecast(props.forecast);
-
-  const onSelectToday = () => props.navigation.navigate(SCREENS.Hourly, {
-    location: props.location,
-    daySummary: preparedForecast.atDay(today),
-    title: 'Hourly Today'
-  });
-  const onSelectDay = (location: string) => (day: DateTime, preparedForecast: Forecast) => props.navigation.navigate(SCREENS.Hourly, {
-    location: location,
-    daySummary: preparedForecast.atDay(day),
-    title: day.toLocaleString({ weekday: 'long' })
-  });
-
-  const today = DateTime.now();
-
-  return (
-    <SafeAreaView>
-      <View style={styles.wrapper}>
-        <ImageBackground style={styles.bg} source={appBackground}>
-          <AppBar location={props.location} navigation={props.navigation} />
-          <ScrollView>
-            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-              <View style={styles.opacity}>
-                <TouchableOpacity onPress={onSelectToday}>
-                  <Today daySummary={preparedForecast.atDay(today)} />
-                </TouchableOpacity>
-                <FiveDays name={props.location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(props.location)} />
-              </View>
-            </GlassView>
-          </ScrollView>
-        </ImageBackground>
-      </View>
-    </SafeAreaView>
-  );
-}
-
-function ForecastError(props: { location: string, navigation: NativeStackNavigationProp<ParamListBase> }): JSX.Element {
-  return (
-    <SafeAreaView>
-      <View style={styles.wrapper}>
-        <ImageBackground style={styles.bg} source={appBackground}>
-          <AppBar location={props.location} navigation={props.navigation} />
-          <ScrollView>
-            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-              <View style={styles.opacity}>
-                <TouchableOpacity onPress={() => { }}>
-                  <View style={styles.errorLoader}>
-                    <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>There was a problem getting the forecast.</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </GlassView>
-          </ScrollView>
-        </ImageBackground>
-      </View>
-    </SafeAreaView>
+  // empty page as default content
+  let mainContent: React.JSX.Element = (
+    <View style={styles.opacity}>
+    </View>
   )
-}
 
+  if (loading) {
+    mainContent = (
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={() => { }}>
+          <View style={styles.loader}>
+            <ActivityIndicator animating={true} color={'white'} size={34} />
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 
-function Waiting(props: { location: string, navigation: NativeStackNavigationProp<ParamListBase> }): JSX.Element {
+  if (forecast) {
+    const preparedForecast = new Forecast(forecast)
+
+    const onSelectToday = () =>
+      navigation.navigate(SCREENS.Hourly, {
+        location: location,
+        daySummary: preparedForecast.atDay(today),
+        title: 'Hourly Today'
+      })
+    const onSelectDay = (location: string) =>
+      (day: DateTime, preparedForecast: Forecast) =>
+        navigation.navigate(SCREENS.Hourly, {
+          location: location,
+          daySummary: preparedForecast.atDay(day),
+          title: day.toLocaleString({ weekday: 'long' })
+        });
+
+    const today = DateTime.now()
+
+    mainContent = (
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={onSelectToday}>
+          <Today daySummary={preparedForecast.atDay(today)} />
+        </TouchableOpacity>
+        <FiveDays name={location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
+      </View>
+    )
+  }
+
+  if (forecastError) {
+    mainContent = (
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={() => { }}>
+          <View style={styles.errorLoader}>
+            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>{forecastError}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
-          <AppBar location={props.location} navigation={props.navigation} />
+          <AppBar location={location} navigation={navigation} />
           <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-            <View style={styles.opacity}>
-              <TouchableOpacity onPress={() => { }}>
-                <View style={styles.loader}>
-                  <ActivityIndicator animating={true} color={'white'} size={34} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            {mainContent}
           </GlassView>
         </ImageBackground>
       </View>
     </SafeAreaView>
   );
 }
-
-
-
-type ErrorNotificationProps = {
-  message: string,
-  onClose: () => void,
-}
-const ErrorNotification = ({ message, onClose }: ErrorNotificationProps) => {
-  return (
-    <View style={styles.error}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <IconButton icon="information-outline" iconColor="white" size={24} onPress={onClose} />
-        <Text style={styles.errorText}>{message}</Text>
-      </View>
-      <View>
-        <IconButton icon="close" iconColor="white" size={12} onPress={onClose} />
-      </View>
-    </View>
-  );
-};
 
 export default MainScreen;
 

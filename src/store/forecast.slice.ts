@@ -11,7 +11,8 @@ export const getLocationForecast = createAsyncThunk('forecast/getLocationForecas
   const USER_AGENT = 'met_malawi';
   const url = `${API_URL}?lat=${lat}&lon=${lon}`
   LOGGER.info(url)
-  const { data } = await Axios.get(url, { headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
+  // Request forecast with 20 seconds timeout
+  const { data } = await Axios.get(url, { timeout: 20000, headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
   return data;
 });
 
@@ -43,10 +44,18 @@ const forecastSlice = createSlice({
       state.loading = false;
       state.forecast = action.payload;
     });
-    builder.addCase(getLocationForecast.rejected, (state) => {
-      LOGGER.error('Loading forecast rejected.');
+    builder.addCase(getLocationForecast.rejected, (state, action) => {
       state.loading = false;
-      state.error = 'There was a problem getting the weather.';
+      let err = ""
+      if (action.error.name === 'AxiosError') {
+        // Handle Axios-specific errors
+        err = action.error.response?.data || action.error.message;
+      } else if(action.error.message){
+        // Handle other types of errors
+        err = action.error.message;
+      }
+      LOGGER.error('Loading forecast rejected: ' + err);
+      state.error = 'There was a problem getting the weather. Please try again later.';
     });
   },
 })
