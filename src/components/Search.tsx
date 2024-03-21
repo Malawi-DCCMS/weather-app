@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {GestureResponderEvent, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
@@ -7,12 +7,15 @@ import {
 import { Icon } from 'react-native-paper';
 
 import {getGeonames} from '../../src/services/geonames.service';
+import {placeByCurrentLocation} from '../utils/location';
+
 import locationAnchor from '../../assets/location-anchor.png';
 import { GlassView } from '../components/GlassView';
+import { LOGGER } from '../lib';
 
 type SearchProps = {
   location: string;
-  setLocation: (place: Geoname) => void;
+  setLocation: (place: Place) => void;
 };
 
 export const Search = ({location, setLocation}: SearchProps) => {
@@ -24,6 +27,16 @@ export const Search = ({location, setLocation}: SearchProps) => {
       setLocation(geonames[item.title]);
     }
   };
+
+  const handleClosestLocation = async (event:GestureResponderEvent) => {
+    const place = await placeByCurrentLocation()
+    if (place){
+      setLocation(place)
+    }
+    else {
+      LOGGER.error("Not able to set closest location.")
+    }
+  }
 
   return (
     <GlassView containerStyle={styles.container} glassStyle={styles.glassCcontainer} blurStyle={{blurAmount: 25, blurType: 'light'}}>
@@ -38,7 +51,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
         debounce={100}
         showChevron={false}
         showClear={false}
-        // RightIconComponent={<TouchableOpacity onPress={() => {}}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
+        RightIconComponent={<TouchableOpacity onPress={handleClosestLocation}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
         LeftComponent={<TouchableOpacity onPress={() => {}}><Icon source={'magnify'} color='white' size={24}/></TouchableOpacity>}
         useFilter={true}
         suggestionsListContainerStyle={styles.suggestionListStyle}
@@ -48,7 +61,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
   );
 };
 
-function getDataset(geonames: Record<string, Geoname>) {
+function getDataset(geonames: Record<string, Place>) {
   let dataset: Array<{ id: string, title: string }> = [];
   for (const [key] of Object.entries(geonames)) {
     dataset.push({
