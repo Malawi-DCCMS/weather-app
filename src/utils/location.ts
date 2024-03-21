@@ -56,8 +56,8 @@ const checkPermissions = async (permissions: Array<Permission>): Promise<boolean
   }
   
   export const placeByCurrentLocation = async (): Promise<Place> => {
-    Platform.OS === 'ios' ? await requestIOS() : await requestAndroid();
     try {
+        Platform.OS === 'ios' ? await requestIOS() : await requestAndroid();
         const location = await queryLocation();
         const closest = getClosestPlace(location.lat, location.lon);
         if (!closest) {

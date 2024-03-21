@@ -28,13 +28,14 @@ export const Search = ({location, setLocation}: SearchProps) => {
     }
   };
 
-  const handleClosestLocation = async (event:GestureResponderEvent) => {
-    const place = await placeByCurrentLocation()
-    if (place){
-      setLocation(place)
-    }
-    else {
-      LOGGER.error("Not able to set closest location.")
+  const handlePlaceByCurrentLocation = async (event:GestureResponderEvent) => {
+    try {
+      const place = await placeByCurrentLocation()
+      if (place){
+        setLocation(place)
+      }
+    } catch {
+      LOGGER.error("Not able to set closest place to current location.")
     }
   }
 
@@ -51,7 +52,7 @@ export const Search = ({location, setLocation}: SearchProps) => {
         debounce={100}
         showChevron={false}
         showClear={false}
-        RightIconComponent={<TouchableOpacity onPress={handleClosestLocation}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
+        RightIconComponent={<TouchableOpacity onPress={handlePlaceByCurrentLocation}><Icon source={locationAnchor} size={24}/></TouchableOpacity>}
         LeftComponent={<TouchableOpacity onPress={() => {}}><Icon source={'magnify'} color='white' size={24}/></TouchableOpacity>}
         useFilter={true}
         suggestionsListContainerStyle={styles.suggestionListStyle}
