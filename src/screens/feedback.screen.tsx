@@ -18,36 +18,55 @@ import { RootDrawerParamList } from '../common';
 import { SCREENS } from '../constants/screens.constant';
 import { FadeIn } from '../components/FadeIn';
 import { GlassView } from '../components/GlassView';
+import axios from 'axios';
+
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Feedback'>;
 const FeedbackScreen = ({ navigation }: ScreenProps) => {
   const { name } = useSelector((state: RootState) => state.location);
   const [loved, setLoved] = useState<boolean>(false);
   const [notLoved, setNotLoved] = useState<boolean>(false);
-  const [text, setText] = useState<string>('Write here...');
-  const [showValidationError, setShowValidationError] = useState<boolean>(false);
+  const [text, setText] = useState<string>("");
+  const [userError, setUserError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
     clear();
   }, []);
 
-  const DEFAULT_TEXT = 'Write here...';
+  const submit = async () => {
 
-  const submit = () => {
-    if ((!loved && !notLoved) || text === DEFAULT_TEXT) {
-      setShowValidationError(true);
+    if (!loved && !notLoved && text == "") {
+      setUserError("Please make sure that you have filled the feedback form.");
       return;
     }
-    setShowValidationError(false);
-    setSuccess(true);
-    LOGGER.info('Submitting...', loved, notLoved, text);
+    setUserError(null);
+
+    let summary = "neutral"
+    if (loved)
+      summary = "good"
+    else if (notLoved)
+      summary = "bad"
+
+    const FEEDBACK_URL = 'http://10.0.2.2/feedback'
+
+    try {
+      LOGGER.info('Submitting...', loved, notLoved, text);
+      await axios.post(FEEDBACK_URL, {
+        summary: summary,
+        free_text: text
+      })
+      setSuccess(true);
+    } catch (e) {
+      console.log(e)
+      setUserError("There was a problem when submitting your feedback. Please try again later!");
+    }
   };
 
   const clear = () => {
     setLoved(false);
     setNotLoved(false);
-    setText(DEFAULT_TEXT);
+    setText("");
     setSuccess(false);
   };
 
@@ -59,6 +78,8 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
     clear();
     navigation.navigate(SCREENS.Home);
   };
+
+  const submitEnabled = loved || notLoved || text != ""
 
   return (
     <SafeAreaView>
@@ -73,13 +94,30 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
                   <TouchableOpacity onPress={() => (setLoved(true), setNotLoved(false))}><View style={styles.smiley}><Icon source={loved ? loveActive : loveInactive} size={50} /></View></TouchableOpacity>
                   <TouchableOpacity onPress={() => (setNotLoved(true), setLoved(false))}><View style={styles.smiley}><Icon source={notLoved ? disableActive : disableInActive} size={60} /></View></TouchableOpacity>
                 </View>
-                <View><Text style={styles.headerSmall}>Anything you would like to tell add?</Text></View>
+                <View><Text style={styles.headerSmall}>Anything you would like to add?</Text></View>
                 <View style={{ width: '100%', alignItems: 'center' }}>
-                  <TextInput style={styles.saymore} multiline editable onChangeText={setText} underlineColorAndroid={'transparent'} placeholder='Write here...' defaultValue={text}></TextInput>
+                  <TextInput
+                    style={styles.saymore}
+                    multiline
+                    textAlignVertical="top"
+                    editable
+                    onChangeText={setText}
+                    underlineColorAndroid={'transparent'}
+                    defaultValue=""
+                    placeholder='Write here...'
+                    placeholderTextColor='#E7E7E7'
+                  />
                 </View>
                 <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'flex-start' }}>
                   <Button onPress={() => cancel()} style={styles.cancelButton} textColor='white'><Text style={styles.buttonText}>Cancel</Text></Button>
-                  <Button onPress={() => submit()} style={styles.sendButton} textColor='white'><Text style={styles.buttonText}>Send</Text></Button>
+                  <Button
+                    onPress={() => submit()}
+                    disabled={!submitEnabled}
+                    style={submitEnabled ? styles.sendButton : styles.disabledSendButton}
+                    textColor='white'
+                  >
+                    <Text style={submitEnabled ? styles.buttonText : styles.disabledButtonText}>Send</Text>
+                  </Button>
                 </View>
               </View>
             </GlassView>
@@ -95,13 +133,13 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
             </GlassView></FadeIn>)
             }
           </ScrollView>
-          <Dialog visible={showValidationError} onDismiss={() => setShowValidationError(false)}>
+          <Dialog visible={userError !== null} onDismiss={() => setUserError(null)}>
             <Dialog.Title>Error</Dialog.Title>
             <Dialog.Content>
-              <Text variant="bodyMedium">Please make sure that you have filled the feedback form.</Text>
+              <Text variant="bodyMedium">{userError}</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => setShowValidationError(false)}>Ok</Button>
+              <Button onPress={() => setUserError(null)}>Ok</Button>
             </Dialog.Actions>
           </Dialog>
         </ImageBackground>
@@ -229,6 +267,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 1,
   },
+  disabledSendButton: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    fontFamily: 'OpenSans',
+    borderRadius: 4,
+    lineHeight: 27,
+    fontSize: 20,
+    padding: 1,
+  },
   sendButton: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -244,4 +292,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white'
   },
+  disabledButtonText: {
+      fontSize: 20,
+      color: 'darkgray'
+  }
 })
