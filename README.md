@@ -71,6 +71,7 @@ You've successfully run and modified your React Native App. :partying_face:
 
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
+# Building your app
 ## Build your app from Android Studio
 To generate debug or release APKs for testing purposes using Android Studio please follow the steps outlined [here](https://code.tutsplus.com/how-to-generate-apk-and-signed-apk-files-in-android-studio--cms-37927t).
 
