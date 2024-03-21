@@ -27,7 +27,7 @@ type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
-  const { forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
+  const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   useEffect(() => {
     dispatch(getPreciseLocation());
@@ -50,6 +50,24 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
+  // empty page as default content
+  let mainContent: React.JSX.Element = (
+    <View style={styles.opacity}>
+    </View>
+  )
+
+  if (loading) {
+    mainContent =  (
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={() => { }}>
+          <View style={styles.loader}>
+            <ActivityIndicator animating={true} color={'white'} size={34} />
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   if (forecast) {
     const preparedForecast = new Forecast(forecast)
 
@@ -69,48 +87,25 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
     const today = DateTime.now()
 
-    return (
-      <SafeAreaView>
-        <View style={styles.wrapper}>
-          <ImageBackground style={styles.bg} source={appBackground}>
-            <AppBar location={location} navigation={navigation} />
-            <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-                <View style={styles.opacity}>
-                  <TouchableOpacity onPress={onSelectToday}>
-                    <Today daySummary={preparedForecast.atDay(today)} />
-                  </TouchableOpacity>
-                  <FiveDays name={location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
-                </View>
-              </GlassView>
-              {/* { testErr && <ErrorNotification message="Forecast update failed." onClose={() => setTestErr(false)}/>} */}
-            </ScrollView>
-          </ImageBackground>
-        </View>
-      </SafeAreaView>
-    );
+    mainContent = (
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={onSelectToday}>
+          <Today daySummary={preparedForecast.atDay(today)} />
+        </TouchableOpacity>
+        <FiveDays name={location} startDate={today.plus({ days: 1 })} preparedForecast={preparedForecast} onClick={onSelectDay(location)} />
+      </View>
+    )
   }
 
   if (forecastError) {
-    return (
-      <SafeAreaView>
-        <View style={styles.wrapper}>
-          <ImageBackground style={styles.bg} source={appBackground}>
-            <AppBar location={location} navigation={navigation} />
-            <ScrollView>
-              <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-                <View style={styles.opacity}>
-                  <TouchableOpacity onPress={() => { }}>
-                    <View style={styles.errorLoader}>
-                      <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>There was a problem getting the forecast.</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              </GlassView>
-            </ScrollView>
-          </ImageBackground>
-        </View>
-      </SafeAreaView>
+    mainContent = ( 
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={() => { }}>
+          <View style={styles.errorLoader}>
+            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>{forecastError}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     )
   }
 
@@ -120,13 +115,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
           <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-            <View style={styles.opacity}>
-              <TouchableOpacity onPress={() => { }}>
-                <View style={styles.loader}>
-                  <ActivityIndicator animating={true} color={'white'} size={34} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            { mainContent }
           </GlassView>
         </ImageBackground>
       </View>
