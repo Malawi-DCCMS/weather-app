@@ -72,131 +72,18 @@ You've successfully run and modified your React Native App. :partying_face:
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
 # Building your app
-## Build your app from Android Studio
-To generate debug or release APKs for testing purposes using Android Studio please follow the steps outlined [here](https://code.tutsplus.com/how-to-generate-apk-and-signed-apk-files-in-android-studio--cms-37927t).
-
-## Build your app from the command line
-
-bookmark\_borderbookmark Stay organized with collections Save and categorize content based on your preferences.
-
-*   In this section
-*   Build and deploy an APK
-    *   Build a debug APK
-    *   Build a release bundle or APK
-    *   Deploy your app to the emulator
-    *   Deploy your app to a physical device
-*   Sign your app from command line
-    *   Sign your app manually from the command line
-
-You can execute all the build tasks available to your Android project using the `Gradle wrapper` command line tool. It's available as a batch file for Windows (`gradlew.bat`) and a shell script for Linux and Mac (`gradlew.sh`), and it's accessible from the root of each project you create with Android Studio.
-
-To run a task with the wrapper, use one of the following commands from a Terminal window (from Android Studio, select **View > Tool Windows > Terminal**):
-
-* On Windows:
-```bash    
-gradlew task-name
-```
-    
-* On Mac or Linux:
-```bash
-./gradlew task-name
-```
-
-To see a list of all available build tasks for your project, execute `tasks`:
-
-```bash
-gradlew tasks
-```
-
-Build and deploy an APK
------------------------
 
 ### Build a debug APK
 
-For immediate app testing and debugging, you can build a debug APK. The debug APK is signed with a debug key provided by the SDK tools and allows debugging through `adb`
+For immediate app testing and debugging, you can build a debug APK. The debug APK is signed with a debug key provided by the SDK tools.
+Open your project in Android Studio and follow these steps:
+1. Click **Build > Build Bundle/APKs**
+2. In the dropdown menu select **Build APK(s)**
 
-To build a debug APK, open a command line and navigate to the root of your Android project directory. To initiate a debug build, invoke the `assembleDebug` task:
+Android Studio will start the build task and take a moment. After it is done you'll get a notification.
+You can now found the built apk at **app/build/outputs/apk/debug/app-debug.apk**
 
-```bash
-gradlew assembleDebug
-```
-
-This creates an APK named `module_name-debug.apk` in `project_name/module_name/build/outputs/apk/`. The file is already signed with the debug key and aligned with [`zipalign`](/tools/help/zipalign), so you can immediately install it on a device.
-
-Or to build the APK and immediately install it on a running emulator or connected device, instead invoke `installDebug`:
-
-```bash
-gradlew installDebug
-```
-
-### Build a release bundle or APK
-
-When you're ready to release and distribute your app, you must build a release bundle or APK that is signed with your private key. For more information, go to the section about how to sign your app from the command line.
-
-### Deploy your app to the emulator
-
-To use the Android Emulator, you must create an Android Virtual Device (AVD) using Android Studio.
-
-Once you have an AVD, start the Android Emulator and install your app as follows:
-
-1.  In a command line, navigate to `android_sdk/tools/` and start the emulator by specifying your AVD:
-    ```bash
-    emulator -avd avd\_name
-    ```
-    
-    If you're unsure of the AVD name, execute `emulator -list-avds`.
-    
-2.  Now you can install your app using either one of the Gradle install tasks mentioned in the section about how to build a debug APK or the `adb` tool.
-    ```bash
-    adb install path/to/your\_app.apk
-    ```
-    
-    All APKs you build are saved in `project_name/module_name/build/outputs/apk/`.
-
-### Deploy your app to a physical device
-
-Before you can run your app on a device, you must enable **USB debugging** on your device. You can find the option under **Settings > Developer options**.
-
-**Note:** On Android 4.2 and newer, **Developer options** is hidden by default. To make it available, go to **Settings > About phone** and tap **Build number** seven times. Return to the previous screen to find **Developer options**.
-
-Once your device is set up and connected via USB, you can install your app using either the Gradle install tasks mentioned in the section about how to build a debug APK or the adb tool:
-```bash
-adb -d install path/to/your\_app.apk
-```
-
-All APKs you build are saved in `project_name/module_name/build/outputs/apk/`.
-
-For more information, see [Run Apps on a Hardware Device](/studio/run/device).
-
-### Sign your app manually from the command line
-
-If you want to sign an app bundle from the command line, you can use `jarsigner` If instead you want to sign an APK, you need to use `zipalign` and `apksigner` as described below.
-
-1.  Open a command line—from Android Studio, select **View > Tool Windows > Terminal**—and navigate to the directory where your unsigned APK is located.
-2.  Align the unsigned APK using `[zipalign](/studio/command-line/zipalign)`:
-    ```bash
-    zipalign -v -p 4 my-app-unsigned.apk my-app-unsigned-aligned.apk
-    ```
-    
-    `zipalign` ensures that all uncompressed data starts with a particular byte alignment relative to the start of the file, which may reduce the amount of RAM consumed by an app.
-    
-3.  Sign your APK with your private key using `apksigner`
-    ```bash
-    apksigner sign --ks my-release-key.jks --out my-app-release.apk my-app-unsigned-aligned.apk
-    ```
-    
-    This example outputs the signed APK at `my-app-release.apk` after signing it with a private key and certificate that are stored in a single KeyStore file: `my-release-key.jks`.
-    
-    The `apksigner` tool supports other signing options, including signing an APK file using separate private key and certificate files, and signing an APK using multiple signers. For more details, see the `apksigner` reference.
-    
-    **Note:** To use the `apksigner` tool, you must have revision 24.0.3 or higher of the Android SDK Build Tools installed. You can update this package using the `SDK Manager`.
-    
-4.  Verify that your APK is signed:
-    ```bash
-    apksigner verify my-app-release.apk
-    ```
-
-To learn more about building using the command-line please go [here](https://developer.android.com/build/building-cmdline).
+To learn more about building APKs using Android Studio please go [here](https://code.tutsplus.com/how-to-generate-apk-and-signed-apk-files-in-android-studio--cms-37927t).
 
 # Learn More
 
