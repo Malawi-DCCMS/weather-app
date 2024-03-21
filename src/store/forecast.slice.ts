@@ -11,7 +11,7 @@ export const getLocationForecast = createAsyncThunk('forecast/getLocationForecas
   const USER_AGENT = 'met_malawi';
   const url = `${API_URL}?lat=${lat}&lon=${lon}`
   LOGGER.info(url)
-  // Request forecast with 10 seconds timeout
+  // Request forecast with 20 seconds timeout
   const { data } = await Axios.get(url, { timeout: 20000, headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
   return data;
 });
