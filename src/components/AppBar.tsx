@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
-import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
+import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BlurView } from '@react-native-community/blur';
 
@@ -22,6 +22,8 @@ const AppBar = (props: AppBarProps) => {
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
+
+  useIsFocused();
 
   return (
     <View style={styles.appBar}>

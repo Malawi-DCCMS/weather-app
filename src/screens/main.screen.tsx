@@ -6,6 +6,7 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 import { DateTime } from "luxon";
 import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { LogBox } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 
 import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
@@ -46,8 +47,13 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }, [lat, lon]);
 
   useEffect(() => {
-    if (locationError) {
-      navigation.navigate(SCREENS.NoLocation);
+    if (locationError && !navigation.canGoBack()) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: SCREENS.NoLocation }],
+        })
+      );
     }
   }, [locationError]);
 
