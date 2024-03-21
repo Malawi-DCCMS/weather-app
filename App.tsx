@@ -19,7 +19,7 @@ const Drawer = createDrawerNavigator<RootDrawerParamList>();
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName={SCREENS.Home} screenOptions={{
+      <Drawer.Navigator initialRouteName={SCREENS.Home} backBehavior='history' screenOptions={{
         headerShown: false
       }}>
         <Drawer.Screen name={SCREENS.Home} component={MainScreen} />
