@@ -32,8 +32,8 @@ const SearchScreen = ({ navigation }: ScreenProps) => {
                   // No need to reset forecast here.
                   dispatch(setForecastError(""))
                   dispatch(setName(place.name));
-                  dispatch(setLat(place.lat));
-                  dispatch(setLon(place.long));
+                  dispatch(setLat(place.position.lat));
+                  dispatch(setLon(place.position.long));
                   navigation.navigate(SCREENS.Home);
                 }
               }

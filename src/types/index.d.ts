@@ -15,9 +15,3 @@ type Place = {
   position: Location;
   name: string;
 };
-
-type Geoname = {
-  name: string;
-  lat: number;
-  long: number;
-};

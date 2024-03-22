@@ -1,15 +1,15 @@
-import { GEONAMES } from '../../assets/geonames';
+import { GEONAMESUNIQUE } from '../../assets/geonames-unique';
 
-export function snapToPlace(place: Place): Place | undefined {
-  if (!insideMalawi(place.position)) {
+export function snapToPlace(location: Location): Place | undefined {
+  if (!insideMalawi(location)) {
     return;
   }
   const places = getPlaces();
-  return closestPlace(places, place);
+  return closestPlace(places, location);
 }
 
 function getPlaces(): Array<Place> {
-  const rawPlaces = parseGeonames(GEONAMES);
+  const rawPlaces = parseGeonames(GEONAMESUNIQUE);
   return rawPlaces.reduce((acc: Array<Place>, val) => {
     const place = placeFromGeoname(val);
     if (place) {
@@ -19,16 +19,20 @@ function getPlaces(): Array<Place> {
   }, []);
 }
 
-function closestPlace(places: Place[], place: Place): Place | undefined {
-  let closest: [distance: number, place: Place] = [9_000_000, place];
+function closestPlace(places: Place[], location: Location): Place | undefined {
+  let closest: [distance: number, place: Place] = [9_000_000, {name: '', position: {lat:0, long:0}}]
 
   for (const val of places) {
-    const distance = getDistance(place.position, val.position);
+    const distance = getDistance(location, val.position);
     if (distance < closest[0]) {
       closest = [distance, val];
     }
   }
 
+  if (closest[1].name === ''){
+    return undefined
+  }
+  
   return closest[1];
 }
 
