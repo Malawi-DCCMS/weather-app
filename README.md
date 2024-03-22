@@ -75,6 +75,12 @@ If you can't get this to work, see the [Troubleshooting](https://reactnative.dev
 
 ### Build a debug APK
 
+First:
+
+```shell
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+```
+
 For immediate app testing and debugging, you can build a debug APK. The debug APK is signed with a debug key provided by the SDK tools.
 Open your project in Android Studio and follow these steps:
 1. Click **Build > Build Bundle/APKs**
