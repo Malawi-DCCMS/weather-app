@@ -30,25 +30,9 @@ function FiveDays(props: DailyForecastProps): JSX.Element {
             );
         }
 
-        const fiveDays = allDays.slice(startIndex, startIndex+5)
+        const fiveDays = allDays.slice(startIndex, startIndex + 5)
         return <View style={{ paddingLeft: 27, paddingRight: 26, marginTop: 60, paddingBottom: 50 }}>
-            <View style={styles.dayRow}>
-                <View style={styles.opacity}>
-                    <Paragraph style={{ flex: 3 }}>
-                        <Text style={styles.transparentText}>Sun</Text>
-                    </Paragraph>
-                    <Paragraph style={{ flex: 3 }}>
-                        <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
-                    </Paragraph>
-                    <Paragraph style={{ flex: 3 }}>
-                        <Text style={styles.whiteText}>Min</Text>
-                    </Paragraph>
-                    <Paragraph style={{ flex: 3 }}>
-                        <Text style={styles.whiteText}>Max</Text>
-                    </Paragraph>
-                    <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
-                </View>
-            </View>
+            <FiveDayHeader />
             {fiveDays.map(day =>
                 <TouchableOpacity key={day.toLocaleString()} onPress={() => props.onClick(day, preparedForecast)}>
                     <DayRow summary={preparedForecast.atDay(day)} />
@@ -63,6 +47,28 @@ function FiveDays(props: DailyForecastProps): JSX.Element {
         </View>
     );
 };
+
+function FiveDayHeader() {
+    return (
+        <View style={styles.dayRow}>
+            <View style={styles.opacity}>
+                <Paragraph style={{ flex: 3 }}>
+                    <Text style={styles.transparentText}>Sun</Text>
+                </Paragraph>
+                <Paragraph style={{ flex: 3 }}>
+                    <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
+                </Paragraph>
+                <Paragraph style={{ flex: 3 }}>
+                    <Text style={styles.whiteText}>Min</Text>
+                </Paragraph>
+                <Paragraph style={{ flex: 3 }}>
+                    <Text style={styles.whiteText}>Max</Text>
+                </Paragraph>
+                <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
+            </View>
+        </View>
+    )
+}
 
 const styles = StyleSheet.create({
     dayRow: {
