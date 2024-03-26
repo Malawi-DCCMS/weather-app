@@ -42,7 +42,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
               </View>
             </View>
             <View style={styles.right}>
-              <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={60} />
+              <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={90} />
             </View>
           </View>
           <BlurView blurAmount={25} blurType='light' />
