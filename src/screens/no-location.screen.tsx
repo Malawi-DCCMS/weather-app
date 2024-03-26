@@ -24,7 +24,7 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location={name} navigation={navigation} />
+          <AppBar location='Zanyengo' navigation={navigation} />
           <ScrollView contentContainerStyle={styles.container}>
             {
               DISTRICTS.map((district, idx) =>
