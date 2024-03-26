@@ -1,20 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { ActivityIndicator, IconButton, Paragraph } from 'react-native-paper';
+import { ActivityIndicator, Paragraph } from 'react-native-paper';
 
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
 } from 'react-native-autocomplete-dropdown';
 import { Icon } from 'react-native-paper';
-import { useIsFocused } from '@react-navigation/native';
 import { BlurView } from '@react-native-community/blur';
 
 import { getGeonames } from '../../src/services/geonames.service';
 import { placeByCurrentLocation } from '../utils/location';
 
 import locationAnchor from '../../assets/location-anchor.png';
-import { GlassView } from '../components/GlassView';
 import { LOGGER } from '../lib';
 
 type SearchProps = {
@@ -25,15 +23,13 @@ type SearchProps = {
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
-  useIsFocused();
-
   const geonames = useMemo(() => getGeonames(), []);
-  const dataset = useMemo(() => getDataset(geonames), [])
+  const dataset = useMemo(() => getDataset(geonames), []);
 
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
-    if (item && item.title !== null) {
+    if (item && item.title) {
       setLocation(geonames[item.title]);
     }
   };
@@ -62,7 +58,7 @@ export const Search = ({ setLocation }: SearchProps) => {
           closeOnSubmit={false}
           textInputProps={{ placeholder: 'Search location', placeholderTextColor: 'white', style: styles.textStyle }}
           onSelectItem={handleSelect}
-          dataSet={[...dataset]}
+          dataSet={dataset}
           inputContainerStyle={styles.searchBar}
           debounce={100}
           showChevron={false}
@@ -73,6 +69,9 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListContainerStyle={styles.suggestionListStyle}
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
+          controller={(controller) => {
+            controller.setItem = item => controller.setItem(item);
+          }}
         />
 
         <BlurView blurAmount={25} blurType='light' style={styles.blurBar} />
