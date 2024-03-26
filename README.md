@@ -83,6 +83,7 @@ npx react-native bundle --platform android --dev false --entry-file index.js --b
 
 For immediate app testing and debugging, you can build a debug APK. The debug APK is signed with a debug key provided by the SDK tools.
 Open your project in Android Studio and follow these steps:
+
 1. Click **Build > Build Bundle/APKs**
 2. In the dropdown menu select **Build APK(s)**
 
@@ -90,6 +91,14 @@ Android Studio will start the build task and take a moment. After it is done you
 You can now found the built apk at **app/build/outputs/apk/debug/app-debug.apk**
 
 To learn more about building APKs using Android Studio please go [here](https://code.tutsplus.com/how-to-generate-apk-and-signed-apk-files-in-android-studio--cms-37927t).
+
+### Building for release
+
+1. Make sure you don't have any garbage in the android folder.
+2. Update `versionCode` in  [android/app/build.gradle](android/app/build.gradle).
+3. Click **Build > Generate signed bundle/APK** - and follow instructions.
+
+Make sure to test everything on a physcal phone before you release to the public!
 
 # Learn More
 
