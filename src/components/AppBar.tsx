@@ -42,7 +42,7 @@ const AppBar = (props: AppBarProps) => {
           <Menu
             visible={visible}
             onDismiss={closeMenu} anchor={<TouchableOpacity onPress={() => openMenu()}><Icon size={24} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
-            contentStyle={{ backgroundColor: 'rgba(217, 217, 217, 0.7)', marginTop: 25 }}
+            contentStyle={{ backgroundColor: 'rgba(217, 217, 217, .7)', marginTop: 25, padding: 0, shadowColor: 'rgba(217, 217, 217, .7)' }}
           >
             <Menu.Item
               onPress={() => {
@@ -78,10 +78,6 @@ const styles = StyleSheet.create({
   },
   blurBar: {
     flex: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingTop: 12,
-    paddingBottom: 12,
     position: 'absolute',
     top: 0,
     width: '100%',
