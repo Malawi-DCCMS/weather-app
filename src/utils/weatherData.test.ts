@@ -1,3 +1,4 @@
+import { DateTime } from "luxon"
 import { WeatherForecast } from "./locationforecast"
 import { Forecast } from "./weatherData"
 
@@ -20,6 +21,7 @@ describe('interpret forecast', () => {
         expect(days[8].setZone('Africa/Blantyre').toISO()).toBe("2024-01-19T00:00:00.000+02:00")
         expect(days[9].setZone('Africa/Blantyre').toISO()).toBe("2024-01-20T00:00:00.000+02:00")
     })
+
     test('extract day', () => {
         const f = new Forecast(sampleForecast)
         const summary = f.atDay(f.days()[1])
@@ -34,5 +36,27 @@ describe('interpret forecast', () => {
 
         expect(summary.steps[0].time.toISO()).toBe("2024-01-12T00:00:00.000+02:00")
         expect(summary.steps[9].time.toISO()).toBe("2024-01-12T09:00:00.000+02:00")
+    })
+
+    test('extract first day', () => {
+        const f = new Forecast(sampleForecast)
+        const summary = f.atDay(DateTime.utc(2024, 1, 11, 13, 0, 0, 0).setZone('Africa/Blantyre'))
+        if (!summary)
+            fail("could not get daily summary")
+        expect(summary.day.toISO()).toBe("2024-01-11T00:00:00.000+02:00")
+        expect(summary.steps.length).toBe(11)
+        expect(summary.steps[0].time.toISO()).toBe("2024-01-11T13:00:00.000+02:00")
+        expect(summary.steps[10].time.toISO()).toBe("2024-01-11T23:00:00.000+02:00")
+    })
+
+    test('extract day after a specific time', () => {
+        const f = new Forecast(sampleForecast)
+        const summary = f.atDay(DateTime.utc(2024, 1, 11, 13, 0, 0, 0).setZone('Africa/Blantyre'), true)
+        if (!summary)
+            fail("could not get daily summary")
+        expect(summary.day.toISO()).toBe("2024-01-11T00:00:00.000+02:00")
+        expect(summary.steps.length).toBe(8)
+        expect(summary.steps[0].time.toISO()).toBe("2024-01-11T16:00:00.000+02:00")
+        expect(summary.steps[7].time.toISO()).toBe("2024-01-11T23:00:00.000+02:00")
     })
 })
