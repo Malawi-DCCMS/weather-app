@@ -11,7 +11,7 @@ import { Search } from '../components/Search';
 import { SCREENS } from '../constants/screens.constant';
 import { AppDispatch, RootState } from '../store';
 import { setName, setLat, setLon } from '../store/location.slice';
-import { setForecast, setForecastError } from '../store/forecast.slice';
+import { setForecastError } from '../store/forecast.slice';
 import { RootDrawerParamList } from '../common';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Search'>;
