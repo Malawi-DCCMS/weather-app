@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     marginTop: -2,
     padding: 0,
     backgroundColor: 'rgba(217, 217, 217, .5)',
+    shadowColor: 'rgba(217, 217, 217, .5)'
   },
   loader: {
     marginTop: 80,
