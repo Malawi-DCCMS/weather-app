@@ -36,8 +36,8 @@ const DayRow = (props: DayRowProps) => {
         <Paragraph style={{ flex: 3 }}>
           <Text style={styles.whiteText}>{summary.day.toLocaleString({ weekday: "short" })}</Text>
         </Paragraph>
-        <View style={{ flex: 3 }}>
-          <Icon source={weatherIcons[icon]} size={32} />
+        <View style={{ flex: 3, margin: -5 }}>
+          <Icon source={weatherIcons[icon]} size={36} />
         </View>
         <Paragraph style={{ flex: 3 }}>
           <Text style={styles.whiteText}>{Math.round(minTemp)}&deg;</Text>
