@@ -121,9 +121,11 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
-            {mainContent}
-          </GlassView>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+              {mainContent}
+            </GlassView>
+          </ScrollView>
         </ImageBackground>
       </View>
     </SafeAreaView>
