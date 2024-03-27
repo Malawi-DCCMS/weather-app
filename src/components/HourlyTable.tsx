@@ -32,7 +32,7 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             {props.daySummary.steps.map((step) => (
               <DataTable.Row key={step.time.toISO()}>
                 <DataTable.Cell><Text style={styles.whiteText}>{step.time.toLocaleString({ hour: '2-digit' })}</Text></DataTable.Cell>
-                <DataTable.Cell><Icon source={weatherIcons[step.weatherSymbol()]} size={36} /></DataTable.Cell>
+                <DataTable.Cell><Icon source={weatherIcons[step.weatherSymbol()]} size={34} /></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.temperature ? Math.round(step.temperature) : ""}&deg;</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.precipitation()}</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{Math.round(step.windSpeed)}</Text></DataTable.Cell>
