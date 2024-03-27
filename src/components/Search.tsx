@@ -24,7 +24,7 @@ type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
   const geonames = useMemo(() => getGeonames(), []);
-  const dataset = useMemo(() => getDataset(geonames), []);
+  const dataset = getDataset(geonames);
 
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
@@ -106,17 +106,7 @@ const GPSFeedback = ({ status }: GPSFeedbackProps) => {
   )
 }
 
-function getDataset(geonames: Record<string, Place>) {
-  let dataset: Array<{ id: string, title: string }> = [];
-  for (const [key] of Object.entries(geonames)) {
-    dataset.push({
-      id: key,
-      title: key,
-    })
-  }
-
-  return dataset
-}
+const getDataset = (geonames: Record<string, Place>) => Object.entries(geonames).map(([key]) => ({ id: key, title: key }));
 
 const styles = StyleSheet.create({
   searchBar: {
