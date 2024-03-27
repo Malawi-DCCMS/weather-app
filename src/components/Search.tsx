@@ -29,9 +29,7 @@ export const Search = ({ setLocation }: SearchProps) => {
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
-    if (item && item.title) {
-      setLocation(geonames[item.title]);
-    }
+    item?.title && setLocation(geonames[item.title]);
   };
 
   const handlePlaceByCurrentLocation = async (event: GestureResponderEvent) => {
@@ -69,9 +67,6 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListContainerStyle={styles.suggestionListStyle}
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
-          controller={(controller) => {
-            controller.setItem = item => controller.setItem(item);
-          }}
         />
 
         <BlurView blurAmount={25} blurType='light' style={styles.blurBar} />
