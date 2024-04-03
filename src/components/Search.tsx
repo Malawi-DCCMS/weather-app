@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { ActivityIndicator, Paragraph } from 'react-native-paper';
+import { ActivityIndicator, Dialog, Paragraph, Portal, Button, Text } from 'react-native-paper';
 
 import {
   AutocompleteDropdown,
@@ -25,6 +25,10 @@ type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 export const Search = ({ setLocation }: SearchProps) => {
   const geonames = useMemo(() => getGeonames(), []);
   const dataset = getDataset(geonames);
+  const [visible, setVisible] = useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
@@ -43,6 +47,7 @@ export const Search = ({ setLocation }: SearchProps) => {
       }
     } catch {
       setGPSSearch("FAILED")
+      showDialog();
       LOGGER.error("Not able to set closest place to current location.")
     }
   }
@@ -71,6 +76,17 @@ export const Search = ({ setLocation }: SearchProps) => {
 
         <BlurView blurAmount={25} blurType='light' style={styles.blurBar} />
       </View>
+      <Portal>
+        <Dialog visible={visible} onDismiss={hideDialog} style={styles.dialogStyle}>
+          <Dialog.Title style={styles.whiteText}>Alert</Dialog.Title>
+          <Dialog.Content>
+            <Paragraph style={styles.whiteText}>Not able to use your location to find the closest place.</Paragraph>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={hideDialog}><Text style={styles.whiteText}>Dismiss</Text></Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
       <GPSFeedback status={gpsSearch} />
     </View>
 
@@ -90,16 +106,6 @@ const GPSFeedback = ({ status }: GPSFeedbackProps) => {
     )
   }
 
-  if (status == "FAILED") {
-    return (
-      <View style={styles.gpsfeedback}>
-        <Paragraph style={{ flex: 1, color: 'white', textAlign: 'center' }}>
-          Not able to use your location to find the closest place.
-        </Paragraph>
-      </View>
-    )
-  }
-
   return (
     <View>
     </View>
@@ -111,6 +117,7 @@ const getDataset = (geonames: Record<string, Place>) => Object.entries(geonames)
 const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: 'rgba(217, 217, 217, 0.50)',
+    shadowColor: 'rgba(217, 217, 217, 0.50)',
     paddingLeft: 17,
     paddingRight: 17,
     paddingTop: 13,
@@ -124,17 +131,22 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   blurBar: {
-    flex: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingTop: 12,
-    paddingBottom: 12,
     position: 'absolute',
+    backgroundColor: 'rgba(217, 217, 217, 0.50)',
     top: 0,
     width: '90%',
     height: '100%',
     borderRadius: 4,
     zIndex: 0,
+  },
+  dialogStyle: {
+    backgroundColor: 'rgba(217, 217, 217, .5)',
+    shadowColor: 'rgba(217, 217, 217, .5)',
+    borderRadius: 4,
+  },
+  whiteText: {
+    color: 'white',
+    fontFamily: 'NotoSans-Regular',
   },
   container: {
     justifyContent: 'center',
@@ -153,13 +165,14 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(217, 217, 217, .5)'
   },
   loader: {
-    marginTop: 80,
+    marginTop: 40,
     marginBottom: 80,
   },
   gpsfeedback: {
-    marginTop: 80,
+    marginTop: 40,
     marginBottom: 80,
     flexDirection: 'row',
     justifyContent: 'center',
+    marginLeft: 25,
   }
 });
