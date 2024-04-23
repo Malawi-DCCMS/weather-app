@@ -28,14 +28,14 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             <DataTable.Title numeric><Text style={styles.whiteHeader}>Rain mm</Text></DataTable.Title>
             <DataTable.Title numeric><Text style={styles.whiteHeader}>Wind km/h</Text></DataTable.Title>
           </DataTable.Header>
-          <ScrollView snapToStart={false}>
+          <ScrollView snapToStart={false} showsVerticalScrollIndicator={false}>
             {props.daySummary.steps.map((step) => (
               <DataTable.Row key={step.time.toISO()}>
                 <DataTable.Cell><Text style={styles.whiteText}>{step.time.toLocaleString({ hour: '2-digit' })}</Text></DataTable.Cell>
                 <DataTable.Cell><Icon source={weatherIcons[step.weatherSymbol()]} size={34} /></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.temperature ? Math.round(step.temperature) : ""}&deg;</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.precipitation()}</Text></DataTable.Cell>
-                <DataTable.Cell numeric><Text style={styles.whiteText}>{Math.round(step.windSpeed)}</Text></DataTable.Cell>
+                <DataTable.Cell numeric><Text style={styles.whiteText}>{Math.round(step.windSpeed || 0)}</Text></DataTable.Cell>
               </DataTable.Row>
             ))}
           </ScrollView>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   opacity: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: 'rgba(125, 125, 125, .1)',
+    backgroundColor: 'rgba(100, 100, 100, .1)',
   },
   whiteHeader: {
     color: 'white',
