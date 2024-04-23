@@ -64,7 +64,7 @@ function FiveDayHeader() {
                 <Paragraph style={{ flex: 3 }}>
                     <Text style={styles.whiteText}>Max</Text>
                 </Paragraph>
-                <Paragraph style={{ flex: 2 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
+                <Paragraph style={{ flex: 3 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
             </View>
         </View>
     )
