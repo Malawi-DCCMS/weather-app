@@ -8,6 +8,8 @@ import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
+import WeatherAlert from '../components/WeatherAlert';
+import YellowWeatherAlert from '../components/YellowWeatherAlert';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'AboutUs'>;
 function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
@@ -16,9 +18,11 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={"About us"} navigation={navigation} />
-          <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 25, blurType: 'light' }}>
+          <WeatherAlert onPress={() => {}} />
+          <YellowWeatherAlert onPress={() => {}} />
+          <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
             <View style={styles.opacity}>
-              <ScrollView>
+              <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
                 <View style={styles.content}>
                   <Paragraph>
                     <Text style={styles.title}>
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
   opacity: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: 'rgba(217, 217, 217, .1)',
+    backgroundColor: 'rgba(100, 100, 100, .1)',
   },
   whiteHeader: {
     color: 'white',

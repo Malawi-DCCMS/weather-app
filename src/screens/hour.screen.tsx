@@ -8,6 +8,8 @@ import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import HourlyTable from '../components/HourlyTable';
 import { RootDrawerParamList } from '../common';
+import WeatherAlert from '../components/WeatherAlert';
+import YellowWeatherAlert from '../components/YellowWeatherAlert';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
@@ -18,6 +20,8 @@ function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
+          <WeatherAlert onPress={() => {}} />
+          <YellowWeatherAlert onPress={() => {}} />
           <HourlyTable daySummary={daySummary} day={DateTime.now()} title={title} />
         </ImageBackground>
       </View>

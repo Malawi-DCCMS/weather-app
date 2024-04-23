@@ -13,6 +13,8 @@ import { AppDispatch, RootState } from '../store';
 import { setName, setLat, setLon } from '../store/location.slice';
 import { setForecastError } from '../store/forecast.slice';
 import { RootDrawerParamList } from '../common';
+import WeatherAlert from '../components/WeatherAlert';
+import YellowWeatherAlert from '../components/YellowWeatherAlert';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Search'>;
 const SearchScreen = ({ navigation }: ScreenProps) => {
@@ -25,6 +27,8 @@ const SearchScreen = ({ navigation }: ScreenProps) => {
         <View style={styles.wrapper}>
           <ImageBackground source={appBackground} style={styles.bg}>
             <AppBar location={name} navigation={navigation} />
+            <WeatherAlert onPress={() => {}} />
+            <YellowWeatherAlert onPress={() => {}} />
             <Search
               location={name}
               setLocation={

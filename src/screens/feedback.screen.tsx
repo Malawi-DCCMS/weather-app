@@ -65,7 +65,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={name} navigation={navigation} />
-          <ScrollView contentContainerStyle={styles.outer} snapToStart={false}>
+          <ScrollView contentContainerStyle={styles.outer} snapToStart={false} showsVerticalScrollIndicator={false}>
             {!success && <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
               <View style={styles.opacity}>
                 <View><Text style={styles.header}>Help us become better!</Text></View>

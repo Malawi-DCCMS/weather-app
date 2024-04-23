@@ -16,8 +16,11 @@ import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation } from '../store/location.slice';
 import { getLocationForecast, setForecast } from '../store/forecast.slice';
-import { Forecast } from '../utils/weatherData';
+import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
+import WeatherAlert from '../components/WeatherAlert';
+import YellowWeatherAlert from '../components/YellowWeatherAlert';
+import { BlurView } from '@react-native-community/blur';
 import { GlassView } from '../components/GlassView';
 
 LogBox.ignoreLogs([
@@ -63,6 +66,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     </View>
   )
 
+  const onSelectWarning = (location: string) => navigation.navigate(SCREENS.WeatherWarning, { location });
+
   if (loading) {
     mainContent = (
       <View style={styles.opacity}>
@@ -83,17 +88,16 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     const onSelectToday = () =>
       navigation.navigate(SCREENS.Hourly, {
         location: location,
-        daySummary: preparedForecast.atDay(today, true),
+        daySummary: preparedForecast.atDay(today, true) as DaySummary,
         title: 'Hourly Today'
       })
     const onSelectDay = (location: string) =>
       (day: DateTime, preparedForecast: Forecast) =>
         navigation.navigate(SCREENS.Hourly, {
           location: location,
-          daySummary: preparedForecast.atDay(day),
+          daySummary: preparedForecast.atDay(day) as DaySummary,
           title: day.toLocaleString({ weekday: 'long' })
         });
-
 
     mainContent = (
       <View style={styles.opacity}>
@@ -122,7 +126,9 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <WeatherAlert onPress={() => onSelectWarning(location)} />
+          <YellowWeatherAlert onPress={() => onSelectWarning(location)} />
+          <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
             <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
               {mainContent}
             </GlassView>
@@ -159,8 +165,15 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: 'rgba(255, 255, 255, .6)',
   },
+  blurCover: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
   opacity: {
-    backgroundColor: 'rgba(125, 125, 125, .10)',
+    backgroundColor: 'rgba(100, 100, 100, .1)',
   },
   error: {
     backgroundColor: '#BFBFBF',

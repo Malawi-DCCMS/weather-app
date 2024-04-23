@@ -25,7 +25,7 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location='Zanyengo' navigation={navigation} />
-          <ScrollView contentContainerStyle={styles.container}>
+          <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false} snapToStart={false}>
             {
               DISTRICTS.map((district, idx) =>
                 <LocationRow
