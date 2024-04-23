@@ -97,13 +97,6 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 4,
   },
-  blurBar: {
-    position: 'absolute',
-    top: 0,
-    height: '100%',
-    width: '100%',
-    zIndex: 0,
-  },
   opacity: {
     backgroundColor: 'rgba(193, 193, 193, 0.5)',
     flex: 1,
