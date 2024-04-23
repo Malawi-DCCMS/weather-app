@@ -8,4 +8,5 @@ export const DEFAULT_PLACE: Place = {
 
 export const WEATHER_WARNINGS: { [k: string]: ImageSourcePropType } = {
   yellow: weatherIcons['icon_warning_wind_yellow'],
+  red: weatherIcons['icon_warning_wind_red'],
 };
