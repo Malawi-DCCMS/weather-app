@@ -8,18 +8,21 @@ import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
-import WeatherAlert from '../components/WeatherAlert';
-import YellowWeatherAlert from '../components/YellowWeatherAlert';
+import Alerts from '../components/Alerts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'AboutUs'>;
 function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
+  const { alerts } = useSelector((state: RootState) => state.alerts);
+  const { lat, lon } = useSelector((state: RootState) => state.location);
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={"About us"} navigation={navigation} />
-          <WeatherAlert onPress={() => {}} />
-          <YellowWeatherAlert onPress={() => {}} />
+          <Alerts alerts={alerts[`${lat}${lon}`]} location={"About us"} navigator={navigation} />
           <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
             <View style={styles.opacity}>
               <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
