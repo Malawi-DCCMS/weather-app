@@ -1,3 +1,4 @@
+import { CAPAlert } from "../lib/cap-client/alert";
 import { DaySummary } from "../utils/weatherData";
 
 export type RootDrawerParamList = {
@@ -7,5 +8,5 @@ export type RootDrawerParamList = {
   Home: undefined;
   AboutUs: undefined;
   Feedback: undefined;
-  WeatherWarning: { location: string };
+  WeatherWarning: { location: string, alert: CAPAlert };
 };
