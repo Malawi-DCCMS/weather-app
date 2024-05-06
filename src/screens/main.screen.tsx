@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
-import { ActivityIndicator, IconButton } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import { LogBox } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
@@ -18,10 +18,9 @@ import { getPreciseLocation } from '../store/location.slice';
 import { getLocationForecast, setForecast } from '../store/forecast.slice';
 import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
-import WeatherAlert from '../components/WeatherAlert';
-import YellowWeatherAlert from '../components/YellowWeatherAlert';
-import { BlurView } from '@react-native-community/blur';
 import { GlassView } from '../components/GlassView';
+import { getLocationAlerts, setAlerts } from '../store/alert.slice';
+import Alerts from '../components/Alerts';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -31,6 +30,7 @@ type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
+  const { alerts, error: alertsError } = useSelector((state: RootState) => state.alerts);
   const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   useEffect(() => {
@@ -42,11 +42,21 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       dispatch(getLocationForecast({ lat, lon }));
     };
 
-    setForecast(undefined)
-    getForecast()
+    const getAlerts = async () => {
+      dispatch(getLocationAlerts({ lat, lon }));
+    }
+
+    setAlerts([]);
+    setForecast(undefined);
+
+    getForecast();
+    getAlerts();
+
     /** Refresh forecast every 6 hours. Specified in milliseconds.  */
     const t = setInterval(getForecast, 21600000);
-    return () => clearInterval(t);
+    /** Refresh forecast every minute. Specified in milliseconds.  */
+    const delta = setInterval(getAlerts, 60000);
+    return () => { clearInterval(t); clearInterval(delta); };
   }, [lat, lon]);
 
   useEffect(() => {
@@ -60,13 +70,15 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     }
   }, [locationError]);
 
+  useEffect(() => {
+    console.log(alertsError);
+  }, [alertsError]);
+
   // empty page as default content
   let mainContent: React.JSX.Element = (
     <View style={styles.opacity}>
     </View>
   )
-
-  const onSelectWarning = (location: string) => navigation.navigate(SCREENS.WeatherWarning, { location });
 
   if (loading) {
     mainContent = (
@@ -114,7 +126,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.opacity}>
         <TouchableOpacity onPress={() => { }}>
           <View style={styles.errorLoader}>
-            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>{forecastError}</Text>
+            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', padding: 10 }}>{forecastError}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -126,8 +138,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <WeatherAlert onPress={() => onSelectWarning(location)} />
-          <YellowWeatherAlert onPress={() => onSelectWarning(location)} />
+          <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
           <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
             <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
               {mainContent}
