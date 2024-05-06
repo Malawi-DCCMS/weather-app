@@ -14,21 +14,22 @@ import severity from '../../assets/severity.png';
 import certainity from '../../assets/certainity.png';
 import WeatherAlert from '../components/WeatherAlert';
 import timePeriodBullet from '../../assets/time-period-bullet.png';
+import { CAPAlert } from '../lib/cap-client/alert';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'WeatherWarning'>;
 function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { location } = route.params;
-  const today = DateTime.now().toFormat('LLL. dd, yyyy, H:ss a');
+  const { location, alert } = route.params;
 
-  const timePeriodData = [
-    { key: 'Issued:', val: today },
-    { key: 'Effective:', val: today },
-    { key: 'Onset:', val: today },
-    { key: 'Expires:', val: today },
-  ];
+  type TimePeriods = Array<{key: string, val?: string}>;
+  const getTimePeriodData = (alert: CAPAlert): TimePeriods => ([
+    { key: 'Issued:', val: alert.info && alert.sent },
+    { key: 'Effective:', val: alert.info && alert.info[0].effective?.toFormat('LLL. dd, yyyy, H:ss a') },
+    { key: 'Onset:', val: alert.info && alert.info[0].onset?.toFormat('LLL. dd, yyyy, H:ss a') },
+    { key: 'Expires:', val: alert.info && alert.info[0].expires?.toFormat('LLL. dd, yyyy, H:ss a') },
+  ]);
 
-  const renderTimePeriodItem = (item: ListRenderItemInfo<typeof timePeriodData[0]>) => <View style={styles.timePeriodItem}>
-    <Image style={styles.bulletStyle} source={timePeriodBullet}/><Text style={styles.timePeriodText}> {item.item?.key} {item.item?.val}</Text>
+  const renderTimePeriodItem = (item: ListRenderItemInfo<TimePeriods[0]>) => <View style={styles.timePeriodItem}>
+    <Image style={styles.bulletStyle} source={timePeriodBullet}/><Text style={styles.timePeriodText}> {item.item.key} {item.item?.val}</Text>
   </View>;
 
   return (
@@ -37,35 +38,35 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
           <View style={styles.contentContainer}>
-            <WeatherAlert onPress={() => {}}/>
+            <WeatherAlert alert={alert} onPress={() => {}}/>
             <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} snapToStart={false}>
               <View style={styles.content}>
                 <BlurView style={styles.blurCover} blurAmount={25} blurType='light' />
                 <Text style={styles.whiteBoldText}>Event description:</Text>
-                <Text style={styles.whiteText}>Expected heavy rainfall in Lilongwe and nearby areas.{'\n'}</Text>
+                <Text style={styles.whiteText}>{alert.info && alert.info[0].description}{'\n'}</Text>
                 <Text style={styles.whiteBoldText}>Instructions:</Text>
-                <Text style={styles.whiteText}>Stay indoors{'\n'}</Text>
+                <Text style={styles.whiteText}>{alert.info && alert.info[0].instruction}{'\n'}</Text>
                 <Text style={styles.whiteBoldText}>Area:</Text>
-                <Text style={styles.whiteText}>Lilongwe</Text>
+                <Text style={styles.whiteText}>{alert.info && alert.info[0].area?.areaDesc}</Text>
               </View>
               <View style={styles.content}>
                 <BlurView style={styles.blurCover} blurAmount={20} blurType='light' />
                 <Text style={styles.whiteLargeText}>Time period</Text>
-                <FlatList data={timePeriodData} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
+                <FlatList data={getTimePeriodData(alert)} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
               </View>
               <View style={styles.content}>
                 <BlurView style={styles.blurCover} blurAmount={20} blurType='light' />
                 <View style={{flexDirection: 'row'}}>
                   <Image style={styles.icons} source={urgency}/>
-                  <Text style={styles.whiteText}>Urgency:   Immediate{'\n'}</Text>
+                  <Text style={styles.whiteText}>Urgency:   {alert.info && alert.info[0].urgency}{'\n'}</Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <Image style={styles.icons} source={severity}/>
-                  <Text style={styles.whiteText}>Severity:    Extreme{'\n'}</Text>
+                  <Text style={styles.whiteText}>Severity:    {alert.info && alert.info[0].severity}{'\n'}</Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <Image style={styles.icons} source={certainity}/>
-                  <Text style={styles.whiteText}>Certainty:  Likely</Text>
+                  <Text style={styles.whiteText}>Certainty:  {alert.info && alert.info[0].certainty}</Text>
                 </View>
               </View>
             </ScrollView>
