@@ -2,33 +2,65 @@ import React from "react";
 import { Image, ImageSourcePropType, StyleProp, StyleSheet, TouchableOpacity, View, ImageBackground } from "react-native";
 import { Text } from "react-native-paper";
 
-import weatherIcons from '../constants/weathericons.constant';
+import { CAPAlert } from '../lib/cap-client/alert';
 import warningBg from '../../assets/warning-bg.png';
+import { WARNING_COLORS, WEATHER_WARNINGS } from "../common";
+import { DateTime } from "luxon";
 
 
-function getWarningIcon(severity?: string): ImageSourcePropType {
-  return weatherIcons['icon_warning_wind_red'];
+function getWarningIcon(severity: string): ImageSourcePropType {
+    return WEATHER_WARNINGS[severity.toLowerCase()];
 }
 
-function getWarningColor(severity?: string): string {
-  return 'rgba(198, 0, 0, 0.60)';
+function getWarningColor(level?: keyof typeof WARNING_COLORS): string | undefined {
+  if (!level) {
+    return;
+  }
+  return WARNING_COLORS[level];
+}
+
+function getAlertStatus(alert: CAPAlert) {
+  if (!alert.info || !alert.info.length || !alert.info[0].onset) {
+    return;
+  }
+  const { onset } = alert.info[0];
+  console.log(alert.info && alert.info[0]);
+  return onset < DateTime.now() ? 'Expected' : 'Ongoing';
+}
+
+function getAlertEvent(alert: CAPAlert) {
+  if (!alert.info || !alert.info.length || !alert.info[0].event) {
+    return;
+  }
+  return alert.info[0].event;
+}
+
+function getAlertLevel(alert: CAPAlert) {
+  if (!alert.info || !alert.info.length) {
+    return;
+  }
+  return alert.info[0].warningColor();
 }
 
 type WeatherAlertProps = {
-  alert?: {};
+  alert: CAPAlert;
   style?: StyleProp<{}>,
   onPress: (alert: {}) => void
 }
 const WeatherAlert = (props: WeatherAlertProps) => {
-  const { onPress } = props;
+  const { alert, onPress } = props;
 
   return (
     <TouchableOpacity style={styles.wrapper} onPress={() => onPress({})}>
       <View style={styles.glassWrapper}>
-        <View style={{ ...styles.opacity, backgroundColor: getWarningColor() }}>
+        <View style={{ ...styles.opacity, backgroundColor: getWarningColor(getAlertLevel(alert)) }}>
           <View style={styles.warning}>
-            <ImageBackground source={warningBg} style={styles.warningIcon}><Image source={getWarningIcon()} style={styles.icon} /></ImageBackground>
-            <View style={styles.warningText}><Text style={styles.header}>Expected: Extreme rainfall{'\n'}Level: red</Text></View>
+            <ImageBackground source={warningBg} style={styles.warningIcon}><Image source={getWarningIcon(getAlertLevel(alert) as string)} style={styles.icon} /></ImageBackground>
+            <View style={styles.warningText}>
+              <Text style={styles.header}>
+                {getAlertStatus(alert)}: {getAlertEvent(alert)}{'\n'}Level: {getAlertLevel(alert)?.toLowerCase()}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
