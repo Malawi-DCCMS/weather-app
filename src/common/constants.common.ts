@@ -16,7 +16,7 @@ export const WEATHER_WARNINGS: { [k: string]: ImageSourcePropType } = {
 
 export const WARNING_COLORS: { [k in 'Red' | 'Yellow' | 'Orange' | 'Green']: string} = {
   Red: 'rgba(198, 0, 0, 0.60)',
-  Yellow: 'rgba(255, 157, 0, 0.60)',
+  Yellow: 'rgba(255, 230, 0, 0.6)',
   Orange: 'rgba(255, 157, 0, 0.6)',
   Green: 'rgba(255, 157, 0, 0.6)',
 };
