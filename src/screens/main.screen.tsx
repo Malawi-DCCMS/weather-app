@@ -14,12 +14,12 @@ import Today from '../components/Today';
 import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
-import { getPreciseLocation } from '../store/location.slice';
+import { getPreciseLocation, saveLocation } from '../store/location.slice';
 import { getLocationForecast, setForecast } from '../store/forecast.slice';
+import { getLocationAlerts } from '../store/alert.slice';
 import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
-import { getLocationAlerts, setAlerts } from '../store/alert.slice';
 import Alerts from '../components/Alerts';
 
 LogBox.ignoreLogs([
@@ -30,7 +30,7 @@ type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
-  const { alerts, error: alertsError } = useSelector((state: RootState) => state.alerts);
+  const { alerts } = useSelector((state: RootState) => state.alerts);
   const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   useEffect(() => {
@@ -38,15 +38,10 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }, []);
 
   useEffect(() => {
-    const getForecast = async () => {
-      dispatch(getLocationForecast({ lat, lon }));
-    };
+    dispatch(saveLocation({ name: location, position: { lat, long: lon } }));
 
-    const getAlerts = async () => {
-      dispatch(getLocationAlerts({ lat, lon }));
-    }
-
-    setAlerts([]);
+    const getAlerts = () => dispatch(getLocationAlerts({ lat, lon }));
+    const getForecast = () => dispatch(getLocationForecast({ lat, lon }));
     setForecast(undefined);
 
     getForecast();
@@ -54,9 +49,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
     /** Refresh forecast every 6 hours. Specified in milliseconds.  */
     const t = setInterval(getForecast, 21600000);
-    /** Refresh forecast every minute. Specified in milliseconds.  */
-    const delta = setInterval(getAlerts, 60000);
-    return () => { clearInterval(t); clearInterval(delta); };
+    return () => { clearInterval(t); };
   }, [lat, lon]);
 
   useEffect(() => {
@@ -69,10 +62,6 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       );
     }
   }, [locationError]);
-
-  useEffect(() => {
-    console.log(alertsError);
-  }, [alertsError]);
 
   // empty page as default content
   let mainContent: React.JSX.Element = (
