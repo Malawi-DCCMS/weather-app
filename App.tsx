@@ -14,7 +14,6 @@ import FeedbackScreen from './src/screens/feedback.screen';
 import WeatherWarningScreen from './src/screens/weather-warning.screen';
 import { RootDrawerParamList } from './src/common';
 
-
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
 function App(): JSX.Element {
