@@ -20,6 +20,8 @@
 		310257AAE1F246E785EADDAA /* NotoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62E4403EBE7645318978F197 /* NotoSans-Black.ttf */; };
 		3DAFB3716C5B4C3D9D99B17A /* NotoSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B42F4B5B2B64BC88CB47267 /* NotoSans-ThinItalic.ttf */; };
 		3F9F0F2139C8452CAA7DAD5F /* NotoSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB7BF76D9947E8BF1F4662 /* NotoSans-ExtraLight.ttf */; };
+		4995BCB92BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4995BCB82BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy */; };
+		4995BCBD2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4995BCBC2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m */; };
 		517C0F89147242A0AED447B3 /* Rajdhani-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5ADDC40F3474835956AECB9 /* Rajdhani-Bold.ttf */; };
 		5775F21020EE412A83B6EC8D /* NotoSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F4776916E0C4F18983EF809 /* NotoSans-BlackItalic.ttf */; };
 		651D6B46D05A43BF8E278A84 /* NotoSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE7CA39369EC47E89D930957 /* NotoSans-Light.ttf */; };
@@ -67,6 +69,8 @@
 		2F5E00DF66584015844229A7 /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-BoldItalic.ttf"; path = "../assets/fonts/NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		36953A278EFA46BBAA1F990A /* Rajdhani-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rajdhani-Medium.ttf"; path = "../assets/fonts/Rajdhani-Medium.ttf"; sourceTree = "<group>"; };
 		4443FB07E16E43DCB0CC72D8 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Medium.ttf"; path = "../assets/fonts/NotoSans-Medium.ttf"; sourceTree = "<group>"; };
+		4995BCB82BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4995BCBC2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		4C2B1DE78AF91B4D43564456 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Zanyengo/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		5BB95BE2F5204EEF98D939D3 /* NotoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-SemiBoldItalic.ttf"; path = "../assets/fonts/NotoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		5F4F4DC713C64D148D68F541 /* NotoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-ExtraLightItalic.ttf"; path = "../assets/fonts/NotoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 		13B07FAE1A68108700A75B9A /* Zanyengo */ = {
 			isa = PBXGroup;
 			children = (
+				4995BCBC2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m */,
 				6566EB872AE650CA0031587B /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -202,6 +207,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4995BCB82BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy */,
 				13B07FAE1A68108700A75B9A /* Zanyengo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ZanyengoTests */,
@@ -377,6 +383,7 @@
 				D8D41D0E98984B39A180DA2C /* NotoSans-Medium.ttf in Resources */,
 				05166EE3783E4D928AFEFE5B /* NotoSans-MediumItalic.ttf in Resources */,
 				C5F4E1215A834CCDB2BB91F3 /* NotoSans-Regular.ttf in Resources */,
+				4995BCB92BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy in Resources */,
 				011848BC11A04007AD09B3AF /* NotoSans-SemiBold.ttf in Resources */,
 				7B690DAD87804E8FBBF4CBCB /* NotoSans-SemiBoldItalic.ttf in Resources */,
 				17EE44E82E4A4F04ACD7B070 /* NotoSans-Thin.ttf in Resources */,
@@ -555,6 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4995BCBD2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
