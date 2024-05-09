@@ -7,6 +7,8 @@ import { Provider as StoreProvider } from 'react-redux';
 import { name as appName } from './app.json';
 import App from './App';
 import { store } from './src/store';
+import { AlertsTask } from './src/tasks';
+import { LocationUpdateTask } from './src/tasks';
 
 const theme = {
   ...DefaultTheme,
@@ -26,5 +28,8 @@ export default function Main() {
     </StoreProvider>
   );
 }
+
+AlertsTask().start();
+LocationUpdateTask().start();
 
 AppRegistry.registerComponent(appName, () => Main);
