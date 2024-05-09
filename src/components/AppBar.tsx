@@ -22,7 +22,7 @@ const getWarningIcons = (alerts: Array<CAPAlert>) => {
   if (alerts && alerts.length) {
     const icons: Array<React.JSX.Element> = [];
     for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
-      const capInfo = alerts[0].info as Array<CAPInfo>;
+      const capInfo = alerts[i].info as Array<CAPInfo>;
       const alertColor = capInfo[0].warningColor().toLowerCase();
       const icon = WEATHER_WARNINGS[alertColor];
       icons.push(
