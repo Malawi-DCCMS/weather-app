@@ -24,7 +24,6 @@ function getAlertStatus(alert: CAPAlert) {
     return;
   }
   const { onset } = alert.info[0];
-  console.log(alert.info && alert.info[0]);
   return onset < DateTime.now() ? 'Expected' : 'Ongoing';
 }
 
