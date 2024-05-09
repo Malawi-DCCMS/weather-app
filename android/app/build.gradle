@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.weatherapp"
+    namespace "com.dccms.zanyengo"
     defaultConfig {
-        applicationId "com.weatherapp"
+        applicationId "com.dccms.zanyengo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

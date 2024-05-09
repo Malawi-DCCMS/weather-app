@@ -1,4 +1,4 @@
-package com.weatherapp;
+package com.dccms.zanyengo;
 
 import android.content.res.Configuration;
 
