@@ -4,6 +4,7 @@ import React from "react";
 import { CAPAlert } from "../lib/cap-client/alert";
 import WeatherAlert from "./WeatherAlert";
 import { SCREENS } from "../constants/screens.constant";
+import { FadeIn } from "./FadeIn";
 
 
 type AlertsProps = {
@@ -18,9 +19,11 @@ const Alerts = (props: AlertsProps) => {
 
   if (alerts && alerts.length) {
     return (
-      <View style={styles.alertsRow}>
-        {alerts.map((alert, idx) => <WeatherAlert key={idx} alert={alert} onPress={() => onSelectWarning(location, alert)}/>)}
-      </View>
+      <FadeIn style={{}}>
+        <View style={styles.alertsRow}>
+          {alerts.map((alert, idx) => <WeatherAlert key={idx} alert={alert} onPress={() => onSelectWarning(location, alert)} />)}
+        </View>
+      </FadeIn>
     )
   }
 
