@@ -1,4 +1,4 @@
-package com.dccms.zanyengo;
+package com.zanyengo;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

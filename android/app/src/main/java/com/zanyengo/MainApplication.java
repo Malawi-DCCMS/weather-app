@@ -1,4 +1,4 @@
-package com.dccms.zanyengo;
+package com.zanyengo;
 
 import android.content.res.Configuration;
 

@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.dccms.zanyengo"
+    namespace "com.zanyengo"
     defaultConfig {
-        applicationId "com.dccms.zanyengo"
+        applicationId "com.zanyengo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
