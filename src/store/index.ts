@@ -8,7 +8,11 @@ export const store = configureStore({
     location: locationReducer,
     forecast: forecastReducer,
     alerts: alertsReducer,
-  }
+  },
+  middleware: getDefaultMiddleware => getDefaultMiddleware({
+    serializableCheck: false,
+    immutableCheck: false,
+  }),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
