@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
-import { ActivityIndicator, IconButton } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import { LogBox } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
@@ -14,11 +14,13 @@ import Today from '../components/Today';
 import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
-import { getPreciseLocation } from '../store/location.slice';
+import { getPreciseLocation, saveLocation } from '../store/location.slice';
 import { getLocationForecast, setForecast } from '../store/forecast.slice';
-import { Forecast } from '../utils/weatherData';
+import { getLocationAlerts } from '../store/alert.slice';
+import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import { GlassView } from '../components/GlassView';
+import Alerts from '../components/Alerts';
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -28,6 +30,7 @@ type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
+  const { alerts } = useSelector((state: RootState) => state.alerts);
   const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   useEffect(() => {
@@ -35,15 +38,18 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }, []);
 
   useEffect(() => {
-    const getForecast = async () => {
-      dispatch(getLocationForecast({ lat, lon }));
-    };
+    dispatch(saveLocation({ name: location, position: { lat, long: lon } }));
 
-    setForecast(undefined)
-    getForecast()
+    const getAlerts = () => dispatch(getLocationAlerts({ lat, lon }));
+    const getForecast = () => dispatch(getLocationForecast({ lat, lon }));
+    setForecast(undefined);
+
+    getForecast();
+    getAlerts();
+
     /** Refresh forecast every 6 hours. Specified in milliseconds.  */
     const t = setInterval(getForecast, 21600000);
-    return () => clearInterval(t);
+    return () => { clearInterval(t); };
   }, [lat, lon]);
 
   useEffect(() => {
@@ -83,17 +89,16 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     const onSelectToday = () =>
       navigation.navigate(SCREENS.Hourly, {
         location: location,
-        daySummary: preparedForecast.atDay(today, true),
+        daySummary: preparedForecast.atDay(today, true) as DaySummary,
         title: 'Hourly Today'
       })
     const onSelectDay = (location: string) =>
       (day: DateTime, preparedForecast: Forecast) =>
         navigation.navigate(SCREENS.Hourly, {
           location: location,
-          daySummary: preparedForecast.atDay(day),
+          daySummary: preparedForecast.atDay(day) as DaySummary,
           title: day.toLocaleString({ weekday: 'long' })
         });
-
 
     mainContent = (
       <View style={styles.opacity}>
@@ -110,7 +115,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.opacity}>
         <TouchableOpacity onPress={() => { }}>
           <View style={styles.errorLoader}>
-            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>{forecastError}</Text>
+            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', padding: 10 }}>{forecastError}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -122,7 +127,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
+          <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
             <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
               {mainContent}
             </GlassView>
@@ -159,8 +165,15 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: 'rgba(255, 255, 255, .6)',
   },
+  blurCover: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
   opacity: {
-    backgroundColor: 'rgba(125, 125, 125, .10)',
+    backgroundColor: 'rgba(100, 100, 100, .1)',
   },
   error: {
     backgroundColor: '#BFBFBF',

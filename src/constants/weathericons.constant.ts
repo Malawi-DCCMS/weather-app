@@ -84,6 +84,7 @@ const snowshowers_day = require('../../assets/weather_icon/png/snowshowers_day.p
 const snowshowers_night = require('../../assets/weather_icon/png/snowshowers_night.png');
 const snowshowers_polartwilight = require('../../assets/weather_icon/png/snowshowers_polartwilight.png');
 const icon_warning_wind_yellow = require('../../assets/weather_icon/png/icon-warning-wind-yellow.png');
+const icon_warning_wind_red = require('../../assets/weather_icon/png/icon-warning-wind-red.png');
 
 const icons: {[key: string]: ImageSourcePropType} = {
   clearsky_day,
@@ -169,7 +170,8 @@ const icons: {[key: string]: ImageSourcePropType} = {
   snowshowers_day,
   snowshowers_night,
   snowshowers_polartwilight,
-  icon_warning_wind_yellow
+  icon_warning_wind_yellow,
+  icon_warning_wind_red,
 };
 
 export default icons;

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { DISTRICTS } from '../constants/districts.constant';
 import { LOGGER } from '../lib';
@@ -6,6 +7,13 @@ import { placeByCurrentLocation } from '../utils/location';
 
 export const getPreciseLocation = createAsyncThunk('location/getPreciseLocation', async (): Promise<Place> => {
   return placeByCurrentLocation()
+});
+
+export const saveLocation = createAsyncThunk('location/saveLocation', async (place: Place): Promise<Place> => {
+  await AsyncStorage.setItem('location', `${place.name}`);
+  await AsyncStorage.setItem('lat', `${place.position.lat}`);
+  await AsyncStorage.setItem('lon', `${place.position.long}`);
+  return place;
 });
 
 type InitialState = {
@@ -46,6 +54,15 @@ const locationSlice = createSlice({
       LOGGER.error('Loading location rejected.');
       LOGGER.error(action.error.message);
       state.error = 'There was a problem figuring out where you are, :(.';
+    });
+    builder.addCase(saveLocation.pending, () => {
+      LOGGER.info('Saving location...');
+    });
+    builder.addCase(saveLocation.fulfilled, () => {
+      LOGGER.info('Saving location fulfilled.')
+    });
+    builder.addCase(saveLocation.rejected, (_, action) => {
+      LOGGER.error(`Failed to save location because of ${action.error.message}`)
     });
   },
 })

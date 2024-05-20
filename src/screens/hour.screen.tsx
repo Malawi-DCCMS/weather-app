@@ -8,16 +8,22 @@ import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import HourlyTable from '../components/HourlyTable';
 import { RootDrawerParamList } from '../common';
+import Alerts from '../components/Alerts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
   const { location, daySummary, title } = route.params;
+  const { alerts } = useSelector((state: RootState) => state.alerts);
+  const { lat, lon } = useSelector((state: RootState) => state.location);
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
+          <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
           <HourlyTable daySummary={daySummary} day={DateTime.now()} title={title} />
         </ImageBackground>
       </View>

@@ -1,5 +1,7 @@
 import { ImageSourcePropType } from 'react-native';
-import weatherIcons from '../constants/weathericons.constant';
+import warningRed from '../../assets/warning-red.png';
+import warningOrange from '../../assets/warning-orange.png';
+import warningYellow from '../../assets/warning-yellow.png';
 
 export const DEFAULT_PLACE: Place = {
   name: 'Blantyre',
@@ -7,5 +9,14 @@ export const DEFAULT_PLACE: Place = {
 };
 
 export const WEATHER_WARNINGS: { [k: string]: ImageSourcePropType } = {
-  yellow: weatherIcons['icon_warning_wind_yellow'],
+  red: warningRed,
+  orange: warningOrange,
+  yellow: warningYellow,
+};
+
+export const WARNING_COLORS: { [k in 'Red' | 'Yellow' | 'Orange' | 'Green']: string} = {
+  Red: 'rgba(198, 0, 0, 0.60)',
+  Yellow: 'rgba(255, 230, 0, 0.6)',
+  Orange: 'rgba(255, 157, 0, 0.6)',
+  Green: 'rgba(255, 157, 0, 0.6)',
 };

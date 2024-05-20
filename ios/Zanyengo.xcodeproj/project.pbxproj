@@ -17,21 +17,23 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		17EE44E82E4A4F04ACD7B070 /* NotoSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2248493E52A449678C7743C9 /* NotoSans-Thin.ttf */; };
 		18CD71AE36C643BA90BA36D8 /* NotoSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F4F4DC713C64D148D68F541 /* NotoSans-ExtraLightItalic.ttf */; };
-		1C36B17EC5F7AC0FBA373580 /* libPods-Zanyengo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED4B2B042EE20570B60C065 /* libPods-Zanyengo.a */; };
 		310257AAE1F246E785EADDAA /* NotoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62E4403EBE7645318978F197 /* NotoSans-Black.ttf */; };
 		3DAFB3716C5B4C3D9D99B17A /* NotoSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B42F4B5B2B64BC88CB47267 /* NotoSans-ThinItalic.ttf */; };
 		3F9F0F2139C8452CAA7DAD5F /* NotoSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB7BF76D9947E8BF1F4662 /* NotoSans-ExtraLight.ttf */; };
+		4995BCB92BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4995BCB82BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy */; };
+		4995BCBD2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4995BCBC2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m */; };
 		517C0F89147242A0AED447B3 /* Rajdhani-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5ADDC40F3474835956AECB9 /* Rajdhani-Bold.ttf */; };
 		5775F21020EE412A83B6EC8D /* NotoSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F4776916E0C4F18983EF809 /* NotoSans-BlackItalic.ttf */; };
 		651D6B46D05A43BF8E278A84 /* NotoSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE7CA39369EC47E89D930957 /* NotoSans-Light.ttf */; };
+		6D2C46C7254A9E5E87B16A4F /* libPods-Zanyengo-ZanyengoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E30A53A74669DEE17855A3 /* libPods-Zanyengo-ZanyengoTests.a */; };
 		7B690DAD87804E8FBBF4CBCB /* NotoSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB95BE2F5204EEF98D939D3 /* NotoSans-SemiBoldItalic.ttf */; };
 		7DF9FFBA4C104513B4B9E8CC /* Rajdhani-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A4419ADA77B4A94B8FF2CAE /* Rajdhani-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		852EF3E55DC5443189CAE1CF /* NotoSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC99D4D290DF4DD0924A423C /* NotoSans-LightItalic.ttf */; };
 		8BFF3D846A4B4D758314E854 /* Rajdhani-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36953A278EFA46BBAA1F990A /* Rajdhani-Medium.ttf */; };
+		AF832DB80D2019F32A212038 /* libPods-Zanyengo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C2CF9EAC287A759C5434BA /* libPods-Zanyengo.a */; };
 		B2195548BCEF4234A35A5DA1 /* Rajdhani-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDA17CD92B524F68A09B2E2B /* Rajdhani-SemiBold.ttf */; };
 		C5F4E1215A834CCDB2BB91F3 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E561E9EDED2C40B19E65C2DB /* NotoSans-Regular.ttf */; };
-		C87977C4E690004862B61EAE /* libPods-Zanyengo-ZanyengoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB06303B6477D0595AB607C4 /* libPods-Zanyengo-ZanyengoTests.a */; };
 		CC3E607E6D8A46899C8E36DF /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D4B1E0971D947F0B60A5B01 /* NotoSans-Italic.ttf */; };
 		CF5EBED6121541289C5E73EF /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF4DD851620F4298A9026002 /* NotoSans-Bold.ttf */; };
 		D00F11CCAD5743A49DE52622 /* NotoSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00E937086690480EA9627A02 /* NotoSans-ExtraBoldItalic.ttf */; };
@@ -63,28 +65,33 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Zanyengo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Zanyengo/main.m; sourceTree = "<group>"; };
 		2248493E52A449678C7743C9 /* NotoSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Thin.ttf"; path = "../assets/fonts/NotoSans-Thin.ttf"; sourceTree = "<group>"; };
+		29A3004665846D9569173CDE /* Pods-Zanyengo-ZanyengoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo-ZanyengoTests.release.xcconfig"; path = "Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests.release.xcconfig"; sourceTree = "<group>"; };
 		2F5E00DF66584015844229A7 /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-BoldItalic.ttf"; path = "../assets/fonts/NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		36953A278EFA46BBAA1F990A /* Rajdhani-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rajdhani-Medium.ttf"; path = "../assets/fonts/Rajdhani-Medium.ttf"; sourceTree = "<group>"; };
-		3ED4B2B042EE20570B60C065 /* libPods-Zanyengo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Zanyengo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4443FB07E16E43DCB0CC72D8 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Medium.ttf"; path = "../assets/fonts/NotoSans-Medium.ttf"; sourceTree = "<group>"; };
+		4995BCB82BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4995BCBC2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		4C2B1DE78AF91B4D43564456 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Zanyengo/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		5BB95BE2F5204EEF98D939D3 /* NotoSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-SemiBoldItalic.ttf"; path = "../assets/fonts/NotoSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		5F4F4DC713C64D148D68F541 /* NotoSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-ExtraLightItalic.ttf"; path = "../assets/fonts/NotoSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		5F775DBA3A444036AD15917C /* NotoSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-MediumItalic.ttf"; path = "../assets/fonts/NotoSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		62E30A53A74669DEE17855A3 /* libPods-Zanyengo-ZanyengoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Zanyengo-ZanyengoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E4403EBE7645318978F197 /* NotoSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Black.ttf"; path = "../assets/fonts/NotoSans-Black.ttf"; sourceTree = "<group>"; };
 		6566EB8B2AE651210031587B /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		6566EB962AE651220031587B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6B2E8AEABE48FDF02D77D28D /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Zanyengo-ZanyengoTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		6D4B1E0971D947F0B60A5B01 /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Italic.ttf"; path = "../assets/fonts/NotoSans-Italic.ttf"; sourceTree = "<group>"; };
+		7155148C2A36EE3A7D07C360 /* Pods-Zanyengo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo.release.xcconfig"; path = "Target Support Files/Pods-Zanyengo/Pods-Zanyengo.release.xcconfig"; sourceTree = "<group>"; };
 		72714818FB824FB19C134B08 /* NotoSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-ExtraBold.ttf"; path = "../assets/fonts/NotoSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		7A4419ADA77B4A94B8FF2CAE /* Rajdhani-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rajdhani-Light.ttf"; path = "../assets/fonts/Rajdhani-Light.ttf"; sourceTree = "<group>"; };
-		7F80AEC61AB3992BE3543EDF /* Pods-Zanyengo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo.release.xcconfig"; path = "Target Support Files/Pods-Zanyengo/Pods-Zanyengo.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Zanyengo/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		82C2CF9EAC287A759C5434BA /* libPods-Zanyengo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Zanyengo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		883387AA294C43649039CE66 /* Rajdhani-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rajdhani-Regular.ttf"; path = "../assets/fonts/Rajdhani-Regular.ttf"; sourceTree = "<group>"; };
 		8F4776916E0C4F18983EF809 /* NotoSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-BlackItalic.ttf"; path = "../assets/fonts/NotoSans-BlackItalic.ttf"; sourceTree = "<group>"; };
 		9B42F4B5B2B64BC88CB47267 /* NotoSans-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-ThinItalic.ttf"; path = "../assets/fonts/NotoSans-ThinItalic.ttf"; sourceTree = "<group>"; };
+		A51F4E392835F087AA8E2872 /* Pods-Zanyengo-ZanyengoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo-ZanyengoTests.debug.xcconfig"; path = "Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A5ADDC40F3474835956AECB9 /* Rajdhani-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rajdhani-Bold.ttf"; path = "../assets/fonts/Rajdhani-Bold.ttf"; sourceTree = "<group>"; };
-		B9C5A78CD826C5A7009DDAC7 /* Pods-Zanyengo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo.debug.xcconfig"; path = "Target Support Files/Pods-Zanyengo/Pods-Zanyengo.debug.xcconfig"; sourceTree = "<group>"; };
+		AE29722ABB6256D94DFD7AEB /* Pods-Zanyengo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo.debug.xcconfig"; path = "Target Support Files/Pods-Zanyengo/Pods-Zanyengo.debug.xcconfig"; sourceTree = "<group>"; };
 		BDA17CD92B524F68A09B2E2B /* Rajdhani-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rajdhani-SemiBold.ttf"; path = "../assets/fonts/Rajdhani-SemiBold.ttf"; sourceTree = "<group>"; };
 		DC99D4D290DF4DD0924A423C /* NotoSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-LightItalic.ttf"; path = "../assets/fonts/NotoSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		E561E9EDED2C40B19E65C2DB /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Regular.ttf"; path = "../assets/fonts/NotoSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -92,9 +99,6 @@
 		EE7CA39369EC47E89D930957 /* NotoSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Light.ttf"; path = "../assets/fonts/NotoSans-Light.ttf"; sourceTree = "<group>"; };
 		EF4DD851620F4298A9026002 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Bold.ttf"; path = "../assets/fonts/NotoSans-Bold.ttf"; sourceTree = "<group>"; };
 		EFFB7BF76D9947E8BF1F4662 /* NotoSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-ExtraLight.ttf"; path = "../assets/fonts/NotoSans-ExtraLight.ttf"; sourceTree = "<group>"; };
-		F204A72C7EA70506D9B2EBCB /* Pods-Zanyengo-ZanyengoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo-ZanyengoTests.debug.xcconfig"; path = "Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FB06303B6477D0595AB607C4 /* libPods-Zanyengo-ZanyengoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Zanyengo-ZanyengoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD9B34D0D20086A5EC1CC0DF /* Pods-Zanyengo-ZanyengoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zanyengo-ZanyengoTests.release.xcconfig"; path = "Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C87977C4E690004862B61EAE /* libPods-Zanyengo-ZanyengoTests.a in Frameworks */,
+				6D2C46C7254A9E5E87B16A4F /* libPods-Zanyengo-ZanyengoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C36B17EC5F7AC0FBA373580 /* libPods-Zanyengo.a in Frameworks */,
+				AF832DB80D2019F32A212038 /* libPods-Zanyengo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +141,7 @@
 		13B07FAE1A68108700A75B9A /* Zanyengo */ = {
 			isa = PBXGroup;
 			children = (
+				4995BCBC2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m */,
 				6566EB872AE650CA0031587B /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -152,8 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				3ED4B2B042EE20570B60C065 /* libPods-Zanyengo.a */,
-				FB06303B6477D0595AB607C4 /* libPods-Zanyengo-ZanyengoTests.a */,
+				82C2CF9EAC287A759C5434BA /* libPods-Zanyengo.a */,
+				62E30A53A74669DEE17855A3 /* libPods-Zanyengo-ZanyengoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4995BCB82BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy */,
 				13B07FAE1A68108700A75B9A /* Zanyengo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ZanyengoTests */,
@@ -228,10 +234,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B9C5A78CD826C5A7009DDAC7 /* Pods-Zanyengo.debug.xcconfig */,
-				7F80AEC61AB3992BE3543EDF /* Pods-Zanyengo.release.xcconfig */,
-				F204A72C7EA70506D9B2EBCB /* Pods-Zanyengo-ZanyengoTests.debug.xcconfig */,
-				FD9B34D0D20086A5EC1CC0DF /* Pods-Zanyengo-ZanyengoTests.release.xcconfig */,
+				AE29722ABB6256D94DFD7AEB /* Pods-Zanyengo.debug.xcconfig */,
+				7155148C2A36EE3A7D07C360 /* Pods-Zanyengo.release.xcconfig */,
+				A51F4E392835F087AA8E2872 /* Pods-Zanyengo-ZanyengoTests.debug.xcconfig */,
+				29A3004665846D9569173CDE /* Pods-Zanyengo-ZanyengoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -273,12 +279,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ZanyengoTests" */;
 			buildPhases = (
-				2812E858BFEDA998E4AD3D4F /* [CP] Check Pods Manifest.lock */,
+				76CA42B44A2A106779E94597 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				F279F1539470BC8C50AE6D25 /* [CP] Embed Pods Frameworks */,
-				46EEB74EEA357237B2AA27AD /* [CP] Copy Pods Resources */,
+				2D53E725E9842728A12E11FB /* [CP] Embed Pods Frameworks */,
+				CC624A2DB6AF81377480A85A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -286,6 +292,7 @@
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
 			name = ZanyengoTests;
+			productName = ZanyengoTests;
 			productReference = 00E356EE1AD99517003FC87E /* ZanyengoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -293,14 +300,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Zanyengo" */;
 			buildPhases = (
-				761338D41ADA1C735B3943DC /* [CP] Check Pods Manifest.lock */,
+				4FEED309661F818F7C53D41C /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				47352999DD908F9F00487E57 /* [CP] Embed Pods Frameworks */,
-				DCC7189AC27A3B261B632325 /* [CP] Copy Pods Resources */,
+				162EF3E3F74D41DC4CCA2983 /* [CP] Embed Pods Frameworks */,
+				EB5098798022298B237C8D3A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -376,6 +383,7 @@
 				D8D41D0E98984B39A180DA2C /* NotoSans-Medium.ttf in Resources */,
 				05166EE3783E4D928AFEFE5B /* NotoSans-MediumItalic.ttf in Resources */,
 				C5F4E1215A834CCDB2BB91F3 /* NotoSans-Regular.ttf in Resources */,
+				4995BCB92BE90E1D0079F8E1 /* PrivacyInfo.xcprivacy in Resources */,
 				011848BC11A04007AD09B3AF /* NotoSans-SemiBold.ttf in Resources */,
 				7B690DAD87804E8FBBF4CBCB /* NotoSans-SemiBoldItalic.ttf in Resources */,
 				17EE44E82E4A4F04ACD7B070 /* NotoSans-Thin.ttf in Resources */,
@@ -407,46 +415,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		2812E858BFEDA998E4AD3D4F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Zanyengo-ZanyengoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		46EEB74EEA357237B2AA27AD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		47352999DD908F9F00487E57 /* [CP] Embed Pods Frameworks */ = {
+		162EF3E3F74D41DC4CCA2983 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -463,7 +432,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zanyengo/Pods-Zanyengo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		761338D41ADA1C735B3943DC /* [CP] Check Pods Manifest.lock */ = {
+		2D53E725E9842728A12E11FB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FEED309661F818F7C53D41C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -485,7 +471,46 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DCC7189AC27A3B261B632325 /* [CP] Copy Pods Resources */ = {
+		76CA42B44A2A106779E94597 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Zanyengo-ZanyengoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC624A2DB6AF81377480A85A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB5098798022298B237C8D3A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -500,23 +525,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zanyengo/Pods-Zanyengo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F279F1539470BC8C50AE6D25 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zanyengo-ZanyengoTests/Pods-Zanyengo-ZanyengoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -554,6 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4995BCBD2BE90FD90079F8E1 /* RNBackgroundFetch+AppDelegate.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -572,7 +581,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F204A72C7EA70506D9B2EBCB /* Pods-Zanyengo-ZanyengoTests.debug.xcconfig */;
+			baseConfigurationReference = A51F4E392835F087AA8E2872 /* Pods-Zanyengo-ZanyengoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -600,7 +609,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD9B34D0D20086A5EC1CC0DF /* Pods-Zanyengo-ZanyengoTests.release.xcconfig */;
+			baseConfigurationReference = 29A3004665846D9569173CDE /* Pods-Zanyengo-ZanyengoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -625,11 +634,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9C5A78CD826C5A7009DDAC7 /* Pods-Zanyengo.debug.xcconfig */;
+			baseConfigurationReference = AE29722ABB6256D94DFD7AEB /* Pods-Zanyengo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CBKM3CQ92T;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Zanyengo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Zanyengo;
@@ -644,7 +654,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.dccms.Zanyengo;
 				PRODUCT_NAME = Zanyengo;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -654,11 +664,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F80AEC61AB3992BE3543EDF /* Pods-Zanyengo.release.xcconfig */;
+			baseConfigurationReference = 7155148C2A36EE3A7D07C360 /* Pods-Zanyengo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CBKM3CQ92T;
 				INFOPLIST_FILE = Zanyengo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Zanyengo;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -672,7 +683,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.dccms.Zanyengo;
 				PRODUCT_NAME = Zanyengo;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

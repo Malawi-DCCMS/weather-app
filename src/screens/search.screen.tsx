@@ -13,11 +13,13 @@ import { AppDispatch, RootState } from '../store';
 import { setName, setLat, setLon } from '../store/location.slice';
 import { setForecastError } from '../store/forecast.slice';
 import { RootDrawerParamList } from '../common';
+import Alerts from '../components/Alerts';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Search'>;
 const SearchScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { name } = useSelector((state: RootState) => state.location);
+  const { name, lat, lon} = useSelector((state: RootState) => state.location);
+  const { alerts } = useSelector((state: RootState) => state.alerts);
 
   return (
     <SafeAreaView>
@@ -25,6 +27,7 @@ const SearchScreen = ({ navigation }: ScreenProps) => {
         <View style={styles.wrapper}>
           <ImageBackground source={appBackground} style={styles.bg}>
             <AppBar location={name} navigation={navigation} />
+            <Alerts alerts={alerts[`${lat}${lon}`]} location={name} navigator={navigation} />
             <Search
               location={name}
               setLocation={

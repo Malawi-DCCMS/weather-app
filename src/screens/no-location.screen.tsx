@@ -1,14 +1,14 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import appBackground from '../../assets/appbackground.png';
 import AppBar from '../components/AppBar';
 import LocationRow from '../components/LocationRow';
-import { District, DISTRICTS } from '../constants/districts.constant';
-import { AppDispatch, RootState } from '../store';
+import { DISTRICTS } from '../constants/districts.constant';
+import { AppDispatch } from '../store';
 import { RootDrawerParamList } from '../common';
 import { setForecast } from '../store/forecast.slice';
 import { setLat, setLon, setName } from '../store/location.slice';
@@ -17,7 +17,6 @@ import { WeatherForecast } from '../utils/locationforecast';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'NoLocation'>;
 const NoLocationScreen = ({ navigation }: ScreenProps) => {
-  const { name } = useSelector((state: RootState) => state.location);
   const dispatch = useDispatch<AppDispatch>();
 
   return (
@@ -25,7 +24,7 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location='Zanyengo' navigation={navigation} />
-          <ScrollView contentContainerStyle={styles.container}>
+          <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false} snapToStart={false}>
             {
               DISTRICTS.map((district, idx) =>
                 <LocationRow

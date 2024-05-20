@@ -1,4 +1,4 @@
-package com.weatherapp;
+package com.zanyengo;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

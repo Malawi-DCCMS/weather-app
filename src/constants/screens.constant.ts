@@ -5,4 +5,5 @@ export enum SCREENS {
   Search = 'Search',
   Feedback = 'Feedback',
   AboutUs = 'AboutUs',
+  WeatherWarning = 'WeatherWarning',
 };

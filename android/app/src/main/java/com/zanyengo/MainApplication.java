@@ -1,4 +1,4 @@
-package com.weatherapp;
+package com.zanyengo;
 
 import android.content.res.Configuration;
 
@@ -60,7 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
       // this app.
       DefaultNewArchitectureEntryPoint.load();
     }
-    ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    //ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 
   @Override
