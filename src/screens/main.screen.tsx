@@ -8,7 +8,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import { LogBox } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
-import appBackground from '../../assets/appbackground.png';
+import appBackground from '../../assets/new-glass-bg.png';
 import AppBar from '../components/AppBar';
 import Today from '../components/Today';
 import FiveDays from '../components/FiveDays';
@@ -19,7 +19,6 @@ import { getLocationForecast, setForecast } from '../store/forecast.slice';
 import { getLocationAlerts } from '../store/alert.slice';
 import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
-import { GlassView } from '../components/GlassView';
 import Alerts from '../components/Alerts';
 
 LogBox.ignoreLogs([
@@ -129,9 +128,9 @@ const MainScreen = ({ navigation }: ScreenProps) => {
           <AppBar location={location} navigation={navigation} />
           <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
           <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
-            <GlassView glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+            <View style={styles.glassWrapper}>
               {mainContent}
-            </GlassView>
+            </View>
           </ScrollView>
         </ImageBackground>
       </View>

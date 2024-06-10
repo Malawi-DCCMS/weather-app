@@ -5,7 +5,6 @@ import { DateTime } from "luxon";
 
 import weatherIcons from '../constants/weathericons.constant';
 import { DaySummary } from '../utils/weatherData';
-import { GlassView } from '../components/GlassView';
 
 type HourlyTableProps = {
   title: string;
@@ -18,7 +17,7 @@ type HourlyTableProps = {
  */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
   return (
-    <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 25, blurType: 'light' }}>
+    <View style={styles.container}>
       <View style={styles.opacity}>
         <DataTable style={styles.table}>
           <DataTable.Header>
@@ -41,7 +40,7 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
           </ScrollView>
         </DataTable>
       </View>
-    </GlassView>
+    </View>
   );
 };
 

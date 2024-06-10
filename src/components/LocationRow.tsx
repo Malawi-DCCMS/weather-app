@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
-import { BlurView } from '@react-native-community/blur';
 
 import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
@@ -45,7 +44,6 @@ function LocationRow(props: LocationRowProps): JSX.Element {
               <Icon source={weatherIcons[today.weatherSymbol || 'fair_day']} size={90} />
             </View>
           </View>
-          <BlurView blurAmount={25} blurType='light' />
         </View>
       </TouchableOpacity>
     );
@@ -61,7 +59,6 @@ function LocationRow(props: LocationRowProps): JSX.Element {
             </View>
           </View>
         </View>
-        <BlurView blurAmount={25} blurType='light' />
       </View>
     </View>
   )
@@ -79,7 +76,6 @@ function ForecastError(props: { msg: string }): JSX.Element {
             </View>
           </View>
         </View>
-        <BlurView blurAmount={25} blurType='light' />
       </View>
     </View>
   )

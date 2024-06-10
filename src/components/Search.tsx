@@ -7,7 +7,6 @@ import {
   TAutocompleteDropdownItem,
 } from 'react-native-autocomplete-dropdown';
 import { Icon } from 'react-native-paper';
-import { BlurView } from '@react-native-community/blur';
 
 import { getGeonames } from '../../src/services/geonames.service';
 import { placeByCurrentLocation } from '../utils/location';
@@ -73,8 +72,6 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
         />
-
-        <BlurView blurAmount={25} blurType='light' style={styles.blurBar} />
       </View>
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog} style={styles.dialogStyle}>

@@ -2,13 +2,12 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View, ScrollView, Image, ListRenderItemInfo, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BlurView } from '@react-native-community/blur';
 import { Text } from 'react-native-paper';
 import { DateTime } from 'luxon';
 
 import AppBar from '../components/AppBar';
 import { RootDrawerParamList } from '../common';
-import appBackground from '../../assets/appbackground.png';
+import appBackground from '../../assets/new-glass-bg.png';
 import urgency from '../../assets/urgency.png';
 import severity from '../../assets/severity.png';
 import certainity from '../../assets/certainity.png';
@@ -41,7 +40,6 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
             <WeatherAlert alert={alert} onPress={() => {}}/>
             <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} snapToStart={false}>
               <View style={styles.content}>
-                <BlurView style={styles.blurCover} blurAmount={25} blurType='light' />
                 <Text style={styles.whiteBoldText}>Event description:</Text>
                 <Text style={styles.whiteText}>{alert.info && alert.info[0].description}{'\n'}</Text>
                 <Text style={styles.whiteBoldText}>Instructions:</Text>
@@ -50,12 +48,10 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
                 <Text style={styles.whiteText}>{alert.info && alert.info[0].area?.areaDesc}</Text>
               </View>
               <View style={styles.content}>
-                <BlurView style={styles.blurCover} blurAmount={20} blurType='light' />
                 <Text style={styles.whiteLargeText}>Time period</Text>
                 <FlatList data={getTimePeriodData(alert)} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
               </View>
               <View style={styles.content}>
-                <BlurView style={styles.blurCover} blurAmount={20} blurType='light' />
                 <View style={{flexDirection: 'row'}}>
                   <Image style={styles.icons} source={urgency}/>
                   <Text style={styles.whiteText}>Urgency:   {alert.info && alert.info[0].urgency}{'\n'}</Text>

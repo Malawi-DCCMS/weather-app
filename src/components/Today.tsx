@@ -5,7 +5,6 @@ import { Icon, Text } from 'react-native-paper';
 import { getForecastDescription } from '../utils/forecast.utils';
 import { DaySummary } from '../utils/weatherData';
 import forwardArrow from '../../assets/icons8-forward-100.png';
-import { GlassView } from '../components/GlassView';
 import upArrow from '../../assets/Arrow-upward.png';
 import downArrow from '../../assets/Arrow-downward.png';
 
@@ -17,11 +16,11 @@ function Today(props: TodaysForecastProps): JSX.Element {
 
   if (!daySummary) {
     return (
-      <GlassView containerStyle={styles.wrapper} glassStyle={styles.glassWrapper} blurStyle={{ blurAmount: 8, blurType: 'light' }}>
+      <View style={styles.wrapper}>
         <View style={styles.today}>
           <Text style={styles.todaysHeader}>Forecast unavailable</Text>
         </View>
-      </GlassView>
+      </View>
     )
   }
 
