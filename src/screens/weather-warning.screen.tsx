@@ -79,14 +79,14 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   contentContainer: {
     flex: 1,
     height: '100%',
     width: '100%',
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   scrollView: {
     height: '100%',
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     paddingBottom: 18,
     borderRadius: 4,
+    backgroundColor: 'rgba(217, 217, 217, 0.5)',
   },
   blurCover: {
     position: 'absolute',
