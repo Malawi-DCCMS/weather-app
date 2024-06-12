@@ -4,10 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Paragraph, Text } from 'react-native-paper';
 
-import appBackground from '../../assets/appbackground.png';
+import appBackground from '../../assets/new-glass-bg.png';
 import AppBar from '../components/AppBar';
 import { RootDrawerParamList } from '../common';
-import { GlassView } from '../components/GlassView';
 import Alerts from '../components/Alerts';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
@@ -23,7 +22,7 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={"About us"} navigation={navigation} />
           <Alerts alerts={alerts[`${lat}${lon}`]} location={"About us"} navigator={navigation} />
-          <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+          <View style={styles.container}>
             <View style={styles.opacity}>
               <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
                 <View style={styles.content}>
@@ -65,7 +64,7 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
                 </View>
               </ScrollView>
             </View>
-          </GlassView>
+          </View>
         </ImageBackground>
       </View>
     </SafeAreaView>

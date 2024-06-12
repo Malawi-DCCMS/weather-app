@@ -5,9 +5,8 @@ import { ActivityIndicator, Dialog, Paragraph, Portal, Button, Text } from 'reac
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
-} from 'react-native-autocomplete-dropdown';
+} from '../lib/autocomplete';
 import { Icon } from 'react-native-paper';
-import { BlurView } from '@react-native-community/blur';
 
 import { getGeonames } from '../../src/services/geonames.service';
 import { placeByCurrentLocation } from '../utils/location';
@@ -24,7 +23,7 @@ type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
   const geonames = useMemo(() => getGeonames(), []);
-  const dataset = getDataset(geonames);
+  const dataset = useMemo(() => getDataset(geonames), []);
   const [visible, setVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
@@ -73,8 +72,6 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
         />
-
-        <BlurView blurAmount={25} blurType='light' style={styles.blurBar} />
       </View>
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog} style={styles.dialogStyle}>

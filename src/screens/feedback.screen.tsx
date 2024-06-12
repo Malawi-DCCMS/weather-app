@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Dialog, Icon, Text } from 'react-native-paper';
 
-import appBackground from '../../assets/appbackground.png';
+import appBackground from '../../assets/new-glass-bg.png';
 import loveActive from '../../assets/love-active.png';
 import loveInactive from '../../assets/love-inactive.png';
 import disableActive from '../../assets/disable-heart-active.png';
@@ -17,7 +17,6 @@ import { LOGGER } from '../lib';
 import { RootDrawerParamList } from '../common';
 import { SCREENS } from '../constants/screens.constant';
 import { FadeIn } from '../components/FadeIn';
-import { GlassView } from '../components/GlassView';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Feedback'>;
 const FeedbackScreen = ({ navigation }: ScreenProps) => {
@@ -66,7 +65,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={name} navigation={navigation} />
           <ScrollView contentContainerStyle={styles.outer} snapToStart={false} showsVerticalScrollIndicator={false}>
-            {!success && <GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+            {!success && <View style={styles.container}>
               <View style={styles.opacity}>
                 <View><Text style={styles.header}>Help us become better!</Text></View>
                 <View style={styles.smileys}>
@@ -82,9 +81,9 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
                   <Button onPress={() => submit()} style={styles.sendButton} textColor='white'><Text style={styles.buttonText}>Send</Text></Button>
                 </View>
               </View>
-            </GlassView>
+            </View>
             }
-            {success && (<FadeIn style={styles.fadeInContainer}><GlassView glassStyle={styles.container} containerStyle={styles.container} blurStyle={{ blurAmount: 20, blurType: 'light' }}>
+            {success && (<FadeIn style={styles.fadeInContainer}><View style={styles.container}>
               <View style={styles.opacity}>
                 <View style={styles.closeIcon}><TouchableOpacity onPress={() => close()}><Icon source='close' size={40} color='white' /></TouchableOpacity></View>
                 <View><Text style={styles.successHeader}>Thank you!</Text></View>
@@ -92,7 +91,7 @@ const FeedbackScreen = ({ navigation }: ScreenProps) => {
                   <View style={styles.successIcon}><Icon source={submitSuccess} size={177} /></View>
                 </View>
               </View>
-            </GlassView></FadeIn>)
+            </View></FadeIn>)
             }
           </ScrollView>
           <Dialog visible={showValidationError} onDismiss={() => setShowValidationError(false)}>

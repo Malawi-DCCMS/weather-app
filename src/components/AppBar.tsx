@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BlurView } from '@react-native-community/blur';
 import { useSelector } from 'react-redux';
 
 import { SCREENS } from '../constants/screens.constant';
@@ -52,7 +51,6 @@ const AppBar = (props: AppBarProps) => {
 
   return (
     <View style={styles.appBar}>
-      <BlurView style={styles.blurBar} blurAmount={20} blurType='light' />
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle}>{fmtLocation}</Text>

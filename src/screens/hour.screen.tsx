@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
 
-import appBackground from '../../assets/appbackground.png';
+import appBackground from '../../assets/new-glass-bg.png';
 import AppBar from '../components/AppBar';
 import HourlyTable from '../components/HourlyTable';
 import { RootDrawerParamList } from '../common';

@@ -45,7 +45,7 @@ const checkPermissions = async (permissions: Array<Permission>): Promise<boolean
             lon: position.coords.longitude,
           }),
         error => reject(error),
-        { enableHighAccuracy: true },
+        { enableHighAccuracy: false },
       );
     });
   }
@@ -62,7 +62,7 @@ const checkPermissions = async (permissions: Array<Permission>): Promise<boolean
         const closest = getClosestPlace(location.lat, location.lon);
         if (!closest) {
             throw new Error('Failed to get closest place to location.' + location);
-        } 
+        }
         return closest as Place;
     } catch (error) {
         LOGGER.error("Failed to get current location")

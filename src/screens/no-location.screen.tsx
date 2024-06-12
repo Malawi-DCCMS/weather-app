@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import appBackground from '../../assets/appbackground.png';
+import appBackground from '../../assets/new-glass-bg.png';
 import AppBar from '../components/AppBar';
 import LocationRow from '../components/LocationRow';
 import { DISTRICTS } from '../constants/districts.constant';
