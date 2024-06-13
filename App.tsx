@@ -13,6 +13,7 @@ import AboutUsScreen from './src/screens/about-us.screen';
 import FeedbackScreen from './src/screens/feedback.screen';
 import WeatherWarningScreen from './src/screens/weather-warning.screen';
 import { RootDrawerParamList } from './src/common';
+import AboutTheAppScreen from './src/screens/about-the-app.screen';
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
@@ -28,6 +29,7 @@ function App(): JSX.Element {
         <Drawer.Screen name={SCREENS.Hourly} component={HourScreen} />
         <Drawer.Screen name={SCREENS.Search} component={SearchScreen} />
         <Drawer.Screen name={SCREENS.AboutUs} component={AboutUsScreen} />
+        <Drawer.Screen name={SCREENS.AboutTheApp} component={AboutTheAppScreen} />
         <Drawer.Screen name={SCREENS.WeatherWarning} component={WeatherWarningScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
