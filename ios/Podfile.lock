@@ -441,7 +441,7 @@ PODS:
   - RNGestureHandler (2.15.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNPermissions (3.8.0):
+  - RNPermissions (4.1.5):
     - React-Core
   - RNReanimated (3.7.2):
     - RCT-Folly (= 2021.07.22.00)
@@ -670,7 +670,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNGestureHandler: fc754e30bb46d093b46b47824e1a04e722fd8a3d
-  RNPermissions: 8a76355fb8b38da8bc0a1ef7f7bf37137cf1fd21
+  RNPermissions: 291897442ea8c0cc518e28f34e218685a279b094
   RNReanimated: a8b800d5b74008211fc6c4e3f8c6dd1833b12c7c
   RNScreens: 8ba3eeb8f5cb9f13662df564e785d64ef7214bf2
   RNSVG: af3907ac5d4fa26a862b75a16d8f15bc74f2ceda
@@ -678,6 +678,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 6f5ab94cd8b1ecd04b6e973d0bc583ede2a598cc
 
-PODFILE CHECKSUM: eac509a898831262083dd3ec8bbaacf3190a8ac7
+PODFILE CHECKSUM: 9ad4f50aec94f1535a8c5adf5cc46b84177b80b2
 
 COCOAPODS: 1.15.2
