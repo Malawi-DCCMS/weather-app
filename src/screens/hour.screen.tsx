@@ -24,7 +24,7 @@ function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
           <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
-          <HourlyTable daySummary={daySummary} day={DateTime.now()} title={title} />
+          <HourlyTable daySummary={daySummary} day={daySummary.day} title={title} />
         </ImageBackground>
       </View>
     </SafeAreaView>

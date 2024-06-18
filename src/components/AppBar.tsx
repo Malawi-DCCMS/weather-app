@@ -79,6 +79,15 @@ const AppBar = (props: AppBarProps) => {
               titleStyle={styles.menuItemTitle}
               title="About us"
             />
+            <Menu.Item
+              onPress={() => {
+                closeMenu();
+                props.navigation.navigate(SCREENS.AboutTheApp);
+              }}
+              style={styles.menuItem}
+              titleStyle={styles.menuItemTitle}
+              title="About the app"
+            />
             {/* <Menu.Item
               onPress={() => {
                 closeMenu();

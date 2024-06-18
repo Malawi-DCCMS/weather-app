@@ -16,9 +16,14 @@ type HourlyTableProps = {
  * Get today's forecast
  */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
+  const isSameDay = props.day.hasSame(DateTime.local(), "day");
+  const dayName = isSameDay ? 'Today' : props.day.toFormat('ccc');
   return (
     <View style={styles.container}>
       <View style={styles.opacity}>
+        <View style={styles.title}>
+          <Text style={styles.titleText}>{dayName} {props.day.toFormat('dd LLL')}</Text>
+        </View>
         <DataTable style={styles.table}>
           <DataTable.Header>
             <DataTable.Title><Text style={styles.whiteHeader}>Time</Text></DataTable.Title>
@@ -49,11 +54,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
   },
+  title: {
+    paddingLeft: 24,
+    paddingRight: 20,
+    paddingTop: 15,
+    marginTop: 5,
+  },
+  titleText: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: '600',
+  },
   table: {
     paddingLeft: 24,
     paddingRight: 20,
-    paddingTop: 40,
-    marginTop: 5,
+    paddingTop: 5,
     flex: 1
   },
   opacity: {

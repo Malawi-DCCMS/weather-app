@@ -21,10 +21,10 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
 
   type TimePeriods = Array<{key: string, val?: string}>;
   const getTimePeriodData = (alert: CAPAlert): TimePeriods => ([
-    { key: 'Issued:', val: alert.info && alert.sent },
-    { key: 'Effective:', val: alert.info && alert.info[0].effective?.toFormat('LLL. dd, yyyy, H:ss a') },
-    { key: 'Onset:', val: alert.info && alert.info[0].onset?.toFormat('LLL. dd, yyyy, H:ss a') },
-    { key: 'Expires:', val: alert.info && alert.info[0].expires?.toFormat('LLL. dd, yyyy, H:ss a') },
+    { key: 'Issued:', val: alert.info && DateTime.fromISO(alert.sent).toFormat('LLL. dd, yyyy, H:mm a') },
+    { key: 'Effective:', val: alert.info && alert.info[0].effective?.toFormat('LLL. dd, yyyy, H:mm a') },
+    { key: 'Onset:', val: alert.info && alert.info[0].onset?.toFormat('LLL. dd, yyyy, H:mm a') },
+    { key: 'Expires:', val: alert.info && alert.info[0].expires?.toFormat('LLL. dd, yyyy, H:mm a') },
   ]);
 
   const renderTimePeriodItem = (item: ListRenderItemInfo<TimePeriods[0]>) => <View style={styles.timePeriodItem}>
