@@ -59,3 +59,22 @@ target 'Zanyengo' do
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
+
+# Setup permissions for ios.
+def node_require(script)
+  # Resolve script with node to allow for hoisting
+  require Pod::Executable.execute_command('node', ['-p',
+    "require.resolve(
+      '#{script}',
+      {paths: [process.argv[1]]},
+    )", __dir__]).strip
+end
+node_require('react-native/scripts/react_native_pods.rb')
+node_require('react-native-permissions/scripts/setup.rb')
+
+setup_permissions([
+  'LocationAccuracy',
+  'LocationAlways',
+  'LocationWhenInUse',
+  'Notifications',
+])
