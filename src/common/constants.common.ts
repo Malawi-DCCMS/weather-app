@@ -8,15 +8,16 @@ export const DEFAULT_PLACE: Place = {
   position: {lat: -15.786111, long: 35.005833},
 };
 
-export const WEATHER_WARNINGS: { [k: string]: ImageSourcePropType } = {
+export const WEATHER_WARNING_ICONS: { [k: string]: ImageSourcePropType } = {
   red: warningRed,
   orange: warningOrange,
   yellow: warningYellow,
 };
 
-export const WARNING_COLORS: { [k in 'Red' | 'Yellow' | 'Orange' | 'Green']: string} = {
+export const WARNING_COLORS: { [k in 'Red' | 'Yellow' | 'Orange' | 'Cyan' | 'Blue']: string} = {
   Red: 'rgba(198, 0, 0, 0.60)',
   Yellow: 'rgba(255, 230, 0, 0.6)',
   Orange: 'rgba(255, 157, 0, 0.6)',
-  Green: 'rgba(255, 157, 0, 0.6)',
+  Cyan: 'rgba(57, 156, 199, 0.6)',
+  Blue: 'rgba(130, 168, 223, 0.6',
 };

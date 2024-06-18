@@ -101,42 +101,80 @@ export class CAPInfo {
     this.certainty = toCertaintyType(certainty);
   }
 
-  // TODO: Verify values
-  public warningColor(): 'Green' | 'Yellow' | 'Orange' | 'Red' {
+  // alertLevel returns a color coded value representing a summary of the event described in a CAP message, according to the following rules:
+  // Note that the rules try to follow https://severeweather.wmo.int/note.html.
+  //
+  // The possible colors for an event are: Red, Orange, Yellow, Cyan, Blue.
+  // When certainty is Observed, Likely or Unknown, color-code based on severity with this mapping:
+  // Extreme: Red
+  // Severe: Orange
+  // Moderate: Yello
+  // Minor: Cyan
+  // Unknown: Blue
+  //
+  // When the certainty is Possible, color-code based on severity with this mapping:
+  // Extreme: Red
+  // Severe: Orange
+  // Moderate: Yello
+  // Minor: Cyan
+  // Unknown: Blue
+  //
+  // When the certainty is Unlikely, color-code based on severity with this mapping:
+  // Extreme: Red
+  // Severe: Orange
+  // Moderate: Yello
+  // Minor: Cyan
+  // Unknown: Blue
+  //
+  // If for some reason the above described mapping fails to color code the event, return 'Blue'.
+  public alertLevel(): 'Blue' | 'Cyan' | 'Yellow' | 'Orange' | 'Red' {
     switch (this.certainty) {
       case 'Observed':
-        switch (this.severity) {
-          case 'Extreme':
-            return 'Red'
-          case 'Severe':
-            return 'Red'
-          case 'Moderate':
-            return 'Orange'
-          case 'Minor':
-            return 'Yellow'
-        }
       case 'Likely':
+      case 'Unknown':
         switch (this.severity) {
           case 'Extreme':
-            return 'Orange'
+            return 'Red'
           case 'Severe':
             return 'Orange'
           case 'Moderate':
             return 'Yellow'
           case 'Minor':
-            return 'Yellow'
+            return 'Cyan'
+          case 'Unknown':
+            return 'Blue'
         }
+        break;
       case 'Possible':
         switch (this.severity) {
           case 'Extreme':
+            return 'Red'
+          case 'Severe':
+            return 'Yellow'
+          case 'Moderate':
+              return 'Yellow'
+          case 'Minor':
+              return 'Cyan'
+          case 'Unknown':
+            return 'Blue'
+        }
+        break;
+      case 'Unlikely':
+        switch (this.severity) {
+          case 'Extreme':
             return 'Yellow'
           case 'Severe':
             return 'Yellow'
+          case 'Moderate':
+            return 'Yellow'
+          case 'Minor':
+            return 'Cyan'
+          case 'Unknown':
+            return 'Blue'
         }
-      // case 'Unlikely':
-      // case 'Unknown':
+        break;
     }
-    return 'Green'
+    return 'Blue' 
   }
 }
 
