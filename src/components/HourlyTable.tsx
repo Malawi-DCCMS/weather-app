@@ -16,11 +16,13 @@ type HourlyTableProps = {
  * Get today's forecast
  */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
+  const isSameDay = props.day.hasSame(DateTime.local(), "day");
+  const dayName = isSameDay ? 'Today' : props.day.toFormat('ccc');
   return (
     <View style={styles.container}>
       <View style={styles.opacity}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>Today {props.day.toFormat('dd LLL')}</Text>
+          <Text style={styles.titleText}>{dayName} {props.day.toFormat('dd LLL')}</Text>
         </View>
         <DataTable style={styles.table}>
           <DataTable.Header>
