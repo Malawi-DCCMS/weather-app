@@ -53,7 +53,7 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
                   </Paragraph>
                   <View>
                     <View>
-                    <Text style={styles.whiteText}>
+                    <Text style={styles.whiteHeader}>
                       {"\n"}Partners in this project have been:
                     </Text>
                       <FlatList data={getPartners()} renderItem={(item: ListRenderItemInfo<string>) =>renderPartner(item)} key={new Date().toISOString()}/>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   whiteHeader: {
     color: 'white',
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: "bold",
     lineHeight: 24.51,
     fontFamily: 'OpenSans',
   },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     lineHeight: 24,
-    fontWeight: "600",
+    fontWeight: "bold",
     fontFamily: 'OpenSans',
   },
   wrapper: {
