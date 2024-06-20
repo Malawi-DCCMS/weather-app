@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Button } from 'react-native-paper';
 import { LogBox } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
@@ -15,8 +15,8 @@ import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation, saveLocation } from '../store/location.slice';
-import { getLocationForecast, setForecast } from '../store/forecast.slice';
-import { getLocationAlerts } from '../store/alert.slice';
+import { getLocationForecast, setForecast, setForecastError, setForecastLoading } from '../store/forecast.slice';
+import { getLocationAlerts, setAlertsLoading } from '../store/alert.slice';
 import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import Alerts from '../components/Alerts';
@@ -30,7 +30,16 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
   const { alerts } = useSelector((state: RootState) => state.alerts);
-  const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
+  let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
+
+  const onTryAgain = () => {
+    dispatch(setForecastError(undefined));
+    dispatch(setForecastLoading());
+    dispatch(setAlertsLoading());
+
+    dispatch(getLocationAlerts({ lat, lon }));
+    dispatch(getLocationForecast({ lat, lon }));
+  }
 
   useEffect(() => {
     dispatch(getPreciseLocation());
@@ -112,11 +121,10 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   if (forecastError) {
     mainContent = (
       <View style={styles.opacity}>
-        <TouchableOpacity onPress={() => { }}>
-          <View style={styles.errorLoader}>
-            <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', padding: 10 }}>{forecastError}</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.errorLoader}>
+          <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', padding: 10 }}>{forecastError}</Text>
+          <Button onPress={() => onTryAgain()} style={styles.sendButton} textColor='white'><Text style={styles.buttonText}>Try again</Text></Button>
+        </View>
       </View>
     )
   }
@@ -196,5 +204,27 @@ const styles = StyleSheet.create({
     marginTop: 80,
     marginBottom: 80,
     textAlign: 'center',
-  }
+    alignItems: 'center',
+  },
+  whiteText: {
+    fontSize: 16,
+    lineHeight: 21.79,
+    fontWeight: '400',
+    fontFamily: 'OpenSans',
+    textDecorationLine: 'underline',
+    color: 'rgba(174, 209, 255, 1)',
+    textAlign: 'center',
+  },
+  sendButton: {
+    backgroundColor: 'rgba(71, 85, 105, .5)',
+    width: '40%',
+    fontFamily: 'OpenSans',
+    borderRadius: 4,
+    color: 'white',
+    padding: 1,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: 'white'
+  },
 });
