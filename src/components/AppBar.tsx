@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 import { SCREENS } from '../constants/screens.constant';
 import backArrow from '../../assets/icons8-back-100_2.png';
-import { WEATHER_WARNINGS } from '../common';
+import { WEATHER_WARNING_ICONS } from '../common';
 import { RootState } from '../store';
 import { CAPAlert, CAPInfo } from '../lib/cap-client/alert';
 
@@ -22,8 +22,8 @@ const getWarningIcons = (alerts: Array<CAPAlert>) => {
     const icons: Array<React.JSX.Element> = [];
     for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
       const capInfo = alerts[i].info as Array<CAPInfo>;
-      const alertColor = capInfo[0].warningColor().toLowerCase();
-      const icon = WEATHER_WARNINGS[alertColor];
+      const alertColor = capInfo[0].alertLevel().toLowerCase();
+      const icon = WEATHER_WARNING_ICONS[alertColor];
       icons.push(
         <TouchableOpacity key={i} style={{ position: 'relative', top: 0, right: j, zIndex: j }}>
           <Image style={{ width: 35, height: 30 }} source={icon} />

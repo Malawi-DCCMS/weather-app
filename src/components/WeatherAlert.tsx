@@ -4,12 +4,12 @@ import { Text } from "react-native-paper";
 
 import { CAPAlert } from '../lib/cap-client/alert';
 import warningBg from '../../assets/warning-bg.png';
-import { WARNING_COLORS, WEATHER_WARNINGS } from "../common";
+import { WARNING_COLORS, WEATHER_WARNING_ICONS } from "../common";
 import { DateTime } from "luxon";
 
 
-function getWarningIcon(severity: string): ImageSourcePropType {
-    return WEATHER_WARNINGS[severity.toLowerCase()];
+function getWarningIcon(level: string): ImageSourcePropType {
+    return WEATHER_WARNING_ICONS[level.toLowerCase()];
 }
 
 function getWarningColor(level?: keyof typeof WARNING_COLORS): string | undefined {
@@ -38,7 +38,7 @@ function getAlertLevel(alert: CAPAlert) {
   if (!alert.info || !alert.info.length) {
     return;
   }
-  return alert.info[0].warningColor();
+  return alert.info[0].alertLevel();
 }
 
 type WeatherAlertProps = {

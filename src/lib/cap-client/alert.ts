@@ -101,42 +101,42 @@ export class CAPInfo {
     this.certainty = toCertaintyType(certainty);
   }
 
-  // TODO: Verify values
-  public warningColor(): 'Green' | 'Yellow' | 'Orange' | 'Red' {
+  // alertLevel returns a color coded value representing a summary of the event described in a CAP message, according to the following rules:
+  // Note that the rules try to follow https://severeweather.wmo.int/note.html.
+  //
+  // The possible colors for an event are: Red, Orange, Yellow, Cyan, Blue.
+  // All certainty levels are treated the same, with the following coding based on severity:
+  // Extreme: Red
+  // Severe: Orange
+  // Moderate: Yellow
+  // Minor: Cyan
+  // Unknown: Blue
+  //
+  // If for some reason the above described mapping fails to color code the event, return 'Blue'.
+  public alertLevel(): 'Red' | 'Orange' | 'Yellow' | 'Cyan' | 'Blue' {
     switch (this.certainty) {
       case 'Observed':
-        switch (this.severity) {
-          case 'Extreme':
-            return 'Red'
-          case 'Severe':
-            return 'Red'
-          case 'Moderate':
-            return 'Orange'
-          case 'Minor':
-            return 'Yellow'
-        }
       case 'Likely':
+      case 'Possible':
+      case 'Unlikely':
+      case 'Unknown':
         switch (this.severity) {
           case 'Extreme':
-            return 'Orange'
+            return 'Red'
           case 'Severe':
             return 'Orange'
           case 'Moderate':
             return 'Yellow'
           case 'Minor':
-            return 'Yellow'
+            return 'Cyan'
+          case 'Unknown':
+            return 'Blue'
+          default:
+            return 'Blue'
         }
-      case 'Possible':
-        switch (this.severity) {
-          case 'Extreme':
-            return 'Yellow'
-          case 'Severe':
-            return 'Yellow'
-        }
-      // case 'Unlikely':
-      // case 'Unknown':
+      default:
+        return 'Blue'
     }
-    return 'Green'
   }
 }
 
