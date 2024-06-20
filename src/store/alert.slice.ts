@@ -29,6 +29,7 @@ const alertSlice = createSlice({
   reducers: {
     setAlerts: (state, action) => { state.alerts = action.payload },
     setAlertsError: (state, action) => { state.error = action.payload },
+    setAlertsLoading: (state) => { state.alerts = {}; state.loading = true; },
   },
   extraReducers(builder) {
     builder.addCase(getLocationAlerts.pending, state => {
@@ -50,5 +51,5 @@ const alertSlice = createSlice({
   },
 })
 
-export const { setAlerts, setAlertsError } = alertSlice.actions;
+export const { setAlerts, setAlertsError, setAlertsLoading } = alertSlice.actions;
 export const { reducer: alertsReducer } = alertSlice;
