@@ -15,7 +15,7 @@ import FiveDays from '../components/FiveDays';
 import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation, saveLocation } from '../store/location.slice';
-import { getLocationForecast, setForecast, setForecastError, setForecastLoading } from '../store/forecast.slice';
+import { getLocationForecast, setForecast, setForecastLoading } from '../store/forecast.slice';
 import { getLocationAlerts, setAlertsLoading } from '../store/alert.slice';
 import { DaySummary, Forecast } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
@@ -33,7 +33,6 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   const onTryAgain = () => {
-    dispatch(setForecastError(undefined));
     dispatch(setForecastLoading());
     dispatch(setAlertsLoading());
 

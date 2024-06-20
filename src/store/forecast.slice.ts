@@ -30,7 +30,7 @@ const forecastSlice = createSlice({
   name: 'forecast',
   initialState,
   reducers: {
-    setForecastLoading: (state) => { state.forecast = undefined; state.loading = true; },
+    setForecastLoading: (state) => { state.forecast = undefined; state.error = undefined; state.loading = true; },
     setForecast: (state, action) => { state.forecast = action.payload },
     setForecastError: (state, action) => { state.error = action.payload },
   },
