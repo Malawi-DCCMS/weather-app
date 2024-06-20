@@ -38,34 +38,42 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
           <AppBar location={location} navigation={navigation} />
           <View style={styles.contentContainer}>
             <WeatherAlert alert={alert} onPress={() => {}}/>
-            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} snapToStart={false}>
-              <View style={styles.content}>
-                <Text style={styles.whiteBoldText}>Event description:</Text>
-                <Text style={styles.whiteText}>{alert.info && alert.info[0].description}{'\n'}</Text>
-                <Text style={styles.whiteBoldText}>Instructions:</Text>
-                <Text style={styles.whiteText}>{alert.info && alert.info[0].instruction}{'\n'}</Text>
-                <Text style={styles.whiteBoldText}>Area:</Text>
-                <Text style={styles.whiteText}>{alert.info && alert.info[0].area?.areaDesc}</Text>
-              </View>
-              <View style={styles.content}>
-                <Text style={styles.whiteLargeText}>Time period</Text>
-                <FlatList data={getTimePeriodData(alert)} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
-              </View>
-              <View style={styles.content}>
-                <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.icons} source={urgency}/>
-                  <Text style={styles.whiteText}>Urgency:   {alert.info && alert.info[0].urgency}{'\n'}</Text>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.icons} source={severity}/>
-                  <Text style={styles.whiteText}>Severity:    {alert.info && alert.info[0].severity}{'\n'}</Text>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.icons} source={certainity}/>
-                  <Text style={styles.whiteText}>Certainty:  {alert.info && alert.info[0].certainty}</Text>
-                </View>
-              </View>
-            </ScrollView>
+            <FlatList
+              data={[{ key: 'data' }]}
+              style={styles.scrollView}
+              showsVerticalScrollIndicator={false}
+              snapToStart={false}
+              renderItem={() => (
+                <>
+                  <View style={styles.content}>
+                    <Text style={styles.whiteBoldText}>Event description:</Text>
+                    <Text style={styles.whiteText}>{alert.info && alert.info[0].description}{'\n'}</Text>
+                    <Text style={styles.whiteBoldText}>Instructions:</Text>
+                    <Text style={styles.whiteText}>{alert.info && alert.info[0].instruction}{'\n'}</Text>
+                    <Text style={styles.whiteBoldText}>Area:</Text>
+                    <Text style={styles.whiteText}>{alert.info && alert.info[0].area?.areaDesc}</Text>
+                  </View>
+                  <View style={styles.content}>
+                    <Text style={styles.whiteLargeText}>Time period</Text>
+                    <FlatList data={getTimePeriodData(alert)} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
+                  </View>
+                  <View style={styles.content}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Image style={styles.icons} source={urgency}/>
+                      <Text style={styles.whiteText}>Urgency:   {alert.info && alert.info[0].urgency}{'\n'}</Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                      <Image style={styles.icons} source={severity}/>
+                      <Text style={styles.whiteText}>Severity:    {alert.info && alert.info[0].severity}{'\n'}</Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                      <Image style={styles.icons} source={certainity}/>
+                      <Text style={styles.whiteText}>Certainty:  {alert.info && alert.info[0].certainty}</Text>
+                    </View>
+                  </View>
+                </>
+              )}
+            />
           </View>
         </ImageBackground>
       </View>
