@@ -105,32 +105,20 @@ export class CAPInfo {
   // Note that the rules try to follow https://severeweather.wmo.int/note.html.
   //
   // The possible colors for an event are: Red, Orange, Yellow, Cyan, Blue.
-  // When certainty is Observed, Likely or Unknown, color-code based on severity with this mapping:
+  // All certainty levels are treated the same, with the following coding based on severity:
   // Extreme: Red
   // Severe: Orange
-  // Moderate: Yello
-  // Minor: Cyan
-  // Unknown: Blue
-  //
-  // When the certainty is Possible, color-code based on severity with this mapping:
-  // Extreme: Red
-  // Severe: Orange
-  // Moderate: Yello
-  // Minor: Cyan
-  // Unknown: Blue
-  //
-  // When the certainty is Unlikely, color-code based on severity with this mapping:
-  // Extreme: Red
-  // Severe: Orange
-  // Moderate: Yello
+  // Moderate: Yellow
   // Minor: Cyan
   // Unknown: Blue
   //
   // If for some reason the above described mapping fails to color code the event, return 'Blue'.
-  public alertLevel(): 'Blue' | 'Cyan' | 'Yellow' | 'Orange' | 'Red' {
+  public alertLevel(): 'Red' | 'Orange' | 'Yellow' | 'Cyan' | 'Blue' {
     switch (this.certainty) {
       case 'Observed':
       case 'Likely':
+      case 'Possible':
+      case 'Unlikely':
       case 'Unknown':
         switch (this.severity) {
           case 'Extreme':
@@ -143,38 +131,12 @@ export class CAPInfo {
             return 'Cyan'
           case 'Unknown':
             return 'Blue'
-        }
-        break;
-      case 'Possible':
-        switch (this.severity) {
-          case 'Extreme':
-            return 'Red'
-          case 'Severe':
-            return 'Yellow'
-          case 'Moderate':
-              return 'Yellow'
-          case 'Minor':
-              return 'Cyan'
-          case 'Unknown':
+          default:
             return 'Blue'
         }
-        break;
-      case 'Unlikely':
-        switch (this.severity) {
-          case 'Extreme':
-            return 'Yellow'
-          case 'Severe':
-            return 'Yellow'
-          case 'Moderate':
-            return 'Yellow'
-          case 'Minor':
-            return 'Cyan'
-          case 'Unknown':
-            return 'Blue'
-        }
-        break;
+      default:
+        return 'Blue'
     }
-    return 'Blue' 
   }
 }
 
