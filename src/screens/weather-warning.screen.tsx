@@ -71,6 +71,7 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
                       <Text style={styles.whiteText}>Certainty:  {alert.info && alert.info[0].certainty}</Text>
                     </View>
                   </View>
+                  <View style={{marginBottom: 20}}></View>
                 </>
               )}
             />
