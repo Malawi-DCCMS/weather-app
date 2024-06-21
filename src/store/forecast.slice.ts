@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Axios, { AxiosError } from 'axios';
 
 import { LOGGER } from '../lib';
-import { WeatherForecast } from '../utils/locationforecast';
+import { LocationForecast } from '../utils/locationforecast';
 
 type ForecastPayload = { lat: number, lon: number };
-export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<WeatherForecast> => {
+export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<LocationForecast> => {
   const API_URL = 'https://api.met.no/weatherapi/locationforecast/2.0';
   const USER_AGENT = 'met_malawi';
   const url = `${API_URL}?lat=${lat}&lon=${lon}`
@@ -18,7 +18,7 @@ export const getLocationForecast = createAsyncThunk('forecast/getLocationForecas
 type InitialState = {
   loading: boolean;
   error?: string;
-  forecast?: WeatherForecast;
+  forecast?: LocationForecast;
 };
 const initialState: InitialState = {
   loading: false,

@@ -3,13 +3,13 @@ import { StyleSheet, View } from 'react-native';
 import { Icon, Text } from 'react-native-paper';
 
 import { getForecastDescription } from '../utils/forecast.utils';
-import { DaySummary } from '../utils/weatherData';
+import { WeatherDataDaySummary } from '../utils/weatherData';
 import forwardArrow from '../../assets/icons8-forward-100.png';
 import upArrow from '../../assets/Arrow-upward.png';
 import downArrow from '../../assets/Arrow-downward.png';
 
 type TodaysForecastProps = {
-  daySummary: DaySummary | undefined;
+  daySummary: WeatherDataDaySummary | undefined;
 };
 function Today(props: TodaysForecastProps): JSX.Element {
   const { daySummary } = props

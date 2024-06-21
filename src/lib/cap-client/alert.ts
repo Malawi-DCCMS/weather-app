@@ -81,9 +81,9 @@ export class CAPInfo {
   public certainty: CertaintyType;
   public audience?: string;
   public eventCode?: { valueName: string; value: string }[];
-  public effective?: DateTime;
-  public onset?: DateTime;
-  public expires?: DateTime;
+  public effective?: string;
+  public onset?: string;
+  public expires?: string;
   public senderName?: string;
   public headline?: string;
   public description?: string;
@@ -319,9 +319,11 @@ export class CAPAlert {
                 value: code.value,
               }));
             }
-            info.effective = infoData.effective ? DateTime.fromISO(infoData.effective[0]) : undefined;
-            info.onset = infoData.onset ? DateTime.fromISO(infoData.onset[0]) : undefined;
-            info.expires = infoData.expires ? DateTime.fromISO(infoData.expires[0]) : undefined;
+            // check all timestamps for valid ISO formatting before setting the fields.
+            info.effective = infoData.effective && DateTime.fromISO(infoData.effective[0]).isValid? infoData.effective[0]: undefined;
+            info.onset = infoData.onset && DateTime.fromISO(infoData.onset[0]).isValid? infoData.onset[0]: undefined;
+            info.expires = infoData.expires && DateTime.fromISO(infoData.expires[0]).isValid? infoData.expires[0] : undefined;
+
             info.senderName = infoData.senderName ? infoData.senderName[0] : undefined;
             info.headline = infoData.headline ? infoData.headline[0] : undefined;
             info.description = infoData.description ? infoData.description[0] : undefined;

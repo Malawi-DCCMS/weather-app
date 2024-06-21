@@ -11,12 +11,26 @@ import { RootDrawerParamList } from '../common';
 import Alerts from '../components/Alerts';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { WeatherData, WeatherDataDaySummary } from '../utils/weatherData';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { location, daySummary, title } = route.params;
+  const { location, dayString, onlyFuture, title } = route.params;
+
   const { alerts } = useSelector((state: RootState) => state.alerts);
+  const { forecast } = useSelector((state: RootState) => state.forecast);
   const { lat, lon } = useSelector((state: RootState) => state.location);
+
+  let daySummary:WeatherDataDaySummary| undefined = undefined
+  if (forecast && dayString){
+    const day = DateTime.fromISO(dayString)
+    daySummary = new WeatherData(forecast).atDay(day, onlyFuture)
+  }
+
+  if (! daySummary){
+    return <>
+    </>
+  }
 
   return (
     <SafeAreaView>

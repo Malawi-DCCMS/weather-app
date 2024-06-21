@@ -1,8 +1,8 @@
 import { CAPAlert } from "../lib/cap-client/alert";
-import { DaySummary } from "../utils/weatherData";
+import { WeatherDataDaySummary } from "../utils/weatherData";
 
 export type RootDrawerParamList = {
-  Hourly: { location: string, daySummary: DaySummary, title: string };
+  Hourly: { location: string, dayString: string|null, onlyFuture: boolean, title: string };
   NoLocation: undefined;
   Search: undefined;
   Home: undefined;

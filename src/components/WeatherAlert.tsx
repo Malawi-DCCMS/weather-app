@@ -23,7 +23,8 @@ function getAlertStatus(alert: CAPAlert) {
   if (!alert.info || !alert.info.length || !alert.info[0].onset) {
     return;
   }
-  const { onset } = alert.info[0];
+
+  const onset= DateTime.fromISO(alert.info[0].onset);
   return onset < DateTime.now() ? 'Expected' : 'Ongoing';
 }
 

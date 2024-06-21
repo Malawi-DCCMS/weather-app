@@ -6,13 +6,13 @@ import { DateTime } from "luxon";
 import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
-import { Forecast } from '../utils/weatherData';
-import { WeatherForecast } from '../utils/locationforecast';
+import { WeatherData } from '../utils/weatherData';
+import { LocationForecast } from '../utils/locationforecast';
 
 
 type LocationRowProps = {
   district: District;
-  onPress: (forecast: WeatherForecast) => void
+  onPress: (forecast: LocationForecast) => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
   const { district, onPress } = props;
@@ -23,7 +23,7 @@ function LocationRow(props: LocationRowProps): JSX.Element {
   }
 
   if (forecast) {
-    const today = new Forecast(forecast).atDay(DateTime.now())
+    const today = new WeatherData(forecast).atDay(DateTime.now())
     if (!today) {
       return <ForecastError msg="Forecast unavailable." />
     }

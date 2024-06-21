@@ -1,13 +1,13 @@
 import { DateTime } from "luxon"
-import { WeatherForecast } from "./locationforecast"
-import { Forecast } from "./weatherData"
+import { LocationForecast } from "./locationforecast"
+import { WeatherData } from "./weatherData"
 
 describe('interpret forecast', () => {
 
-    const sampleForecast: WeatherForecast = require("./weatherData.test.json")
+    const sampleForecast: LocationForecast = require("./weatherData.test.json")
 
     test('get days', () => {
-        const f = new Forecast(sampleForecast)
+        const f = new WeatherData(sampleForecast)
         const days = f.days()
         expect(days.length).toBe(10)
         expect(days[0].setZone('Africa/Blantyre').toISO()).toBe("2024-01-11T00:00:00.000+02:00")
@@ -23,7 +23,7 @@ describe('interpret forecast', () => {
     })
 
     test('extract day', () => {
-        const f = new Forecast(sampleForecast)
+        const f = new WeatherData(sampleForecast)
         const summary = f.atDay(f.days()[1])
         if (!summary)
             fail("could not get daily summary")
@@ -39,7 +39,7 @@ describe('interpret forecast', () => {
     })
 
     test('extract first day', () => {
-        const f = new Forecast(sampleForecast)
+        const f = new WeatherData(sampleForecast)
         const summary = f.atDay(DateTime.utc(2024, 1, 11, 13, 0, 0, 0).setZone('Africa/Blantyre'))
         if (!summary)
             fail("could not get daily summary")
@@ -50,7 +50,7 @@ describe('interpret forecast', () => {
     })
 
     test('extract day after a specific time', () => {
-        const f = new Forecast(sampleForecast)
+        const f = new WeatherData(sampleForecast)
         const summary = f.atDay(DateTime.utc(2024, 1, 11, 13, 0, 0, 0).setZone('Africa/Blantyre'), true)
         if (!summary)
             fail("could not get daily summary")
