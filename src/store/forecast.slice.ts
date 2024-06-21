@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import Axios from 'axios';
+import Axios, { AxiosError } from 'axios';
 
 import { LOGGER } from '../lib';
 import { WeatherForecast } from '../utils/locationforecast';
@@ -7,7 +7,6 @@ import { WeatherForecast } from '../utils/locationforecast';
 type ForecastPayload = { lat: number, lon: number };
 export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<WeatherForecast> => {
   const API_URL = 'https://api.met.no/weatherapi/locationforecast/2.0';
-  // const API_URL = 'http://10.0.2.2/forecast'
   const USER_AGENT = 'met_malawi';
   const url = `${API_URL}?lat=${lat}&lon=${lon}`
   LOGGER.info(url)
@@ -31,8 +30,9 @@ const forecastSlice = createSlice({
   name: 'forecast',
   initialState,
   reducers: {
+    setForecastLoading: (state) => { state.forecast = undefined; state.error = undefined; state.loading = true; },
     setForecast: (state, action) => { state.forecast = action.payload },
-    setForecastError: (state, action) => { state.error = action.payload}
+    setForecastError: (state, action) => { state.error = action.payload },
   },
   extraReducers(builder) {
     builder.addCase(getLocationForecast.pending, state => {
@@ -60,5 +60,5 @@ const forecastSlice = createSlice({
   },
 })
 
-export const { setForecast, setForecastError } = forecastSlice.actions;
+export const { setForecast, setForecastError, setForecastLoading } = forecastSlice.actions;
 export const { reducer: forecastReducer } = forecastSlice;
