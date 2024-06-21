@@ -26,7 +26,7 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
   ]);
 
   const renderPartner = (item: ListRenderItemInfo<string>) => <View style={styles.partnerItem}>
-    <Image style={styles.bulletStyle} source={bulletListIcon}/><Text style={styles.partnerText}> {item.item}</Text>
+    <Image style={styles.bulletStyle} source={bulletListIcon} /><Text style={styles.partnerText}> {item.item}</Text>
   </View>;
 
   const onClickYrURL = () => Linking.openURL('https://yr.no/NRK');
@@ -35,46 +35,53 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location={"About us"} navigation={navigation} />
+          <AppBar location={"About the app"} navigation={navigation} />
           <Alerts alerts={alerts[`${lat}${lon}`]} location={"About the app"} navigator={navigation} />
           <View style={styles.container}>
             <View style={styles.opacity}>
-              <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
-                <View style={styles.content}>
-                  <Paragraph>
-                    <Text style={styles.title}>The app and its forecasts</Text>
-                  </Paragraph>
-                  <Paragraph>
-                    <Text style={styles.whiteText}>
-                      The app development is led by {"\n"}DCCMS - Department of Climate Change 
-                      and Meteorological Services Malawi.{"\n"}{"\n"}
-                      All forecasts are issued by DCCMS.
-                    </Text>
-                  </Paragraph>
-                  <View>
-                    <View>
-                    <Text style={styles.whiteHeader}>
-                      {"\n"}Partners in this project have been:
-                    </Text>
-                      <FlatList data={getPartners()} renderItem={(item: ListRenderItemInfo<string>) =>renderPartner(item)} key={new Date().toISOString()}/>
+              <FlatList
+                data={[{ key: 'data' }]}
+                showsVerticalScrollIndicator={false}
+                snapToStart={false}
+                renderItem={() => (
+                  <>
+                    <View style={styles.content}>
+                      <Paragraph>
+                        <Text style={styles.title}>The app and its forecasts</Text>
+                      </Paragraph>
+                      <Paragraph>
+                        <Text style={styles.whiteText}>
+                          The app development is led by {"\n"}DCCMS - Department of Climate Change
+                          and Meteorological Services Malawi.{"\n"}{"\n"}
+                          All forecasts are issued by DCCMS.
+                        </Text>
+                      </Paragraph>
+                      <View>
+                        <View>
+                          <Text style={styles.whiteHeader}>
+                            {"\n"}Partners in this project have been:
+                          </Text>
+                          <FlatList data={getPartners()} renderItem={(item: ListRenderItemInfo<string>) => renderPartner(item)} key={new Date().toISOString()} />
+                        </View>
                       </View>
-                  </View>
-                  <Paragraph>
-                    <Text style={styles.whiteHeader}>{"\n"}Icons</Text>{"\n"}
-                    <Text style={styles.whiteText}>
-                    <TouchableOpacity onPress={() => onClickYrURL()}><Text style={{...styles.whiteText, ...styles.ln}}>Weather icons are licensed by yr.no/NRK.</Text></TouchableOpacity>{"\n"}{"\n"}
-                      Warning icons are contributed by the World Meteorological Organisation.
-                    </Text>
-                  </Paragraph>
-                  <Paragraph>
-                    <Text style={styles.whiteHeader}>{"\n"}Background photo</Text>{"\n"}
-                    <Text style={styles.whiteText}>
-                      Background photo is by:{"\n"}
-                      Craig Manners - Unsplash{"\n"}{"\n"}{"\n"}
-                    </Text>
-                  </Paragraph>
-                </View>
-              </ScrollView>
+                      <Paragraph>
+                        <Text style={styles.whiteHeader}>{"\n"}Icons</Text>{"\n"}
+                        <Text style={styles.whiteText}>
+                          <TouchableOpacity onPress={() => onClickYrURL()}><Text style={{ ...styles.whiteText, ...styles.ln }}>Weather icons are licensed by yr.no/NRK.</Text></TouchableOpacity>{"\n"}{"\n"}
+                          Warning icons are contributed by the World Meteorological Organisation.
+                        </Text>
+                      </Paragraph>
+                      <Paragraph>
+                        <Text style={styles.whiteHeader}>{"\n"}Background photo</Text>{"\n"}
+                        <Text style={styles.whiteText}>
+                          Background photo is by:{"\n"}
+                          Craig Manners - Unsplash{"\n"}{"\n"}{"\n"}
+                        </Text>
+                      </Paragraph>
+                    </View>
+                  </>
+                )}
+              />
             </View>
           </View>
         </ImageBackground>
