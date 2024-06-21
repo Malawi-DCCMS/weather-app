@@ -86,14 +86,13 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
   if (forecast) {
     const preparedForecast = new WeatherData(forecast)
-
     const today = DateTime.now()
 
     const onSelectToday = () =>
       navigation.navigate(SCREENS.Hourly, {
         location: location,
         dayString: today.toISO(),
-        onlyFuture: true,
+        noValuesBefore: true,
         title: 'Hourly Today'
       })
     const onSelectDay = (location: string) =>
@@ -101,7 +100,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
         navigation.navigate(SCREENS.Hourly, {
           location: location,
           dayString: day.toISO(),
-          onlyFuture: false,
+          noValuesBefore: false,
           title: day.toLocaleString({ weekday: 'long' })
         });
 

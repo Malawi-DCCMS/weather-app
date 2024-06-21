@@ -1,10 +1,10 @@
 import { DateTime } from "luxon"
-import { LocationForecast } from "./locationforecast"
+import { Forecast } from "./locationforecast"
 import { WeatherData } from "./weatherData"
 
 describe('interpret forecast', () => {
 
-    const sampleForecast: LocationForecast = require("./weatherData.test.json")
+    const sampleForecast: Forecast = require("./weatherData.test.json")
 
     test('get days', () => {
         const f = new WeatherData(sampleForecast)

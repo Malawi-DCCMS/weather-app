@@ -7,12 +7,12 @@ import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { WeatherData } from '../utils/weatherData';
-import { LocationForecast } from '../utils/locationforecast';
+import { Forecast } from '../utils/locationforecast';
 
 
 type LocationRowProps = {
   district: District;
-  onPress: (forecast: LocationForecast) => void
+  onPress: (forecast: Forecast) => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
   const { district, onPress } = props;

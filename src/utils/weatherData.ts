@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { ForecastTimestep, LocationForecast } from "./locationforecast";
+import { ForecastTimestep, Forecast } from "./locationforecast";
 
 const timeZone = 'Africa/Blantyre'
 
@@ -11,7 +11,7 @@ const timeZone = 'Africa/Blantyre'
 export class WeatherData {
     timeSteps: WeatherDataTimestep[]
 
-    constructor(forecastDocument: LocationForecast) {
+    constructor(forecastDocument: Forecast) {
         this.timeSteps = []
 
         for (const timestep of forecastDocument.properties.timeseries) {
@@ -38,17 +38,18 @@ export class WeatherData {
     /**
      * Get a summary of the forecast for a single day.
      * 
-     * @param day The day to get a summary for. Only the date part of this argument will be considered.
+     * @param time Get summary for the day of the specified time.
+     * @noValuesBefore Only get values for timesteps after specified time.
      * @returns A summary of the forecast for the given day.
      */
-    atDay(day: DateTime, noValuesBefore: boolean = false): WeatherDataDaySummary|undefined {
+    atDay(time: DateTime, noValuesBefore: boolean = false): WeatherDataDaySummary|undefined {
         let timeSteps = this.timeSteps
         if (noValuesBefore)
-            timeSteps = timeSteps.filter(step => step.time > day)
+            timeSteps = timeSteps.filter(step => step.time > time)
 
-        day = day.setZone(timeZone).startOf('day')
+        time = time.setZone(timeZone).startOf('day')
         let relevantSteps = timeSteps.
-            filter(step => step.time.year == day.year && step.time.month == day.month && step.time.day == day.day)
+            filter(step => step.time.year == time.year && step.time.month == time.month && step.time.day == time.day)
 
         if (relevantSteps.length == 0)
             return undefined
@@ -58,12 +59,12 @@ export class WeatherData {
         const weatherSymbol = getWeatherSymbol(relevantSteps);
 
         return {
-            day: day,
+            day: time,
             weatherSymbol: weatherSymbol,
             windSpeed: windSpeed,
             maxTemperature: temperature.max,
             minTemperature: temperature.min,
-            steps: timeSteps.filter(step => step.time.startOf('day').equals(day))
+            steps: timeSteps.filter(step => step.time.startOf('day').equals(time))
         }
     }
 }

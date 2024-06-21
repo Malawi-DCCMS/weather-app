@@ -19,7 +19,7 @@ export class Forecaster {
     latitude: number,
     longitude: number,
     altitude?: number,
-  ): Promise<LocationForecast | undefined> {
+  ): Promise<Forecast | undefined> {
     let url =
       this.baseURL +
       '?lat=' +
@@ -45,7 +45,7 @@ export class Forecaster {
   }
 }
 
-export interface LocationForecast {
+export interface Forecast {
   type: string;
   geometry: {
     type: 'Point';
