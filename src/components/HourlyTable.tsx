@@ -4,11 +4,11 @@ import { DataTable, Icon } from 'react-native-paper';
 import { DateTime } from "luxon";
 
 import weatherIcons from '../constants/weathericons.constant';
-import { DaySummary } from '../utils/weatherData';
+import { WeatherDataDaySummary } from '../utils/weatherData';
 
 type HourlyTableProps = {
   title: string;
-  daySummary: DaySummary;
+  daySummary: WeatherDataDaySummary;
   day: DateTime;
 };
 

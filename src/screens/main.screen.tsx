@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
 import { ActivityIndicator, Button } from 'react-native-paper';
-import { LogBox } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
 import appBackground from '../../assets/new-glass-bg.png';
@@ -17,13 +16,10 @@ import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation, saveLocation } from '../store/location.slice';
 import { getLocationForecast, setForecast, setForecastLoading } from '../store/forecast.slice';
 import { getLocationAlerts, setAlertsLoading } from '../store/alert.slice';
-import { DaySummary, Forecast } from '../utils/weatherData';
+import { WeatherData } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import Alerts from '../components/Alerts';
 
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
@@ -89,21 +85,24 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   }
 
   if (forecast) {
-    const preparedForecast = new Forecast(forecast)
-
+    const preparedForecast = new WeatherData(forecast)
     const today = DateTime.now()
 
     const onSelectToday = () =>
       navigation.navigate(SCREENS.Hourly, {
         location: location,
-        daySummary: preparedForecast.atDay(today, true) as DaySummary,
+        forecast: forecast,
+        dayString: today.toISO(),
+        noValuesBefore: true,
         title: 'Hourly Today'
       })
     const onSelectDay = (location: string) =>
-      (day: DateTime, preparedForecast: Forecast) =>
+      (day: DateTime) =>
         navigation.navigate(SCREENS.Hourly, {
           location: location,
-          daySummary: preparedForecast.atDay(day) as DaySummary,
+          forecast: forecast,
+          dayString: day.toISO(),
+          noValuesBefore: false,
           title: day.toLocaleString({ weekday: 'long' })
         });
 

@@ -19,7 +19,7 @@ export class Forecaster {
     latitude: number,
     longitude: number,
     altitude?: number,
-  ): Promise<WeatherForecast | undefined> {
+  ): Promise<Forecast | undefined> {
     let url =
       this.baseURL +
       '?lat=' +
@@ -45,7 +45,7 @@ export class Forecaster {
   }
 }
 
-export interface WeatherForecast {
+export interface Forecast {
   type: string;
   geometry: {
     type: 'Point';
@@ -77,7 +77,7 @@ export interface WeatherForecast {
   };
 }
 
-export interface WeatherDetails {
+export interface ForecastDetails {
   air_temperature_min?: number;
   air_temperature_max?: number;
   precipitation_amount?: number;
@@ -88,8 +88,8 @@ export interface WeatherDetails {
   ultraviolet_index_clear_sky_max?: number;
 }
 
-export interface TimestepForecast {
-  details?: WeatherDetails;
+export interface ForecastPeriod {
+  details?: ForecastDetails;
   summary?: {
     symbol_code?: string;
   };
@@ -114,8 +114,8 @@ export interface ForecastTimestep {
         wind_speed?: number;
       };
     };
-    next_1_hours?: TimestepForecast;
-    next_6_hours?: TimestepForecast;
-    next_12_hours?: TimestepForecast;
+    next_1_hours?: ForecastPeriod;
+    next_6_hours?: ForecastPeriod;
+    next_12_hours?: ForecastPeriod;
   };
 }

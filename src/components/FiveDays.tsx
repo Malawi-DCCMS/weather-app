@@ -4,16 +4,16 @@ import { Icon, Paragraph, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
 
 import DayRow from './DayRow';
-import { Forecast } from '../utils/weatherData';
+import { WeatherData } from '../utils/weatherData';
 import weatherIcons from '../constants/weathericons.constant';
 
-type DailyForecastProps = {
+type FiveDaysProps = {
     startDate: DateTime;
-    preparedForecast?: Forecast;
+    preparedForecast?: WeatherData;
     name: string;
-    onClick: (day: DateTime, preparedForecast: Forecast) => void;
+    onClick: (day: DateTime) => void;
 }
-function FiveDays(props: DailyForecastProps): JSX.Element {
+function FiveDays(props: FiveDaysProps): JSX.Element {
     const { startDate, preparedForecast } = props
 
     if (preparedForecast) {
@@ -34,7 +34,7 @@ function FiveDays(props: DailyForecastProps): JSX.Element {
         return <View style={{ paddingLeft: 27, paddingRight: 26, marginTop: 60, paddingBottom: 50 }}>
             <FiveDayHeader />
             {fiveDays.map(day =>
-                <TouchableOpacity key={day.toLocaleString()} onPress={() => props.onClick(day, preparedForecast)}>
+                <TouchableOpacity key={day.toLocaleString()} onPress={() => props.onClick(day)}>
                     <DayRow summary={preparedForecast.atDay(day)} />
                 </TouchableOpacity>
             )}

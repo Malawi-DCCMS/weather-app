@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { ForecastTimestep, WeatherForecast } from "./locationforecast";
+import { ForecastTimestep, Forecast } from "./locationforecast";
 
 const timeZone = 'Africa/Blantyre'
 
@@ -8,14 +8,14 @@ const timeZone = 'Africa/Blantyre'
  * The purpose of this class is to move all logic related to selecting forecast data to show into a single location.
  * Presentation code should just call method or read data from here instead of making their own aggregations/selections of data.
  */
-export class Forecast {
-    timeSteps: ForecastStep[]
+export class WeatherData {
+    timeSteps: WeatherDataTimestep[]
 
-    constructor(forecastDocument: WeatherForecast) {
+    constructor(forecastDocument: Forecast) {
         this.timeSteps = []
 
         for (const timestep of forecastDocument.properties.timeseries) {
-            let data = new ForecastStep(timestep)
+            let data = new WeatherDataTimestep(timestep)
             this.timeSteps.push(data)
         }
     }
@@ -38,18 +38,18 @@ export class Forecast {
     /**
      * Get a summary of the forecast for a single day.
      * 
-     * @param day The day to get a summary for. Only the date part of this argument will be considered.
+     * @param time Get summary for the day of the specified time.
+     * @noValuesBefore Only get values for timesteps after specified time.
      * @returns A summary of the forecast for the given day.
      */
-    atDay(day: DateTime, noValuesBefore: boolean = false): DaySummary|undefined {
-        
+    atDay(time: DateTime, noValuesBefore: boolean = false): WeatherDataDaySummary|undefined {
         let timeSteps = this.timeSteps
         if (noValuesBefore)
-            timeSteps = timeSteps.filter(step => step.time > day)
+            timeSteps = timeSteps.filter(step => step.time > time)
 
-        day = day.setZone(timeZone).startOf('day')
+        time = time.setZone(timeZone).startOf('day')
         let relevantSteps = timeSteps.
-            filter(step => step.time.year == day.year && step.time.month == day.month && step.time.day == day.day)
+            filter(step => step.time.year == time.year && step.time.month == time.month && step.time.day == time.day)
 
         if (relevantSteps.length == 0)
             return undefined
@@ -59,12 +59,12 @@ export class Forecast {
         const weatherSymbol = getWeatherSymbol(relevantSteps);
 
         return {
-            day: day,
+            day: time,
             weatherSymbol: weatherSymbol,
             windSpeed: windSpeed,
             maxTemperature: temperature.max,
             minTemperature: temperature.min,
-            steps: timeSteps.filter(step => step.time.startOf('day').equals(day))
+            steps: timeSteps.filter(step => step.time.startOf('day').equals(time))
         }
     }
 }
@@ -73,7 +73,7 @@ export class Forecast {
  * Weather data for a single time step.
  * Note that a time step is not neccessarily one hour - it can also be six hours.
  */
-export class ForecastStep {
+export class WeatherDataTimestep {
     time: DateTime
 
     temperature?: number
@@ -128,21 +128,21 @@ export class ForecastStep {
 /**
  * Summary of the weather for a single day
  */
-export interface DaySummary {
+export interface WeatherDataDaySummary {
     day: DateTime
     weatherSymbol?: string
     maxTemperature?: number
     minTemperature?: number
     windSpeed?: number
 
-    steps: ForecastStep[]
+    steps: WeatherDataTimestep[]
 }
 
 interface minmax {
     min?: number
     max?: number
 }
-function getMinMaxTemperature(relevantSteps: ForecastStep[]): minmax {
+function getMinMaxTemperature(relevantSteps: WeatherDataTimestep[]): minmax {
     let max: number | undefined = -1000;
     let min: number | undefined = 1000;
     for (const step of relevantSteps) {
@@ -161,7 +161,7 @@ function getMinMaxTemperature(relevantSteps: ForecastStep[]): minmax {
     };
 }
 
-function getMaxWindSpeed(relevantSteps: ForecastStep[]): number| undefined {
+function getMaxWindSpeed(relevantSteps: WeatherDataTimestep[]): number| undefined {
     let max = 0 
     for (const step of relevantSteps) {
         const val = step.windSpeed;
@@ -174,7 +174,7 @@ function getMaxWindSpeed(relevantSteps: ForecastStep[]): number| undefined {
     return max;
 }
 
-function getWeatherSymbol(relevantSteps: ForecastStep[]): string | undefined {
+function getWeatherSymbol(relevantSteps: WeatherDataTimestep[]): string | undefined {
     if (relevantSteps.length == 0)
         return undefined
 
@@ -187,7 +187,7 @@ function getWeatherSymbol(relevantSteps: ForecastStep[]): string | undefined {
     return relevantSteps[0].weatherSymbol_1h
 }
 
-function dailySummary(relevantSteps: ForecastStep[]): string | undefined {
+function dailySummary(relevantSteps: WeatherDataTimestep[]): string | undefined {
     let ret = relevantSteps.find(v => v.time.hour == 6)?.weatherSymbol_12h
     if (ret === undefined) {
         // TODO: programatically find time step (of 0,6,12,18 utc) closest to 6 local time, and use that instead

@@ -13,7 +13,7 @@ import { RootDrawerParamList } from '../common';
 import { setForecast } from '../store/forecast.slice';
 import { setLat, setLon, setName } from '../store/location.slice';
 import { SCREENS } from '../constants/screens.constant';
-import { WeatherForecast } from '../utils/locationforecast';
+import { Forecast } from '../utils/locationforecast';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'NoLocation'>;
 const NoLocationScreen = ({ navigation }: ScreenProps) => {
@@ -30,7 +30,7 @@ const NoLocationScreen = ({ navigation }: ScreenProps) => {
                 <LocationRow
                   key={idx}
                   district={district}
-                  onPress={(forecast: WeatherForecast): void => {
+                  onPress={(forecast: Forecast): void => {
                     dispatch(setForecast(forecast))
                     dispatch(setName(district.name));
                     dispatch(setLat(district.lat));

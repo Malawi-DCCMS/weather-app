@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { LOGGER } from '../lib';
 
-import { WeatherForecast } from '../utils/locationforecast';
+import { Forecast } from '../utils/locationforecast';
 
 type ReturnType = [
   loading: boolean,
-  forecast?: WeatherForecast,
+  forecast?: Forecast,
   error?: Error,
 ];
 
 export function useForecast(latitude: number, longitude: number): ReturnType {
-  const [forecast, setForecast] = useState<WeatherForecast>();
+  const [forecast, setForecast] = useState<Forecast>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error>();
 
