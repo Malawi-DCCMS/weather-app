@@ -16,10 +16,9 @@ import { WeatherData, WeatherDataDaySummary } from '../utils/weatherData';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { location, dayString, noValuesBefore, title } = route.params;
+  const { location, forecast, dayString, noValuesBefore, title } = route.params;
 
   const { alerts } = useSelector((state: RootState) => state.alerts);
-  const { forecast } = useSelector((state: RootState) => state.forecast);
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   let daySummary:WeatherDataDaySummary| undefined = undefined
