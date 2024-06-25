@@ -29,7 +29,7 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
     <Image style={styles.bulletStyle} source={bulletListIcon} /><Text style={styles.partnerText}> {item.item}</Text>
   </View>;
 
-  const onClickYrURL = () => Linking.openURL('https://yr.no/NRK');
+  const onClickURL = (url: string) => Linking.openURL(url);
 
   return (
     <SafeAreaView>
@@ -67,8 +67,16 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
                       <Paragraph>
                         <Text style={styles.whiteHeader}>{"\n"}Icons</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          <TouchableOpacity onPress={() => onClickYrURL()}><Text style={{ ...styles.whiteText, ...styles.ln }}>Weather icons are licensed by yr.no/NRK.</Text></TouchableOpacity>{"\n"}{"\n"}
+                          <Text style={styles.whiteText}>
+                            Weather icons are licensed by <Text onPress={() => onClickURL('https://yr.no/NRK')} style={{ ...styles.whiteText, ...styles.ln }}>yr.no/NRK</Text>.
+                          </Text>{"\n"}{"\n"}
                           Warning icons are contributed by the World Meteorological Organisation.
+                        </Text>
+                      </Paragraph>
+                      <Paragraph>
+                        <Text style={styles.whiteHeader}>{"\n"}Geographical Data</Text>{"\n"}
+                        <Text style={styles.whiteText}>
+                          The geographical data in the app was downloaded from <Text onPress={() => onClickURL('https://download.geonames.org/export/dump/MW.zip')} style={{ ...styles.whiteText, ...styles.ln }}>Geonames</Text>.{"\n"}
                         </Text>
                       </Paragraph>
                       <Paragraph>
