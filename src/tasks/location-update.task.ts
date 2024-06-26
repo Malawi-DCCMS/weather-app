@@ -2,6 +2,8 @@ import BackgroundFetch from "react-native-background-fetch";
 
 import { store, } from '../store';
 import { getPreciseLocation, saveLocation } from "../store/location.slice";
+import { LOGGER } from "../lib";
+import { getLocationAlerts } from "../store/alert.slice";
 
 export const LocationUpdateTask = () => {
 
@@ -11,25 +13,22 @@ export const LocationUpdateTask = () => {
       stopOnTerminate: false,
       startOnBoot: true,
     }, async taskId => {
-      console.log('[BackgroundFetch] starting location task with identifier taskId: ', taskId);
-      console.log('Dispatching get location...');
+      LOGGER.info('[BackgroundFetch] starting location update and alerts task with identifier taskId:', taskId);
       const locationAction = await store.dispatch(getPreciseLocation());
       if (locationAction.meta.requestStatus === 'fulfilled') {
-        console.log('Precise location successfully gotten. Dispatching save location...');
         const location = locationAction.payload as Place;
-        const saveLocationAction = await store.dispatch(saveLocation(location));
-        if (saveLocationAction.meta.requestStatus === 'fulfilled') {
-          console.log('Precise location successfully saved.');
-        }
+        await store.dispatch(saveLocation(location));
+        LOGGER.info(`Dispatching get location alerts for ${location.position.lat}, ${location.position.long}`);
+        await store.dispatch(getLocationAlerts({ lat: location.position.lat, lon: location.position.long }));
       }
-      console.log('Task complete.')
+      LOGGER.info('Task complete.')
       BackgroundFetch.finish(taskId);
     }, async (taskId) => {
-      console.log('Task has timed out. Exiting...');
+      LOGGER.info('Task has timed out. Exiting...');
       BackgroundFetch.finish(taskId);
     });
 
-    console.log('[BackgroundFetch] Location update task status is ', status);
+    LOGGER.info('[BackgroundFetch] Location update and alerts task status is ', status);
   };
 
   return { start };

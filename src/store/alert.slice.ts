@@ -6,16 +6,15 @@ import { CAPCollector } from '../lib/cap-client/collector';
 
 type AlertPayload = { lat: number, lon: number };
 
-const levelYellowAndAbove = (alert:CAPAlert) => {
+const levelYellowAndAbove = (alert: CAPAlert) => {
   if (!alert.info || !alert.info.length) {
     return false;
   }
-  switch(alert.info[0].alertLevel()){
+  switch (alert.info[0].alertLevel()) {
     case 'Red':
     case 'Orange':
     case 'Yellow':
       return true;
-      break;
     default:
       return false;
   };
@@ -25,16 +24,16 @@ export const getLocationAlerts = createAsyncThunk('alerts/getActiveAlerts', asyn
   const RSS_FEED_URL = 'https://www.metmalawi.gov.mw/api/cap/rss.xml';
   const collector = new CAPCollector(RSS_FEED_URL);
   await collector.update();
-  
+
   const filteredMessages = collector.activeMessages({ latitude: lat, longitude: lon })
-                                     .filter(levelYellowAndAbove);
-  return [`${lat}${lon}`, filteredMessages ]; 
+    .filter(levelYellowAndAbove);
+  return [`${lat}${lon}`, filteredMessages];
 });
 
 type InitialState = {
   loading: boolean;
   error?: string;
-  alerts: {[key: string]: Array<CAPAlert>};
+  alerts: { [key: string]: Array<CAPAlert> };
 };
 const initialState: InitialState = {
   loading: false,
