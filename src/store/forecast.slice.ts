@@ -1,18 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import Axios, { AxiosError } from 'axios';
+import Axios from 'axios';
 
 import { LOGGER } from '../lib';
-import { Forecast } from '../utils/locationforecast';
+import { Forecast } from '../common';
+import { Forecaster } from '../utils/locationforecast';
 
 type ForecastPayload = { lat: number, lon: number };
 export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<Forecast> => {
-  const API_URL = 'https://api.met.no/weatherapi/locationforecast/2.0';
-  const USER_AGENT = 'met_malawi';
-  const url = `${API_URL}?lat=${lat}&lon=${lon}`
-  LOGGER.info(url)
-  // Request forecast with 20 seconds timeout
-  const { data } = await Axios.get(url, { timeout: 20000, headers: { 'User-Agent': USER_AGENT, 'Accept-Encoding': 'gzip'} });
-  return data;
+  const forecaster = new Forecaster();
+  return await forecaster.getForecast(lat, lon);
 });
 
 type InitialState = {
@@ -47,7 +43,7 @@ const forecastSlice = createSlice({
     builder.addCase(getLocationForecast.rejected, (state, action) => {
       state.loading = false;
       let err = ""
-      if (action.error.name === 'AxiosError') {
+      if (Axios.isAxiosError(action.error)) {
         // Handle Axios-specific errors
         err = action.error.response?.data || action.error.message;
       } else if(action.error.message){
