@@ -13,7 +13,7 @@ import { RootDrawerParamList } from '../common';
 import { setForecast } from '../store/forecast.slice';
 import { setLat, setLon, setName } from '../store/location.slice';
 import { SCREENS } from '../constants/screens.constant';
-import { Forecast } from '../utils/locationforecast';
+import { Forecast } from '../common';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'NoLocation'>;
 const NoLocationScreen = ({ navigation }: ScreenProps) => {

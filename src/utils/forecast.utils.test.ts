@@ -1,6 +1,6 @@
 import moment from "moment";
 import { getForecastSymbolAtTime, getWeatherIconAtDay } from "./forecast.utils";
-import { ForecastTimestep } from './locationforecast';
+import { ForecastTimestep } from '../common';
 
 
 describe("select correct weather symbol for today's forecast", () => {
@@ -48,7 +48,7 @@ describe("select correct weather symbol for a single day", () => {
         forecast[12].data.next_1_hours = undefined
         expect(getWeatherIconAtDay(forecast)).toBeUndefined()
     })
-    
+
 })
 
 /**

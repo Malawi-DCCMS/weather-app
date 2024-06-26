@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { ForecastTimestep, Forecast } from "./locationforecast";
+import { ForecastTimestep, Forecast } from "../common";
 
 const timeZone = 'Africa/Blantyre'
 
@@ -29,7 +29,7 @@ export class WeatherData {
         let ret = [this.timeSteps[0].time.startOf('day')]
         for (const step of this.timeSteps) {
             const t = step.time.startOf('day')
-            if (!t.equals(ret[ret.length-1]))
+            if (!t.equals(ret[ret.length - 1]))
                 ret.push(t)
         }
         return ret
@@ -42,7 +42,7 @@ export class WeatherData {
      * @noValuesBefore Only get values for timesteps after specified time.
      * @returns A summary of the forecast for the given day.
      */
-    atDay(time: DateTime, noValuesBefore: boolean = false): WeatherDataDaySummary|undefined {
+    atDay(time: DateTime, noValuesBefore: boolean = false): WeatherDataDaySummary | undefined {
         let timeSteps = this.timeSteps
         if (noValuesBefore)
             timeSteps = timeSteps.filter(step => step.time > time)
@@ -89,7 +89,7 @@ export class WeatherDataTimestep {
         this.temperature = timestep.data.instant.details.air_temperature
         this.precipitation_1h = timestep.data.next_1_hours?.details?.precipitation_amount
         this.precipitation_6h = timestep.data.next_6_hours?.details?.precipitation_amount
-        let windSpeed = timestep.data.instant.details.wind_speed 
+        let windSpeed = timestep.data.instant.details.wind_speed
         if (windSpeed) {
             // Convert to km/h
             windSpeed *= 3.6
@@ -117,9 +117,9 @@ export class WeatherDataTimestep {
      * Get the weather symbol for this time step - either for the next hour or for the next six hours.
      */
     weatherSymbol(): string {
-        if (this.weatherSymbol_1h !== undefined) 
+        if (this.weatherSymbol_1h !== undefined)
             return this.weatherSymbol_1h
-        if (this.weatherSymbol_6h !== undefined) 
+        if (this.weatherSymbol_6h !== undefined)
             return this.weatherSymbol_6h
         return "??"
     }
@@ -161,8 +161,8 @@ function getMinMaxTemperature(relevantSteps: WeatherDataTimestep[]): minmax {
     };
 }
 
-function getMaxWindSpeed(relevantSteps: WeatherDataTimestep[]): number| undefined {
-    let max = 0 
+function getMaxWindSpeed(relevantSteps: WeatherDataTimestep[]): number | undefined {
+    let max = 0
     for (const step of relevantSteps) {
         const val = step.windSpeed;
         if (val === undefined) {

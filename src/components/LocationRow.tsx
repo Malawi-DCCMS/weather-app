@@ -7,7 +7,7 @@ import { useForecast } from '../hooks/current-forecast.hook';
 import { District } from '../constants/districts.constant';
 import weatherIcons from '../constants/weathericons.constant';
 import { WeatherData } from '../utils/weatherData';
-import { Forecast } from '../utils/locationforecast';
+import { Forecast } from '../common';
 
 
 type LocationRowProps = {
