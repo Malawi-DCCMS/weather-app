@@ -1,6 +1,7 @@
-import { FORECAST_DESCRIPTIONS } from '../constants/forecast-descriptions.constant';
 import moment from 'moment';
-import { ForecastTimestep } from './locationforecast';
+
+import { FORECAST_DESCRIPTIONS } from '../constants/forecast-descriptions.constant';
+import { ForecastTimestep } from '../common';
 
 
 export function getForecastDescription(key: string): string {
