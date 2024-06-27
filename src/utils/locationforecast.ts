@@ -8,7 +8,7 @@ import { Forecast } from '../common';
  */
 export class Forecaster {
   private readonly userAgent: string = 'DCCMS - Zanyengo v1';
-  private readonly basURL: string = 'https://api.met.no/weatherapi/locationforecast/2.0';
+  private readonly basURL: string = 'https://aa057bsnsvkzwdeb6.api.met.no/weatherapi/locationforecast/2.0';
 
   constructor(userAgent?: string, baseURL?: string) {
     userAgent && (this.userAgent = userAgent);
