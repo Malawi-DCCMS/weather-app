@@ -29,6 +29,11 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
 
   const onTryAgain = () => {
+    if (typeof lat === 'undefined' ||
+        typeof lon === 'undefined'){
+      return
+    }
+
     dispatch(setForecastLoading());
     dispatch(setAlertsLoading());
 
@@ -36,11 +41,19 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     dispatch(getLocationForecast({ lat, lon }));
   }
 
+  // Get GPS location after first(empty)render.
   useEffect(() => {
     dispatch(getPreciseLocation());
   }, []);
 
+  // Update forecast and alerts each time lat/lon changes.
+  // Also update timer for refreshing forecast specified lat/lon regularly.
   useEffect(() => {
+    if (typeof lat === 'undefined' ||
+        typeof lon === 'undefined'){
+      return
+    }
+
     dispatch(saveLocation({ name: location, position: { lat, long: lon } }));
 
     const getAlerts = () => dispatch(getLocationAlerts({ lat, lon }));
@@ -50,11 +63,12 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     getForecast();
     getAlerts();
 
-    /** Refresh forecast every 6 hours. Specified in milliseconds.  */
+    // Refresh forecast every 6 hours. Specified in milliseconds.
     const t = setInterval(getForecast, 21600000);
     return () => { clearInterval(t); };
   }, [lat, lon]);
 
+  // Reset navigation and go to list of cities if GPS location results in locationError.
   useEffect(() => {
     if (locationError && !navigation.canGoBack()) {
       navigation.dispatch(

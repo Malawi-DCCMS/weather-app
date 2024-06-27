@@ -18,15 +18,15 @@ export const saveLocation = createAsyncThunk('location/saveLocation', async (pla
 
 type InitialState = {
   name: string;
-  lat: number;
-  lon: number;
+  lat?: number;
+  lon?: number;
   loading: boolean;
   error?: string;
 };
 const initialState: InitialState = {
-  name: DISTRICTS[0].name,
-  lat: DISTRICTS[0].lat,
-  lon: DISTRICTS[0].lon,
+  name: "",
+  lat: undefined,
+  lon: undefined,
   loading: false,
   error: undefined,
 };
