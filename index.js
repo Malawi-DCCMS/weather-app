@@ -28,6 +28,6 @@ export default function Main() {
   );
 }
 
-LocationUpdateTask().start();
+//LocationUpdateTask().start();
 
 AppRegistry.registerComponent(appName, () => Main);
