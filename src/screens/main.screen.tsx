@@ -43,7 +43,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
   // Get GPS location after first(empty)render.
   useEffect(() => {
-    dispatch(getPreciseLocation());
+    (!lat || !lon) && dispatch(getPreciseLocation());
   }, []);
 
   // Update forecast and alerts each time lat/lon changes.
