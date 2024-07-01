@@ -90,8 +90,8 @@ export class CAPCollector {
             return false
         if (alert.scope != 'Public')
             return false
-        //if (info.expires && info.expires <= DateTime.now())
-        //    return false
+        if (info.expires && DateTime.fromISO(info.expires) <= DateTime.now())
+            return false
 
         if (location) {
             if (!info.area || !info.area.isValidFor(location))
