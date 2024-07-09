@@ -21,7 +21,8 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName={SCREENS.Home} backBehavior='history' screenOptions={{
-        headerShown: false
+        headerShown: false,
+        swipeEnabled: false,
       }}>
         <Drawer.Screen name={SCREENS.Home} component={MainScreen} />
         <Drawer.Screen name={SCREENS.Feedback} component={FeedbackScreen} />
