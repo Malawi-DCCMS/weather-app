@@ -53,7 +53,7 @@ const AppBar = (props: AppBarProps) => {
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
-        <Text style={styles.appTitle}>{fmtLocation}</Text>
+        <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
         {getWarningIcons(alerts[`${lat}${lon}`])}
       </View>
 
@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Regular',
     color: 'white',
     marginRight: 19,
+    flex: 1,
   },
   appNav: {
     flex: 2,
