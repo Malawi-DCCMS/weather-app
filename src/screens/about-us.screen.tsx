@@ -49,7 +49,7 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
                         <Text style={styles.whiteHeader}>Our mandate</Text>{"\n"}
                         <Text style={styles.whiteText}>
                           To monitor, predict and provide
-                          information an weather and climate, that would contribute towards the socio-economic development of the country.
+                          information on weather and climate, that would contribute towards the socio-economic development of the country.
                         </Text>
                       </Paragraph>
                       <Paragraph style={{ marginTop: 40 }}>
