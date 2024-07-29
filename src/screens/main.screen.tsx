@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DateTime } from "luxon";
 import { ActivityIndicator, Button } from 'react-native-paper';
 import { CommonActions } from '@react-navigation/native';
+import { isUndefined } from 'lodash';
 
 import appBackground from '../../assets/new-glass-bg.png';
 import AppBar from '../components/AppBar';
@@ -27,11 +28,24 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
   const { alerts } = useSelector((state: RootState) => state.alerts);
   let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(async () => {
+    if (isUndefined(lat) || isUndefined(lon)) {
+      return;
+    }
+
+    setRefreshing(true);
+    dispatch(getLocationForecast({ lat, lon }));
+    dispatch(getLocationAlerts({ lat, lon }));
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2_000);
+  }, []);
 
   const onTryAgain = () => {
-    if (typeof lat === 'undefined' ||
-        typeof lon === 'undefined'){
-      return
+    if (isUndefined(lat) || isUndefined(lon)) {
+      return;
     }
 
     dispatch(setForecastLoading());
@@ -50,7 +64,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   // Also update timer for refreshing forecast specified lat/lon regularly.
   useEffect(() => {
     if (typeof lat === 'undefined' ||
-        typeof lon === 'undefined'){
+      typeof lon === 'undefined') {
       return
     }
 
@@ -63,8 +77,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     getForecast();
     getAlerts();
 
-    // Refresh forecast every 6 hours. Specified in milliseconds.
-    const t = setInterval(getForecast, 21600000);
+    // Refresh forecast and alerts every hour. Specified in milliseconds.
+    const t = setInterval(() => (getForecast(), getAlerts()), 3_600_000);
     return () => { clearInterval(t); };
   }, [lat, lon]);
 
@@ -147,7 +161,9 @@ const MainScreen = ({ navigation }: ScreenProps) => {
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
           <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
-          <ScrollView showsVerticalScrollIndicator={false} snapToStart={false}>
+          <ScrollView showsVerticalScrollIndicator={false} snapToStart={false} refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={'#ffffff'} />
+          }>
             <View style={styles.glassWrapper}>
               {mainContent}
             </View>
