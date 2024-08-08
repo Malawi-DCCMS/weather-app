@@ -52,13 +52,13 @@ const AppBar = (props: AppBarProps) => {
   return (
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
-        {props.navigation.canGoBack() && <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
+        {props.navigation.canGoBack() && <TouchableOpacity accessible={true} accessibilityLabel='Tap me to go back to the previous page.' onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
         {getWarningIcons(alerts[`${lat}${lon}`])}
       </View>
 
       <View style={styles.appNav}>
-        {showSearch && <TouchableOpacity style={styles.items} onPress={() => props.navigation.navigate(SCREENS.Search)}><Icon size={24} color='white' source="magnify" /></TouchableOpacity>}
+        {showSearch && <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Tap me to go back to go to the search page.' onPress={() => props.navigation.navigate(SCREENS.Search)}><Icon size={24} color='white' source="magnify" /></TouchableOpacity>}
         <View
           style={{
             flexDirection: 'row',
@@ -66,7 +66,7 @@ const AppBar = (props: AppBarProps) => {
           }}>
           <Menu
             visible={visible}
-            onDismiss={closeMenu} anchor={<TouchableOpacity onPress={() => openMenu()}><Icon size={24} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
+            onDismiss={closeMenu} anchor={<TouchableOpacity accessible={true} accessibilityLabel={visible ? 'Tap me to close the app menu.' : 'Tap me to open the app menu.'} onPress={() => openMenu()}><Icon size={24} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
             style={{ position: 'absolute', right: 0, width: 185 }}
             contentStyle={{ backgroundColor: 'rgba(217, 217, 217, .9)', marginTop: 25, padding: 0, shadowColor: 'rgba(217, 217, 217, .9)' }}
           >
@@ -76,6 +76,7 @@ const AppBar = (props: AppBarProps) => {
                 props.navigation.navigate(SCREENS.AboutUs);
               }}
               style={styles.menuItem}
+              accessibilityLabel='Tap me to learn more about how the app was developed.'
               titleStyle={styles.menuItemTitle}
               title="About us"
             />
@@ -85,6 +86,7 @@ const AppBar = (props: AppBarProps) => {
                 props.navigation.navigate(SCREENS.AboutTheApp);
               }}
               style={styles.menuItem}
+              accessibilityLabel='Tap me to learn about the app.'
               titleStyle={styles.menuItemTitle}
               title="About the app"
             />
