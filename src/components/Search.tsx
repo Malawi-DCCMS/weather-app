@@ -65,12 +65,13 @@ export const Search = ({ setLocation }: SearchProps) => {
           debounce={100}
           showChevron={false}
           showClear={false}
-          RightIconComponent={<TouchableOpacity onPress={handlePlaceByCurrentLocation}><Icon source={locationAnchor} size={24} /></TouchableOpacity>}
-          LeftComponent={<TouchableOpacity onPress={() => { }}><Icon source={'magnify'} color='white' size={24} /></TouchableOpacity>}
+          RightIconComponent={<TouchableOpacity accessible={true} accessibilityLabel='Tap me to snap to your current location.' onPress={handlePlaceByCurrentLocation}><Icon source={locationAnchor} size={24} /></TouchableOpacity>}
+          LeftComponent={<TouchableOpacity accessible={true} accessibilityLabel='Tap me to search.' onPress={() => { }}><Icon source={'magnify'} color='white' size={24} /></TouchableOpacity>}
           useFilter={true}
           suggestionsListContainerStyle={styles.suggestionListStyle}
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
+          inputHeight={48}
         />
       </View>
       <Portal>
