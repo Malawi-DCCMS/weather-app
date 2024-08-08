@@ -36,7 +36,7 @@ const DayRow = (props: DayRowProps) => {
         <Paragraph style={{ flex: 3 }}>
           <Text style={styles.whiteText}>{summary.day.toLocaleString({ weekday: "short" })}</Text>
         </Paragraph>
-        <View style={{ flex: 3, margin: -5 }}>
+        <View style={{ flex: 3, margin: -5 }} accessible={true} accessibilityLabel={`The symbol for the weather on ${summary.day.toLocaleString({ weekday: "short" })} is ${icon.split('_').join(' ')}.`}>
           <Icon source={weatherIcons[icon]} size={36} />
         </View>
         <Paragraph style={{ flex: 3 }}>
