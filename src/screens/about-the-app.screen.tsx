@@ -22,7 +22,7 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
     'NORAD',
     'NORCAP',
     'World Meteorological Organisation',
-    'Save the Chidlren'
+    'Save the Children'
   ]);
 
   const renderPartner = (item: ListRenderItemInfo<string>) => <View style={styles.partnerItem}>
