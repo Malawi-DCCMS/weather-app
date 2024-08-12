@@ -161,7 +161,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
           <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
-          <ScrollView showsVerticalScrollIndicator={false} snapToStart={false} refreshControl={
+          <ScrollView showsVerticalScrollIndicator={false} snapToStart={false} accessible={true} accessibilityLabel='Landing page' refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={'#ffffff'} />
           }>
             <View style={styles.glassWrapper}>
