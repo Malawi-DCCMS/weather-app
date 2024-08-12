@@ -1,61 +1,23 @@
-import { GEONAMESUNIQUE } from '../../assets/geonames-unique';
+import geonames from '../../assets/geonames.json'
 
 export function snapToPlace(location: Location): Place | undefined {
   if (!insideMalawi(location)) {
     return;
   }
-  const places = getPlaces();
-  return closestPlace(places, location);
+  return closestPlace(location);
 }
 
-function getPlaces(): Array<Place> {
-  const rawPlaces = parseGeonames(GEONAMESUNIQUE);
-  return rawPlaces.reduce((acc: Array<Place>, val) => {
-    const place = placeFromGeoname(val);
-    if (place) {
-      acc.push(place);
-    }
-    return acc;
-  }, []);
-}
+function closestPlace(location: Location): Place | undefined {
+  let closest: {distance: number, place: Place|undefined} = {distance: 9_000_000, place: undefined};
 
-function closestPlace(places: Place[], location: Location): Place | undefined {
-  let closest: [distance: number, place: Place] = [9_000_000, {name: '', position: {lat:0, long:0}}]
-
-  for (const val of places) {
-    const distance = getDistance(location, val.position);
-    if (distance < closest[0]) {
-      closest = [distance, val];
+  for (const geoname of geonames) {
+    const distance = getDistance(location, {lat: geoname.latitude, long: geoname.longitude });
+    if (distance < closest.distance) {
+      closest = {distance: distance, place: geoname};
     }
   }
 
-  if (closest[1].name === ''){
-    return undefined
-  }
-  
-  return closest[1];
-}
-
-function placeFromGeoname(value: string): Place | undefined {
-  const fields = value.split(/\t/);
-  const lat = parseFloat(fields[4]);
-  const long = parseFloat(fields[5]);
-  // ignore place if lat or long could not be parsed into float.
-  if (isNaN(lat) || isNaN(long)) {
-    return;
-  }
-
-  return {
-    position: {
-      lat: parseFloat(fields[4]),
-      long: parseFloat(fields[5]),
-    },
-    name: fields[1],
-  };
-}
-
-function parseGeonames(geonames: string): Array<string> {
-  return geonames.split(/\r?\n/);
+  return closest.place
 }
 
 function getDistance(point1: Location, point2: Location): number {

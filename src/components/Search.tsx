@@ -8,7 +8,7 @@ import {
 } from '../lib/autocomplete';
 import { Icon } from 'react-native-paper';
 
-import { getGeonames } from '../../src/services/geonames.service';
+import geonames from '../../assets/geonames.json'
 import { placeByCurrentLocation } from '../utils/location';
 
 import locationAnchor from '../../assets/location-anchor.png';
@@ -22,8 +22,13 @@ type SearchProps = {
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
-  const geonames = useMemo(() => getGeonames(), []);
-  const dataset = useMemo(() => getDataset(geonames), []);
+  const dataset = useMemo(() => geonames.map(
+    (geoname, idx) => {
+      return {
+        id: idx,
+        title: geoname.name}
+    } 
+  ), []);
   const [visible, setVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
@@ -32,7 +37,7 @@ export const Search = ({ setLocation }: SearchProps) => {
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
-    item?.title && setLocation(geonames[item.title]);
+    item?.id && setLocation(geonames[item.id]);
   };
 
   const handlePlaceByCurrentLocation = async (event: GestureResponderEvent) => {
@@ -110,7 +115,7 @@ const GPSFeedback = ({ status }: GPSFeedbackProps) => {
   )
 }
 
-const getDataset = (geonames: Record<string, Place>) => Object.entries(geonames).map(([key]) => ({ id: key, title: key }));
+// const getDataset = (geonames: Place[]) => Object.entries(geonames).map(([key]) => ({ id: key, title: key }));
 
 const styles = StyleSheet.create({
   searchBar: {
