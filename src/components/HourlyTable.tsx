@@ -36,7 +36,7 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
             {props.daySummary.steps.map((step) => (
               <DataTable.Row key={step.time.toISO()}>
                 <DataTable.Cell><Text style={styles.whiteText}>{step.time.toLocaleString({ hour: '2-digit' })}</Text></DataTable.Cell>
-                <DataTable.Cell accessible={true} accessibilityLabel={`The symbol for the weather on ${props.day.toFormat('dd LLL')} at ${step.time.toLocaleString({ hour: '2-digit' })} is ${step.weatherSymbol().split('_').join(' ')}.`}><Icon source={weatherIcons[step.weatherSymbol()]} size={34} /></DataTable.Cell>
+                <DataTable.Cell accessible={true} accessibilityLabel={`Weather symbol on ${props.day.toFormat('dd LLL')} at ${step.time.toLocaleString({ hour: '2-digit' })} is ${step.weatherSymbol().split('_').join(' ')}.`}><Icon source={weatherIcons[step.weatherSymbol()]} size={34} /></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.temperature ? Math.round(step.temperature) : ""}&deg;</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{step.precipitation()}</Text></DataTable.Cell>
                 <DataTable.Cell numeric><Text style={styles.whiteText}>{Math.round(step.windSpeed || 0)}</Text></DataTable.Cell>
