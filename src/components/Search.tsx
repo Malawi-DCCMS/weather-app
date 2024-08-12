@@ -115,8 +115,6 @@ const GPSFeedback = ({ status }: GPSFeedbackProps) => {
   )
 }
 
-// const getDataset = (geonames: Place[]) => Object.entries(geonames).map(([key]) => ({ id: key, title: key }));
-
 const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: 'rgba(217, 217, 217, 0.50)',

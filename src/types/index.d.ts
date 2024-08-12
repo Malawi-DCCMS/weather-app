@@ -11,11 +11,6 @@ declare module '@env' {
 
 type Location = {lat: number; long: number};
 
-// type Place = {
-//   position: Location;
-//   name: string;
-// };
-
 type Place = {
   name: string;
   latitude: number;
