@@ -67,6 +67,14 @@ You've successfully run and modified your React Native App. :partying_face:
 - If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
 - If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
 
+# Updating the geonames list
+
+The app comes with a small extract from the [geonames](https://www.geonames.org/) database, containing placenames and other features from Malawi. Before a release, the embedded database can be updated like this:
+
+```shell
+python get_geonames.py > assets/geonames.json
+```
+
 # Troubleshooting
 
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
