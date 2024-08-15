@@ -15,8 +15,8 @@ type Place = {
   name: string;
   latitude: number;
   longitude: number;
-  elevation: number|null;
-  admin1: string|null;
-  admin2: string|null;
-  feature: string|null;
+  elevation?: number;
+  admin1?: string;
+  admin2?: string;
+  feature?: string;
 }
