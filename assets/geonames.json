@@ -19143,7 +19143,7 @@
     "feature": "populated place"
   },
   {
-    "name": "Nancholi",
+    "name": "Nancholi Stream",
     "latitude": -16.15,
     "longitude": 34.71667,
     "elevation": null,
@@ -80294,7 +80294,7 @@
     "longitude": 33.80359,
     "elevation": null,
     "admin1": "Central Region",
-    "admin2": null,
+    "admin2": "Lilongwe District",
     "feature": "road"
   },
   {
@@ -118834,5 +118834,14 @@
     "admin1": null,
     "admin2": null,
     "feature": "bay"
+  },
+  {
+    "name": "Nancholi",
+    "latitude": -15.82666,
+    "longitude": 34.98302,
+    "elevation": null,
+    "admin1": "Southern Region",
+    "admin2": "Blantyre District",
+    "feature": "section of populated place"
   }
 ]
