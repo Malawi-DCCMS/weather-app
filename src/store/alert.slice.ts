@@ -63,7 +63,7 @@ const alertSlice = createSlice({
     });
     builder.addCase(getLocationAlerts.rejected, (state, action) => {
       state.loading = false;
-      LOGGER.error('Loading location alerts rejected: ' + action.error);
+      LOGGER.error('Loading location alerts rejected: ' + action.error.message);
       state.error = 'There was a problem getting the location alerts. Please try again later.';
     });
   },
