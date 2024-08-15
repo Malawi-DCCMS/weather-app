@@ -11,8 +11,8 @@ export const getPreciseLocation = createAsyncThunk('location/getPreciseLocation'
 
 export const saveLocation = createAsyncThunk('location/saveLocation', async (place: Place): Promise<Place> => {
   await AsyncStorage.setItem('location', `${place.name}`);
-  await AsyncStorage.setItem('lat', `${place.position.lat}`);
-  await AsyncStorage.setItem('lon', `${place.position.long}`);
+  await AsyncStorage.setItem('lat', `${place.latitude}`);
+  await AsyncStorage.setItem('lon', `${place.longitude}`);
   return place;
 });
 
@@ -47,8 +47,8 @@ const locationSlice = createSlice({
         LOGGER.info('Loading location fulfilled.');
         state.loading = false;
         state.name = action.payload.name;
-        state.lat = action.payload.position.lat;
-        state.lon = action.payload.position.long;
+        state.lat = action.payload.latitude;
+        state.lon = action.payload.longitude;
     });
     builder.addCase(getPreciseLocation.rejected, (state, action) => {
       LOGGER.error('Loading location rejected.');
