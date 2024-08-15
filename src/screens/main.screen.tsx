@@ -68,7 +68,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       return
     }
 
-    dispatch(saveLocation({ name: location, position: { lat, long: lon } }));
+    dispatch(saveLocation({ name: location, latitude: lat, longitude: lon }));
 
     const getAlerts = () => dispatch(getLocationAlerts({ lat, lon }));
     const getForecast = () => dispatch(getLocationForecast({ lat, lon }));
