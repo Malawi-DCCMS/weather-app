@@ -31,7 +31,7 @@ const SearchScreen = ({ navigation }: ScreenProps) => {
             <Search
               location={name}
               setLocation={
-                place => {
+                (place: Place) => {
                   // No need to reset forecast here.
                   dispatch(setForecastError(""))
                   dispatch(setName(place.name));
