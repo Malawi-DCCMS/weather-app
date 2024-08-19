@@ -22,13 +22,7 @@ type SearchProps = {
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
-  const dataset = useMemo(() => geonames.map(
-    (geoname, idx) => {
-      return {
-        id: idx,
-        title: geoname.name}
-    } 
-  ), []);
+  const dataset = useMemo(() => geonames.map((geoname, idx) => ({ id: idx, title: geoname.name, region: geoname.admin2 })), []);
   const [visible, setVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
@@ -77,6 +71,7 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
           inputHeight={48}
+          renderItem={(item: any) => <Text style={{ color: 'white', fontSize: 16, padding: 15, width: '100%', flexGrow: 1, flexShrink: 0 }}>{item.region === null ? item.title : `${item.title}, ${item.region}`}</Text>}
         />
       </View>
       <Portal>
