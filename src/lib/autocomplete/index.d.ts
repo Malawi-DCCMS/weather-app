@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { StyleProp, TextInputProps, TextStyle, ViewStyle, FlatListProps, TextInput } from 'react-native'
 
 export type TAutocompleteDropdownItem = {
-  id: string
+  id: number
   title: string | null
 }
 

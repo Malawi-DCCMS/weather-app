@@ -31,12 +31,12 @@ const SearchScreen = ({ navigation }: ScreenProps) => {
             <Search
               location={name}
               setLocation={
-                place => {
+                (place: Place) => {
                   // No need to reset forecast here.
                   dispatch(setForecastError(""))
                   dispatch(setName(place.name));
-                  dispatch(setLat(place.position.lat));
-                  dispatch(setLon(place.position.long));
+                  dispatch(setLat(place.latitude));
+                  dispatch(setLon(place.longitude));
                   navigation.navigate(SCREENS.Home);
                 }
               }

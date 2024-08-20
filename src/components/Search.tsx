@@ -1,18 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Dialog, Paragraph, Portal, Button, Text } from 'react-native-paper';
+import { isNil } from 'lodash';
+import { Icon } from 'react-native-paper';
 
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
 } from '../lib/autocomplete';
-import { Icon } from 'react-native-paper';
-
-import { getGeonames } from '../../src/services/geonames.service';
-import { placeByCurrentLocation } from '../utils/location';
-
-import locationAnchor from '../../assets/location-anchor.png';
 import { LOGGER } from '../lib';
+import { placeByCurrentLocation } from '../utils/location';
+import geonames from '../../assets/geonames.json'
+import locationAnchor from '../../assets/location-anchor.png';
 
 type SearchProps = {
   location: string;
@@ -22,8 +21,7 @@ type SearchProps = {
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
-  const geonames = useMemo(() => getGeonames(), []);
-  const dataset = useMemo(() => getDataset(geonames), []);
+  const dataset = useMemo(() => geonames.map((geoname, idx) => ({ id: idx, title: geoname.name, region: geoname.admin2 })), []);
   const [visible, setVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
@@ -32,7 +30,7 @@ export const Search = ({ setLocation }: SearchProps) => {
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
-    item?.title && setLocation(geonames[item.title]);
+    item?.id && setLocation(geonames[item.id]);
   };
 
   const handlePlaceByCurrentLocation = async (event: GestureResponderEvent) => {
@@ -72,6 +70,7 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
           inputHeight={48}
+          renderItem={(item: any) => <Text style={{ color: 'white', fontSize: 16, padding: 15, width: '100%', flexGrow: 1, flexShrink: 0 }}>{isNil(item.region) ? item.title : `${item.title}, ${item.region}`}</Text>}
         />
       </View>
       <Portal>
@@ -109,8 +108,6 @@ const GPSFeedback = ({ status }: GPSFeedbackProps) => {
     </View>
   )
 }
-
-const getDataset = (geonames: Record<string, Place>) => Object.entries(geonames).map(([key]) => ({ id: key, title: key }));
 
 const styles = StyleSheet.create({
   searchBar: {
