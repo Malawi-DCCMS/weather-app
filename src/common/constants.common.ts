@@ -3,11 +3,6 @@ import warningRed from '../../assets/warning-red.png';
 import warningOrange from '../../assets/warning-orange.png';
 import warningYellow from '../../assets/warning-yellow.png';
 
-export const DEFAULT_PLACE: Place = {
-  name: 'Blantyre',
-  position: {lat: -15.786111, long: 35.005833},
-};
-
 export const WEATHER_WARNING_ICONS: { [k: string]: ImageSourcePropType } = {
   red: warningRed,
   orange: warningOrange,
