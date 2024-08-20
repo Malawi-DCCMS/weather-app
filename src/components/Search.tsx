@@ -1,18 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Dialog, Paragraph, Portal, Button, Text } from 'react-native-paper';
+import { isNil } from 'lodash';
+import { Icon } from 'react-native-paper';
 
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
 } from '../lib/autocomplete';
-import { Icon } from 'react-native-paper';
-
-import geonames from '../../assets/geonames.json'
-import { placeByCurrentLocation } from '../utils/location';
-
-import locationAnchor from '../../assets/location-anchor.png';
 import { LOGGER } from '../lib';
+import { placeByCurrentLocation } from '../utils/location';
+import geonames from '../../assets/geonames.json'
+import locationAnchor from '../../assets/location-anchor.png';
 
 type SearchProps = {
   location: string;
@@ -71,7 +70,7 @@ export const Search = ({ setLocation }: SearchProps) => {
           suggestionsListTextStyle={styles.textStyle}
           containerStyle={{ zIndex: 1 }}
           inputHeight={48}
-          renderItem={(item: any) => <Text style={{ color: 'white', fontSize: 16, padding: 15, width: '100%', flexGrow: 1, flexShrink: 0 }}>{item.region === null ? item.title : `${item.title}, ${item.region}`}</Text>}
+          renderItem={(item: any) => <Text style={{ color: 'white', fontSize: 16, padding: 15, width: '100%', flexGrow: 1, flexShrink: 0 }}>{isNil(item.region) ? item.title : `${item.title}, ${item.region}`}</Text>}
         />
       </View>
       <Portal>
