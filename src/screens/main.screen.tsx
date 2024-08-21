@@ -30,7 +30,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
   let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = async () => {
     if (isUndefined(lat) || isUndefined(lon)) {
       return;
     }
@@ -40,8 +40,8 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     dispatch(getLocationAlerts({ lat, lon }));
     setTimeout(() => {
       setRefreshing(false);
-    }, 2_000);
-  }, []);
+    }, 2000);
+  };
 
   const onTryAgain = () => {
     if (isUndefined(lat) || isUndefined(lon)) {
