@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { DISTRICTS } from '../constants/districts.constant';
 import { LOGGER } from '../lib';
 import { placeByCurrentLocation } from '../utils/location';
 
