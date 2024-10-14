@@ -3,11 +3,15 @@ import * as React from 'react';
 import { AppRegistry } from 'react-native';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { name as appName } from './app.json';
 import App from './App';
-import { store } from './src/store';
-import { LocationUpdateTask } from './src/tasks';
+import { store, persistor } from './src/store';
+import i18n from './src/lib/i18n';
+
+const state = store.getState();
+i18n.changeLanguage(state.settings.appSettings.language);
 
 const theme = {
   ...DefaultTheme,
@@ -22,12 +26,12 @@ export default function Main() {
   return (
     <StoreProvider store={store}>
       <PaperProvider theme={theme}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </PaperProvider>
     </StoreProvider>
   );
 }
-
-//LocationUpdateTask().start();
 
 AppRegistry.registerComponent(appName, () => Main);

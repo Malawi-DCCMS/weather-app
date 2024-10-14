@@ -16,3 +16,8 @@ export const WARNING_COLORS: { [k in 'Red' | 'Yellow' | 'Orange' | 'Cyan' | 'Blu
   Cyan: 'rgba(57, 156, 199, 0.6)',
   Blue: 'rgba(130, 168, 223, 0.6',
 };
+
+export const LANGUAGES = {
+  Chichewa: 'chichewa',
+  English: 'english',
+};

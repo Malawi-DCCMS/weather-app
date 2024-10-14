@@ -82,6 +82,7 @@ export type RootDrawerParamList = {
   Home: undefined;
   AboutUs: undefined;
   AboutTheApp: undefined;
+  Settings: undefined;
   Feedback: undefined;
   WeatherWarning: { location: string, alert: CAPAlert };
 };
