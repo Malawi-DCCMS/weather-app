@@ -4,6 +4,7 @@ import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { SCREENS } from '../constants/screens.constant';
 import backArrow from '../../assets/icons8-back-100_2.png';
@@ -37,8 +38,7 @@ const getWarningIcons = (alerts: Array<CAPAlert>) => {
 };
 
 const AppBar = (props: AppBarProps) => {
-  const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 15)}...` : props.location;
+  const { t } = useTranslation();
   const { alerts } = useSelector((state: RootState) => state.alerts);
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
@@ -53,7 +53,7 @@ const AppBar = (props: AppBarProps) => {
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
-        <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
+        <Text style={styles.appTitle} numberOfLines={1}>{t(props.location)}</Text>
         {getWarningIcons(alerts[`${lat}${lon}`])}
       </View>
 
@@ -76,9 +76,9 @@ const AppBar = (props: AppBarProps) => {
                 props.navigation.navigate(SCREENS.AboutUs);
               }}
               style={styles.menuItem}
-              accessibilityLabel='About the developers'
+              accessibilityLabel={t('About us')}
               titleStyle={styles.menuItemTitle}
-              title="About us"
+              title={t('About us')}
             />
             <Menu.Item
               onPress={() => {
@@ -86,9 +86,19 @@ const AppBar = (props: AppBarProps) => {
                 props.navigation.navigate(SCREENS.AboutTheApp);
               }}
               style={styles.menuItem}
-              accessibilityLabel='About the app'
+              accessibilityLabel={t('About the app')}
               titleStyle={styles.menuItemTitle}
-              title="About the app"
+              title={t('About the app')}
+            />
+            <Menu.Item
+              onPress={() => {
+                closeMenu();
+                props.navigation.navigate(SCREENS.Settings);
+              }}
+              style={styles.menuItem}
+              accessibilityLabel={t('Settings')}
+              titleStyle={styles.menuItemTitle}
+              title={t('Settings')}
             />
             {/* <Menu.Item
               onPress={() => {

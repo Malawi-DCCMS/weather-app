@@ -1,15 +1,18 @@
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon, Paragraph, Text } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 import weatherIcons from '../constants/weathericons.constant';
 import { WeatherDataDaySummary } from "../utils/weatherData";
-import React from "react";
+
 
 
 type DayRowProps = {
   summary: WeatherDataDaySummary | undefined;
 }
 const DayRow = (props: DayRowProps) => {
+  const { t } = useTranslation();
   const { summary } = props;
 
   if (!summary) {
@@ -34,7 +37,7 @@ const DayRow = (props: DayRowProps) => {
     <View style={styles.dayRow}>
       <View style={styles.opacity}>
         <Paragraph style={{ flex: 3 }}>
-          <Text style={styles.whiteText}>{summary.day.toLocaleString({ weekday: "short" })}</Text>
+          <Text style={styles.whiteText}>{t(summary.day.toLocaleString({ weekday: "short" }))}</Text>
         </Paragraph>
         <View style={{ flex: 3, margin: -5 }} accessible={true} accessibilityLabel={`Weather symbol on ${summary.day.toLocaleString({ weekday: "short" })} is ${icon.split('_').join(' ')}.`}>
           <Icon source={weatherIcons[icon]} size={36} />

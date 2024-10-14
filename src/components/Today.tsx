@@ -7,12 +7,14 @@ import { WeatherDataDaySummary } from '../utils/weatherData';
 import forwardArrow from '../../assets/icons8-forward-100.png';
 import upArrow from '../../assets/Arrow-upward.png';
 import downArrow from '../../assets/Arrow-downward.png';
+import { useTranslation } from 'react-i18next';
 
 type TodaysForecastProps = {
   daySummary: WeatherDataDaySummary | undefined;
 };
 function Today(props: TodaysForecastProps): JSX.Element {
-  const { daySummary } = props
+  const { t } = useTranslation();
+  const { daySummary } = props;
 
   if (!daySummary) {
     return (
@@ -28,7 +30,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
     <View style={styles.wrapper}>
       <View style={styles.opacity}>
         <View style={styles.today}>
-          <View><Text style={styles.todaysHeader}>Today <Icon size={24} color='white' source={forwardArrow} /></Text></View>
+          <View><Text style={styles.todaysHeader}>{t('Today')} <Icon size={24} color='white' source={forwardArrow} /></Text></View>
           <View><Text style={styles.large}>{Math.round(daySummary.steps[0].temperature || 0)}&deg;</Text></View>
         </View>
         <View style={styles.temps}>
@@ -39,7 +41,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
           </View>
           <View>
             <Text style={styles.small}>
-              {daySummary.weatherSymbol ? getForecastDescription(daySummary.weatherSymbol) : 'Not available'}
+              {daySummary.weatherSymbol ? t(daySummary.weatherSymbol) : 'Not available'}
             </Text>
           </View>
         </View>

@@ -14,6 +14,7 @@ import FeedbackScreen from './src/screens/feedback.screen';
 import WeatherWarningScreen from './src/screens/weather-warning.screen';
 import { RootDrawerParamList } from './src/common';
 import AboutTheAppScreen from './src/screens/about-the-app.screen';
+import SettingsScreen from './src/screens/settings.screen';
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
@@ -32,6 +33,7 @@ function App(): JSX.Element {
         <Drawer.Screen name={SCREENS.AboutUs} component={AboutUsScreen} />
         <Drawer.Screen name={SCREENS.AboutTheApp} component={AboutTheAppScreen} />
         <Drawer.Screen name={SCREENS.WeatherWarning} component={WeatherWarningScreen} />
+        <Drawer.Screen name={SCREENS.Settings} component={SettingsScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

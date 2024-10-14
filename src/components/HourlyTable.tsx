@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 
 import weatherIcons from '../constants/weathericons.constant';
 import { WeatherDataDaySummary } from '../utils/weatherData';
+import { useTranslation } from 'react-i18next';
 
 type HourlyTableProps = {
   title: string;
@@ -16,30 +17,31 @@ type HourlyTableProps = {
  * Get today's forecast
  */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
+  const { t } = useTranslation();
   const isSameDay = props.day.hasSame(DateTime.local(), "day");
-  const dayName = isSameDay ? 'Today' : props.day.toFormat('ccc');
+  const dayName = isSameDay ? t('Today') : props.day.toFormat('ccc');
   return (
     <View style={styles.container}>
       <View style={styles.opacity}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>{dayName} {props.day.toFormat('dd LLL')}</Text>
+          <Text style={styles.titleText}>{t(dayName)} {props.day.toFormat('dd LLL')}</Text>
         </View>
         <DataTable style={styles.table}>
           <DataTable.Header>
-            <DataTable.Title><Text style={styles.whiteHeader}>Time</Text></DataTable.Title>
+            <DataTable.Title><Text style={styles.whiteHeader}>{t('Time')}</Text></DataTable.Title>
             <DataTable.Title><Text></Text></DataTable.Title>
-            <DataTable.Title numeric><Text style={styles.whiteHeader}>Temp C&deg;</Text></DataTable.Title>
-            <DataTable.Title numeric><Text style={styles.whiteHeader}>Rain mm</Text></DataTable.Title>
-            <DataTable.Title numeric><Text style={styles.whiteHeader}>Wind km/h</Text></DataTable.Title>
+            <DataTable.Title numeric><Text style={styles.whiteHeader}>{t('Temp')}</Text></DataTable.Title>
+            <DataTable.Title numeric><Text style={styles.whiteHeader}>{t('Rain')}</Text></DataTable.Title>
+            <DataTable.Title numeric><Text style={styles.whiteHeader}>{t('Wind')}</Text></DataTable.Title>
           </DataTable.Header>
           <ScrollView snapToStart={false} showsVerticalScrollIndicator={false}>
             {props.daySummary.steps.map((step) => (
               <DataTable.Row key={step.time.toISO()}>
                 <DataTable.Cell><Text style={styles.whiteText}>{step.time.toLocaleString({ hour: '2-digit' })}</Text></DataTable.Cell>
                 <DataTable.Cell accessible={true} accessibilityLabel={`Weather symbol on ${props.day.toFormat('dd LLL')} at ${step.time.toLocaleString({ hour: '2-digit' })} is ${step.weatherSymbol().split('_').join(' ')}.`}><Icon source={weatherIcons[step.weatherSymbol()]} size={34} /></DataTable.Cell>
-                <DataTable.Cell numeric><Text style={styles.whiteText}>{step.temperature ? Math.round(step.temperature) : ""}&deg;</Text></DataTable.Cell>
-                <DataTable.Cell numeric><Text style={styles.whiteText}>{step.precipitation()}</Text></DataTable.Cell>
-                <DataTable.Cell numeric><Text style={styles.whiteText}>{Math.round(step.windSpeed || 0)}</Text></DataTable.Cell>
+                <DataTable.Cell numeric><Text style={styles.whiteText}>{step.temperature ? Math.round(step.temperature) : ""}&deg;C</Text></DataTable.Cell>
+                <DataTable.Cell numeric><Text style={styles.whiteText}>{step.precipitation()}mm</Text></DataTable.Cell>
+                <DataTable.Cell numeric><Text style={styles.whiteText}>{Math.round(step.windSpeed || 0)}kph</Text></DataTable.Cell>
               </DataTable.Row>
             ))}
           </ScrollView>

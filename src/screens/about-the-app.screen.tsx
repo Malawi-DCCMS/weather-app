@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Paragraph, Text } from 'react-native-paper';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import appBackground from '../../assets/new-glass-bg.png';
 import AppBar from '../components/AppBar';
@@ -14,6 +15,7 @@ import bulletListIcon from '../../assets/time-period-bullet.png';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'AboutTheApp'>;
 function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
+  const { t } = useTranslation();
   const { alerts } = useSelector((state: RootState) => state.alerts);
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
@@ -47,43 +49,38 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
                   <>
                     <View style={styles.content}>
                       <Paragraph>
-                        <Text style={styles.title}>The app and its forecasts</Text>
+                        <Text style={styles.title}>{t('app.and.forecasts')}</Text>
                       </Paragraph>
                       <Paragraph>
-                        <Text style={styles.whiteText}>
-                          The app development is led by {"\n"}DCCMS - Department of Climate Change
-                          and Meteorological Services Malawi.{"\n"}{"\n"}
-                          All forecasts are issued by DCCMS.
-                        </Text>
+                        <Text style={styles.whiteText}>{t('app.and.forecasts.desc')}</Text>
                       </Paragraph>
                       <View>
                         <View>
                           <Text style={styles.whiteHeader}>
-                            {"\n"}Partners in this project have been:
+                            {"\n"}{t('partners')}
                           </Text>
                           <FlatList data={getPartners()} renderItem={(item: ListRenderItemInfo<string>) => renderPartner(item)} key={new Date().toISOString()} />
                         </View>
                       </View>
                       <Paragraph>
-                        <Text style={styles.whiteHeader}>{"\n"}Icons</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{"\n"}{t('Icons')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
                           <Text style={styles.whiteText}>
-                            Weather icons are licensed by <Text onPress={() => onClickURL('https://yr.no/NRK')} style={{ ...styles.whiteText, ...styles.ln }}>yr.no/NRK</Text>.
+                          {t('icons.disclaimer')} <Text onPress={() => onClickURL('https://yr.no/NRK')} style={{ ...styles.whiteText, ...styles.ln }}>yr.no/NRK</Text>.
                           </Text>{"\n"}{"\n"}
-                          Warning icons are contributed by the World Meteorological Organisation.
+                          {t('warning.icons.disclaimer')}
                         </Text>
                       </Paragraph>
                       <Paragraph>
-                        <Text style={styles.whiteHeader}>{"\n"}Geographical Data</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{"\n"}{t('Geographical Data')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          The geographical data in the app was downloaded from <Text onPress={() => onClickURL('https://download.geonames.org/export/dump/MW.zip')} style={{ ...styles.whiteText, ...styles.ln }}>Geonames</Text>.{"\n"}
+                          {t('geographical.data.disclaimer')} <Text onPress={() => onClickURL('https://download.geonames.org/export/dump/MW.zip')} style={{ ...styles.whiteText, ...styles.ln }}>Geonames</Text>.{"\n"}
                         </Text>
                       </Paragraph>
                       <Paragraph>
-                        <Text style={styles.whiteHeader}>{"\n"}Background photo</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{"\n"}{t('Background photo')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          Background photo is by:{"\n"}
-                          Craig Manners - Unsplash{"\n"}{"\n"}{"\n"}
+                          {t('background.photo.disclaimer')}{"\n"}{"\n"}{"\n"}
                         </Text>
                       </Paragraph>
                     </View>

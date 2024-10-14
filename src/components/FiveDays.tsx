@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 import DayRow from './DayRow';
 import { WeatherData } from '../utils/weatherData';
 import weatherIcons from '../constants/weathericons.constant';
+import { useTranslation } from 'react-i18next';
 
 type FiveDaysProps = {
     startDate: DateTime;
@@ -49,6 +50,7 @@ function FiveDays(props: FiveDaysProps): JSX.Element {
 };
 
 function FiveDayHeader() {
+    const { t } = useTranslation();
     return (
         <View style={styles.dayRow}>
             <View style={styles.opacity}>
@@ -59,12 +61,12 @@ function FiveDayHeader() {
                     <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
                 </Paragraph>
                 <Paragraph style={{ flex: 3 }}>
-                    <Text style={styles.whiteText}>Min</Text>
+                    <Text style={styles.whiteText}>{t('Min')}</Text>
                 </Paragraph>
                 <Paragraph style={{ flex: 3 }}>
-                    <Text style={styles.whiteText}>Max</Text>
+                    <Text style={styles.whiteText}>{t('Max')}</Text>
                 </Paragraph>
-                <Paragraph style={{ flex: 3 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
+                <Paragraph style={{ flex: 3 }}><Text style={styles.whiteText}>{t('Km/h')}</Text></Paragraph>
             </View>
         </View>
     )
