@@ -18,7 +18,6 @@ type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
   const { location, forecast, dayString, noValuesBefore, title } = route.params;
 
-  const { alerts } = useSelector((state: RootState) => state.alerts);
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   let daySummary:WeatherDataDaySummary| undefined = undefined

@@ -20,8 +20,6 @@ import { getAlerts, setAlertsLoading } from '../store/alert.slice';
 import { WeatherData } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import Alerts from '../components/Alerts';
-//import { CAPAlert } from '../types/cap-feed.type';
-
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
