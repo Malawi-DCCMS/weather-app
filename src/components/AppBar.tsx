@@ -9,7 +9,7 @@ import { SCREENS } from '../constants/screens.constant';
 import backArrow from '../../assets/icons8-back-100_2.png';
 import { WEATHER_WARNING_ICONS } from '../common';
 import { RootState } from '../store';
-import { CAPAlert, CAPInfo, alertLevel } from '../lib/cap-client/alert';
+import { CAPAlert, CAPInfo, alertLevel, alertInLocation } from '../lib/cap-client/alert';
 
 type AppBarProps = {
   location: string,
@@ -49,12 +49,17 @@ const AppBar = (props: AppBarProps) => {
 
   useIsFocused();
 
+  let relevantAlerts: CAPAlert[] = []
+  if(lat && lon){
+    relevantAlerts =  alerts.filter(alert => alertInLocation(alert, {latitude:lat, longitude:lon}))
+  }
+
   return (
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
-        {getWarningIcons(alerts[`${lat}${lon}`])}
+        {getWarningIcons(relevantAlerts)}
       </View>
 
       <View style={styles.appNav}>
