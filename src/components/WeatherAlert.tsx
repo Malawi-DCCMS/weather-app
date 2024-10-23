@@ -2,7 +2,7 @@ import React from "react";
 import { Image, ImageSourcePropType, StyleProp, StyleSheet, TouchableOpacity, View, ImageBackground } from "react-native";
 import { Text } from "react-native-paper";
 
-import { CAPAlert } from '../lib/cap-client/alert';
+import { CAPAlert, alertLevel } from '../lib/cap-client/alert';
 import warningBg from '../../assets/warning-bg.png';
 import { WARNING_COLORS, WEATHER_WARNING_ICONS } from "../common";
 import { DateTime } from "luxon";
@@ -39,7 +39,7 @@ function getAlertLevel(alert: CAPAlert) {
   if (!alert.info || !alert.info.length) {
     return;
   }
-  return alert.info[0].alertLevel();
+  return alertLevel(alert.info[0]);
 }
 
 type WeatherAlertProps = {

@@ -1,6 +1,7 @@
 import { DateTime } from "luxon"
 import { readCapFeedIfModified } from "./rss"
 import { CAPAlert } from './index';
+import { fetchCAPAlert, isValidFor } from "./alert";
 
 /**
  * CAPCollector keeps track of active CAP alerts.
@@ -36,7 +37,7 @@ export class CAPCollector {
             if (ref.pubDate <= this._lastUpdate)
                 continue
             try {
-                const msg = await CAPAlert.fetch(ref.link)
+                const msg = await fetchCAPAlert(ref.link)
 
                 if (msg.msgType == 'Cancel' || msg.msgType == 'Update') {
                     if (msg.references) {
@@ -63,12 +64,27 @@ export class CAPCollector {
      * 
      * @param location The location we want active messages for.
      * @returns All active (not canceled) alerts.
+    //  */
+    // public activeMessagesForLocation(location?: { latitude: number, longitude: number }): CAPAlert[] {
+    //     let ret: CAPAlert[] = []
+
+    //     for (let [id, msg] of Object.entries(this._messages)) {
+    //         if (this.isRelevant(msg, location))
+    //             ret.push(msg)
+    //     }
+    //     return ret
+    // }
+
+        /**
+     * Get a list of all active alerts.
+     * 
+     * @returns All active (not canceled) alerts.
      */
-    public activeMessages(location?: { latitude: number, longitude: number }): CAPAlert[] {
+    public activeMessages(): CAPAlert[] {
         let ret: CAPAlert[] = []
 
         for (let [id, msg] of Object.entries(this._messages)) {
-            if (this.isRelevant(msg, location))
+            if (this.isRelevant(msg))
                 ret.push(msg)
         }
         return ret
@@ -81,7 +97,7 @@ export class CAPCollector {
      * @param point The location we are interested in
      * @returns True if the given alert is relevant.
      */
-    private isRelevant(alert: CAPAlert, location?: { latitude: number, longitude: number }): boolean {
+    private isRelevant(alert: CAPAlert): boolean {
         if (!alert.info)
             return false
         const info = alert.info[0]
@@ -90,14 +106,11 @@ export class CAPCollector {
             return false
         if (alert.scope != 'Public')
             return false
-        if (info.expires && DateTime.fromISO(info.expires) <= DateTime.now())
-            return false
-
-        if (location) {
-            if (!info.area || !info.area.isValidFor(location))
-                return false
-        }
+        // if (info.expires && DateTime.fromISO(info.expires) <= DateTime.now())
+        //     return false
 
         return true
     }
 }
+
+    

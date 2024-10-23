@@ -14,7 +14,6 @@ import bulletListIcon from '../../assets/time-period-bullet.png';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'AboutTheApp'>;
 function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
-  const { alerts } = useSelector((state: RootState) => state.alerts);
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   const getPartners = (): Array<string> => ([
@@ -36,7 +35,7 @@ function AboutTheAppScreen({ navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={"About the app"} navigation={navigation} />
-          <Alerts alerts={alerts[`${lat}${lon}`]} location={"About the app"} navigator={navigation} />
+          <Alerts lat={lat} lon={lon} location={"About the app"} navigator={navigation} />
           <View style={styles.container}>
             <View style={styles.opacity}>
               <FlatList

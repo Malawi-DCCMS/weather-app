@@ -21,7 +21,7 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={"About us"} navigation={navigation} />
-          <Alerts alerts={alerts[`${lat}${lon}`]} location={"About us"} navigator={navigation} />
+          <Alerts lat={lat} lon={lon} location={"About us"} navigator={navigation} />
           <View style={styles.container}>
             <View style={styles.opacity}>
               <FlatList

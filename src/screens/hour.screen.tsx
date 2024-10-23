@@ -47,7 +47,7 @@ function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
-          <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
+          <Alerts lat={lat} lon={lon} location={location} navigator={navigation} />
           {mainContent}
         </ImageBackground>
       </View>

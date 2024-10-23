@@ -16,17 +16,17 @@ import type { AppDispatch, RootState } from '../store'
 import { SCREENS } from '../constants/screens.constant';
 import { getPreciseLocation, saveLocation } from '../store/location.slice';
 import { getLocationForecast, setForecast, setForecastLoading } from '../store/forecast.slice';
-import { getLocationAlerts, setAlertsLoading } from '../store/alert.slice';
+import { getAlerts, setAlertsLoading } from '../store/alert.slice';
 import { WeatherData } from '../utils/weatherData';
 import { RootDrawerParamList } from '../common';
 import Alerts from '../components/Alerts';
+//import { CAPAlert } from '../types/cap-feed.type';
 
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Home'>;
 const MainScreen = ({ navigation }: ScreenProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
-  const { alerts } = useSelector((state: RootState) => state.alerts);
   let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -37,7 +37,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
     setRefreshing(true);
     dispatch(getLocationForecast({ lat, lon }));
-    dispatch(getLocationAlerts({ lat, lon }));
+    dispatch(getAlerts());
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
@@ -51,7 +51,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
     dispatch(setForecastLoading());
     dispatch(setAlertsLoading());
 
-    dispatch(getLocationAlerts({ lat, lon }));
+    dispatch(getAlerts());
     dispatch(getLocationForecast({ lat, lon }));
   }
 
@@ -70,15 +70,15 @@ const MainScreen = ({ navigation }: ScreenProps) => {
 
     dispatch(saveLocation({ name: location, latitude: lat, longitude: lon }));
 
-    const getAlerts = () => dispatch(getLocationAlerts({ lat, lon }));
-    const getForecast = () => dispatch(getLocationForecast({ lat, lon }));
+    const getReduxAlerts = () => dispatch(getAlerts());
+    const getReduxForecast = () => dispatch(getLocationForecast({ lat, lon }));
     setForecast(undefined);
 
-    getForecast();
-    getAlerts();
+    getReduxForecast();
+    getReduxAlerts();
 
     // Refresh forecast and alerts every hour. Specified in milliseconds.
-    const t = setInterval(() => (getForecast(), getAlerts()), 3_600_000);
+    const t = setInterval(() => (getReduxForecast(), getReduxAlerts()), 3_600_000);
     return () => { clearInterval(t); };
   }, [lat, lon]);
 
@@ -160,7 +160,7 @@ const MainScreen = ({ navigation }: ScreenProps) => {
       <View style={styles.wrapper}>
         <ImageBackground style={styles.bg} source={appBackground}>
           <AppBar location={location} navigation={navigation} />
-          <Alerts alerts={alerts[`${lat}${lon}`]} location={location} navigator={navigation} />
+          <Alerts lat={lat} lon={lon} location={location} navigator={navigation} />
           <ScrollView showsVerticalScrollIndicator={false} snapToStart={false} accessible={true} accessibilityLabel='Landing page' refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={'#ffffff'} />
           }>
