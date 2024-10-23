@@ -76,7 +76,7 @@ export interface ForecastTimestep {
 }
 
 export type RootDrawerParamList = {
-  Hourly: { location: string, forecast: Forecast, dayString: string | null, noValuesBefore: boolean, title: string };
+  Hourly: { location: string, dayString: string | null, noValuesBefore: boolean, title: string };
   NoLocation: undefined;
   Search: undefined;
   Home: undefined;
