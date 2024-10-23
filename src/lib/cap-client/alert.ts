@@ -241,6 +241,10 @@ export const setNote = (alert: CAPAlert, note: string | undefined): CAPAlert => 
   note: note ? note[0] : undefined,
 });
 
+/**
+ * Update a CAPAlert with a list of references to previous CAPAlert messages linked to this one. 
+ * Each reference string must be on the format: "sender,identifier,sent".
+ */
 export const setReferences = (alert: CAPAlert, references: string[] | undefined): CAPAlert => {
   if (!references) return alert;
   const refs: Reference[] = references.flatMap((r) =>
@@ -355,6 +359,13 @@ export const parseFromXML = async (xmlString: string): Promise<CAPAlert> => {
 };
 
 
+/**
+ * Determines if a given alert is relevant for a specific location.
+ *
+ * @param alert - The CAPAlert object containing alert information.
+ * @param location - An object containing the latitude and longitude of the location to check.
+ * @returns A boolean indicating whether the alert is relevant for the specified location.
+ */
 export function alertInLocation(alert: CAPAlert, location: { latitude: number, longitude: number }): boolean {
   if (!alert.info)
       return false
