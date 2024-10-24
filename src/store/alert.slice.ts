@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { LOGGER } from '../lib';
-import { CAPAlert } from '../lib/cap-client/alert';
+import { CAPAlert, alertLevel } from '../lib/cap-client/alert';
 import { CAPCollector } from '../lib/cap-client/collector';
 
 type AlertPayload = { lat: number, lon: number };
 
-const levelYellowAndAbove = (alert: CAPAlert) => {
+const levelYellowAndAbove = (alert: CAPAlert): boolean => {
   if (!alert.info || !alert.info.length) {
     return false;
   }
-  switch (alert.info[0].alertLevel()) {
+  switch (alertLevel(alert.info[0])) {
     case 'Red':
     case 'Orange':
     case 'Yellow':
@@ -20,25 +20,25 @@ const levelYellowAndAbove = (alert: CAPAlert) => {
   };
 }
 
-export const getLocationAlerts = createAsyncThunk('alerts/getActiveAlerts', async ({ lat, lon }: AlertPayload): Promise<[string, Array<CAPAlert>]> => {
+export const getAlerts = createAsyncThunk('alerts/getActiveAlerts', async (): Promise<Array<CAPAlert>> => {
   const RSS_FEED_URL = 'https://www.metmalawi.gov.mw/api/cap/rss.xml';
   const collector = new CAPCollector(RSS_FEED_URL);
   await collector.update();
 
-  const filteredMessages = collector.activeMessages({ latitude: lat, longitude: lon })
+  const filteredMessages = collector.activeMessages()
     .filter(levelYellowAndAbove);
-  return [`${lat}${lon}`, filteredMessages];
+  return filteredMessages;
 });
 
 type InitialState = {
   loading: boolean;
   error?: string;
-  alerts: { [key: string]: Array<CAPAlert> };
+  alerts: Array<CAPAlert> ;
 };
 const initialState: InitialState = {
   loading: false,
   error: undefined,
-  alerts: {},
+  alerts: [],
 };
 
 const alertSlice = createSlice({
@@ -47,23 +47,23 @@ const alertSlice = createSlice({
   reducers: {
     setAlerts: (state, action) => { state.alerts = action.payload },
     setAlertsError: (state, action) => { state.error = action.payload },
-    setAlertsLoading: (state) => { state.alerts = {}; state.loading = true; },
+    setAlertsLoading: (state) => { state.alerts = []; state.loading = true; },
   },
   extraReducers(builder) {
-    builder.addCase(getLocationAlerts.pending, state => {
-      LOGGER.info('Loading location alerts...');
+    builder.addCase(getAlerts.pending, state => {
+      LOGGER.info('Loading alerts...');
       state.loading = true;
     });
-    builder.addCase(getLocationAlerts.fulfilled, (state, action) => {
-      LOGGER.info('Loading location alerts fulfilled.');
+    builder.addCase(getAlerts.fulfilled, (state, action) => {
+      LOGGER.info('Loading alerts fulfilled.');
       state.loading = false;
-      const [location, alerts] = action.payload;
+      const alerts = action.payload;
       const withInfo = alerts.filter(alert => alert.info && alert.info.length);
-      state.alerts[location] = withInfo;
+      state.alerts = withInfo;
     });
-    builder.addCase(getLocationAlerts.rejected, (state, action) => {
+    builder.addCase(getAlerts.rejected, (state, action) => {
       state.loading = false;
-      LOGGER.error('Loading location alerts rejected: ' + action.error.message);
+      LOGGER.error('Loading alerts rejected: ' + action.error.message);
       state.error = 'There was a problem getting the location alerts. Please try again later.';
     });
   },
