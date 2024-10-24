@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text } from 'react-native-paper';
 import { DateTime } from 'luxon';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store'
 
 import AppBar from '../components/AppBar';
 import { RootDrawerParamList } from '../common';
@@ -17,7 +19,10 @@ import { CAPAlert } from '../lib/cap-client/alert';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'WeatherWarning'>;
 function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { location, alert } = route.params;
+  const { location, alertID } = route.params;
+  const { alerts } = useSelector((state: RootState) => state.alerts);
+
+  const alert = alerts.find(alert => alert.identifier === alertID)
 
   type TimePeriods = Array<{key: string, val?: string}>;
   const getTimePeriodData = (alert: CAPAlert): TimePeriods => ([
@@ -34,51 +39,66 @@ function WeatherWarningScreen({ route, navigation }: ScreenProps): JSX.Element {
     <Image style={styles.bulletStyle} source={timePeriodBullet}/><Text style={styles.timePeriodText}> {item.item.key} {item.item?.val}</Text>
   </View>;
 
+   // content for missing alert
+   let mainContent: React.JSX.Element = (
+    <View style={styles.contentContainer}>
+      <Text>
+        Missing alert! Please go back and try again.
+      </Text>
+    </View>
+  )
+
+  if(alert) {
+    mainContent = (
+      <View style={styles.contentContainer}>
+        <WeatherAlert alert={alert} onPress={() => {}}/>
+        <FlatList
+          data={[{ key: 'data' }]}
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          snapToStart={false}
+          renderItem={() => (
+            <>
+              <View style={styles.content}>
+                <Text style={styles.whiteBoldText}>Event description:</Text>
+                <Text style={styles.whiteText}>{alert.info && alert.info[0].description}{'\n'}</Text>
+                <Text style={styles.whiteBoldText}>Instructions:</Text>
+                <Text style={styles.whiteText}>{alert.info && alert.info[0].instruction}{'\n'}</Text>
+                <Text style={styles.whiteBoldText}>Area:</Text>
+                <Text style={styles.whiteText}>{alert.info && alert.info[0].area?.areaDesc}</Text>
+              </View>
+              <View style={styles.content}>
+                <Text style={styles.whiteLargeText}>Time period</Text>
+                <FlatList data={getTimePeriodData(alert)} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
+              </View>
+              <View style={styles.content}>
+                <View style={{flexDirection: 'row'}}>
+                  <Image style={styles.icons} source={urgency}/>
+                  <Text style={styles.whiteText}>Urgency:   {alert.info && alert.info[0].urgency}{'\n'}</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Image style={styles.icons} source={severity}/>
+                  <Text style={styles.whiteText}>Severity:    {alert.info && alert.info[0].severity}{'\n'}</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Image style={styles.icons} source={certainity}/>
+                  <Text style={styles.whiteText}>Certainty:  {alert.info && alert.info[0].certainty}</Text>
+                </View>
+              </View>
+              <View style={{marginBottom: 20}}></View>
+            </>
+          )}
+        />
+      </View>
+    )
+  }
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={location} navigation={navigation} />
-          <View style={styles.contentContainer}>
-            <WeatherAlert alert={alert} onPress={() => {}}/>
-            <FlatList
-              data={[{ key: 'data' }]}
-              style={styles.scrollView}
-              showsVerticalScrollIndicator={false}
-              snapToStart={false}
-              renderItem={() => (
-                <>
-                  <View style={styles.content}>
-                    <Text style={styles.whiteBoldText}>Event description:</Text>
-                    <Text style={styles.whiteText}>{alert.info && alert.info[0].description}{'\n'}</Text>
-                    <Text style={styles.whiteBoldText}>Instructions:</Text>
-                    <Text style={styles.whiteText}>{alert.info && alert.info[0].instruction}{'\n'}</Text>
-                    <Text style={styles.whiteBoldText}>Area:</Text>
-                    <Text style={styles.whiteText}>{alert.info && alert.info[0].area?.areaDesc}</Text>
-                  </View>
-                  <View style={styles.content}>
-                    <Text style={styles.whiteLargeText}>Time period</Text>
-                    <FlatList data={getTimePeriodData(alert)} renderItem={item =>renderTimePeriodItem(item)} key={new Date().toISOString()}/>
-                  </View>
-                  <View style={styles.content}>
-                    <View style={{flexDirection: 'row'}}>
-                      <Image style={styles.icons} source={urgency}/>
-                      <Text style={styles.whiteText}>Urgency:   {alert.info && alert.info[0].urgency}{'\n'}</Text>
-                    </View>
-                    <View style={{flexDirection: 'row'}}>
-                      <Image style={styles.icons} source={severity}/>
-                      <Text style={styles.whiteText}>Severity:    {alert.info && alert.info[0].severity}{'\n'}</Text>
-                    </View>
-                    <View style={{flexDirection: 'row'}}>
-                      <Image style={styles.icons} source={certainity}/>
-                      <Text style={styles.whiteText}>Certainty:  {alert.info && alert.info[0].certainty}</Text>
-                    </View>
-                  </View>
-                  <View style={{marginBottom: 20}}></View>
-                </>
-              )}
-            />
-          </View>
+          { mainContent }
         </ImageBackground>
       </View>
     </SafeAreaView>

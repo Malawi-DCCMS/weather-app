@@ -9,7 +9,7 @@ import { SCREENS } from '../constants/screens.constant';
 import backArrow from '../../assets/icons8-back-100_2.png';
 import { WEATHER_WARNING_ICONS } from '../common';
 import { RootState } from '../store';
-import { CAPAlert, CAPInfo } from '../lib/cap-client/alert';
+import { CAPAlert, CAPInfo, alertLevel, alertInLocation } from '../lib/cap-client/alert';
 
 type AppBarProps = {
   location: string,
@@ -22,7 +22,7 @@ const getWarningIcons = (alerts: Array<CAPAlert>) => {
     const icons: Array<React.JSX.Element> = [];
     for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
       const capInfo = alerts[i].info as Array<CAPInfo>;
-      const alertColor = capInfo[0].alertLevel().toLowerCase();
+      const alertColor = alertLevel(capInfo[0]).toLowerCase();
       const icon = WEATHER_WARNING_ICONS[alertColor];
       icons.push(
         <TouchableOpacity key={i} style={{ position: 'relative', top: 0, right: j, zIndex: j }}>
@@ -49,12 +49,17 @@ const AppBar = (props: AppBarProps) => {
 
   useIsFocused();
 
+  let relevantAlerts: CAPAlert[] = []
+  if(lat && lon){
+    relevantAlerts =  alerts.filter(alert => alertInLocation(alert, {latitude:lat, longitude:lon}))
+  }
+
   return (
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
         {props.navigation.canGoBack() && <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => props.navigation.goBack()} style={{ paddingRight: 12 }}><Icon size={24} color='white' source={backArrow} /></TouchableOpacity>}
         <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
-        {getWarningIcons(alerts[`${lat}${lon}`])}
+        {getWarningIcons(relevantAlerts)}
       </View>
 
       <View style={styles.appNav}>

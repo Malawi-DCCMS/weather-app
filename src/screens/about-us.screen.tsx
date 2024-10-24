@@ -13,7 +13,6 @@ import { RootState } from '../store';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'AboutUs'>;
 function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
-  const { alerts } = useSelector((state: RootState) => state.alerts);
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   return (
@@ -21,7 +20,7 @@ function AboutUsScreen({ navigation }: ScreenProps): JSX.Element {
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
           <AppBar location={"About us"} navigation={navigation} />
-          <Alerts alerts={alerts[`${lat}${lon}`]} location={"About us"} navigator={navigation} />
+          <Alerts lat={lat} lon={lon} location={"About us"} navigator={navigation} />
           <View style={styles.container}>
             <View style={styles.opacity}>
               <FlatList

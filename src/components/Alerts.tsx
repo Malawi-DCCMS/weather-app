@@ -1,27 +1,37 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 
-import { CAPAlert } from "../lib/cap-client/alert";
+import { CAPAlert, alertInLocation } from "../lib/cap-client/alert";
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store'
+
 import WeatherAlert from "./WeatherAlert";
 import { SCREENS } from "../constants/screens.constant";
 import { FadeIn } from "./FadeIn";
 
 
 type AlertsProps = {
-  alerts?: Array<CAPAlert>
+  lat: number | undefined,
+  lon: number | undefined,
   location: string,
   navigator: any,
 }
 const Alerts = (props: AlertsProps) => {
-  const { alerts, navigator, location } = props;
+  const { lat, lon, navigator, location } = props;
+  const { alerts } = useSelector((state: RootState) => state.alerts);
 
-  const onSelectWarning = (location: string, alert: CAPAlert) => navigator.navigate(SCREENS.WeatherWarning, { location, alert });
+  const onSelectWarning = (location: string, alertID: string) => navigator.navigate(SCREENS.WeatherWarning, { location, alertID });
 
-  if (alerts && alerts.length) {
+  let relevantAlerts: CAPAlert[] = []
+  if(lat && lon){
+    relevantAlerts =  alerts.filter(alert => alertInLocation(alert, {latitude:lat, longitude:lon}))
+  }
+
+  if (relevantAlerts.length > 0) {
     return (
       <FadeIn style={{}}>
         <View style={styles.alertsRow}>
-          {alerts.map((alert, idx) => <WeatherAlert key={idx} alert={alert} onPress={() => onSelectWarning(location, alert)} />)}
+          {relevantAlerts.map((alert, idx) => <WeatherAlert key={idx} alert={alert} onPress={() => onSelectWarning(location, alert.identifier)} />)}
         </View>
       </FadeIn>
     )
