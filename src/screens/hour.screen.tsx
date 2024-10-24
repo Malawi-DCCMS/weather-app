@@ -16,12 +16,15 @@ import { WeatherData, WeatherDataDaySummary } from '../utils/weatherData';
 
 type ScreenProps = NativeStackScreenProps<RootDrawerParamList, 'Hourly'>;
 function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
-  const { location, forecast, dayString, noValuesBefore, title } = route.params;
+  const { location: location_name, dayString, noValuesBefore, title } = route.params;
 
-  const { lat, lon } = useSelector((state: RootState) => state.location);
+  const { name: store_location_name, lat, lon } = useSelector((state: RootState) => state.location);
+  let { forecast } = useSelector((state: RootState) => state.forecast);
 
   let daySummary:WeatherDataDaySummary| undefined = undefined
-  if (forecast && dayString){
+  // Make sure the stored forecast is for the same location as specified through params. This should always be the case.
+  if (forecast && dayString &&
+    location_name === store_location_name){
     const day = DateTime.fromISO(dayString)
     daySummary = new WeatherData(forecast).atDay(day, noValuesBefore)
   }
@@ -45,8 +48,8 @@ function HourScreen({ route, navigation }: ScreenProps): JSX.Element {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location={location} navigation={navigation} />
-          <Alerts lat={lat} lon={lon} location={location} navigator={navigation} />
+          <AppBar location={location_name} navigation={navigation} />
+          <Alerts lat={lat} lon={lon} location={location_name} navigator={navigation} />
           {mainContent}
         </ImageBackground>
       </View>
