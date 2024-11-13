@@ -12,6 +12,7 @@ web-build/
 android/
 ios/
 .vscode
+.idea
 # macOS
 .DS_Store
 
