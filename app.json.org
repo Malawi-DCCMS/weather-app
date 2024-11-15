@@ -4,17 +4,17 @@
     "slug": "zanyengo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ic_launcher.png",
+    "icon": "./assets/urgency.png",
+    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "scheme": "zanyengo",
     "splash": {
-      "image": "./assets/ic_launcher.png",
+      "image": "./assets/appbackground.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "mw.gov.metmalawi.zanyengo",
+      "bundleIdentifier": "com.dccms.zanyengo",
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
         "NSLocationAlwaysUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
@@ -22,6 +22,10 @@
       }
     },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
       "permissions": [
         "android.permission.INTERNET",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
@@ -29,11 +33,12 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCEPT_HANDOVER"
       ],
-      "package": "mw.gov.metmalawi.zanyengo"
+      "package": "com.dccms.zanyengo"
     },
     "web": {
       "bundler": "metro",
-      "output": "static"
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router"
