@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "zanyengo",
+    "name": "Zanyengo",
     "slug": "zanyengo",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/urgency.png",
-    "scheme": "myapp",
+    "scheme": "zanyengo",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/appbackground.png",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dccms.zanyengo",
+      "bundleIdentifier": "com.zanyengo",
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
         "NSLocationAlwaysUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
@@ -33,7 +33,7 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCEPT_HANDOVER"
       ],
-      "package": "com.dccms.zanyengo"
+      "package": "com.zanyengo"
     },
     "web": {
       "bundler": "metro",
