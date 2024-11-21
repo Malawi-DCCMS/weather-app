@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "zanyengo",
+    "name": "Zanyengo",
     "slug": "zanyengo",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "automatic",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "mw.gov.metmalawi.zanyengo",
+      "bundleIdentifier": "com.zanyengo",
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
         "NSLocationAlwaysUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
@@ -29,7 +29,7 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCEPT_HANDOVER"
       ],
-      "package": "mw.gov.metmalawi.zanyengo"
+      "package": "com.zanyengo"
     },
     "web": {
       "bundler": "metro",
