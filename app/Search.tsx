@@ -27,7 +27,7 @@ const SearchScreen = () => {
       <AutocompleteDropdownContextProvider>
         <View style={styles.wrapper}>
           <ImageBackground source={appBackground} style={styles.bg}>
-            <AppBar location={name} />
+            <AppBar location={name ? name : 'Search location'} />
             <Alerts lat={lat} lon={lon} location={name} />
             <Search
               location={name}
