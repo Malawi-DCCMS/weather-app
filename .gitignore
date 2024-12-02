@@ -21,3 +21,8 @@ ios
 
 expo-env.d.ts
 # @end expo-cliios/
+
+# Expo
+.expo
+dist/
+web-build/

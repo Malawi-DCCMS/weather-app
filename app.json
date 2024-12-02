@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "scheme": "zanyengo",
     "splash": {
       "image": "./assets/ic_launcher.png",
@@ -36,10 +37,16 @@
       "output": "static"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      }
     }
   }
 }

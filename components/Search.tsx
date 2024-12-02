@@ -32,7 +32,7 @@ export const Search = ({ setLocation }: SearchProps) => {
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
-    item?.id && setLocation(geonames[item.id]);
+    item && setLocation(geonames[item.id]);
   };
 
   const handlePlaceByCurrentLocation = async (event: GestureResponderEvent) => {
