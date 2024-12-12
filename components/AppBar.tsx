@@ -18,9 +18,6 @@ type AppBarProps = {
 };
 
 const AppBar = (props: AppBarProps) => {
-  const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 15)}...` : props.location;
-
   const router = useRouter();
   const navigation = useNavigation();
 
@@ -46,7 +43,7 @@ const AppBar = (props: AppBarProps) => {
         <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => navigation.goBack()} style={{ paddingRight: 12 }}>
             <Icon size={24} color='white' source={backArrow} />
         </TouchableOpacity>}
-        <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
+        <Text style={styles.appTitle} numberOfLines={1}>{props.location || "Zanyengo"}</Text>
         {getWarningIcons(relevantAlerts)}
       </View>
 
