@@ -27,7 +27,7 @@ const MainScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
+  const { name: location, lat, lon, loading: locationLoading, error: locationError } = useSelector((state: RootState) => state.location);
   let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -101,7 +101,7 @@ const MainScreen = () => {
     </View>
   )
 
-  if (loading) {
+  if (loading || locationLoading) {
     mainContent = (
       <View style={styles.opacity}>
         <TouchableOpacity onPress={() => { }}>
