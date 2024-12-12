@@ -20,7 +20,7 @@ const Alerts = (props: AlertsProps) => {
 
   const router = useRouter();
 
-  const onSelectWarning = (location: string, alertID: string) => router.navigate({
+  const onSelectWarning = (location: string, alertID: string) => router.push({
         pathname: "/WeatherWarning", params: { location, alertID }
       });
 

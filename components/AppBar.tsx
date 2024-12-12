@@ -50,7 +50,7 @@ const AppBar = (props: AppBarProps) => {
       <View style={styles.appNav}>
         {showSearch && 
             <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Search' 
-                onPress={() => router.navigate(SCREENS.Search.toString() as Href)}>
+                onPress={() => router.push(SCREENS.Search.toString() as Href)}>
                 <Icon size={24} color='white' source="magnify" />
             </TouchableOpacity>
         }
@@ -68,7 +68,7 @@ const AppBar = (props: AppBarProps) => {
             <Menu.Item
               onPress={() => {
                 closeMenu();
-                router.navigate(SCREENS.AboutUs.toString() as Href);
+                router.push(SCREENS.AboutUs.toString() as Href);
               }}
               style={styles.menuItem}
               accessibilityLabel='About the developers'
@@ -78,22 +78,13 @@ const AppBar = (props: AppBarProps) => {
             <Menu.Item
               onPress={() => {
                 closeMenu();
-                router.navigate(SCREENS.AboutTheApp.toString() as Href);
+                router.push(SCREENS.AboutTheApp.toString() as Href);
               }}
               style={styles.menuItem}
               accessibilityLabel='About the app'
               titleStyle={styles.menuItemTitle}
               title="About the app"
             />
-            {/* <Menu.Item
-              onPress={() => {
-                closeMenu();
-                props.navigation.navigate(SCREENS.Feedback);
-              }}
-              style={styles.menuItem}
-              titleStyle={styles.menuItemTitle}
-              title="Give feedback"
-            /> */}
           </Menu>
         </View>
       </View>

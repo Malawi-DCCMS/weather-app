@@ -36,7 +36,7 @@ const NoLocationScreen = () => {
                     dispatch(setName(district.name));
                     dispatch(setLat(district.lat));
                     dispatch(setLon(district.lon));
-                    router.navigate(SCREENS.Home.toString() as Href);
+                    router.push(SCREENS.Home.toString() as Href);
                   }}
                 />)
             }

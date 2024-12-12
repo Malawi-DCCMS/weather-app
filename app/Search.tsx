@@ -38,7 +38,7 @@ const SearchScreen = () => {
                   dispatch(setName(place.name));
                   dispatch(setLat(place.latitude));
                   dispatch(setLon(place.longitude));
-                  router.navigate(SCREENS.Home.toString() as Href);
+                  router.push(SCREENS.Home.toString() as Href);
                 }
               }
             />

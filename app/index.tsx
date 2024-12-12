@@ -118,7 +118,7 @@ const MainScreen = () => {
     const today = DateTime.now()
 
     const onSelectToday = () =>
-      router.navigate({pathname: "/Hourly", params: {
+      router.push({pathname: "/Hourly", params: {
         location: location,
         dayString: today.toISO(),
         startAtCurrentTime: "yes",
@@ -126,7 +126,7 @@ const MainScreen = () => {
       }})
     const onSelectDay = (location: string) =>
       (day: DateTime) =>
-        router.navigate({pathname: "/Hourly", params: {
+        router.push({pathname: "/Hourly", params: {
           location: location,
           dayString: day.toISO(),
           startAtCurrentTime: "no",
