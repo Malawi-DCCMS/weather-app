@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { LOGGER } from '@/lib/utils/logger';
 import { placeByCurrentLocation } from '@/lib/geo/location';
 import { Place } from '@/lib/geo/places';
 
@@ -40,29 +39,29 @@ const locationSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(getPreciseLocation.pending, state => {
-      LOGGER.info('Loading location...');
+      console.log('Loading location...');
       state.loading = true;
     });
     builder.addCase(getPreciseLocation.fulfilled, (state, action) => {
-        LOGGER.info('Loading location fulfilled.');
+        console.log('Loading location fulfilled.');
         state.loading = false;
         state.name = action.payload.name;
         state.lat = action.payload.latitude;
         state.lon = action.payload.longitude;
     });
     builder.addCase(getPreciseLocation.rejected, (state, action) => {
-      LOGGER.error('Loading location rejected.');
-      LOGGER.error(action.error.message);
+      console.error('Loading location rejected.');
+      console.error(action.error.message);
       state.error = 'There was a problem figuring out where you are, :(.';
     });
     builder.addCase(saveLocation.pending, () => {
-      LOGGER.info('Saving location...');
+      console.log('Saving location...');
     });
     builder.addCase(saveLocation.fulfilled, () => {
-      LOGGER.info('Saving location fulfilled.')
+      console.log('Saving location fulfilled.')
     });
     builder.addCase(saveLocation.rejected, (_, action) => {
-      LOGGER.error(`Failed to save location because of ${action.error.message}`)
+      console.error(`Failed to save location because of ${action.error.message}`)
     });
   },
 })

@@ -8,7 +8,7 @@ import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
 } from '@/lib/autocomplete';
-import { LOGGER } from '@/lib/utils/logger';
+
 import { placeByCurrentLocation } from '@/lib/geo/location';
 import { Place } from '@/lib/geo/places';
 
@@ -22,7 +22,7 @@ type SearchProps = {
 
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
-export const Search = ({ setLocation }: SearchProps) => {
+export const Search = useMemo( () => ({ setLocation }: SearchProps) => {
   const dataset = useMemo(() => geonames.map((geoname, idx) => ({ id: idx, title: geoname.name, region: geoname.admin2 })), []);
   const [visible, setVisible] = useState(false);
 
@@ -47,7 +47,7 @@ export const Search = ({ setLocation }: SearchProps) => {
     } catch {
       setGPSSearch("FAILED")
       showDialog();
-      LOGGER.error("Not able to set closest place to current location.")
+      console.error("Not able to set closest place to current location.")
     }
   }
 
@@ -90,7 +90,7 @@ export const Search = ({ setLocation }: SearchProps) => {
     </View>
 
   );
-};
+}, []);
 
 type GPSFeedbackProps = {
   status: GPS

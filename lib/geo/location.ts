@@ -1,6 +1,5 @@
 import * as ExpoLocation from 'expo-location';
 import { Place } from '@/lib/geo/places'
-import { LOGGER } from '@/lib/utils/logger';
 
 import { snapToPlace } from './places';
 
@@ -29,7 +28,7 @@ export const placeByCurrentLocation = async (): Promise<Place> => {
     }
     return closest as Place;
   } catch (error) {
-    LOGGER.error("Failed to get current location")
+    console.error("Failed to get current location")
     throw error
   }
 }
