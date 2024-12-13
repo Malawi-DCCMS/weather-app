@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useLocalSearchParams } from 'expo-router';
 
 import AppBar from '@/components/AppBar';
@@ -18,8 +18,8 @@ function HourlyScreen(): JSX.Element {
   const { location: location_name, dayString, startAtCurrentTime, title } = 
           useLocalSearchParams<{location: string, dayString: string, startAtCurrentTime: string, title: string}>()
 
-  const { name: store_location_name, lat, lon } = useSelector((state: RootState) => state.location);
-  let { forecast } = useSelector((state: RootState) => state.forecast);
+  const { name: store_location_name, lat, lon } = useSelector((state: RootState) => state.location, shallowEqual);
+  const { forecast } = useSelector((state: RootState) => state.forecast, shallowEqual);
 
   let daySummary:WeatherDataDaySummary| undefined = undefined
   // Make sure the stored forecast is for the same location as specified through params. This should always be the case.

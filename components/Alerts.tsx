@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";  
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 
 import { RootState } from "@/lib/store";
 import { CAPAlert, alertInLocation } from "@/lib/alerts/alert";
@@ -16,7 +16,7 @@ type AlertsProps = {
 
 const Alerts = (props: AlertsProps) => {
   const { lat, lon, location } = props;
-  const { alerts } = useSelector((state: RootState) => state.alerts);
+  const { alerts } = useSelector((state: RootState) => state.alerts, shallowEqual);
 
   const router = useRouter();
 
