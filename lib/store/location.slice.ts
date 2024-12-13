@@ -1,18 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { placeByCurrentLocation } from '@/lib/geo/location';
 import { Place } from '@/lib/geo/places';
 
 export const getPreciseLocation = createAsyncThunk('location/getPreciseLocation', async (): Promise<Place> => {
   return placeByCurrentLocation()
-});
-
-export const saveLocation = createAsyncThunk('location/saveLocation', async (place: Place): Promise<Place> => {
-  await AsyncStorage.setItem('location', `${place.name}`);
-  await AsyncStorage.setItem('lat', `${place.latitude}`);
-  await AsyncStorage.setItem('lon', `${place.longitude}`);
-  return place;
 });
 
 type InitialState = {
@@ -36,6 +28,7 @@ const locationSlice = createSlice({
     setName: (state, action) => { state.name = action.payload },
     setLat: (state, action) => { state.lat = action.payload },
     setLon: (state, action) => { state.lon = action.payload },
+    setLocation: (state, action) => (Object.assign(state, { name: action.payload.name, lat: action.payload.lat, lon: action.payload.lon })),
   },
   extraReducers(builder) {
     builder.addCase(getPreciseLocation.pending, state => {
@@ -54,17 +47,8 @@ const locationSlice = createSlice({
       console.error(action.error.message);
       state.error = 'There was a problem figuring out where you are, :(.';
     });
-    builder.addCase(saveLocation.pending, () => {
-      console.log('Saving location...');
-    });
-    builder.addCase(saveLocation.fulfilled, () => {
-      console.log('Saving location fulfilled.')
-    });
-    builder.addCase(saveLocation.rejected, (_, action) => {
-      console.error(`Failed to save location because of ${action.error.message}`)
-    });
   },
 })
 
-export const { setName, setLat, setLon } = locationSlice.actions;
+export const { setName, setLat, setLon, setLocation } = locationSlice.actions;
 export const { reducer: locationReducer } = locationSlice;
