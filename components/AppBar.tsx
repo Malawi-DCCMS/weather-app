@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigation, useRouter, Href } from 'expo-router';
 
 import { SCREENS } from '@/lib/layout/constants';
@@ -21,8 +21,8 @@ const AppBar = (props: AppBarProps) => {
   const router = useRouter();
   const navigation = useNavigation();
 
-  const { alerts } = useSelector((state: RootState) => state.alerts);
-  const { lat, lon } = useSelector((state: RootState) => state.location);
+  const { alerts } = useSelector((state: RootState) => state.alerts, shallowEqual);
+  const { lat, lon } = useSelector((state: RootState) => state.location, shallowEqual);
 
   const showSearch = useRoute().name !== SCREENS.Search;
   const [visible, setVisible] = React.useState(false);
@@ -36,7 +36,7 @@ const AppBar = (props: AppBarProps) => {
     relevantAlerts =  alerts.filter(alert => alertInLocation(alert, {latitude:lat, longitude:lon}))
   }
 
-  return (
+  return useMemo(() => (
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
         {navigation.canGoBack() && 
@@ -89,7 +89,7 @@ const AppBar = (props: AppBarProps) => {
         </View>
       </View>
     </View>
-  );
+  ), [lat, lon, alerts, visible]);
 }
 
 const getWarningIcons = (alerts: Array<CAPAlert>) => {
