@@ -11,8 +11,7 @@ import AppBar from '@/components/AppBar';
 import { AutocompleteDropdownContextProvider } from '@/lib/autocomplete';
 import { SCREENS } from '@/lib/layout/constants';
 import { AppDispatch, RootState } from '@/lib/store';
-import { setName, setLat, setLon } from '@/lib/store/location.slice';
-import { setForecastError } from '@/lib/store/forecast.slice';
+import { setLocation } from '@/lib/store/location.slice';
 import { Place } from '@/lib/geo/places'
 
 const appBackground = require('@/assets/new-glass-bg.png');
@@ -23,7 +22,7 @@ const SearchScreen = () => {
 
   const router = useRouter();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.wrapper}>
       <AutocompleteDropdownContextProvider>
         <View style={styles.wrapper}>
           <ImageBackground source={appBackground} style={styles.bg}>
@@ -33,11 +32,7 @@ const SearchScreen = () => {
               location={name}
               setLocation={
                 (place: Place) => {
-                  // No need to reset forecast here.
-                  dispatch(setForecastError(""))
-                  dispatch(setName(place.name));
-                  dispatch(setLat(place.latitude));
-                  dispatch(setLon(place.longitude));
+                  dispatch(setLocation({ name: place.name, lat: place.latitude, lon: place.longitude }));
                   router.push(SCREENS.Home.toString() as Href);
                 }
               }
@@ -58,11 +53,6 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 0,
     padding: 0,
-  },
-  container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: 30,
   },
   bg: {
     height: '100%',

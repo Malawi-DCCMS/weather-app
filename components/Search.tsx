@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Dialog, Paragraph, Portal, Button, Text } from 'react-native-paper';
 import { isNil } from 'lodash';
 import { Icon } from 'react-native-paper';
@@ -22,8 +22,7 @@ type SearchProps = {
 
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
-export const Search = useMemo( () => ({ setLocation }: SearchProps) => {
-  const dataset = useMemo(() => geonames.map((geoname, idx) => ({ id: idx, title: geoname.name, region: geoname.admin2 })), []);
+export const Search = ({ setLocation }: SearchProps) => {
   const [visible, setVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
@@ -35,7 +34,7 @@ export const Search = useMemo( () => ({ setLocation }: SearchProps) => {
     item && setLocation(geonames[item.id]);
   };
 
-  const handlePlaceByCurrentLocation = async (event: GestureResponderEvent) => {
+  const handlePlaceByCurrentLocation = async () => {
     setGPSSearch("SEARCHING")
 
     try {
@@ -51,16 +50,15 @@ export const Search = useMemo( () => ({ setLocation }: SearchProps) => {
     }
   }
 
-  return (
+  return useMemo(() => (
     <View>
       <View style={styles.container}>
         <AutocompleteDropdown
           clearOnFocus={true}
           closeOnBlur={false}
-          closeOnSubmit={false}
+          closeOnSubmit={true}
           textInputProps={{ placeholder: 'Search location', placeholderTextColor: 'white', style: styles.textStyle }}
           onSelectItem={handleSelect}
-          dataSet={dataset}
           inputContainerStyle={styles.searchBar}
           debounce={100}
           showChevron={false}
@@ -88,16 +86,15 @@ export const Search = useMemo( () => ({ setLocation }: SearchProps) => {
       </Portal>
       <GPSFeedback status={gpsSearch} />
     </View>
-
-  );
-}, []);
+  ), []);
+};
 
 type GPSFeedbackProps = {
   status: GPS
 }
 
 const GPSFeedback = ({ status }: GPSFeedbackProps) => {
-  if (status == "SEARCHING") {
+  if (status === "SEARCHING") {
     return (
       <View style={styles.loader}>
         <ActivityIndicator animating={true} color={'white'} size={34} />
@@ -173,3 +170,5 @@ const styles = StyleSheet.create({
     marginLeft: 25,
   }
 });
+
+export default Search;
