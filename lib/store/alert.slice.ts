@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { LOGGER } from '@/lib/utils/logger';
 import { CAPAlert, alertLevel } from '@/lib/alerts/alert';
 import { CAPCollector } from '../alerts/collector';
 
@@ -49,11 +48,11 @@ const alertSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(getAlerts.pending, state => {
-      LOGGER.info('Loading alerts...');
+      console.log('Loading alerts...');
       state.loading = true;
     });
     builder.addCase(getAlerts.fulfilled, (state, action) => {
-      LOGGER.info('Loading alerts fulfilled.');
+      console.log('Loading alerts fulfilled.');
       state.loading = false;
       const alerts = action.payload;
       const withInfo = alerts.filter(alert => alert.info && alert.info.length);
@@ -61,7 +60,7 @@ const alertSlice = createSlice({
     });
     builder.addCase(getAlerts.rejected, (state, action) => {
       state.loading = false;
-      LOGGER.error('Loading alerts rejected: ' + action.error.message);
+      console.error('Loading alerts rejected: ' + action.error.message);
       state.error = 'There was a problem getting the location alerts. Please try again later.';
     });
   },

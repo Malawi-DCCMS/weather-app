@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";
 import { ActivityIndicator, Button } from 'react-native-paper';
 import { CommonActions } from '@react-navigation/native';
-import { useRouter, useNavigation } from 'expo-router';
+import { useRouter, useNavigation, useFocusEffect } from 'expo-router';
 import { isUndefined } from 'lodash';
 
 import AppBar from '@/components/AppBar';
@@ -15,9 +15,9 @@ import Alerts from '@/components/Alerts';
 
 import type { AppDispatch, RootState } from '@/lib/store'
 import { SCREENS } from '@/lib/layout/constants';
-import { getPreciseLocation, saveLocation } from '@/lib/store/location.slice';
-import { getLocationForecast, setForecast, setForecastLoading } from '@/lib/store/forecast.slice';
-import { getAlerts, setAlertsLoading } from '@/lib/store/alert.slice';
+import { getPreciseLocation } from '@/lib/store/location.slice';
+import { getLocationForecast } from '@/lib/store/forecast.slice';
+import { getAlerts } from '@/lib/store/alert.slice';
 import { WeatherData } from '@/lib/forecast/weatherData';
 
 const appBackground = require('@/assets/new-glass-bg.png');
@@ -27,8 +27,8 @@ const MainScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { name: location, lat, lon, error: locationError } = useSelector((state: RootState) => state.location);
-  let { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast);
+  const { name: location, lat, lon, loading: locationLoading, error: locationError } = useSelector((state: RootState) => state.location, shallowEqual);
+  const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast, shallowEqual);
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = async () => {
@@ -49,39 +49,30 @@ const MainScreen = () => {
       return;
     }
 
-    dispatch(setForecastLoading());
-    dispatch(setAlertsLoading());
-
-    dispatch(getAlerts());
     dispatch(getLocationForecast({ lat, lon }));
+    dispatch(getAlerts());
   }
 
   // Get GPS location after first(empty)render.
   useEffect(() => {
-    (!lat || !lon) && dispatch(getPreciseLocation());
+    if (isUndefined(lat) || isUndefined(lon)) {
+      dispatch(getPreciseLocation());
+    }
   }, []);
 
   // Update forecast and alerts each time lat/lon changes.
   // Also update timer for refreshing forecast specified lat/lon regularly.
-  useEffect(() => {
-    if (typeof lat === 'undefined' ||
-      typeof lon === 'undefined') {
-      return
-    }
+  useFocusEffect(useCallback(() => {
+      if (isUndefined(lat) || isUndefined(lon)) {
+        return;
+      }
+  
+      dispatch(getLocationForecast({ lat, lon }));
+      dispatch(getAlerts());
 
-    dispatch(saveLocation({ name: location, latitude: lat, longitude: lon }));
-
-    const getReduxAlerts = () => dispatch(getAlerts());
-    const getReduxForecast = () => dispatch(getLocationForecast({ lat, lon }));
-    setForecast(undefined);
-
-    getReduxForecast();
-    getReduxAlerts();
-
-    // Refresh forecast and alerts every hour. Specified in milliseconds.
-    const t = setInterval(() => (getReduxForecast(), getReduxAlerts()), 3_600_000);
-    return () => { clearInterval(t); };
-  }, [lat, lon]);
+      return () => {};
+    }, [lat, lon])
+  );
 
   // Reset navigation and go to list of cities if GPS location results in locationError.
   useEffect(() => {
@@ -101,7 +92,7 @@ const MainScreen = () => {
     </View>
   )
 
-  if (loading) {
+  if (loading || locationLoading) {
     mainContent = (
       <View style={styles.opacity}>
         <TouchableOpacity onPress={() => { }}>
@@ -118,20 +109,24 @@ const MainScreen = () => {
     const today = DateTime.now()
 
     const onSelectToday = () =>
-      router.navigate({pathname: "/Hourly", params: {
-        location: location,
-        dayString: today.toISO(),
-        startAtCurrentTime: "yes",
-        title: 'Hourly Today'
-      }})
+      router.push({
+        pathname: "/Hourly", params: {
+          location: location,
+          dayString: today.toISO(),
+          startAtCurrentTime: "yes",
+          title: 'Hourly Today'
+        }
+      })
     const onSelectDay = (location: string) =>
       (day: DateTime) =>
-        router.navigate({pathname: "/Hourly", params: {
-          location: location,
-          dayString: day.toISO(),
-          startAtCurrentTime: "no",
-          title: day.toLocaleString({ weekday: 'long' })
-        }});
+        router.push({
+          pathname: "/Hourly", params: {
+            location: location,
+            dayString: day.toISO(),
+            startAtCurrentTime: "no",
+            title: day.toLocaleString({ weekday: 'long' })
+          }
+        });
 
     mainContent = (
       <View style={styles.opacity}>

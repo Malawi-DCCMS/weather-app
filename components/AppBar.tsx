@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigation, useRouter, Href } from 'expo-router';
 
 import { SCREENS } from '@/lib/layout/constants';
@@ -18,14 +18,11 @@ type AppBarProps = {
 };
 
 const AppBar = (props: AppBarProps) => {
-  const tooLong = props.location.length > 15;
-  const fmtLocation = tooLong ? `${props.location?.slice(0, 15)}...` : props.location;
-
   const router = useRouter();
   const navigation = useNavigation();
 
-  const { alerts } = useSelector((state: RootState) => state.alerts);
-  const { lat, lon } = useSelector((state: RootState) => state.location);
+  const { alerts } = useSelector((state: RootState) => state.alerts, shallowEqual);
+  const { lat, lon } = useSelector((state: RootState) => state.location, shallowEqual);
 
   const showSearch = useRoute().name !== SCREENS.Search;
   const [visible, setVisible] = React.useState(false);
@@ -39,22 +36,22 @@ const AppBar = (props: AppBarProps) => {
     relevantAlerts =  alerts.filter(alert => alertInLocation(alert, {latitude:lat, longitude:lon}))
   }
 
-  return (
+  return useMemo(() => (
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
         {navigation.canGoBack() && 
         <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => navigation.goBack()} style={{ paddingRight: 12 }}>
-            <Icon size={24} color='white' source={backArrow} />
+            <Icon size={28} color='white' source={backArrow} />
         </TouchableOpacity>}
-        <Text style={styles.appTitle} numberOfLines={1}>{props.location}</Text>
+        <Text style={styles.appTitle} numberOfLines={1}>{props.location || "Zanyengo"}</Text>
         {getWarningIcons(relevantAlerts)}
       </View>
 
       <View style={styles.appNav}>
         {showSearch && 
             <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Search' 
-                onPress={() => router.navigate(SCREENS.Search.toString() as Href)}>
-                <Icon size={24} color='white' source="magnify" />
+                onPress={() => router.push(SCREENS.Search.toString() as Href)}>
+                <Icon size={28} color='white' source="magnify" />
             </TouchableOpacity>
         }
         <View
@@ -64,14 +61,14 @@ const AppBar = (props: AppBarProps) => {
           }}>
           <Menu
             visible={visible}
-            onDismiss={closeMenu} anchor={<TouchableOpacity accessible={true} accessibilityLabel={visible ? 'Close menu' : 'Open menu'} onPress={() => openMenu()}><Icon size={24} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
+            onDismiss={closeMenu} anchor={<TouchableOpacity accessible={true} accessibilityLabel={visible ? 'Close menu' : 'Open menu'} onPress={() => openMenu()}><Icon size={28} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
             style={{ position: 'absolute', right: 0, width: 185 }}
             contentStyle={{ backgroundColor: 'rgba(217, 217, 217, .9)', marginTop: 25, padding: 0, shadowColor: 'rgba(217, 217, 217, .9)' }}
           >
             <Menu.Item
               onPress={() => {
                 closeMenu();
-                router.navigate(SCREENS.AboutUs.toString() as Href);
+                router.push(SCREENS.AboutUs.toString() as Href);
               }}
               style={styles.menuItem}
               accessibilityLabel='About the developers'
@@ -81,27 +78,18 @@ const AppBar = (props: AppBarProps) => {
             <Menu.Item
               onPress={() => {
                 closeMenu();
-                router.navigate(SCREENS.AboutTheApp.toString() as Href);
+                router.push(SCREENS.AboutTheApp.toString() as Href);
               }}
               style={styles.menuItem}
               accessibilityLabel='About the app'
               titleStyle={styles.menuItemTitle}
               title="About the app"
             />
-            {/* <Menu.Item
-              onPress={() => {
-                closeMenu();
-                props.navigation.navigate(SCREENS.Feedback);
-              }}
-              style={styles.menuItem}
-              titleStyle={styles.menuItemTitle}
-              title="Give feedback"
-            /> */}
           </Menu>
         </View>
       </View>
     </View>
-  );
+  ), [lat, lon, alerts, visible]);
 }
 
 const getWarningIcons = (alerts: Array<CAPAlert>) => {

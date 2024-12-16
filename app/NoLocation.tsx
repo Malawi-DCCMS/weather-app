@@ -24,7 +24,7 @@ const NoLocationScreen = () => {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location='Zanyengo' />
+          <AppBar location="Zanyengo" />
           <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false} snapToStart={false}>
             {
               DISTRICTS.map((district, idx) =>
@@ -36,7 +36,7 @@ const NoLocationScreen = () => {
                     dispatch(setName(district.name));
                     dispatch(setLat(district.lat));
                     dispatch(setLon(district.lon));
-                    router.navigate(SCREENS.Home.toString() as Href);
+                    router.push(SCREENS.Home.toString() as Href);
                   }}
                 />)
             }

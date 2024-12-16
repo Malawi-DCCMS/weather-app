@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 
-import { LOGGER } from '@/lib/utils/logger';
 import { Forecast } from '@/lib/forecast/types';
 import { Forecaster } from '@/lib/forecast/locationforecast';
 
@@ -25,9 +24,9 @@ export function useForecast(latitude: number, longitude: number): ReturnType {
       } catch (error) {
         setLoading(false);
         if (Axios.isAxiosError(error)) {
-          LOGGER.error('Axios error:', error.response?.data || error.message);
+          console.error('Axios error:', error.response?.data || error.message);
         } else {
-          LOGGER.error('Non-Axios error:' + error);
+          console.error('Non-Axios error:' + error);
         }
         setError(new Error("There was a problem getting the weather. Please try again later."))
       }
