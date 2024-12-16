@@ -41,7 +41,7 @@ const AppBar = (props: AppBarProps) => {
       <View style={styles.appTitleContainer}>
         {navigation.canGoBack() && 
         <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => navigation.goBack()} style={{ paddingRight: 12 }}>
-            <Icon size={24} color='white' source={backArrow} />
+            <Icon size={28} color='white' source={backArrow} />
         </TouchableOpacity>}
         <Text style={styles.appTitle} numberOfLines={1}>{props.location || "Zanyengo"}</Text>
         {getWarningIcons(relevantAlerts)}
@@ -51,7 +51,7 @@ const AppBar = (props: AppBarProps) => {
         {showSearch && 
             <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Search' 
                 onPress={() => router.push(SCREENS.Search.toString() as Href)}>
-                <Icon size={24} color='white' source="magnify" />
+                <Icon size={28} color='white' source="magnify" />
             </TouchableOpacity>
         }
         <View
@@ -61,7 +61,7 @@ const AppBar = (props: AppBarProps) => {
           }}>
           <Menu
             visible={visible}
-            onDismiss={closeMenu} anchor={<TouchableOpacity accessible={true} accessibilityLabel={visible ? 'Close menu' : 'Open menu'} onPress={() => openMenu()}><Icon size={24} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
+            onDismiss={closeMenu} anchor={<TouchableOpacity accessible={true} accessibilityLabel={visible ? 'Close menu' : 'Open menu'} onPress={() => openMenu()}><Icon size={28} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
             style={{ position: 'absolute', right: 0, width: 185 }}
             contentStyle={{ backgroundColor: 'rgba(217, 217, 217, .9)', marginTop: 25, padding: 0, shadowColor: 'rgba(217, 217, 217, .9)' }}
           >
