@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";
-import { Button } from 'react-native-paper';
+import { ActivityIndicator, Button } from 'react-native-paper';
 import { CommonActions } from '@react-navigation/native';
 import { useRouter, useNavigation, useFocusEffect } from 'expo-router';
 import { isUndefined } from 'lodash';
@@ -29,14 +29,19 @@ const MainScreen = () => {
 
   const { name: location, lat, lon, loading: locationLoading, error: locationError } = useSelector((state: RootState) => state.location, shallowEqual);
   const { loading, forecast, error: forecastError } = useSelector((state: RootState) => state.forecast, shallowEqual);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = async () => {
     if (isUndefined(lat) || isUndefined(lon)) {
       return;
     }
 
+    setRefreshing(true);
     dispatch(getLocationForecast({ lat, lon }));
     dispatch(getAlerts());
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
   };
 
   const onTryAgain = () => {
@@ -64,6 +69,8 @@ const MainScreen = () => {
   
       dispatch(getLocationForecast({ lat, lon }));
       dispatch(getAlerts());
+
+      return () => {};
     }, [lat, lon])
   );
 
@@ -84,6 +91,18 @@ const MainScreen = () => {
     <View style={styles.opacity}>
     </View>
   )
+
+  if (loading || locationLoading) {
+    mainContent = (
+      <View style={styles.opacity}>
+        <TouchableOpacity onPress={() => { }}>
+          <View style={styles.loader}>
+            <ActivityIndicator animating={true} color={'white'} size={34} />
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 
   if (forecast) {
     const preparedForecast = new WeatherData(forecast)
@@ -137,7 +156,7 @@ const MainScreen = () => {
           <AppBar location={location} />
           <Alerts lat={lat} lon={lon} location={location} />
           <ScrollView showsVerticalScrollIndicator={false} snapToStart={false} accessible={true} accessibilityLabel='Landing page' refreshControl={
-            <RefreshControl refreshing={loading || locationLoading} onRefresh={onRefresh} tintColor={'#ffffff'} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={'#ffffff'} />
           }>
             <View style={styles.glassWrapper}>
               {mainContent}
