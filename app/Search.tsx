@@ -12,13 +12,13 @@ import { AutocompleteDropdownContextProvider } from '@/lib/autocomplete';
 import { SCREENS } from '@/lib/layout/constants';
 import { AppDispatch, RootState } from '@/lib/store';
 import { setLocation } from '@/lib/store/location.slice';
-import { Place } from '@/lib/geo/places'
+import { Place } from '@/lib/geo/places';
 
 const appBackground = require('@/assets/new-glass-bg.png');
 
 const SearchScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { name, lat, lon} = useSelector((state: RootState) => state.location);
+  const { name, lat, lon } = useSelector((state: RootState) => state.location);
 
   const router = useRouter();
   return (
