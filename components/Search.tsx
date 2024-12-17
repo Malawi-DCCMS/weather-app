@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Dialog, Paragraph, Portal, Button, Text } from 'react-native-paper';
 import { isNil } from 'lodash';
@@ -50,7 +50,7 @@ export const Search = ({ setLocation }: SearchProps) => {
     }
   }
 
-  return useMemo(() => (
+  return (
     <View>
       <View style={styles.container}>
         <AutocompleteDropdown
@@ -86,7 +86,7 @@ export const Search = ({ setLocation }: SearchProps) => {
       </Portal>
       <GPSFeedback status={gpsSearch} />
     </View>
-  ), []);
+  );
 };
 
 type GPSFeedbackProps = {
