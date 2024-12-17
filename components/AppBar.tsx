@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
 import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
@@ -32,27 +32,27 @@ const AppBar = (props: AppBarProps) => {
   useIsFocused();
 
   let relevantAlerts: CAPAlert[] = []
-  if(lat && lon){
-    relevantAlerts =  alerts.filter(alert => alertInLocation(alert, {latitude:lat, longitude:lon}))
+  if (lat && lon) {
+    relevantAlerts = alerts.filter(alert => alertInLocation(alert, { latitude: lat, longitude: lon }))
   }
 
-  return useMemo(() => (
+  return (
     <View style={styles.appBar}>
       <View style={styles.appTitleContainer}>
-        {navigation.canGoBack() && 
-        <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => navigation.goBack()} style={{ paddingRight: 12 }}>
+        {navigation.canGoBack() &&
+          <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => navigation.goBack()} style={{ paddingRight: 12 }}>
             <Icon size={28} color='white' source={backArrow} />
-        </TouchableOpacity>}
+          </TouchableOpacity>}
         <Text style={styles.appTitle} numberOfLines={1}>{props.location || "Zanyengo"}</Text>
         {getWarningIcons(relevantAlerts)}
       </View>
 
       <View style={styles.appNav}>
-        {showSearch && 
-            <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Search' 
-                onPress={() => router.push(SCREENS.Search.toString() as Href)}>
-                <Icon size={28} color='white' source="magnify" />
-            </TouchableOpacity>
+        {showSearch &&
+          <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Search'
+            onPress={() => router.push(SCREENS.Search.toString() as Href)}>
+            <Icon size={28} color='white' source="magnify" />
+          </TouchableOpacity>
         }
         <View
           style={{
@@ -89,28 +89,28 @@ const AppBar = (props: AppBarProps) => {
         </View>
       </View>
     </View>
-  ), [lat, lon, alerts, visible]);
+  );
 }
 
 const getWarningIcons = (alerts: Array<CAPAlert>) => {
-    if (alerts && alerts.length) {
-      const icons: Array<React.JSX.Element> = [];
-      for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
-        const capInfo = alerts[i].info as Array<CAPInfo>;
-        const alertColor = alertLevel(capInfo[0]).toLowerCase();
-        const icon = WEATHER_WARNING_ICONS[alertColor];
-        icons.push(
-          <TouchableOpacity key={i} style={{ position: 'relative', top: 0, right: j, zIndex: j }}>
-            <Image style={{ width: 35, height: 30 }} source={icon} />
-          </TouchableOpacity>
-        );
-      }
-      return <View style={styles.warningIcons}>
-        {icons}
-      </View>;
+  if (alerts && alerts.length) {
+    const icons: Array<React.JSX.Element> = [];
+    for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
+      const capInfo = alerts[i].info as Array<CAPInfo>;
+      const alertColor = alertLevel(capInfo[0]).toLowerCase();
+      const icon = WEATHER_WARNING_ICONS[alertColor];
+      icons.push(
+        <TouchableOpacity key={i} style={{ position: 'relative', top: 0, right: j, zIndex: j }}>
+          <Image style={{ width: 35, height: 30 }} source={icon} />
+        </TouchableOpacity>
+      );
     }
-  };
-  
+    return <View style={styles.warningIcons}>
+      {icons}
+    </View>;
+  }
+};
+
 export default AppBar;
 
 const styles = StyleSheet.create({
