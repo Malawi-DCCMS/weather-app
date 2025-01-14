@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Axios from 'axios';
 
-import { LOGGER } from '@/lib/utils/logger';
 import { Forecast } from '@/lib/forecast/types';
 import { Forecaster } from '@/lib/forecast/locationforecast';
 
@@ -32,11 +31,11 @@ const forecastSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(getLocationForecast.pending, state => {
-      LOGGER.info('Loading forecast...');
+      console.log('Loading forecast...');
       state.loading = true;
     });
     builder.addCase(getLocationForecast.fulfilled, (state, action) => {
-      LOGGER.info('Loading forecast fulfilled.');
+      console.log('Loading forecast fulfilled.');
       state.loading = false;
       state.forecast = action.payload;
     });
@@ -50,7 +49,7 @@ const forecastSlice = createSlice({
         // Handle other types of errors
         err = action.error.message;
       }
-      LOGGER.error('Loading forecast rejected: ' + err);
+      console.error('Loading forecast rejected: ' + err);
       state.error = 'There was a problem getting the weather. Please try again later.';
     });
   },
