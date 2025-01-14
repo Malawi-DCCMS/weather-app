@@ -47,12 +47,13 @@ function getWarningColor(level?: keyof typeof WARNING_COLORS): string | undefine
 }
 
 function getAlertStatus(alert: CAPAlert) {
-  if (!alert.info || !alert.info.length || !alert.info[0].onset) {
+  if (!alert.info || !alert.info.length) {
     return;
   }
 
-  const onset= DateTime.fromISO(alert.info[0].onset);
-  return onset < DateTime.now() ? 'Expected' : 'Ongoing';
+  const { onset, effective } = alert.info[0];
+  const start = DateTime.fromISO(onset || effective || alert?.sent);
+  return start < DateTime.now() ? 'Expected' : 'Ongoing';
 }
 
 function getAlertEvent(alert: CAPAlert) {
