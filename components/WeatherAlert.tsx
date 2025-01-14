@@ -53,7 +53,7 @@ function getAlertStatus(alert: CAPAlert) {
 
   const { onset, effective } = alert.info[0];
   const start = DateTime.fromISO(onset || effective || alert?.sent);
-  return start < DateTime.now() ? 'Expected' : 'Ongoing';
+  return start <= DateTime.now() ? 'Ongoing' : 'Expected';
 }
 
 function getAlertEvent(alert: CAPAlert) {
