@@ -73,7 +73,7 @@ function parseRssFeed(doc: string): CAPReference[] | PromiseLike<CAPReference[]>
       for (const item of result.rss.channel[0].item) {
         ret.push({
           title: item.title[0],
-          link: item.link[0]['_'],
+          link: item.link[0],
           guid: item.guid[0],
           pubDate: DateTime.fromRFC2822(item.pubDate[0])
         });
