@@ -17,7 +17,7 @@ export interface CAPReference {
  */
 async function download(url: string, ifModifiedSince?: DateTime): Promise<string | null> {
   let httpRequestHeaders: any = {
-    'User-Agent': 'vegardb cap_reader',
+    'User-Agent': 'Zanyengo v1 cap_reader',
   }
   if (ifModifiedSince)
     httpRequestHeaders['If-Modified-Since'] = ifModifiedSince.toHTTP()
