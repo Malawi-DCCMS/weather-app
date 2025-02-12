@@ -48,8 +48,7 @@ export class CAPCollector {
                 this._messages[msg.identifier] = msg
 
                 ret.push(msg)
-            }
-            catch (err: any) {
+            } catch (err: any) {
                 console.log(err)
             }
         }
