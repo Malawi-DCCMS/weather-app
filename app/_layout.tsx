@@ -3,6 +3,8 @@ import { store } from '@/lib/store';
 import { Provider as StoreProvider } from 'react-redux';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 
+import '../lib/localization/i18n';
+
 const theme = {
   ...DefaultTheme,
   colors: {
