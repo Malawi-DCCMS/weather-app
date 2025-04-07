@@ -37,7 +37,7 @@ const resources = {
     en: {
         translation: en,
     },
-    fr: {
+    chi: {
         translation: chi,
     },
 };

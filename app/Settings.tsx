@@ -1,45 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { Text } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter, Href } from 'expo-router';
+import { Dropdown } from 'react-native-paper-dropdown';
 
-import { Search } from '@/components/Search';
 import Alerts from '@/components/Alerts';
 import AppBar from '@/components/AppBar';
 
-import { AutocompleteDropdownContextProvider } from '@/lib/autocomplete';
-import { SCREENS } from '@/lib/layout/constants';
-import { AppDispatch, RootState } from '@/lib/store';
-import { setLocation } from '@/lib/store/location.slice';
-import { Place } from '@/lib/geo/places';
+import { RootState } from '@/lib/store';
 
 const appBackground = require('@/assets/new-glass-bg.png');
 
 const SettingsScreen = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const options = [
+    { label: 'English', value: 'en' },
+    { label: 'Chichewa', value: 'chi' },
+  ];
+
+  const [language, setLanguage] = useState<string>();
   const { name, lat, lon } = useSelector((state: RootState) => state.location);
 
-  const router = useRouter();
   return (
     <SafeAreaView style={styles.wrapper}>
-      <AutocompleteDropdownContextProvider>
-        <View style={styles.wrapper}>
-          <ImageBackground source={appBackground} style={styles.bg}>
-            <AppBar location={name ? name : 'Search location'} />
-            <Alerts lat={lat} lon={lon} location={name} />
-            <Search
-              location={name}
-              setLocation={
-                (place: Place) => {
-                  dispatch(setLocation({ name: place.name, lat: place.latitude, lon: place.longitude }));
-                  router.push(SCREENS.Home.toString() as Href);
-                }
-              }
+      <View style={styles.wrapper}>
+        <ImageBackground source={appBackground} style={styles.bg}>
+          <AppBar location={'Settings'} />
+          <Alerts lat={lat} lon={lon} location={name} />
+          <View>
+            <Text style={styles.text}>Language</Text>
+            <Dropdown
+              label="Language"
+              placeholder="Select Language"
+              options={options}
+              value={language}
+              onSelect={setLanguage}
             />
-          </ImageBackground>
-        </View>
-      </AutocompleteDropdownContextProvider>
+          </View>
+        </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 }
@@ -56,5 +55,24 @@ const styles = StyleSheet.create({
   },
   bg: {
     height: '100%',
-  }
+  },
+  text: {
+    color: 'white',
+    fontFamily: 'NotoSans-Regular',
+  },
+  settings: {
+    backgroundColor: 'rgba(217, 217, 217, 0.50)',
+    shadowColor: 'rgba(217, 217, 217, 0.50)',
+    paddingLeft: 17,
+    paddingRight: 17,
+    paddingTop: 13,
+    paddingBottom: 13,
+    borderRadius: 4,
+    width: '90%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    fontFamily: 'OpenSans',
+    fontSize: 20,
+    color: 'white',
+  },
 })
