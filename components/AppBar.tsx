@@ -85,6 +85,16 @@ const AppBar = (props: AppBarProps) => {
               titleStyle={styles.menuItemTitle}
               title="About the app"
             />
+            <Menu.Item
+              onPress={() => {
+                closeMenu();
+                router.push(SCREENS.Settings.toString() as Href);
+              }}
+              style={styles.menuItem}
+              accessibilityLabel='Settings'
+              titleStyle={styles.menuItemTitle}
+              title="Settings"
+            />
           </Menu>
         </View>
       </View>

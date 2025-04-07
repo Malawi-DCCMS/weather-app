@@ -8,4 +8,5 @@
     AboutUs = "AboutUs",
     AboutTheApp = "AboutTheApp",
     WeatherWarning = "WeatherWarning",
+    Settings = "Settings"
   };
