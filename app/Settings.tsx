@@ -28,20 +28,20 @@ const SettingsScreen = () => {
           <AppBar location={'Settings'} />
           <Alerts lat={lat} lon={lon} location={name} />
           <View>
-            <Text style={styles.text}>Language</Text>
-                            <Dropdown
-                  label="Language"
-                  placeholder="Select a language..."
-                  options={options}
-                  selectedValue={language}
-                  onValueChange={value => setLanguage(value as string)}
-                  primaryColor={'#313131'}
-                  dropdownStyle={styles.settings}
-                  placeholderStyle={{ color: 'white' }}
-                  selectedItemStyle={{ color: 'white' }}
-                  dropdownIconStyle={{ borderColor: 'white', borderWidth: 1, borderRadius: 1000 }}
-                  dropdownIcon={<Icon source={'chevron-down'} color='white' size={24} />}
-                />
+            <Text style={styles.whiteText}>Language</Text>
+            <Dropdown
+              label="Language"
+              placeholder="Select a language..."
+              options={options}
+              selectedValue={language}
+              onValueChange={value => setLanguage(value as string)}
+              primaryColor={'#313131'}
+              dropdownStyle={styles.dropdownStyle}
+              placeholderStyle={{ color: 'white' }}
+              selectedItemStyle={{ color: 'white' }}
+              dropdownIconStyle={{ borderColor: 'white', borderWidth: 1, borderRadius: 1000 }}
+              dropdownIcon={<Icon source={'chevron-down'} color='white' size={24} />}
+            />
           </View>
         </ImageBackground>
       </View>
@@ -52,33 +52,55 @@ const SettingsScreen = () => {
 export default SettingsScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    flex: 1,
+  },
+  opacity: {
+    flexDirection: 'column',
+    flex: 1,
+    backgroundColor: 'rgba(100, 100, 100, .1)',
+  },
+  dropdownStyle: {
+    flexDirection: 'column',
+    flex: 1,
+    verticalAlign: 'middle',
+    backgroundColor: 'rgba(100, 100, 100, .1)',
+    borderColor: 'white',
+  },
+  whiteHeader: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: "600",
+    fontFamily: 'OpenSans',
+  },
+  whiteText: {
+    color: 'white',
+    fontSize: 16,
+    lineHeight: 22,
+    fontFamily: 'OpenSans',
+  },
+  title: {
+    color: 'white',
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: "600",
+    fontFamily: 'OpenSans',
+  },
   wrapper: {
     flexDirection: 'column',
     height: '100%',
     width: '100%',
     margin: 0,
     padding: 0,
+    overflow: 'scroll',
   },
   bg: {
     height: '100%',
   },
-  text: {
-    color: 'white',
-    fontFamily: 'NotoSans-Regular',
+  content: {
+    marginTop: 24,
+    marginLeft: 32,
+    marginRight: 58,
   },
-  settings: {
-    backgroundColor: 'rgba(217, 217, 217, 0.50)',
-    shadowColor: 'rgba(217, 217, 217, 0.50)',
-    paddingLeft: 17,
-    paddingRight: 17,
-    paddingTop: 13,
-    paddingBottom: 13,
-    borderRadius: 4,
-    width: '90%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    fontFamily: 'OpenSans',
-    fontSize: 20,
-    color: 'white',
-  },
-})
+});
