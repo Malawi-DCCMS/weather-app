@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
-import { Icon, Text } from 'react-native-paper';
+import { Paragraph, Text } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Dropdown from 'react-native-input-select';
@@ -9,39 +9,50 @@ import Alerts from '@/components/Alerts';
 import AppBar from '@/components/AppBar';
 
 import { RootState } from '@/lib/store';
+import { useTranslation } from 'react-i18next';
 
 const appBackground = require('@/assets/new-glass-bg.png');
 
 const SettingsScreen = () => {
+  const { t, i18n } = useTranslation();
+
   const options = [
     { label: 'English', value: 'en' },
     { label: 'Chichewa', value: 'chi' },
   ];
 
+  const handleChangeLanguage = (lang: string) => (i18n.changeLanguage(lang), setLanguage(lang));
+
   const [language, setLanguage] = useState<string>();
   const { name, lat, lon } = useSelector((state: RootState) => state.location);
 
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location={'Settings'} />
+          <AppBar location={t('Settings')} />
           <Alerts lat={lat} lon={lon} location={name} />
-          <View>
-            <Text style={styles.whiteText}>Language</Text>
-            <Dropdown
-              label="Language"
-              placeholder="Select a language..."
-              options={options}
-              selectedValue={language}
-              onValueChange={value => setLanguage(value as string)}
-              primaryColor={'#313131'}
-              dropdownStyle={styles.dropdownStyle}
-              placeholderStyle={{ color: 'white' }}
-              selectedItemStyle={{ color: 'white' }}
-              dropdownIconStyle={{ borderColor: 'white', borderWidth: 1, borderRadius: 1000 }}
-              dropdownIcon={<Icon source={'chevron-down'} color='white' size={24} />}
-            />
+          <View style={styles.container}>
+            <View style={styles.opacity}>
+              <View style={styles.content}>
+                <Paragraph>
+                  <Text style={styles.title}>
+                    {t('Language')}
+                  </Text>
+                </Paragraph>
+                <Dropdown
+                  label={t('Language')}
+                  placeholder={t('select.language.placeholder')}
+                  options={options}
+                  selectedValue={i18n.language}
+                  onValueChange={value => handleChangeLanguage(value as string)}
+                  primaryColor={'#313131'}
+                  dropdownStyle={styles.dropdownStyle}
+                  placeholderStyle={{ color: 'white' }}
+                  selectedItemStyle={{ color: 'white' }}
+                />
+              </View>
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -71,7 +82,7 @@ const styles = StyleSheet.create({
   whiteHeader: {
     color: 'white',
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: '600',
     fontFamily: 'OpenSans',
   },
   whiteText: {
@@ -84,7 +95,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     lineHeight: 24,
-    fontWeight: "600",
+    fontWeight: '600',
     fontFamily: 'OpenSans',
   },
   wrapper: {

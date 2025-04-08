@@ -13,6 +13,7 @@ import { placeByCurrentLocation } from '@/lib/geo/location';
 import { Place } from '@/lib/geo/places';
 
 import geonames from '@/assets/geonames.json'
+import { useTranslation } from 'react-i18next';
 const locationAnchor = require('@/assets/location-anchor.png');
 
 type SearchProps = {
@@ -23,6 +24,7 @@ type SearchProps = {
 type GPS = "INACTIVE" | "SEARCHING" | "FAILED";
 
 export const Search = ({ setLocation }: SearchProps) => {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
@@ -57,7 +59,7 @@ export const Search = ({ setLocation }: SearchProps) => {
           clearOnFocus={true}
           closeOnBlur={false}
           closeOnSubmit={true}
-          textInputProps={{ placeholder: 'Search location', placeholderTextColor: 'white', style: styles.textStyle }}
+          textInputProps={{ placeholder: t('Search location'), placeholderTextColor: 'white', style: styles.textStyle }}
           onSelectItem={handleSelect}
           inputContainerStyle={styles.searchBar}
           debounce={100}

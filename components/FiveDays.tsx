@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 import DayRow from './DayRow';
 import { WeatherData } from '@/lib/forecast/weatherData';
 import weatherIcons from '@/lib/forecast/weathericons.constant';
+import { useTranslation } from 'react-i18next';
 
 type FiveDaysProps = {
     startDate: DateTime;
@@ -14,6 +15,7 @@ type FiveDaysProps = {
     onClick: (day: DateTime) => void;
 }
 function FiveDays(props: FiveDaysProps): JSX.Element {
+    const { t } = useTranslation();
     const { startDate, preparedForecast } = props
 
     if (preparedForecast) {
@@ -24,7 +26,7 @@ function FiveDays(props: FiveDaysProps): JSX.Element {
             return (
                 <View style={{ paddingLeft: 12, paddingRight: 12, marginTop: 40 }}>
                     <Text style={{ fontFamily: 'NotoSans-Regular' }}>
-                        Forecast not available at the moment. Please try again later.
+                        {t('Forecast not available at the moment. Please try again later.')}
                     </Text>
                 </View>
             );
@@ -43,12 +45,14 @@ function FiveDays(props: FiveDaysProps): JSX.Element {
 
     return (
         <View style={{ paddingLeft: 12, paddingRight: 12, marginTop: 40 }}>
-            <Text style={{ fontFamily: 'NotoSans-Regular' }}>Loading...</Text>
+            <Text style={{ fontFamily: 'NotoSans-Regular' }}>{t('Loading')}...</Text>
         </View>
     );
 };
 
 function FiveDayHeader() {
+    const { t } = useTranslation();
+
     return (
         <View style={styles.dayRow}>
             <View style={styles.opacity}>
@@ -58,11 +62,11 @@ function FiveDayHeader() {
                 <Paragraph style={{ flex: 3 }}>
                     <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
                 </Paragraph>
-                <Paragraph style={{ flex: 3 }}>
-                    <Text style={styles.whiteText}>Min</Text>
+                <Paragraph style={{ flex: 4 }}>
+                    <Text style={styles.whiteText}>{t('Min')}</Text>
                 </Paragraph>
-                <Paragraph style={{ flex: 3 }}>
-                    <Text style={styles.whiteText}>Max</Text>
+                <Paragraph style={{ flex: 4 }}>
+                    <Text style={styles.whiteText}>{t('Max')}</Text>
                 </Paragraph>
                 <Paragraph style={{ flex: 3 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
             </View>

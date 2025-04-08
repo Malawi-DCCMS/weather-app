@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 
 import weatherIcons from '@/lib/forecast/weathericons.constant';
 import { WeatherDataDaySummary } from '@/lib/forecast/weatherData';
+import { useTranslation } from 'react-i18next';
 
 type HourlyTableProps = {
   title: string;
@@ -16,8 +17,10 @@ type HourlyTableProps = {
  * Get today's forecast
  */
 function HourlyTable(props: HourlyTableProps): JSX.Element {
+  const { t } = useTranslation();
+
   const isSameDay = props.day.hasSame(DateTime.local(), "day");
-  const dayName = isSameDay ? 'Today' : props.day.toFormat('ccc');
+  const dayName = isSameDay ? t('Today') : props.day.toFormat('ccc');
   return (
     <View style={styles.container}>
       <View style={styles.opacity}>
@@ -26,11 +29,11 @@ function HourlyTable(props: HourlyTableProps): JSX.Element {
         </View>
         <DataTable style={styles.table}>
           <DataTable.Header>
-            <DataTable.Title><Text style={styles.whiteHeader}>Time</Text></DataTable.Title>
+            <DataTable.Title><Text style={styles.whiteHeader}>{t('Time')}</Text></DataTable.Title>
             <DataTable.Title><Text></Text></DataTable.Title>
-            <DataTable.Title numeric><Text style={styles.whiteHeader}>Temp C&deg;</Text></DataTable.Title>
-            <DataTable.Title numeric><Text style={styles.whiteHeader}>Rain mm</Text></DataTable.Title>
-            <DataTable.Title numeric><Text style={styles.whiteHeader}>Wind km/h</Text></DataTable.Title>
+            <DataTable.Title numeric numberOfLines={2}><Text style={styles.whiteHeader}>{t('Temp')}{"\n"}C&deg;</Text></DataTable.Title>
+            <DataTable.Title numeric numberOfLines={2}><Text style={styles.whiteHeader}>{t('Rain')}{"\n"}mm</Text></DataTable.Title>
+            <DataTable.Title numeric numberOfLines={2}><Text style={styles.whiteHeader}>{t('Wind')}{"\n"}km/h</Text></DataTable.Title>
           </DataTable.Header>
           <ScrollView snapToStart={false} showsVerticalScrollIndicator={false}>
             {props.daySummary.steps.map((step) => (
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 20,
     paddingTop: 5,
-    flex: 1
+    flex: 1,
   },
   opacity: {
     flexDirection: 'column',
@@ -78,6 +81,7 @@ const styles = StyleSheet.create({
   },
   whiteHeader: {
     color: 'white',
+    textAlign: 'center'
   },
   whiteText: {
     color: 'white',

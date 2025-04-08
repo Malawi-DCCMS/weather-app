@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Icon, Text } from 'react-native-paper';
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
 
 import { useForecast } from '@/lib/hooks/current-forecast.hook';
 import { District } from '@/lib/geo/constants';
 import weatherIcons from '@/lib/forecast/weathericons.constant';
 import { WeatherData } from '@/lib/forecast/weatherData';
 import { Forecast } from '@/lib/forecast/types';
+import { useTranslation } from 'react-i18next';
 
 
 type LocationRowProps = {
@@ -15,17 +16,19 @@ type LocationRowProps = {
   onPress: (forecast: Forecast) => void
 };
 function LocationRow(props: LocationRowProps): JSX.Element {
+  const { t } = useTranslation();
+
   const { district, onPress } = props;
   const [, forecast, error] = useForecast(district.lat, district.lon);
 
   if (error) {
-    return <ForecastError msg="There was an error getting the forecast." />
+    return <ForecastError msg={t('There was an error getting the forecast') + '.'} />
   }
 
   if (forecast) {
     const today = new WeatherData(forecast).atDay(DateTime.now())
     if (!today) {
-      return <ForecastError msg="Forecast unavailable." />
+      return <ForecastError msg={t('Forecast unavailable.')} />
     }
 
     return (
@@ -119,13 +122,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'NotoSans-Regular',
     color: 'white',
-    fontWeight: "400",
+    fontWeight: '400',
   },
   small: {
     fontSize: 16,
     fontFamily: 'NotoSans-Regular',
     color: 'white',
-    fontWeight: "400",
+    fontWeight: '400',
   },
   smallContainer: {
     marginTop: 5,

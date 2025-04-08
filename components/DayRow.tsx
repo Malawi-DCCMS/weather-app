@@ -4,12 +4,14 @@ import { Icon, Paragraph, Text } from "react-native-paper";
 
 import weatherIcons from '@/lib/forecast/weathericons.constant';
 import { WeatherDataDaySummary } from "@/lib/forecast/weatherData";
+import { useTranslation } from "react-i18next";
 
 
 type DayRowProps = {
   summary: WeatherDataDaySummary | undefined;
 }
 const DayRow = (props: DayRowProps) => {
+  const { t } = useTranslation();
   const { summary } = props;
 
   if (!summary) {
@@ -17,7 +19,7 @@ const DayRow = (props: DayRowProps) => {
       <View style={styles.dayRow}>
         <View style={styles.opacity}>
           <Paragraph style={{ flex: 2 }}>
-            <Text style={styles.whiteText}>Forecast unavailable</Text>
+            <Text style={styles.whiteText}>{t('Forecast unavailable')}.</Text>
           </Paragraph>
         </View>
       </View>

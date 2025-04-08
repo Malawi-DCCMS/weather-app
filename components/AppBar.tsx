@@ -9,6 +9,7 @@ import { SCREENS } from '@/lib/layout/constants';
 import { WEATHER_WARNING_ICONS } from '@/lib/alerts/icons';
 import { RootState } from '@/lib/store';
 import { CAPAlert, CAPInfo, alertInLocation, alertLevel } from '@/lib/alerts/alert';
+import { useTranslation } from 'react-i18next';
 
 const backArrow = require('@/assets/icons8-back-100_2.png');
 
@@ -18,6 +19,7 @@ type AppBarProps = {
 };
 
 const AppBar = (props: AppBarProps) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const navigation = useNavigation();
 
@@ -73,7 +75,7 @@ const AppBar = (props: AppBarProps) => {
               style={styles.menuItem}
               accessibilityLabel='About the developers'
               titleStyle={styles.menuItemTitle}
-              title="About us"
+              title={t("About us")}
             />
             <Menu.Item
               onPress={() => {
@@ -83,7 +85,7 @@ const AppBar = (props: AppBarProps) => {
               style={styles.menuItem}
               accessibilityLabel='About the app'
               titleStyle={styles.menuItemTitle}
-              title="About the app"
+              title={t("About the app")}
             />
             <Menu.Item
               onPress={() => {
@@ -93,7 +95,7 @@ const AppBar = (props: AppBarProps) => {
               style={styles.menuItem}
               accessibilityLabel='Settings'
               titleStyle={styles.menuItemTitle}
-              title="Settings"
+              title={t("Settings")}
             />
           </Menu>
         </View>
