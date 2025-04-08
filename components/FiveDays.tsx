@@ -7,6 +7,7 @@ import DayRow from './DayRow';
 import { WeatherData } from '@/lib/forecast/weatherData';
 import weatherIcons from '@/lib/forecast/weathericons.constant';
 import { useTranslation } from 'react-i18next';
+import i18n from '@/lib/localization/i18n';
 
 type FiveDaysProps = {
     startDate: DateTime;
@@ -15,7 +16,7 @@ type FiveDaysProps = {
     onClick: (day: DateTime) => void;
 }
 function FiveDays(props: FiveDaysProps): JSX.Element {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { startDate, preparedForecast } = props
 
     if (preparedForecast) {
@@ -62,10 +63,10 @@ function FiveDayHeader() {
                 <Paragraph style={{ flex: 3 }}>
                     <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
                 </Paragraph>
-                <Paragraph style={{ flex: 4 }}>
+                <Paragraph style={{ flex: i18n.language === 'en' ? 3 : 4 }}>
                     <Text style={styles.whiteText}>{t('Min')}</Text>
                 </Paragraph>
-                <Paragraph style={{ flex: 4 }}>
+                <Paragraph style={{ flex: i18n.language === 'en' ? 3 : 4 }}>
                     <Text style={styles.whiteText}>{t('Max')}</Text>
                 </Paragraph>
                 <Paragraph style={{ flex: 3 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
