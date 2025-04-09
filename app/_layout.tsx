@@ -4,6 +4,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 
 import '../lib/localization/i18n';
+import { AutocompleteDropdownContextProvider } from "@/lib/autocomplete";
 
 const theme = {
   ...DefaultTheme,
@@ -18,10 +19,12 @@ export default function RootLayout() {
   return (
     <StoreProvider store={store}>
       <PaperProvider theme={theme}>
-        <Stack screenOptions={{
-          // Hide the default expo header
-          headerShown: false,
-        }} />
+        <AutocompleteDropdownContextProvider>
+          <Stack screenOptions={{
+            // Hide the default expo header
+            headerShown: false,
+          }} />
+        </AutocompleteDropdownContextProvider>
       </PaperProvider>
     </StoreProvider>
   );
