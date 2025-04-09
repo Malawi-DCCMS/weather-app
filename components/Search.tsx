@@ -33,7 +33,9 @@ export const Search = ({ setLocation }: SearchProps) => {
   const [gpsSearch, setGPSSearch] = useState<GPS>("INACTIVE");
 
   const handleSelect = (item: TAutocompleteDropdownItem) => {
-    item && setLocation(geonames[item.id]);
+    if (item) {
+      setLocation(geonames[item.id]);
+    }
   };
 
   const handlePlaceByCurrentLocation = async () => {
