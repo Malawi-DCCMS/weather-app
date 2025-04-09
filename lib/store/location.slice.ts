@@ -28,7 +28,12 @@ const locationSlice = createSlice({
     setName: (state, action) => { state.name = action.payload },
     setLat: (state, action) => { state.lat = action.payload },
     setLon: (state, action) => { state.lon = action.payload },
-    setLocation: (state, action) => (Object.assign(state, { name: action.payload.name, lat: action.payload.lat, lon: action.payload.lon })),
+    setLocation: (state, action) => {
+      console.log('[Redux] setLocation called with:', action.payload);
+      state.name = action.payload.name;
+      state.lat = action.payload.lat;
+      state.lon = state.lon;
+    },
   },
   extraReducers(builder) {
     builder.addCase(getPreciseLocation.pending, state => {

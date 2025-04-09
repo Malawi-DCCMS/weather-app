@@ -6,6 +6,7 @@ import { Forecaster } from '@/lib/forecast/locationforecast';
 
 type ForecastPayload = { lat: number, lon: number };
 export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<Forecast> => {
+  console.log('[Thunk] getLocationForecast DISPATCHED with', { lat, lon });
   const forecaster = new Forecaster();
   return await forecaster.getForecast(lat, lon);
 });
