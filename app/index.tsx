@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";
 import { ActivityIndicator, Button } from 'react-native-paper';
 import { CommonActions } from '@react-navigation/native';
-import { useRouter, useNavigation, useFocusEffect } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 import { isUndefined } from 'lodash';
 
 import AppBar from '@/components/AppBar';
@@ -15,7 +15,7 @@ import Alerts from '@/components/Alerts';
 
 import type { AppDispatch, RootState } from '@/lib/store'
 import { SCREENS } from '@/lib/layout/constants';
-import { getPreciseLocation } from '@/lib/store/location.slice';
+import { resetError, getPreciseLocation } from '@/lib/store/location.slice';
 import { getLocationForecast } from '@/lib/store/forecast.slice';
 import { getAlerts } from '@/lib/store/alert.slice';
 import { WeatherData } from '@/lib/forecast/weatherData';
@@ -72,6 +72,7 @@ const MainScreen = () => {
   // Reset navigation and go to list of cities if GPS location results in locationError.
   useEffect(() => {
     if (locationError && !navigation.canGoBack()) {
+      dispatch(resetError());
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
