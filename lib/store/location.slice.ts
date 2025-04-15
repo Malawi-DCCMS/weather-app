@@ -32,7 +32,11 @@ const locationSlice = createSlice({
       console.log('[Redux] setLocation called with:', action.payload);
       state.name = action.payload.name;
       state.lat = action.payload.lat;
-      state.lon = state.lon;
+      state.lon = action.payload.lon;
+    },
+    resetError: (state) => {
+      console.log('[Redux] clearing location error...');
+      state.error = undefined;
     },
   },
   extraReducers(builder) {
@@ -55,5 +59,5 @@ const locationSlice = createSlice({
   },
 })
 
-export const { setName, setLat, setLon, setLocation } = locationSlice.actions;
+export const { setName, setLat, setLon, setLocation, resetError } = locationSlice.actions;
 export const { reducer: locationReducer } = locationSlice;
