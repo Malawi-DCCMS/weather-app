@@ -18,7 +18,7 @@ function AboutTheAppScreen(): JSX.Element {
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   const getPartners = (): Array<string> => ([
-    'Nowergian Meteorological Institute',
+    'Norwegian Meteorological Institute',
     'NORAD',
     'NORCAP',
     'World Meteorological Organisation',
