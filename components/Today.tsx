@@ -4,6 +4,7 @@ import { Icon, Text } from 'react-native-paper';
 
 import { getForecastDescription } from '@/lib/forecast/forecast.utils';
 import { WeatherDataDaySummary } from '@/lib/forecast/weatherData';
+import { useTranslation } from 'react-i18next';
 
 const forwardArrow = require('@/assets/icons8-forward-100.png');
 const upArrow = require('@/assets/Arrow-upward.png');
@@ -13,7 +14,9 @@ type TodaysForecastProps = {
   daySummary: WeatherDataDaySummary | undefined;
 };
 function Today(props: TodaysForecastProps): JSX.Element {
-  const { daySummary } = props
+  const { t } = useTranslation();
+
+  const { daySummary } = props;
 
   if (!daySummary) {
     return (
@@ -29,7 +32,7 @@ function Today(props: TodaysForecastProps): JSX.Element {
     <View style={styles.wrapper}>
       <View style={styles.opacity}>
         <View style={styles.today}>
-          <View><Text style={styles.todaysHeader}>Today <Icon size={24} color='white' source={forwardArrow} /></Text></View>
+          <View><Text style={styles.todaysHeader}>{t('Today')} <Icon size={24} color='white' source={forwardArrow} /></Text></View>
           <View><Text style={styles.large}>{Math.round(daySummary.steps[0].temperature || 0)}&deg;</Text></View>
         </View>
         <View style={styles.temps}>
@@ -39,8 +42,8 @@ function Today(props: TodaysForecastProps): JSX.Element {
             </Text>
           </View>
           <View>
-            <Text style={styles.small}>
-              {daySummary.weatherSymbol ? getForecastDescription(daySummary.weatherSymbol) : 'Not available'}
+            <Text style={styles.smallSymbol} numberOfLines={2}>
+              {daySummary.weatherSymbol ? t(daySummary.weatherSymbol) : t('Not available')}
             </Text>
           </View>
         </View>
@@ -100,6 +103,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Rajdhani-Light',
     color: 'white',
+  },
+  smallSymbol: {
+    fontSize: 16,
+    fontFamily: 'Rajdhani-Light',
+    color: 'white',
+    maxWidth: 150
   },
 });
 

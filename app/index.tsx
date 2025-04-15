@@ -62,17 +62,12 @@ const MainScreen = () => {
 
   // Update forecast and alerts each time lat/lon changes.
   // Also update timer for refreshing forecast specified lat/lon regularly.
-  useFocusEffect(useCallback(() => {
-      if (isUndefined(lat) || isUndefined(lon)) {
-        return;
-      }
-  
+  useEffect(() => {
+    if (!isUndefined(lat) && !isUndefined(lon)) {
       dispatch(getLocationForecast({ lat, lon }));
       dispatch(getAlerts());
-
-      return () => {};
-    }, [lat, lon])
-  );
+    }
+  }, [lat, lon]);
 
   // Reset navigation and go to list of cities if GPS location results in locationError.
   useEffect(() => {

@@ -8,17 +8,19 @@ import AppBar from '@/components/AppBar';
 import Alerts from '@/components/Alerts';
 
 import { RootState } from '@/lib/store';
+import { useTranslation } from 'react-i18next';
 
 const appBackground = require('@/assets/new-glass-bg.png');
 
 function AboutUsScreen(): JSX.Element {
+  const { t } = useTranslation();
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ImageBackground source={appBackground} style={styles.bg}>
-          <AppBar location={"About us"} />
+          <AppBar location={t("About us")} />
           <Alerts lat={lat} lon={lon} location={"About us"} />
           <View style={styles.container}>
             <View style={styles.opacity}>
@@ -31,37 +33,31 @@ function AboutUsScreen(): JSX.Element {
                     <View style={styles.content}>
                       <Paragraph>
                         <Text style={styles.title}>
-                          Department of Climate Change and Meteorological Services (DCCMS)
+                          {t('Department of Climate Change and Meteorological Services (DCCMS)')}
                         </Text>{"\n"}
                       </Paragraph>
                       <Paragraph>
-                        <Text style={styles.whiteHeader}>How we started</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{t('how.we.started')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          We began with volunteers and enthusiasts in the 1890s.
-                          Later in the 1940s, we started providing weather services for local aviation.
-                          Today, we provide reliable weather services across globe.
-                          We cover aviation, marine, agriculture, livestock management, and more.
+                          {t('how.we.started.desc')}
                         </Text>
                       </Paragraph>
                       <Paragraph style={{ marginTop: 40 }}>
-                        <Text style={styles.whiteHeader}>Our mandate</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{t('our.mandate')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          To monitor, predict and provide
-                          information on weather and climate, that would contribute towards the socio-economic development of the country.
+                          {t('our.mandate.desc')}
                         </Text>
                       </Paragraph>
                       <Paragraph style={{ marginTop: 40 }}>
-                        <Text style={styles.whiteHeader}>Our mission</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{t('our.mission')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          To provide reliable, responsive and high quality weather and climate services to meet national, regional and
-                          international obligations through timely dissemination of accurate and up to-date data and information
-                          for socio-economic development.
+                          {(t('our.mission.desc'))}
                         </Text>
                       </Paragraph>
                       <Paragraph style={{ marginTop: 40 }}>
-                        <Text style={styles.whiteHeader}>Our vision</Text>{"\n"}
+                        <Text style={styles.whiteHeader}>{t('our.vision')}</Text>{"\n"}
                         <Text style={styles.whiteText}>
-                          A Responsive Nation to Weather and Climate Change Impacts{"\n"}{"\n"}
+                          {t('our.vision.desc')}{"\n"}{"\n"}
                         </Text>
                       </Paragraph>
                     </View>
