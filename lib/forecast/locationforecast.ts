@@ -7,6 +7,7 @@ import {
   CircuitState,
 } from 'cockatiel';
 
+import { PRIMARY_API_URL, FALLBACK_API_URL, APP_USER_AGENT } from 'react-native-dotenv';
 import { Forecast } from "./types"
 
 /**
@@ -15,9 +16,9 @@ import { Forecast } from "./types"
  * Ensures that a uses agent is set on each request.
  */
 export class Forecaster {
-  private readonly userAgent: string = 'DCCMS - Zanyengo v1';
-  private readonly apiUrl: string = 'https://api.metmalawi.gov.mw';
-  private readonly fallbackApiUrl: string = 'https://aa057bsnsvkzwdeb6.api.met.no/weatherapi/locationforecast/2.0';
+  private readonly userAgent: string = APP_USER_AGENT;
+  private readonly apiUrl: string = PRIMARY_API_URL;
+  private readonly fallbackApiUrl: string = FALLBACK_API_URL;
   private config: AxiosRequestConfig;
   private breakerPolicy: CircuitBreakerPolicy;
 

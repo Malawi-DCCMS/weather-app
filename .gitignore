@@ -13,6 +13,8 @@ android
 ios
 .vscode
 .idea
+.env
+
 # macOS
 .DS_Store
 
