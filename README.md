@@ -9,10 +9,18 @@ Zanyengo is the weather app for DCCMS.
    ```bash
    npm install
    ```
+2. Set environment variables
 
-2. Create a development build
+   ```bash
+   cp .env.sample .env
+   # Set the variables as required in your preferred editor
+   # For example I use Vim and I would have the following
+   vim .env
+   ```
 
-Ensure that you have setup the relevant build environment for an android|ios emulator.
+3. Create a development build
+
+- Ensure that you have setup the relevant build environment for an android|ios emulator.
 
 - ios: Use xcode to download the latest version of ios and create an iPhone emulator device.
 - android: Install Android Studio, download latest android SDK and create an android phone emulator device.
@@ -21,15 +29,15 @@ Ensure that you have setup the relevant build environment for an android|ios emu
    npx expo run:android|ios
    ```
 
-3. Start the app
+4. Start the app
 
    ```bash
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+- In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Development build](https://docs.expo.dev/develop/development-builds/introduction/)
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
