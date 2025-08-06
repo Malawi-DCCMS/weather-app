@@ -16,7 +16,7 @@ import Alerts from '@/components/Alerts';
 import type { AppDispatch, RootState } from '@/lib/store'
 import { SCREENS } from '@/lib/layout/constants';
 import { resetError, getPreciseLocation } from '@/lib/store/location.slice';
-import { getLocationForecast } from '@/lib/store/forecast.slice';
+import { getLocationForecast, resetForecastError } from '@/lib/store/forecast.slice';
 import { getAlerts } from '@/lib/store/alert.slice';
 import { WeatherData } from '@/lib/forecast/weatherData';
 
@@ -49,6 +49,7 @@ const MainScreen = () => {
       return;
     }
 
+    dispatch(resetForecastError());
     dispatch(getLocationForecast({ lat, lon }));
     dispatch(getAlerts());
   }
