@@ -36,7 +36,7 @@ export class Forecaster {
     // Stop calling the executed function for 15 seconds if it fails 3 times in a row
     this.breakerPolicy = circuitBreaker(handleAll, {
       halfOpenAfter: 15_000,
-      breaker: new ConsecutiveBreaker(3),
+      breaker: new ConsecutiveBreaker(2),
     });
     this.setBreakerLogging();
   }
