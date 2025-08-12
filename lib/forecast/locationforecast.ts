@@ -7,8 +7,9 @@ import {
   CircuitState,
 } from 'cockatiel';
 
-import { PRIMARY_API_URL, FALLBACK_API_URL, APP_USER_AGENT } from 'react-native-dotenv';
 import { Forecast } from "./types"
+
+const { EXPO_PUBLIC_PRIMARY_API_URL, EXPO_PUBLIC_FALLBACK_API_URL, EXPO_PUBLIC_APP_USER_AGENT } = process.env as NonNullable<{ [k: string]: any }>;
 
 /**
  * Download a weather forecast from api.met.no/weatherapi/locationforecast or a similar service.
@@ -16,9 +17,9 @@ import { Forecast } from "./types"
  * Ensures that a uses agent is set on each request.
  */
 export class Forecaster {
-  private readonly userAgent: string = APP_USER_AGENT;
-  private readonly apiUrl: string = PRIMARY_API_URL;
-  private readonly fallbackApiUrl: string = FALLBACK_API_URL;
+  private readonly userAgent: string = EXPO_PUBLIC_APP_USER_AGENT;
+  private readonly apiUrl: string = EXPO_PUBLIC_PRIMARY_API_URL;
+  private readonly fallbackApiUrl: string = EXPO_PUBLIC_FALLBACK_API_URL;
   private config: AxiosRequestConfig;
   private breakerPolicy: CircuitBreakerPolicy;
 
