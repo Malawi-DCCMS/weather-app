@@ -4,10 +4,11 @@ import Axios from 'axios';
 import { Forecast } from '@/lib/forecast/types';
 import { Forecaster } from '@/lib/forecast/locationforecast';
 
+const forecaster = new Forecaster();
+
 type ForecastPayload = { lat: number, lon: number };
 export const getLocationForecast = createAsyncThunk('forecast/getLocationForecast', async ({ lat, lon }: ForecastPayload): Promise<Forecast> => {
   console.log('[Thunk] getLocationForecast DISPATCHED with', { lat, lon });
-  const forecaster = new Forecaster();
   return await forecaster.getForecast(lat, lon);
 });
 
@@ -29,6 +30,10 @@ const forecastSlice = createSlice({
     setForecastLoading: (state) => { state.forecast = undefined; state.error = undefined; state.loading = true; },
     setForecast: (state, action) => { state.forecast = action.payload },
     setForecastError: (state, action) => { state.error = action.payload },
+    resetForecastError: (state) => {
+      console.log('[Redux] clearing forecast error...');
+      state.error = undefined;
+    },
   },
   extraReducers(builder) {
     builder.addCase(getLocationForecast.pending, state => {
@@ -56,5 +61,5 @@ const forecastSlice = createSlice({
   },
 })
 
-export const { setForecast, setForecastError, setForecastLoading } = forecastSlice.actions;
+export const { setForecast, setForecastError, setForecastLoading, resetForecastError } = forecastSlice.actions;
 export const { reducer: forecastReducer } = forecastSlice;
