@@ -1,6 +1,6 @@
 
   export enum SCREENS {
-    Home = "",
+    Home = "/",
     NoLocation = "NoLocation",
     Hourly = "Hourly",
     Search = "Search",
