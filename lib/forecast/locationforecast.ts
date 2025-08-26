@@ -64,7 +64,7 @@ export class Forecaster {
 
   async getForecast(lat: number, lon: number, alt?: number): Promise<Forecast> {
     try {
-      console.log(`Quering primary API for forecast over ${lat},${lon} with breaker in state ${this.breakerPolicy.state}...`);
+      console.log(`Querying primary API for forecast over ${lat},${lon} with breaker in state ${this.breakerPolicy.state}...`);
       const url = this.buildUrl(this.apiUrl, lat, lon, alt);
 
       const { data } = await this.breakerPolicy.execute(() => Axios.get<Forecast>(url, this.config));
