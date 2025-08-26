@@ -3,7 +3,7 @@ import { DateTime } from "luxon"
 import { readCapFeedIfModified } from "./rss"
 import { CAPAlert } from './alert';
 import { fetchCAPAlert } from './alert';
-const { EXPO_PUBLIC_APP_ALERTS_SENDER_ID } = process.env as NonNullable<{ [k: string]: any }>;
+import { APP_ALERTS_SENDER_ID } from '../../config';
 
 /**
  * CAPCollector keeps track of active CAP alerts.
@@ -84,7 +84,7 @@ export class CAPCollector {
         if (!alert.info) return false;
         const info = alert.info[0]
 
-        if (alert.sender !== EXPO_PUBLIC_APP_ALERTS_SENDER_ID) return false;
+        if (alert.sender !== APP_ALERTS_SENDER_ID) return false;
         if (alert.status !== 'Actual') return false;
         if (alert.scope !== 'Public') return false;
         if (info.expires && DateTime.fromISO(info.expires) <= DateTime.now()) return false;

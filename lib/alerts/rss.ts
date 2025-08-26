@@ -10,8 +10,7 @@ import {
   CircuitState,
 } from 'cockatiel';
 
-const { EXPO_PUBLIC_PRIMARY_ALERTS_URL, EXPO_PUBLIC_FALLBACK_ALERTS_URL, EXPO_PUBLIC_APP_USER_AGENT } = process.env as NonNullable<{ [k: string]: any }>;
-
+import { PRIMARY_ALERTS_URL, FALLBACK_ALERTS_URL, APP_USER_AGENT } from '../../config';
 
 /**
  * A reference to a CAP message.
@@ -50,7 +49,7 @@ initBreaker(breakerPolicy);
 async function download(url: string, ifModifiedSince?: DateTime): Promise<string | null> {
   const config: AxiosRequestConfig = {
     headers: {
-      'User-Agent': EXPO_PUBLIC_APP_USER_AGENT
+      'User-Agent': APP_USER_AGENT
     },
     responseType: 'text'
   };
@@ -58,11 +57,11 @@ async function download(url: string, ifModifiedSince?: DateTime): Promise<string
 
   try {
     console.log(`Querying primary alerts feed alerts with breaker in state ${breakerPolicy.state}...`);
-    const response = await breakerPolicy.execute(() => Axios.get(EXPO_PUBLIC_PRIMARY_ALERTS_URL, config));
+    const response = await breakerPolicy.execute(() => Axios.get(url, config));
     console.log('✅ Successfully got response from primary alerts feed.');
 
     if (response.status === HttpStatusCode.NotModified) {
-      console.log(`Alerts feed from ${EXPO_PUBLIC_PRIMARY_ALERTS_URL} has not been modified since ${ifModifiedSince}. Returning. null...`);
+      console.log(`Alerts feed from ${url} has not been modified since ${ifModifiedSince}. Returning. null...`);
       return null;
     }
 
@@ -73,7 +72,7 @@ async function download(url: string, ifModifiedSince?: DateTime): Promise<string
 
     if (breakerPolicy.state === CircuitState.Open) {
       console.warn('🚨 Breaker is OPEN. Using fallback alerts feed...');
-      const { data } = await Axios.get(EXPO_PUBLIC_FALLBACK_ALERTS_URL, config);
+      const { data } = await Axios.get(FALLBACK_ALERTS_URL, config);
       return data;
     }
 
@@ -88,7 +87,7 @@ async function download(url: string, ifModifiedSince?: DateTime): Promise<string
  * @returns A list of CAPReference objects, or null if no changes have been made.
  */
 export async function readCapFeedIfModified(ifModifiedSince: DateTime): Promise<CAPReference[] | null> {
-  const doc = await download(EXPO_PUBLIC_PRIMARY_ALERTS_URL, ifModifiedSince)
+  const doc = await download(PRIMARY_ALERTS_URL, ifModifiedSince)
   if (!doc) {
     return null
   }
