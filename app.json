@@ -37,7 +37,10 @@
             "enableProguardInReleaseBuilds": true,
             "compileSdkVersion": 35,
             "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0"
+            "buildToolsVersion": "35.0.0",
+            "gradleProperties": {
+              "org.gradle.jvmargs": "-Xmx4096m -XX:MaxPermSize=2048m"
+            }
           }
         }
       ],
