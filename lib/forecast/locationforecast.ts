@@ -7,9 +7,8 @@ import {
   CircuitState,
 } from 'cockatiel';
 
-import { Forecast } from "./types"
-
-const { EXPO_PUBLIC_PRIMARY_API_URL, EXPO_PUBLIC_FALLBACK_API_URL, EXPO_PUBLIC_APP_USER_AGENT } = process.env as NonNullable<{ [k: string]: any }>;
+import { Forecast } from './types'
+import { PRIMARY_API_URL, FALLBACK_API_URL, APP_USER_AGENT } from '../../config';
 
 /**
  * Download a weather forecast from api.met.no/weatherapi/locationforecast or a similar service.
@@ -17,9 +16,9 @@ const { EXPO_PUBLIC_PRIMARY_API_URL, EXPO_PUBLIC_FALLBACK_API_URL, EXPO_PUBLIC_A
  * Ensures that a uses agent is set on each request.
  */
 export class Forecaster {
-  private readonly userAgent: string = EXPO_PUBLIC_APP_USER_AGENT;
-  private readonly apiUrl: string = EXPO_PUBLIC_PRIMARY_API_URL;
-  private readonly fallbackApiUrl: string = EXPO_PUBLIC_FALLBACK_API_URL;
+  private readonly userAgent: string = APP_USER_AGENT;
+  private readonly apiUrl: string = PRIMARY_API_URL;
+  private readonly fallbackApiUrl: string = FALLBACK_API_URL;
   private config: AxiosRequestConfig;
   private breakerPolicy: CircuitBreakerPolicy;
 
@@ -64,7 +63,7 @@ export class Forecaster {
 
   async getForecast(lat: number, lon: number, alt?: number): Promise<Forecast> {
     try {
-      console.log(`Quering primary API for forecast over ${lat},${lon} with breaker in state ${this.breakerPolicy.state}...`);
+      console.log(`Querying primary API for forecast over ${lat},${lon} with breaker in state ${this.breakerPolicy.state}...`);
       const url = this.buildUrl(this.apiUrl, lat, lon, alt);
 
       const { data } = await this.breakerPolicy.execute(() => Axios.get<Forecast>(url, this.config));

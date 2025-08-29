@@ -2,7 +2,7 @@
   "expo": {
     "name": "Zanyengo",
     "slug": "zanyengo",
-    "version": "1.5.0",
+    "version": "1.7.0",
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "automatic",
@@ -16,12 +16,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.zanyengo",
-      "buildNumber": "1.5.0",
+      "buildNumber": "1.7.0",
       "infoPlist": {}
     },
     "android": {
       "package": "com.zanyengo",
-      "versionCode": 12
+      "versionCode": 14
     },
     "web": {
       "bundler": "metro",
@@ -37,7 +37,10 @@
             "enableProguardInReleaseBuilds": true,
             "compileSdkVersion": 35,
             "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0"
+            "buildToolsVersion": "35.0.0",
+            "gradleProperties": {
+              "org.gradle.jvmargs": "-Xmx4096m -XX:MaxPermSize=2048m"
+            }
           }
         }
       ],

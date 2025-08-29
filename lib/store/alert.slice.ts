@@ -20,8 +20,7 @@ const levelYellowAndAbove = (alert: CAPAlert): boolean => {
 export const getAlerts = createAsyncThunk('alerts/getActiveAlerts', async (): Promise<Array<CAPAlert>> => {
   console.log('[Thunk] getAlerts DISPATCHED');
 
-  const RSS_FEED_URL = 'https://www.metmalawi.gov.mw/api/cap/rss.xml';
-  const collector = new CAPCollector(RSS_FEED_URL);
+  const collector = new CAPCollector();
   await collector.update();
 
   const filteredMessages = collector.activeMessages()

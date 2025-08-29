@@ -1,6 +1,16 @@
 import { DateTime } from 'luxon'
 import { parseString } from 'xml2js';
+import Axios, { AxiosError, AxiosRequestConfig, HttpStatusCode } from 'axios';
 
+import {
+  ConsecutiveBreaker,
+  handleAll,
+  circuitBreaker,
+  CircuitBreakerPolicy,
+  CircuitState,
+} from 'cockatiel';
+
+import { PRIMARY_ALERTS_URL, FALLBACK_ALERTS_URL, APP_USER_AGENT } from '../../config';
 
 /**
  * A reference to a CAP message.
@@ -12,26 +22,62 @@ export interface CAPReference {
   pubDate: DateTime
 }
 
+function initBreaker(breaker: CircuitBreakerPolicy): void {
+  breaker.onBreak(() => {
+    console.warn('💥 Breaker tripped after consecutive failures');
+  });
+
+  breaker.onReset(() => {
+    console.log('✅ Breaker reset — primary API re-enabled');
+  });
+
+  breaker.onStateChange((state) => {
+    console.info(`⚡ Breaker state changed to: ${state}`);
+  });
+}
+
+// Stop calling the executed function for 15 seconds if it fails 3 times in a row
+const breakerPolicy = circuitBreaker(handleAll, {
+  halfOpenAfter: 15_000,
+  breaker: new ConsecutiveBreaker(2),
+});
+initBreaker(breakerPolicy);
+
 /**
  * Download something via http.
  */
 async function download(url: string, ifModifiedSince?: DateTime): Promise<string | null> {
-  let httpRequestHeaders: any = {
-    'User-Agent': 'Zanyengo v1 cap_reader',
-  }
-  if (ifModifiedSince)
-    httpRequestHeaders['If-Modified-Since'] = ifModifiedSince.toHTTP()
+  const config: AxiosRequestConfig = {
+    headers: {
+      'User-Agent': APP_USER_AGENT
+    },
+    responseType: 'text'
+  };
+  if (config.headers && ifModifiedSince) config.headers['If-Modified-Since'] = ifModifiedSince.toHTTP();
 
-  const response = await fetch(url, {
-    headers: httpRequestHeaders
-  })
-  if (response.status == 304) {
-    return null
-  }
-  if (!response.ok)
-    throw new Error('unable to access cap rss feed')
+  try {
+    console.log(`Querying primary alerts feed alerts with breaker in state ${breakerPolicy.state}...`);
+    const response = await breakerPolicy.execute(() => Axios.get(url, config));
+    console.log('✅ Successfully got response from primary alerts feed.');
 
-  return response.text()
+    if (response.status === HttpStatusCode.NotModified) {
+      console.log(`Alerts feed from ${url} has not been modified since ${ifModifiedSince}. Returning. null...`);
+      return null;
+    }
+
+    return response.data;
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    console.warn('⚠️ Error from primary alerts feed:', axiosError.message);
+
+    if (breakerPolicy.state === CircuitState.Open) {
+      console.warn('🚨 Breaker is OPEN. Using fallback alerts feed...');
+      const { data } = await Axios.get(FALLBACK_ALERTS_URL, config);
+      return data;
+    }
+
+    throw axiosError;
+  }
 }
 
 /**
@@ -40,23 +86,10 @@ async function download(url: string, ifModifiedSince?: DateTime): Promise<string
  * @param ifModifiedSince 
  * @returns A list of CAPReference objects, or null if no changes have been made.
  */
-export async function readCapFeedIfModified(rssURL: string, ifModifiedSince: DateTime): Promise<CAPReference[] | null> {
-  const doc = await download(rssURL, ifModifiedSince)
+export async function readCapFeedIfModified(ifModifiedSince: DateTime): Promise<CAPReference[] | null> {
+  const doc = await download(PRIMARY_ALERTS_URL, ifModifiedSince)
   if (!doc) {
     return null
-  }
-  return parseRssFeed(doc)
-}
-
-/**
- * Read a CAP RSS feed
- * @param rssURL 
- * @returns A list of all CAPReference objects.
- */
-export async function readCapFeed(rssURL: string): Promise<CAPReference[]> {
-  const doc = await download(rssURL)
-  if (!doc) {
-    throw new Error('unexpected response from rss feed')
   }
   return parseRssFeed(doc)
 }
