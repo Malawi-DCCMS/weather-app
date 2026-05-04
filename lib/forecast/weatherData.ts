@@ -112,10 +112,10 @@ export class WeatherDataTimestep {
   /**
    * Get the precipitation amount for this time step - either for the next hour or for the next six hours.
    */
-  precipitation(): number | "??" {
+  precipitation(): number | "-" {
     if (this.precipitation_1h !== undefined) return this.precipitation_1h;
     if (this.precipitation_6h !== undefined) return this.precipitation_6h;
-    return "??";
+    return "-";
   }
 
   /**
