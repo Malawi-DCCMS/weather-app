@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "scheme": "zanyengo",
     "splash": {
       "image": "./assets/ic_launcher.png",
@@ -54,7 +53,8 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "reactCompiler": true
     },
     "extra": {
       "router": {
