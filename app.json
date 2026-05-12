@@ -34,9 +34,9 @@
         {
           "android": {
             "enableProguardInReleaseBuilds": true,
-            "compileSdkVersion": 35,
+            "compileSdkVersion": 36,
             "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0",
+            "buildToolsVersion": "36.0.0",
             "gradleProperties": {
               "org.gradle.jvmargs": "-Xmx4096m -XX:MaxPermSize=2048m"
             }
@@ -50,7 +50,8 @@
           "locationAlwaysPermission": "Allow $(PRODUCT_NAME) to use your location.",
           "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
