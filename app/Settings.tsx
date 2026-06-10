@@ -18,7 +18,7 @@ const SettingsScreen = () => {
 
   const options = [
     { label: 'English', value: 'en' },
-    { label: 'Chichewa', value: 'chi' },
+    { label: 'Chichewa', value: 'chi' }
   ];
 
   const handleChangeLanguage = (lang: string) => (i18n.changeLanguage(lang), setLanguage(lang));

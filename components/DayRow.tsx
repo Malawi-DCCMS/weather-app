@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Icon, Paragraph, Text } from "react-native-paper";
+import { Icon, Text } from "react-native-paper";
 
 import weatherIcons from "@/lib/forecast/weathericons.constant";
 import { WeatherDataDaySummary } from "@/lib/forecast/weatherData";
@@ -17,9 +17,9 @@ const DayRow = (props: DayRowProps) => {
     return (
       <View style={styles.dayRow}>
         <View style={styles.opacity}>
-          <Paragraph style={{ flex: 2 }}>
-            <Text style={styles.whiteText}>{t("Forecast unavailable")}.</Text>
-          </Paragraph>
+          <Text variant="bodyMedium" style={{ flex: 2 }}>
+            <Text style={styles.whiteText}>{t('Forecast unavailable')}.</Text>
+          </Text>
         </View>
       </View>
     );
@@ -34,31 +34,25 @@ const DayRow = (props: DayRowProps) => {
   return (
     <View style={styles.dayRow}>
       <View style={styles.opacity}>
-        <Paragraph style={{ flex: 3 }}>
-          <Text style={styles.whiteText}>
-            {summary.day.toLocaleString({ weekday: "short" })}
+        <View style={{ flex: 1 }}>
+          <Text variant="bodyMedium" style={{ flex: 1 }}>
+            <Text style={styles.dayName}>{t(summary.day.toLocaleString({ weekday: "short" }))}</Text>
           </Text>
-        </Paragraph>
-        <View
-          style={{ flex: 3, margin: -5 }}
-          accessible={true}
-          accessibilityLabel={
-            iconSource
-              ? `Weather symbol on ${summary.day.toLocaleString({ weekday: "short" })} is ${icon!.split("_").join(" ")}.`
-              : undefined
-          }
-        >
-          {iconSource && <Icon source={iconSource} size={36} />}
         </View>
-        <Paragraph style={{ flex: 3 }}>
-          <Text style={styles.whiteText}>{Math.round(minTemp)}&deg;</Text>
-        </Paragraph>
-        <Paragraph style={{ flex: 3 }}>
-          <Text style={styles.whiteText}>{Math.round(maxTemp)}&deg;</Text>
-        </Paragraph>
-        <Paragraph style={{ flex: 2 }}>
-          <Text style={styles.whiteText}>{Math.round(windSpeed)}</Text>
-        </Paragraph>
+        <View style={{ flex: 1, flexDirection: 'row', marginTop: 2 }}>
+          <View style={{ flex: 3, flexDirection: 'column' }}>
+            <Text style={{ ...styles.whiteText, flex: 1 }}>{t("Min")}{"\n"}<Text style={styles.whiteParameters}>{Math.round(minTemp)}&deg;</Text></Text>
+          </View>
+          <View style={{ flex: 3, flexDirection: 'column' }}>
+            <Text style={{ ...styles.whiteText, flex: 1 }}>{t("Max")}{"\n"}<Text style={styles.whiteParameters}>{Math.round(maxTemp)}&deg;</Text></Text>
+          </View>
+          <View style={{ flex: 2, flexDirection: 'column' }}>
+            <Text style={{ ...styles.whiteText, flex: 1 }}>{t("Km/h")}{"\n"}<Text style={styles.whiteParameters}>{Math.round(windSpeed)}</Text></Text>
+          </View>
+          <View style={{ flex: 2, margin: 0, padding: 0 }} accessible={true} accessibilityLabel={`Weather symbol on ${summary.day.toLocaleString({ weekday: "short" })} is ${icon?.split('_').join(' ')}.`}>
+            {iconSource && <Icon source={iconSource} size={55} />}
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -70,18 +64,27 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 9,
   },
-  whiteText: {
-    color: "white",
-    fontSize: 16,
-    zIndex: 1,
-  },
   opacity: {
-    backgroundColor: "rgba(217, 217, 217, .5)",
-    width: "100%",
-    padding: 15,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'column',
+    backgroundColor: 'rgba(217, 217, 217, .5)',
+    width: '100%',
+    padding: 8,
     borderRadius: 4,
+  },
+  whiteText: {
+    color: 'white',
+    fontSize: 14,
+    textAlign: 'left'
+  },
+  whiteParameters: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'left'
+  },
+  dayName: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'left'
   },
 });
 

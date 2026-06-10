@@ -40,7 +40,7 @@ const resources = {
 
 i18n.use(initReactI18next).use(languageDetectorPlugin).init({
     resources,
-    compatibilityJSON: 'v3',
+    compatibilityJSON: 'v4',
     fallbackLng: 'en',
     interpolation: {
         escapeValue: false,

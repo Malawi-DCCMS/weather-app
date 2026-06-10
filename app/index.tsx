@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl, useWindowDimensions } from 'react-native';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";

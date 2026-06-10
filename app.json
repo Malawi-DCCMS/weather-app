@@ -2,7 +2,7 @@
   "expo": {
     "name": "Zanyengo",
     "slug": "zanyengo",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "automatic",
@@ -15,12 +15,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.zanyengo",
-      "buildNumber": "1.7.0",
+      "buildNumber": "1.7.1",
       "infoPlist": {}
     },
     "android": {
       "package": "com.zanyengo",
-      "versionCode": 14
+      "versionCode": 15
     },
     "web": {
       "bundler": "metro",

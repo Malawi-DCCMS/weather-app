@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Icon, Paragraph, Text } from 'react-native-paper';
+import { Icon, Text } from 'react-native-paper';
 import { DateTime } from "luxon";
 
 import DayRow from './DayRow';
@@ -16,7 +16,7 @@ type FiveDaysProps = {
     onClick: (day: DateTime) => void;
 }
 function FiveDays(props: FiveDaysProps): JSX.Element {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { startDate, preparedForecast } = props
 
     if (preparedForecast) {
@@ -35,7 +35,6 @@ function FiveDays(props: FiveDaysProps): JSX.Element {
 
         const fiveDays = allDays.slice(startIndex, startIndex + 5)
         return <View style={{ paddingLeft: 27, paddingRight: 26, marginTop: 60, paddingBottom: 50 }}>
-            <FiveDayHeader />
             {fiveDays.map(day =>
                 <TouchableOpacity key={day.toLocaleString()} onPress={() => props.onClick(day)}>
                     <DayRow summary={preparedForecast.atDay(day)} />
@@ -57,19 +56,19 @@ function FiveDayHeader() {
     return (
         <View style={styles.dayRow}>
             <View style={styles.opacity}>
-                <Paragraph style={{ flex: 3 }}>
+                <Text variant="bodyMedium" style={{ flex: 3 }}>
                     <Text style={styles.transparentText}>Sun</Text>
-                </Paragraph>
-                <Paragraph style={{ flex: 3 }}>
+                </Text>
+                <Text variant="bodyMedium" style={{ flex: 2 }}>
                     <Icon source={weatherIcons['fair_day']} color='rgba(255, 255, 255, 0)' size={28} />
-                </Paragraph>
-                <Paragraph style={{ flex: i18n.language === 'en' ? 3 : 4 }}>
+                </Text>
+                <Text variant="bodyMedium" style={{ flex: i18n.language === 'en' ? 3 : 4 }}>
                     <Text style={styles.whiteText}>{t('Min')}</Text>
-                </Paragraph>
-                <Paragraph style={{ flex: i18n.language === 'en' ? 3 : 4 }}>
+                </Text>
+                <Text variant="bodyMedium" style={{ flex: i18n.language === 'en' ? 3 : 4 }}>
                     <Text style={styles.whiteText}>{t('Max')}</Text>
-                </Paragraph>
-                <Paragraph style={{ flex: 3 }}><Text style={styles.whiteText}>Km/h</Text></Paragraph>
+                </Text>
+                <Text variant="bodyMedium" style={{ flex: 3 }}><Text style={styles.whiteText}>Km/h</Text></Text>
             </View>
         </View>
     )
@@ -87,6 +86,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 14,
         fontWeight: "300",
+        textAlign: 'center',
     },
     transparentText: {
         color: 'transparent',
