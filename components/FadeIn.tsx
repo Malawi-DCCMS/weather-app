@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Animated } from 'react-native';
 import type { PropsWithChildren } from 'react';
 import type { ViewStyle } from 'react-native';
@@ -6,7 +6,7 @@ import type { ViewStyle } from 'react-native';
 type FadeInProps = PropsWithChildren<{ style: ViewStyle }>;
 
 export const FadeIn: React.FC<FadeInProps> = (props): JSX.Element => {
-  const fadeAnimation = useRef(new Animated.Value(0)).current;
+  const [fadeAnimation] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     Animated.timing(fadeAnimation, {
