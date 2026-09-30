@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Icon, Menu } from 'react-native-paper';
-import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
+import { ParamListBase, RouteProp, useIsFocused, useRoute } from 'expo-router/react-navigation';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigation, useRouter, Href } from 'expo-router';
 
