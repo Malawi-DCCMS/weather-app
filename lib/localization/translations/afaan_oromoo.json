@@ -1,496 +1,466 @@
 {
   "settings": {
-    "title": "Settings",
-    "alwaysShowStartPage": "Always Show Start Page",
-    "appearance": "Appearance",
+    "title": "Qopheewwan",
+    "alwaysShowStartPage": "Yeroo Hunda Fuula Jalqabaa Agarsiisi",
+    "appearance": "Mul'ata",
     "language": {
-      "title": "Language",
+      "title": "Afaan",
       "english": "English",
-      "placeholder": "Select a language"
+      "placeholder": "Afaan filadhu"
     },
     "sections": {
-      "preferences": "Preferences",
-      "about": "About"
+      "preferences": "Filannoowwan",
+      "about": "Waa'ee Keenya"
     },
     "preferences": {
       "appearance": {
-        "darkMode": "Dark Mode"
+        "darkMode": "Haala Dukkanaa (Dark Mode)"
       },
-      "showOnboarding": "Show Onboarding"
+      "showOnboarding": "Qajeelfama Jalqabaa Agarsiisi"
     },
     "about": {
-      "appVersion": "App Version"
-    },
-    "rateApp": "Rate this app"
+      "appVersion": "Gosa Appii (App Version)"
+    }
   },
   "common": {
     "actions": {
-      "retry": "Retry",
-      "dismiss": "Dismiss"
+      "retry": "Irra deebi'ii yaali",
+      "dismiss": "Dhiisi / Haquu"
     },
     "states": {
-      "notAvailable": "Not available",
-      "loading": "Loading"
+      "notAvailable": "Hin jiru",
+      "loading": "Fe'amaa jira..."
     },
     "alerts": {
-      "title": "Alert"
+      "title": "Beeksisni Akeekkachiisaa"
     }
   },
   "forecast": {
     "error": {
-      "title": "Couldn't load the forecast",
-      "unavailable": "Forecast not available at the moment. Please try again later.",
-      "generic": "There was an error getting the forecast"
+      "title": "Raaga qilleensaa fe'uu hin dandeenye",
+      "unavailable": "Ammaaf raagiin qilleensaa hin jiru. Maaloo booda irra deebi'aa yaalaa.",
+      "generic": "Raaga qilleensaa argachuu irratti dogoggorni uumamee jira"
     },
-    "lastUpdated": "Forecast last updated at {{time}}",
+    "lastUpdated": "Raagiin qilleensaa kan haaromfame yeroo {{time}} irratti",
     "states": {
-      "unavailable": "Forecast unavailable"
+      "unavailable": "Raagiin qilleensaa hin jiru"
     }
   },
   "warnings": {
     "error": {
-      "title": "Couldn't load alerts"
+      "title": "Akeekkachiisota fe'uu hin dandeenye"
     },
-    "title": "Warnings",
+    "title": "Akeekkachiisota",
     "empty": {
-      "title": "No warnings right now",
-      "text": "There are no active weather warnings right now."
+      "title": "Amma akeekkachiisni tokkoyyoo hin jiru",
+      "text": "Amma yeroo kana akeekkachiisni qilleensaa hojii irra jiru hin jiru."
     },
     "group": {
-      "yourArea": "Your area",
-      "elsewhere": "Elsewhere in the country"
+      "yourArea": "Naannoo keessan",
+      "elsewhere": "Bakka biroo biyyattii keessatti"
     }
   },
   "location": {
     "notSet": {
-      "title": "No location set",
-      "text": "Choose a place to see its forecast and alerts.",
-      "action": "Choose a place"
+      "title": "Bakki hin murtaa'in",
+      "text": "Raaga qilleensaa fi akeekkachiisa isaa argachuuf bakka tokko filadhaa.",
+      "action": "Bakka tokko filadhu"
     }
   },
   "aboutUs": {
-    "title": "About us",
+    "title": "Waa'ee keenya",
     "partners": {
-      "dccms": "Department of Climate Change and Meteorological Services (DCCMS)"
+      "dccms": "Departimanti Jijjiirrama Qilleensaa fi Tajaajila Raaga Qilleensaa (DCCMS)"
     },
     "emi": {
-      "title": "Ethiopian Meteorological Institute",
-      "description": "The Ethiopian Meteorological Institute (EMI) is the state authority responsible for providing weather, climate, and early warning services across Ethiopia.",
+      "title": "Inistiitiyuutii Meetoroolojii Itoophiyaa",
+      "description": "Inistiitiyuutii Meetoroolojii Itoophiyaa (EMI) aboo mootummaa Itoophiyaa guutuu keessatti tajaajila qilleensaa, jijjiirrama qilleensaa, fi akeekkachiisa dursaa dhiyeessuuf itti gaafatamummaa qabuudha.",
       "mission": {
-        "title": "Mission",
-        "description": "To monitor, analyze, and forecast weather, climate, and agro-meteorological conditions to support sustainable national development and ensure public safety."
+        "title": "Ergama",
+        "description": "Guddinarratti hundaa'ee misooma biyyaalessaa deeggaruufi nageenya hawaasaa mirkaneessuuf jecha haala qilleensaa, jijjiirrama qilleensaa, fi qilleensa qonnaa hordofuu, xiinxaluu, fi raaguu."
       }
     },
     "forecastServices": {
-      "title": "Forecast Services",
+      "title": "Tajaajiloota Raaga Qilleensaa",
       "products": {
-        "title": "Meteorological Products",
-        "description": "EMI uses advanced meteorological stations, satellite data, and numerical models to deliver tailored forecasts:"
+        "title": "Oomishaalee Meetoroolojii",
+        "description": "EMI buufatoota meetoroolojii aanaa ammayyaa, odeeffannoo saatalaayitii, fi moodeelota lakkoofsaa fayyadamuun raaga qilleensaa mijaawaa dhiyeessa:"
       },
       "nowcasting": {
-        "title": "Nowcasting & Hourly",
-        "description": "Real-time alerts for sudden changes in weather conditions."
+        "title": "Raaga Yeroo Dhihoo & Sa'aatii",
+        "description": "Haala qilleensaa tasa jijjiirramuuf akeekkachiisa yeroo-harka-qabutti kennamu."
       },
       "daily": {
-        "title": "Daily & Medium Range",
-        "description": "1 to 10-day outlooks for travel, public safety, and general planning."
+        "title": "Guyyaa & Giddu-galeessa",
+        "description": "Imalaaf, nageenya hawaasaaf, fi karoora waliigalaaf raaga guyyaa 1 hanga 10."
       },
       "seasonal": {
-        "title": "Seasonal Outlooks",
-        "description": "Critical forecasts for agricultural seasons like Belg and Kiremt."
+        "title": "Raaga Waqtii",
+        "description": "Raaga barbaachisoo ta'an kan akka waqtii Qulqulluu/Bonaa fi Gannaaf."
       }
     }
   },
   "aboutApp": {
-    "title": "About the app",
-    "icons": "Icons",
-    "partners": "Partners in this project have been",
-    "geographicalData": "Geographical Data",
+    "title": "Waa'ee appii kanaa",
+    "icons": "Mallattoowwan (Icons)",
+    "partners": "Hirmaattonni pirojekti kana keessa turan",
+    "geographicalData": "Odeeffannoo Lafaa (Geographical Data)",
     "forecasts": {
-      "title": "The app and its forecasts",
-      "description": "The app development is led by \nWMO-RAF - World Meteorological Organisation, Regional Office for Africa, and Norway MET - Meteorologisk institutt.\n\n All forecasts are issued by Norway MET."
+      "title": "Appichaa fi raagiwwan qilleensaa isaa",
+      "description": "Misooma appichaa kan durfamu \nWMO-RAF - Dhaabbata Qilleensaa Addunyaa, Waajjira Naannoo Afrikaa, fi Norway MET - Meteorologisk institutt.\n\n Raagiwwan qilleensaa hundi kan kenname Norway MET tiin."
     }
   },
   "privacy": {
-    "title": "Privacy Policy",
-    "intro": "Climweb Weather App is developed by WMO-RAF (World Meteorological Organisation - Regional Office for Africa) and Norway MET (Meteorologisk institutt). We are committed to protecting your privacy.",
+    "title": "Imaammata Dhuunfaa (Privacy Policy)",
+    "intro": "Climweb Weather App kan misoome WMO-RAF (Dhaabbata Qilleensaa Addunyaa - Waajjira Naannoo Afrikaa) fi Norway MET (Meteorologisk institutt) tiin. Nuti iccitii fi mirga dhuunfaa keessan eeguuf kutannoo qabna.",
     "dataCollected": {
-      "title": "Information We Collect",
-      "text": "Climweb Weather App does not collect, store, or share any personal information. You do not need to register or provide any personal details to use the app."
+      "title": "Odeeffannoo Nuti Walitti Qabnu",
+      "text": "Appiin Qilleensaa Climweb odeeffannoo dhuunfaa kamiyyuu hin walitti qabu, hin kuusu, ykn hin qoodu. Appicha fayyadamuuf galmaa'uun ykn ragaa dhuunfaa kennuun isin irraa hin barbaachisu."
     },
     "location": {
-      "title": "Use of Location Data",
-      "text": "To show you accurate weather forecasts and alerts for your area, the app uses your device's location. Your location is used only to fetch weather data for that spot and is not linked to your identity or stored on our servers."
+      "title": "Fayyida Odeeffannoo Bakkaa (Location Data)",
+      "text": "Naannoo keessaniif raaga qilleensaa sirrii fi akeekkachiisa isinitti agarsiisuuf, appichi bakka meeshaa keessan (location) fayyadama. Bakki keessan tajaajila ragaa qilleensaa bakka sana qofa argachuuf kan oolu malee eenyummaa keessan wajjin hin qabatu ykn sarvarewwan keenya irratti hin kuufamu."
     },
     "favourites": {
-      "title": "Your Favourite Places",
-      "text": "If you save favourite places, they are stored only on your device. This information is never sent to us or shared with anyone else. You can add, change, or remove your favourite places at any time from Favourites on the More tab."
+      "title": "Bakkeewwan Jaallataman",
+      "text": "Bakkeewwan jaallataman yoo olkaa'attan, isaan kun meeshaa keessan qofa irratti kuufamu. Odeeffannoon kun matumaa gara keenyatti hin ergamu ykn namoota biroof hin qoodamu. Tabii 'Bakkeewwan' irraa yeroo barbaaddanitti bakkeewwan jaallataman dabaluu, jijjiiruu, ykn haquu dandeessu."
     },
     "security": {
-      "title": "Data Security",
-      "text": "We take data security seriously. Since we do not collect or store personal data, our focus is on keeping the app's forecast and alert services accurate and reliable."
+      "title": "Nageenya Odeeffannoo",
+      "text": "Nageenya odeeffannoo cimaatti ilaalla. Odeeffannoo dhuunfaa kan hin walitti qabne ykn hin kuusne ta'uu keenyaan, xiyyeeffannoon keenya tajaajiloonni raaga qilleensaa fi akeekkachiisa appichaa sirrii fi amanamaa akka ta'an taasisuudha."
     },
     "children": {
-      "title": "Children's Privacy",
-      "text": "Climweb Weather App is designed to be used by people of all ages, including children. We do not collect personal information from children or any other users."
+      "title": "Iccitii Dhuunfaa Daa'immanii",
+      "text": "Appiin Qilleensaa Climweb umrii hundaaaf, dabalataanis daa'immanif kan qophaa'eedha. Nuti daa'imman irraa ykn fayyadamtoota biroo kamirraayyuu odeeffannoo dhuunfaa hin walitti qabnu."
     },
     "thirdParty": {
-      "title": "Third-Party Services",
-      "text": "The app may contain links to third-party websites or services that we do not operate. If you tap a third-party link, you will be taken to that third party's site. We encourage you to read their privacy policies, as we are not responsible for their content or practices."
+      "title": "Tajaajiloota Qaama Sadaffaa",
+      "text": "Appichi marsariitiiwwan ykn tajaajiloota qaama sadaffaa kan nuti hin bulchineef geessituu qabaachuu danda'a. Yoo geessituu qaama sadaffaa tuqte, gara marsariitii qaama sanaatti geessita. Qabiyyee ykn gocha isaaniitiif itti gaafatamummaa waan hin qabneef, imaammata dhuunfaa isaanii akka dubbiftan jajjabeessina."
     },
     "changes": {
-      "title": "Changes to This Policy",
-      "text": "We may update this Privacy Policy from time to time. Any changes will be reflected on this page."
+      "title": "Jijjiirama Imaammata Kanaa",
+      "text": "Yeroo gara yerootti Imaammata Dhuunfaa kana fooyyessuu dandeenya. Jijjiirni kamiyyuu fuula kana irratti ni calaqqisiifama."
     },
     "contact": {
-      "title": "Contact Us",
-      "text": "If you have questions about this Privacy Policy, please contact WMO-RAF (World Meteorological Organisation - Regional Office for Africa) or Norway MET (Meteorologisk institutt)."
+      "title": "Nu Quunnamaa",
+      "text": "Imaammata Dhuunfaa kana irratti gaaffii yoo qabaattan, maaloo WMO-RAF (Dhaabbata Qilleensaa Addunyaa - Waajjira Naannoo Afrikaa) ykn Norway MET (Meteorologisk institutt) quunnamaa."
     }
   },
   "time": {
-    "today": "Today",
-    "fiveDays": "Five Days",
-    "nextFiveDays": "Next 5 days",
-    "time": "Time",
+    "today": "Har'a",
+    "fiveDays": "Guyyoota 5",
+    "nextFiveDays": "Guyyoota 5 dhufan",
+    "time": "Yeroo",
     "days": {
-      "sun": "Sunday",
-      "mon": "Monday",
-      "tue": "Tuesday",
-      "wed": "Wednesday",
-      "thu": "Thursday",
-      "fri": "Friday",
-      "sat": "Saturday"
+      "sun": "Dilbata",
+      "mon": "Wixata",
+      "tue": "Kibxata",
+      "wed": "Roobii",
+      "thu": "Kamisa",
+      "fri": "Jimaata",
+      "sat": "Sanbataa"
     },
     "periods": {
-      "morning": "Morning",
-      "afternoon": "Afternoon",
-      "evening": "Evening",
-      "night": "Night"
+      "morning": "Ganama",
+      "afternoon": "Guyyaa / Waaree Booda",
+      "evening": "Galgala",
+      "night": "Halkan"
     },
-    "morning": "morning",
-    "afternoon": "afternoon",
-    "evening": "evening",
-    "night": "night"
+    "morning": "ganama",
+    "afternoon": "waaree booda",
+    "evening": "galgala",
+    "night": "halkan"
   },
   "alerts": {
-    "title": "Alerts"
+    "title": "Akeekkachiisota"
   },
   "places": {
-    "title": "Places",
-    "tapToChange": "Tap to change place",
-    "pickerTitle": "Choose your favourite places",
-    "pickerSubtitle": "Search and select up to 5 places you care about.",
-    "selectedCount": "{{count}}/5 selected",
-    "maxReached": "You've selected the maximum of 5 places.",
-    "finish": "Finish",
-    "removeChip": "Remove {{name}}",
+    "title": "Bakkeewwan",
+    "tapToChange": "Bakka jijjiiruuf tuqi",
+    "pickerTitle": "Bakkeewwan jaallataman filadhu",
+    "pickerSubtitle": "Bakkeewwan ati barbaaddu hanga 5 barbaaddii filadhu.",
+    "selectedCount": "{{count}}/5 filatamaniru",
+    "maxReached": "Bakkeewwan 5 kan ta'an olaanaaf filatteetta.",
+    "finish": "Xumuri",
+    "removeChip": "{{name}} haqi",
     "empty": {
-      "title": "No favourite places yet",
-      "text": "Add up to 5 places to see their forecasts here."
+      "title": "Ammaaf bakkeewwan jaallataman hin jiran",
+      "text": "Asitti raaga qilleensaa isaanii ilaaluuf bakkeewwan hanga 5 dabali."
     },
-    "setFavourites": "Set favourite places",
-    "edit": "Edit favourite places",
-    "yourPlaces": "Your favourite places",
-    "searchLocation": "Search location",
+    "setFavourites": "Bakkeewwan jaallataman murteessi",
+    "edit": "Bakkeewwan jaallataman gulaali",
+    "yourPlaces": "Bakkeewwan kee",
+    "searchLocation": "Bakka barbaadi",
     "locationError": {
-      "message": "Not able to use your location to find the closest place."
+      "message": "Bakka dhihoo jiru argachuuf bakka kee fayyadamuu hin dandeenye."
     }
   },
   "fiveDays": {
-    "footnote": "Forecast data provided by your national weather service."
+    "footnote": "Odeeffannoon raaga qilleensaa tajaajila qilleensaa biyyaalessaan dhiyaate."
   },
   "welcome": {
-    "title": "Welcome to ClimWeb Weather App",
-    "subtitle": "Weather forecasts and warnings.",
-    "getStarted": "Get started",
-    "next": "Next"
+    "subtitle": "Raaga qilleensaa fi akeekkachiisota, jechoota salphaadhaan.",
+    "getStarted": "Jalqabi",
+    "next": "Itti fufi"
   },
   "today": {
-    "tomorrow": "Tomorrow",
-    "warmer": "warmer",
-    "cooler": "cooler",
-    "tapToSeeFiveDays": "Tap to see the next 5 days",
-    "hourByHour": "Today, hour by hour",
-    "tapToSeeHourly": "Tap to see the hourly forecast"
+    "tomorrow": "Bor",
+    "warmer": "ho'aa dha",
+    "cooler": "qabbanaa'aa dha",
+    "tapToSeeFiveDays": "Guyyoota 5 dhufan ilaaluuf tuqi",
+    "hourByHour": "Har'a, sa'aatiidhaan",
+    "tapToSeeHourly": "Raaga qilleensaa sa'aatii sa'aatiidhaan ilaaluuf tuqi"
   },
   "day": {
-    "conditionWindy": "{{condition}} and very windy."
+    "conditionWindy": "{{condition}} fi bubbee cimaa qaba."
   },
   "weather": {
-    "min": "Min",
-    "max": "Max",
+    "min": "Xiqqaa (Min)",
+    "max": "Guddaa (Max)",
     "kmh": "Km/h",
-    "rain": "Rain",
+    "rain": "Bokkaa",
     "mm": "mm",
-    "wind": "Wind",
-    "temp": "Temp"
+    "wind": "Bubbee",
+    "temp": "Ho'ina (Temp)"
   },
   "how": {
     "we": {
-      "started": "How we started"
+      "started": "Akkaataa itti jalqabne"
     }
   },
   "our": {
-    "mandate": "Our mandate",
-    "mission": "Our mission",
-    "vision": "Our vision"
+    "mandate": "Aango fi hojiin keenya",
+    "mission": "Ergama keenya",
+    "vision": "Mul'ata keenya"
   },
   "app": {
     "and": {
-      "forecasts": "The app and its forecasts"
+      "forecasts": "Appichaa fi raagiwwan qilleensaa isaa"
     }
   },
   "icons": {
-    "disclaimer": "Weather icons are licensed by"
+    "disclaimer": "Mallattoowwan qilleensaa hayyama kan qaban"
   },
   "warning": {
     "icons": {
-      "disclaimer": "Warning icons are contributed by the World Meteorological Organisation."
+      "disclaimer": "Mallattoowwan akeekkachiisaa kan gumaachame Dhaabbata Qilleensaa Addunyaatiini."
     }
   },
   "geographical": {
     "data": {
-      "disclaimer": "The geographical data in the app was downloaded from"
+      "disclaimer": "Odeeffannoon lafaa appichaa keessa jiru kan buufame"
     }
   },
-  "clearsky_day": "Clear sky",
-  "clearsky_night": "Clear sky",
-  "clearsky_polartwilight": "Clear sky polar twilight",
-  "cloudy": "Cloudy",
-  "fair_day": "Fair day",
-  "fair_night": "Fair night",
-  "fair_polartwilight": "Fair polar twilight",
-  "fog": "Fog",
-  "heavyrainandthunder": "Heavy rain and thunder",
-  "heavyrain": "Heavy rain",
-  "heavyrainshowersandthunder_day": "Heavy rain showers and thunder",
-  "heavyrainshowersandthunder_night": "Heavy rain showers and thunder",
-  "heavyrainshowersandthunder_polartwilight": "Heavy rain showers and thunder polar twilight",
-  "heavyrainshowers_day": "Heavy rain showers",
-  "heavyrainshowers_night": "Heavy rain showers",
-  "heavyrainshowers_polartwilight": "Heavy rain showers polar twilight",
-  "heavysleetandthunder": "Heavy sleet and thunder",
-  "heavysleet": "Heavy sleet",
-  "heavysleetshowersandthunder_day": "Heavy sleet showers and thunder",
-  "heavysleetshowersandthunder_night": "Heavy sleet showers and thunder",
-  "heavysleetshowersandthunder_polartwilight": "Heavy sleet showers and thunder polar twilight",
-  "heavysleetshowers_day": "Heavy sleet showers",
-  "heavysleetshowers_night": "Heavy sleet showers",
-  "heavysleetshowers_polartwilight": "Heavy sleet showers polar twilight",
-  "heavysnowandthunder": "Heavy snow and thunder",
-  "heavysnow": "Heavy snow",
-  "heavysnowshowersandthunder_day": "Heavy snow showers and thunder",
-  "heavysnowshowersandthunder_night": "Heavy snow showers and thunder",
-  "heavysnowshowersandthunder_polartwilight": "Heavy snow showers and thunder polar twilight",
-  "heavysnowshowers_day": "Heavy snow showers",
-  "heavysnowshowers_night": "Heavy snow showers",
-  "heavysnowshowers_polartwilight": "Heavy snow showers polar twilight",
-  "lightrainandthunder": "Light rain and thunder",
-  "lightrain": "Light rain",
-  "lightrainshowersandthunder_day": "Light rain showers and thunder",
-  "lightrainshowersandthunder_night": "Light rain showers and thunder",
-  "lightrainshowersandthunder_polartwilight": "Light rain showers and thunder polar twilight",
-  "lightrainshowers_day": "Light rain showers",
-  "lightrainshowers_night": "Light rain showers",
-  "lightrainshowers_polartwilight": "Light rain showers polar twilight",
-  "lightsleetandthunder": "Light sleet and thunder",
-  "lightsleet": "Light sleet",
-  "lightsleetshowers_day": "Light sleet showers",
-  "lightsleetshowers_night": "Light sleet showers",
-  "lightsleetshowers_polartwilight": "Light sleet showers polar twilight",
-  "lightsnowandthunder": "Light snow and thunder",
-  "lightsnow": "Light snow",
-  "lightsnowshowers_day": "Light snow showers",
-  "lightsnowshowers_night": "Light snow showers",
-  "lightsnowshowers_polartwilight": "Light snow showers polar twilight",
-  "lightssleetshowersandthunder_day": "Light sleet showers and thunder",
-  "lightssleetshowersandthunder_night": "Light sleet showers and thunder",
-  "lightssleetshowersandthunder_polartwilight": "Light sleet showers and thunder polar twilight",
-  "lightssnowshowersandthunder_day": "Light snow showers and thunder",
-  "lightssnowshowersandthunder_night": "Light snow showers and thunder",
-  "lightssnowshowersandthunder_polartwilight": "Light snow showers and thunder polar twilight",
-  "partlycloudy_day": "Partly cloudy",
-  "partlycloudy_night": "Partly cloudy",
-  "partlycloudy_polartwilight": "Partly cloudy polar twilight",
-  "rainandthunder": "Rain and thunder",
+  "clearsky_day": "Qilleensa qulqulluu",
+  "clearsky_night": "Qilleensa qulqulluu",
+  "clearsky_polartwilight": "Qilleensa qulqulluu polarii gannaa/bultii",
+  "cloudy": "Dduumessa",
+  "fair_day": "Qilleensa gaarii",
+  "fair_night": "Qilleensa gaarii halkanii",
+  "fair_polartwilight": "Qilleensa gaarii polarii",
+  "fog": "Hurka/Gunguubuu",
+  "heavyrainandthunder": "Bokkaa cimaa fi tilmaama lolaa/bakakkaa",
+  "heavyrain": "Bokkaa cimaa",
+  "heavyrainshowersandthunder_day": "Bokkaa facaasaa cimaa fi bakakkaa",
+  "heavyrainshowersandthunder_night": "Bokkaa facaasaa cimaa fi bakakkaa",
+  "heavyrainshowersandthunder_polartwilight": "Bokkaa facaasaa cimaa fi bakakkaa polarii",
+  "heavyrainshowers_day": "Bokkaa facaasaa cimaa",
+  "heavyrainshowers_night": "Bokkaa facaasaa cimaa",
+  "heavyrainshowers_polartwilight": "Bokkaa facaasaa cimaa polarii",
+  "heavysleetandthunder": "Qolaa bokkaa/cabbii cimaa fi bakakkaa",
+  "heavysleet": "Qolaa bokkaa/cabbii cimaa",
+  "heavysleetshowersandthunder_day": "Bokkaa cabbii makaa fi bakakkaa cimaa",
+  "heavysleetshowersandthunder_night": "Bokkaa cabbii makaa fi bakakkaa cimaa",
+  "heavysleetshowersandthunder_polartwilight": "Bokkaa cabbii makaa fi bakakkaa cimaa polarii",
+  "heavysleetshowers_day": "Facaasaa cabbii makaa cimaa",
+  "heavysleetshowers_night": "Facaasaa cabbii makaa cimaa",
+  "heavysleetshowers_polartwilight": "Facaasaa cabbii makaa cimaa polarii",
+  "heavysnowandthunder": "Cabbii cimaa fi bakakkaa",
+  "heavysnow": "Cabbii cimaa",
+  "heavysnowshowersandthunder_day": "Facaasaa cabbii cimaa fi bakakkaa",
+  "heavysnowshowersandthunder_night": "Facaasaa cabbii cimaa fi bakakkaa",
+  "heavysnowshowersandthunder_polartwilight": "Facaasaa cabbii cimaa fi bakakkaa polarii",
+  "heavysnowshowers_day": "Facaasaa cabbii cimaa",
+  "heavysnowshowers_night": "Facaasaa cabbii cimaa",
+  "heavysnowshowers_polartwilight": "Facaasaa cabbii cimaa polarii",
+  "lightrainandthunder": "Bokkaa xiqqoo fi bakakkaa",
+  "lightrain": "Bokkaa xiqqoo",
+  "lightrainshowersandthunder_day": "Facaasaa bokkaa xiqqoo fi bakakkaa",
+  "lightrainshowersandthunder_night": "Facaasaa bokkaa xiqqoo fi bakakkaa",
+  "lightrainshowersandthunder_polartwilight": "Facaasaa bokkaa xiqqoo fi bakakkaa polarii",
+  "lightrainshowers_day": "Facaasaa bokkaa xiqqoo",
+  "lightrainshowers_night": "Facaasaa bokkaa xiqqoo",
+  "lightrainshowers_polartwilight": "Facaasaa bokkaa xiqqoo polarii",
+  "lightsleetandthunder": "Qolaa cabbii xiqqoo fi bakakkaa",
+  "lightsleet": "Qolaa cabbii xiqqoo",
+  "lightsleetshowers_day": "Facaasaa qolaa cabbii xiqqoo",
+  "lightsleetshowers_night": "Facaasaa qolaa cabbii xiqqoo",
+  "lightsleetshowers_polartwilight": "Facaasaa qolaa cabbii xiqqoo polarii",
+  "lightsnowandthunder": "Cabbii xiqqoo fi bakakkaa",
+  "lightsnow": "Cabbii xiqqoo",
+  "lightsnowshowers_day": "Facaasaa cabbii xiqqoo",
+  "lightsnowshowers_night": "Facaasaa cabbii xiqqoo",
+  "lightsnowshowers_polartwilight": "Facaasaa cabbii xiqqoo polarii",
+  "lightssleetshowersandthunder_day": "Facaasaa qolaa cabbii xiqqoo fi bakakkaa",
+  "lightssleetshowersandthunder_night": "Facaasaa qolaa cabbii xiqqoo fi bakakkaa",
+  "lightssleetshowersandthunder_polartwilight": "Facaasaa qolaa cabbii xiqqoo fi bakakkaa polarii",
+  "lightssnowshowersandthunder_day": "Facaasaa cabbii xiqqoo fi bakakkaa",
+  "lightssnowshowersandthunder_night": "Facaasaa cabbii xiqqoo fi bakakkaa",
+  "lightssnowshowersandthunder_polartwilight": "Facaasaa cabbii xiqqoo fi bakakkaa polarii",
+  "partlycloudy_day": "Harkaan duumessa",
+  "partlycloudy_night": "Harkaan duumessa",
+  "partlycloudy_polartwilight": "Harkaan duumessa polarii",
+  "rainandthunder": "Bokkaa fi bakakkaa",
   "conditions": {
     "rain": {
       "none": {
-        "label": "No rain",
-        "sentence": "No rain expected."
+        "label": "Bokkaan hin jiru",
+        "sentence": "Bokkaan ni eegama miti."
       },
       "light": {
-        "label": "Light rain",
-        "sentence": "Light rain expected."
+        "label": "Bokkaa xiqqoo",
+        "sentence": "Bokkaan xiqqoo ni eegama."
       },
       "moderate": {
-        "label": "Rain",
-        "sentence": "Rain expected."
+        "label": "Bokkaa",
+        "sentence": "Bokkaan ni eegama."
       },
       "heavy": {
-        "label": "Heavy rain",
-        "sentence": "Heavy rain expected."
+        "label": "Bokkaa cimaa",
+        "sentence": "Bokkaan cimaan ni eegama."
       }
     }
   },
-  "rainshowersandthunder_day": "Rain showers and thunder",
-  "rainshowersandthunder_night": "Rain showers and thunder",
-  "rainshowersandthunder_polartwilight": "Rain showers and thunder polar twilight",
-  "rainshowers_day": "Rain showers",
-  "rainshowers_night": "Rain showers",
-  "rainshowers_polartwilight": "Rain showers polar twilight",
-  "sleetandthunder": "Sleet and thunder",
-  "sleet": "Sleet",
-  "sleetshowersandthunder_day": "Sleet showers and thunder",
-  "sleetshowersandthunder_night": "Sleet showers and thunder",
-  "sleetshowersandthunder_polartwilight": "Sleet showers and thunder polar twilight",
-  "sleetshowers_day": "Sleet showers",
-  "sleetshowers_night": "Sleet showers",
-  "sleetshowers_polartwilight": "Sleet showers polar twilight",
-  "snowandthunder": "Snow and thunder",
-  "snow": "Snow",
-  "snowshowersandthunder_day": "Snow showers and thunder",
-  "snowshowersandthunder_night": "Snow showers and thunder",
-  "snowshowersandthunder_polartwilight": "Snow showers and thunder polar twilight",
-  "snowshowers_day": "Snow showers",
-  "snowshowers_night": "Snow showers",
-  "snowshowers_polartwilight": "Snow showers polar twilight",
+  "rainshowersandthunder_day": "Facaasaa bokkaa fi bakakkaa",
+  "rainshowersandthunder_night": "Facaasaa bokkaa fi bakakkaa",
+  "rainshowersandthunder_polartwilight": "Facaasaa bokkaa fi bakakkaa polarii",
+  "rainshowers_day": "Facaasaa bokkaa",
+  "rainshowers_night": "Facaasaa bokkaa",
+  "rainshowers_polartwilight": "Facaasaa bokkaa polarii",
+  "sleetandthunder": "Qolaa bokkaa/cabbiif bakakkaa",
+  "sleet": "Qolaa bokkaa/cabbii",
+  "sleetshowersandthunder_day": "Facaasaa qolaa bokkaa cabbiif bakakkaa",
+  "sleetshowersandthunder_night": "Facaasaa qolaa bokkaa cabbiif bakakkaa",
+  "sleetshowersandthunder_polartwilight": "Facaasaa qolaa bokkaa cabbiif bakakkaa polarii",
+  "sleetshowers_day": "Facaasaa qolaa bokkaa cabbii",
+  "sleetshowers_night": "Facaasaa qolaa bokkaa cabbii",
+  "sleetshowers_polartwilight": "Facaasaa qolaa bokkaa cabbii polarii",
+  "snowandthunder": "Cabbii fi bakakkaa",
+  "snow": "Cabbii",
+  "snowshowersandthunder_day": "Facaasaa cabbiif bakakkaa",
+  "snowshowersandthunder_night": "Facaasaa cabbiif bakakkaa",
+  "snowshowersandthunder_polartwilight": "Facaasaa cabbiif bakakkaa polarii",
+  "snowshowers_day": "Facaasaa cabbii",
+  "snowshowers_night": "Facaasaa cabbii",
+  "snowshowers_polartwilight": "Facaasaa cabbii polarii",
   "wind": {
     "calm": {
-      "label": "Calm",
-      "sentence": "Calm — safe for boats."
+      "label": "Tasgabbaa'aa",
+      "sentence": "Tasgabbaa'aa — dooniileef qilleensa nageenya qabu."
     },
     "gentle": {
-      "label": "Gentle",
-      "sentence": "Gentle wind — safe for boats."
+      "label": "Laafaa",
+      "sentence": "Bubbee laafaa — dooniileef qilleensa nageenya qabu."
     },
     "breezy": {
-      "label": "Breezy",
-      "sentence": "Breezy — take care on the water."
+      "label": "Qilleensa qabowwaa/Bubbeeffamaa",
+      "sentence": "Bubbeeffamaa — bishaan irratti eeggannoo godhaa."
     },
     "strong": {
-      "label": "Strong wind",
-      "sentence": "Strong wind — dangerous for boats."
+      "label": "Bubbee cimaa",
+      "sentence": "Bubbee cimaa — dooniileef balaa qaba."
     },
     "severe": {
-      "label": "Severe wind",
-      "sentence": "Very strong wind — stay off the water."
+      "label": "Bubbee hamaan",
+      "sentence": "Bubbee baay'ee cimaa — bishaan irraa fagaadhaa."
     }
   },
   "condition": {
-    "clear": "Clear sky",
-    "fair": "Fair",
-    "partlycloudy": "Partly cloudy",
-    "cloudy": "Cloudy",
-    "fog": "Fog",
-    "lightrain": "Light rain",
-    "rain": "Rain",
-    "heavyrain": "Heavy rain",
-    "lightsleet": "Light sleet",
-    "sleet": "Sleet",
-    "heavysleet": "Heavy sleet",
-    "lightsnow": "Light snow",
-    "snow": "Snow",
-    "heavysnow": "Heavy snow",
-    "thunder": "Thunderstorm",
-    "now": "{{condition}} now"
+    "clear": "Qilleensa qulqulluu",
+    "fair": "Gaarii",
+    "partlycloudy": "Harkaan duumessa",
+    "cloudy": "Duumessa",
+    "fog": "Hurka",
+    "lightrain": "Bokkaa xiqqoo",
+    "rain": "Bokkaa",
+    "heavyrain": "Bokkaa cimaa",
+    "lightsleet": "Qolaa cabbii xiqqoo",
+    "sleet": "Qolaa cabbii",
+    "heavysleet": "Qolaa cabbii cimaa",
+    "lightsnow": "Cabbii xiqqoo",
+    "snow": "Cabbii",
+    "heavysnow": "Cabbii cimaa",
+    "thunder": "Bokkaa bakakkaa",
+    "now": "{{condition}} amma"
   },
   "daypart": {
-    "morning": "morning",
-    "afternoon": "afternoon",
-    "evening": "evening",
-    "night": "tonight"
+    "morning": "ganama",
+    "afternoon": "waaree booda",
+    "evening": "galgala",
+    "night": "halkan kana"
   },
   "summary": {
-    "lead": "{{condition}} in {{location}}.",
-    "morerain": "More rain is coming this {{part}}.",
-    "raineasing": "The rain should ease by this {{part}}.",
-    "coolertonight": "Cooler tonight, about {{temp}}."
+    "lead": "{{location}}tti {{condition}}.",
+    "morerain": "{{part}} kana bokkaan dabalataa dhufaa jira.",
+    "raineasing": "{{part}} kana bokkaan hirrisuu qaba.",
+    "coolertonight": "Halkan kana qabbanaa'aa dha, gara {{temp}}°."
   },
   "alert": {
     "lead": {
-      "red": "Danger",
-      "orange": "Warning",
-      "yellow": "Caution",
-      "notice": "Notice"
+      "red": "Balaa",
+      "orange": "Akeekkachiisa",
+      "yellow": "Eeggannoo",
+      "notice": "Beeksisa"
     },
-    "tapToSeeWhatToDo": "Tap here to see what to do",
-    "moreWarningsSingular": "+{{count}} more warning · tap to see all",
-    "moreWarningsPlural": "+{{count}} more warnings · tap to see all",
+    "tapToSeeWhatToDo": "Maal gochuun akka qabdu ilaaluuf as tuqi",
+    "moreWarningsSingular": "+{{count}} akeekkachiisa dabalataa · hundumaa ilaaluuf tuqi",
+    "moreWarningsPlural": "+{{count}} akeekkachiisota dabalataa · hundumaa ilaaluuf tuqi",
     "band": {
-      "red": "RED — act now",
-      "orange": "ORANGE — get ready",
-      "yellow": "YELLOW — be careful",
-      "notice": "NOTICE"
+      "red": "DIIMAO — ammuma tarkaanfii fudhadhaa",
+      "orange": "BURQAA/OOLOLA — qophaa'aa",
+      "yellow": "ELOOWII — eeggannoo godhaa",
+      "notice": "BEEKSISA"
     },
-    "whenLabel": "When",
-    "whereLabel": "Where",
-    "whatToDo": "What to do",
-    "affectedArea": "Affected area",
+    "whenLabel": "Yoom",
+    "whereLabel": "Eessa",
+    "whatToDo": "Maal gochuu qabda",
+    "affectedArea": "Naannoo miidhaan ga'e",
     "map": {
-      "attribution": "Map data © OpenStreetMap contributors"
+      "attribution": "Odeeffannoo kaartaa © gumaachitoota OpenStreetMap"
     },
     "when": {
-      "now": "now",
-      "range": "From {{start}} until {{end}}.",
-      "fromOnly": "From {{start}}.",
-      "untilOnly": "Until {{end}}."
+      "now": "amma",
+      "range": "{{start}} irraa kaasee hanga {{end}}tti.",
+      "fromOnly": "{{start}} irraa kaasee.",
+      "untilOnly": "Hanga {{end}}tti."
     },
-    "listen": "Listen",
-    "stop": "Stop",
-    "missing": "Missing alert! Please go back and try again.",
-    "share": "Share"
+    "listen": "Dhaggeeffadhu",
+    "stop": "Dhiisi / Dhaabi",
+    "missing": "Akeekkachiisni dhabameera! Maaloo deebi'ii irra deebi'ii yaali.",
+    "share": "Qoodi"
   },
   "legend": {
-    "title": "What the colours mean",
+    "title": "Hiika halluuwwanii",
     "red": {
-      "label": "Red",
-      "description": "Act now — serious danger is happening or expected very soon."
+      "label": "Diimaa",
+      "description": "Ammuma tarkaanfii fudhadhaa — balaan cimaan uumamaa jira ykn dhiyeenyatti ni eegama."
     },
     "orange": {
-      "label": "Orange",
-      "description": "Get ready — a serious risk is expected soon."
+      "label": "Oorenji",
+      "description": "Qophaa'aa — balaan cimaan dhiyeenyatti ni eegama."
     },
     "yellow": {
-      "label": "Yellow",
-      "description": "Be careful — bad weather is possible."
+      "label": "Keelloo",
+      "description": "Eeggannoo godhaa — qilleensi hamaa uumamuu danda'a."
     },
     "green": {
-      "label": "Green",
-      "description": "No warnings right now."
+      "label": "Magariisa",
+      "description": "Ammaaf akeekkachiisni tokkoyyoo hin jiru."
     }
   },
   "placeholders": {
     "loremIpsum": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit tempore quod aperiam obcaecati nihil expedita, sint veniam reprehenderit veritatis soluta corporis beatae eligendi quos dicta culpa maxime. Vel, unde tempora.",
-    "appTitle": "ClimWeb Weather App",
-    "appDescription": "ClimWeb Weather App provides accurate and up-to-date weather forecasts for locations across the globe."
-  },
-  "units": {
-    "title": "Units",
-    "temperature": "Temperature",
-    "wind": "Wind speed",
-    "precipitation": "Rain",
-    "celsius": "Celsius (°C)",
-    "fahrenheit": "Fahrenheit (°F)",
-    "kmh": "Kilometres per hour (km/h)",
-    "ms": "Metres per second (m/s)",
-    "knots": "Knots (kn)",
-    "mph": "Miles per hour (mph)",
-    "mm": "Millimetres (mm)",
-    "in": "Inches (in)",
-    "spoken": {
-      "celsius": "{{value}} degrees Celsius",
-      "fahrenheit": "{{value}} degrees Fahrenheit"
-    }
-  },
-  "More": "More",
-  "More conditions": "More conditions",
-  "Favourites": "Favourites",
-  "Go back": "Go back",
-  "more": {
-    "intro": "More weather details for your work.",
-    "favourites": {
-      "description": "Your saved places"
-    }
+    "appTitle": "Appii Qilleensaa ClimWeb",
+    "appDescription": "Appiin Qilleensaa ClimWeb bakkeewwan addunyaa maratti argamaniif raaga qilleensaa sirrii fi yeroo ammaa dhiyeessa."
   }
 }
