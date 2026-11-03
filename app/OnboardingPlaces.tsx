@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { SystemBars } from 'react-native-edge-to-edge';
+import { SystemBars } from '@/components/SystemBars';
 import { Text } from 'react-native-paper';
 import { useRouter, Redirect } from 'expo-router';
 import { useTranslation } from 'react-i18next';

@@ -33,7 +33,10 @@ jest.mock('expo-router', () => ({
   useNavigation: () => mockNavigation,
   useGlobalSearchParams: () => ({}),
 }));
-jest.mock('react-native-safe-area-context', () => require('react-native-safe-area-context/jest/mock').default);
+// Icons load their font on mount, which needs an asset registry Jest doesn't
+// have; report fonts as already loaded instead.
+jest.mock('expo-font', () => ({ ...jest.requireActual('expo-font'), isLoaded: () => true }));
+jest.mock('react-native-safe-area-context',() => require('react-native-safe-area-context/jest/mock').default);
 jest.mock('@/lib/hooks/use-color-scheme', () => ({ useColorScheme: () => 'light' }));
 jest.mock('@/lib/hooks/alerts.hook', () => ({ useAlertsQuery: () => ({ data: [] }) }));
 jest.mock('@/lib/hooks/use-units', () => ({

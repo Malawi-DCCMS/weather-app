@@ -1,7 +1,7 @@
 import React, { JSX, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { SystemBars } from 'react-native-edge-to-edge';
+import { SystemBars } from '@/components/SystemBars';
 import { Icon, Text, Menu, Button } from 'react-native-paper';
 import { useRouter, Redirect, Href } from 'expo-router';
 import { useTranslation } from 'react-i18next';

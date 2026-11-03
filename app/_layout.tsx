@@ -2,7 +2,7 @@ import { Buffer } from 'buffer';
 import * as SplashScreen from 'expo-splash-screen';
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SystemBars } from 'react-native-edge-to-edge';
+import { SystemBars } from '@/components/SystemBars';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { queryClient, persistOptions } from '@/lib/query/client';
 import { MD3LightTheme, MD3DarkTheme, PaperProvider, configureFonts } from 'react-native-paper';

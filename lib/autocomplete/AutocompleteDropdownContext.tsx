@@ -80,7 +80,7 @@ export const AutocompleteDropdownContextProvider: FC<any> = ({ headerOffset = 0,
   }, [content])
 
   useEffect(() => {
-    let positionTrackingInterval: NodeJS.Timeout|undefined;
+    let positionTrackingInterval: ReturnType<typeof setInterval> | undefined;
     if (show && !!opacity) {
       positionTrackingInterval = setInterval(() => {
         requestAnimationFrame(() => {

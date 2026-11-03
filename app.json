@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Climweb Weather App",
-    "slug": "climweb.weatherapp",
+    "slug": "climweb_weather_app",
     "version": "1.7.1",
     "orientation": "portrait",
     "icon": "./assets/ic_launcher.png",
@@ -62,12 +62,9 @@
       ],
       "expo-web-browser",
       [
-        "react-native-edge-to-edge",
+        "expo-navigation-bar",
         {
-          "android": {
-            "parentTheme": "Default",
-            "enforceNavigationBarContrast": false
-          }
+          "enforceContrast": false
         }
       ],
       "expo-sharing",
