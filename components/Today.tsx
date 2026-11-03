@@ -1,115 +1,64 @@
-import React, { JSX } from 'react';
+import React, { JSX, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Icon, Text } from 'react-native-paper';
-
-import { WeatherDataDaySummary } from '@/lib/forecast/weatherData';
+import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-const forwardArrow = require('@/assets/icons8-forward-100.png');
-const upArrow = require('@/assets/Arrow-upward.png');
-const downArrow = require('@/assets/Arrow-downward.png');
+import { ForecastDayRecord } from '@/lib/forecast/types';
+import { getDayParts } from '@/lib/forecast/day-parts';
+import CurrentConditionsCard from './CurrentConditionsCard';
+import DayPartsGrid from './DayPartsGrid';
+import FiveHourSummary from './FiveHourSummary';
+import { ThemeColors, Fonts, Spacing, tempSize } from '@/lib/theme';
+import { useTheme } from '@/lib/hooks/use-theme';
 
 type TodaysForecastProps = {
-  daySummary: WeatherDataDaySummary | undefined;
+  daySummary: ForecastDayRecord | undefined;
+  location: string;
+  tempFontSize?: number;
+  // Small breakpoint (<360dp) — tighter margins to fit entry-level phones.
+  compact?: boolean;
 };
-function Today(props: TodaysForecastProps): JSX.Element {
-  const { t } = useTranslation();
 
-  const { daySummary } = props;
+// The single-column (phone) composition of Today's screen. The XL/tablet
+// two-pane layout is assembled directly in app/(tabs)/index.tsx from the
+// same CurrentConditionsCard/DayPartsGrid pieces, since it needs different
+// grouping (conditions+wind on the left, day-parts+5-day list on the right).
+function Today({ daySummary, location, tempFontSize = tempSize.large, compact }: TodaysForecastProps): JSX.Element {
+  const { t } = useTranslation();
+  const colors = useTheme();
+  const styles = useMemo(() => makeStyles(colors), [colors]);
 
   if (!daySummary) {
     return (
       <View style={styles.wrapper}>
-        <View style={styles.today}>
-          <Text style={styles.todaysHeader}>Forecast unavailable</Text>
-        </View>
+        <Text style={styles.todaysHeader}>{t("forecast.states.unavailable")}</Text>
       </View>
     )
   }
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.opacity}>
-        <View style={styles.todayText}><Text style={styles.todaysHeader}>{t('Today')} {">"}</Text></View>
-        <View style={styles.today}>
-          <View><Text style={styles.large}>{Math.round(daySummary.steps[0].temperature || 0)}&deg;</Text></View>
-        </View>
-        <View style={styles.temps}>
-          <View>
-            <Text style={styles.small}>
-              <Icon size={15} color='white' source={upArrow} /> {Math.round(daySummary.maxTemperature || 0)}&deg;<View style={{ paddingRight: 24 }}></View><Icon size={15} color='white' source={downArrow} /> {Math.round(daySummary.minTemperature || 0)}&deg;
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.smallSymbol} numberOfLines={2}>
-              {daySummary.weatherSymbol ? t(daySummary.weatherSymbol) : t('Not available')}
-            </Text>
-          </View>
-        </View>
-      </View>
+    <View style={[styles.wrapper, compact && styles.wrapperCompact]}>
+      <CurrentConditionsCard daySummary={daySummary} location={location} tempFontSize={tempFontSize} compact={compact} />
+      <DayPartsGrid dayParts={getDayParts(daySummary)} columns={2} />
+      <FiveHourSummary daySummary={daySummary} location={location} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: ThemeColors) => StyleSheet.create({
+  // Negative margin paired with equal padding expands the ViewGroup bounds
+  // so Android does not clip child card elevation shadows on any side while
+  // keeping exact layout alignment with app/(tabs)/index.tsx's contentWrapper.
   wrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 28,
-    marginRight: 27,
-    marginLeft: 27,
+    marginTop: 0,
   },
-  glassWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    borderRadius: 8,
-  },
-  opacity: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    flex: 1,
-    borderRadius: 4,
-    backgroundColor: 'rgba(217, 217, 217, .5)',
-    padding: 8,
-  },
-  today: {
-    flex: 1,
-    paddingTop: 38,
-    paddingBottom: 18,
-    textAlign: 'center',
-  },
-  todayText: {
-    flex: 1,
-  },
-  temps: {
-    margin: 8,
+  wrapperCompact: {
+    marginTop: 0,
   },
   todaysHeader: {
-    fontSize: 24,
-    fontFamily: 'Rajdhani-Regular',
-    marginBottom: -15,
-    marginLeft: 8,
-    color: 'white',
-  },
-  large: {
-    fontSize: 92,
-    fontFamily: 'Rajdhani-Regular',
-    color: 'white',
-    textAlign: 'center',
-  },
-  small: {
-    fontSize: 16,
-    fontFamily: 'Rajdhani-Light',
-    color: 'white',
-  },
-  smallSymbol: {
-    fontSize: 16,
-    fontFamily: 'Rajdhani-Light',
-    color: 'white',
-    maxWidth: 150
+    fontSize: 20,
+    fontFamily: Fonts.sans.bold,
+    color: colors.textStrong,
   },
 });
 

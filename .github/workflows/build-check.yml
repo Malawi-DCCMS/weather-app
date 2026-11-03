@@ -1,0 +1,164 @@
+# Verifies the app still compiles before a PR can merge into main.
+#
+# - "JS check" runs on every PR (Linux, a few minutes): type check, tests and a
+#   production JS bundle for both platforms, which catches the import,
+#   syntax and type errors most PRs could introduce.
+# - "Android build" / "iOS build" compile the native apps, but only when a
+#   file that can affect native code changed (dependencies, app config).
+#   Otherwise they're skipped, which GitHub counts as passing.
+#
+# Required status checks (ruleset on main) must match the job names:
+# "JS check", "Android build" and "iOS build". JS check must be required:
+# if it fails, the native jobs are skipped and would otherwise pass.
+name: Build check
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read # paths-filter lists the PR's changed files
+
+concurrency:
+  group: build-check-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 24
+  EXPO_NO_TELEMETRY: 1
+
+jobs:
+  js:
+    name: JS check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      native: ${{ steps.filter.outputs.native }}
+    steps:
+      - uses: actions/checkout@v5
+
+      # ios/ and android/ aren't committed (prebuild generates them), so
+      # native code can only change through these files.
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            native:
+              - 'package.json'
+              - 'package-lock.json'
+              - 'app.json'
+              - 'eas.json'
+              - 'google-services.json'
+              - 'plugins/**'
+              - 'patches/**'
+              - '.github/workflows/build-check.yml'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Expo doctor
+        run: npx expo-doctor
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      # Calls jest directly: `npm test` runs in watch mode. --forceExit
+      # because an open handle otherwise keeps jest from exiting.
+      - name: Tests
+        run: npx jest --ci --forceExit
+
+      # EXPO_PUBLIC_* values are inlined into the bundle; the example values
+      # are enough to build it.
+      - run: cp .env.example .env
+
+      - name: Bundle JS for iOS and Android
+        run: npx expo export --platform ios --platform android --output-dir "$RUNNER_TEMP/export"
+
+  android:
+    name: Android build
+    needs: js
+    if: needs.js.outputs.native == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      # Matches .java-version.
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v5
+
+      - run: npm ci
+
+      - run: cp .env.example .env
+
+      - run: npx expo prebuild --platform android --no-install
+
+      # One ABI keeps native compile time down; the other ABIs build from
+      # the same sources.
+      - name: Assemble release
+        working-directory: android
+        run: ./gradlew assembleRelease -PreactNativeArchitectures=x86_64 --no-daemon
+
+  ios:
+    name: iOS build
+    needs: js
+    if: needs.js.outputs.native == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: macos-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - run: npm ci
+
+      - run: cp .env.example .env
+
+      # Download cache only: restoring ios/Pods would create ios/ before
+      # prebuild runs, and prebuild treats an existing ios/ as a project.
+      - uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/CocoaPods
+          key: pods-${{ runner.os }}-${{ hashFiles('package-lock.json', 'app.json') }}
+          restore-keys: pods-${{ runner.os }}-
+
+      # Also runs pod install.
+      - run: npx expo prebuild --platform ios
+
+      # Simulator build, so no signing identity or provisioning is needed.
+      - name: Build release for simulator
+        working-directory: ios
+        run: |
+          # Prebuild names the workspace and scheme after the app name.
+          workspace=$(ls -d *.xcworkspace | head -n 1)
+          scheme=$(basename "$workspace" .xcworkspace)
+          xcodebuild -quiet \
+            -workspace "$workspace" \
+            -scheme "$scheme" \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build

@@ -1,0 +1,496 @@
+{
+  "settings": {
+    "title": "Settings",
+    "alwaysShowStartPage": "Always Show Start Page",
+    "appearance": "Appearance",
+    "language": {
+      "title": "Language",
+      "english": "English",
+      "placeholder": "Select a language"
+    },
+    "sections": {
+      "preferences": "Preferences",
+      "about": "About"
+    },
+    "preferences": {
+      "appearance": {
+        "darkMode": "Dark Mode"
+      },
+      "showOnboarding": "Show Onboarding"
+    },
+    "about": {
+      "appVersion": "App Version"
+    },
+    "rateApp": "Rate this app"
+  },
+  "common": {
+    "actions": {
+      "retry": "Retry",
+      "dismiss": "Dismiss"
+    },
+    "states": {
+      "notAvailable": "Not available",
+      "loading": "Loading"
+    },
+    "alerts": {
+      "title": "Alert"
+    }
+  },
+  "forecast": {
+    "error": {
+      "title": "Couldn't load the forecast",
+      "unavailable": "Forecast not available at the moment. Please try again later.",
+      "generic": "There was an error getting the forecast"
+    },
+    "lastUpdated": "Forecast last updated at {{time}}",
+    "states": {
+      "unavailable": "Forecast unavailable"
+    }
+  },
+  "warnings": {
+    "error": {
+      "title": "Couldn't load alerts"
+    },
+    "title": "Warnings",
+    "empty": {
+      "title": "No warnings right now",
+      "text": "There are no active weather warnings right now."
+    },
+    "group": {
+      "yourArea": "Your area",
+      "elsewhere": "Elsewhere in the country"
+    }
+  },
+  "location": {
+    "notSet": {
+      "title": "No location set",
+      "text": "Choose a place to see its forecast and alerts.",
+      "action": "Choose a place"
+    }
+  },
+  "aboutUs": {
+    "title": "About us",
+    "partners": {
+      "dccms": "Department of Climate Change and Meteorological Services (DCCMS)"
+    },
+    "emi": {
+      "title": "Ethiopian Meteorological Institute",
+      "description": "The Ethiopian Meteorological Institute (EMI) is the state authority responsible for providing weather, climate, and early warning services across Ethiopia.",
+      "mission": {
+        "title": "Mission",
+        "description": "To monitor, analyze, and forecast weather, climate, and agro-meteorological conditions to support sustainable national development and ensure public safety."
+      }
+    },
+    "forecastServices": {
+      "title": "Forecast Services",
+      "products": {
+        "title": "Meteorological Products",
+        "description": "EMI uses advanced meteorological stations, satellite data, and numerical models to deliver tailored forecasts:"
+      },
+      "nowcasting": {
+        "title": "Nowcasting & Hourly",
+        "description": "Real-time alerts for sudden changes in weather conditions."
+      },
+      "daily": {
+        "title": "Daily & Medium Range",
+        "description": "1 to 10-day outlooks for travel, public safety, and general planning."
+      },
+      "seasonal": {
+        "title": "Seasonal Outlooks",
+        "description": "Critical forecasts for agricultural seasons like Belg and Kiremt."
+      }
+    }
+  },
+  "aboutApp": {
+    "title": "About the app",
+    "icons": "Icons",
+    "partners": "Partners in this project have been",
+    "geographicalData": "Geographical Data",
+    "forecasts": {
+      "title": "The app and its forecasts",
+      "description": "The app development is led by \nWMO-RAF - World Meteorological Organisation, Regional Office for Africa, and Norway MET - Meteorologisk institutt.\n\n All forecasts are issued by Norway MET."
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "Climweb Weather App is developed by WMO-RAF (World Meteorological Organisation - Regional Office for Africa) and Norway MET (Meteorologisk institutt). We are committed to protecting your privacy.",
+    "dataCollected": {
+      "title": "Information We Collect",
+      "text": "Climweb Weather App does not collect, store, or share any personal information. You do not need to register or provide any personal details to use the app."
+    },
+    "location": {
+      "title": "Use of Location Data",
+      "text": "To show you accurate weather forecasts and alerts for your area, the app uses your device's location. Your location is used only to fetch weather data for that spot and is not linked to your identity or stored on our servers."
+    },
+    "favourites": {
+      "title": "Your Favourite Places",
+      "text": "If you save favourite places, they are stored only on your device. This information is never sent to us or shared with anyone else. You can add, change, or remove your favourite places at any time from Favourites on the More tab."
+    },
+    "security": {
+      "title": "Data Security",
+      "text": "We take data security seriously. Since we do not collect or store personal data, our focus is on keeping the app's forecast and alert services accurate and reliable."
+    },
+    "children": {
+      "title": "Children's Privacy",
+      "text": "Climweb Weather App is designed to be used by people of all ages, including children. We do not collect personal information from children or any other users."
+    },
+    "thirdParty": {
+      "title": "Third-Party Services",
+      "text": "The app may contain links to third-party websites or services that we do not operate. If you tap a third-party link, you will be taken to that third party's site. We encourage you to read their privacy policies, as we are not responsible for their content or practices."
+    },
+    "changes": {
+      "title": "Changes to This Policy",
+      "text": "We may update this Privacy Policy from time to time. Any changes will be reflected on this page."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text": "If you have questions about this Privacy Policy, please contact WMO-RAF (World Meteorological Organisation - Regional Office for Africa) or Norway MET (Meteorologisk institutt)."
+    }
+  },
+  "time": {
+    "today": "Today",
+    "fiveDays": "Five Days",
+    "nextFiveDays": "Next 5 days",
+    "time": "Time",
+    "days": {
+      "sun": "Sunday",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday"
+    },
+    "periods": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "night": "Night"
+    },
+    "morning": "morning",
+    "afternoon": "afternoon",
+    "evening": "evening",
+    "night": "night"
+  },
+  "alerts": {
+    "title": "Alerts"
+  },
+  "places": {
+    "title": "Places",
+    "tapToChange": "Tap to change place",
+    "pickerTitle": "Choose your favourite places",
+    "pickerSubtitle": "Search and select up to 5 places you care about.",
+    "selectedCount": "{{count}}/5 selected",
+    "maxReached": "You've selected the maximum of 5 places.",
+    "finish": "Finish",
+    "removeChip": "Remove {{name}}",
+    "empty": {
+      "title": "No favourite places yet",
+      "text": "Add up to 5 places to see their forecasts here."
+    },
+    "setFavourites": "Set favourite places",
+    "edit": "Edit favourite places",
+    "yourPlaces": "Your favourite places",
+    "searchLocation": "Search location",
+    "locationError": {
+      "message": "Not able to use your location to find the closest place."
+    }
+  },
+  "fiveDays": {
+    "footnote": "Forecast data provided by your national weather service."
+  },
+  "welcome": {
+    "title": "Welcome to ClimWeb Weather App",
+    "subtitle": "Weather forecasts and warnings.",
+    "getStarted": "Get started",
+    "next": "Next"
+  },
+  "today": {
+    "tomorrow": "Tomorrow",
+    "warmer": "warmer",
+    "cooler": "cooler",
+    "tapToSeeFiveDays": "Tap to see the next 5 days",
+    "hourByHour": "Today, hour by hour",
+    "tapToSeeHourly": "Tap to see the hourly forecast"
+  },
+  "day": {
+    "conditionWindy": "{{condition}} and very windy."
+  },
+  "weather": {
+    "min": "Min",
+    "max": "Max",
+    "kmh": "Km/h",
+    "rain": "Rain",
+    "mm": "mm",
+    "wind": "Wind",
+    "temp": "Temp"
+  },
+  "how": {
+    "we": {
+      "started": "How we started"
+    }
+  },
+  "our": {
+    "mandate": "Our mandate",
+    "mission": "Our mission",
+    "vision": "Our vision"
+  },
+  "app": {
+    "and": {
+      "forecasts": "The app and its forecasts"
+    }
+  },
+  "icons": {
+    "disclaimer": "Weather icons are licensed by"
+  },
+  "warning": {
+    "icons": {
+      "disclaimer": "Warning icons are contributed by the World Meteorological Organisation."
+    }
+  },
+  "geographical": {
+    "data": {
+      "disclaimer": "The geographical data in the app was downloaded from"
+    }
+  },
+  "clearsky_day": "Clear sky",
+  "clearsky_night": "Clear sky",
+  "clearsky_polartwilight": "Clear sky polar twilight",
+  "cloudy": "Cloudy",
+  "fair_day": "Fair day",
+  "fair_night": "Fair night",
+  "fair_polartwilight": "Fair polar twilight",
+  "fog": "Fog",
+  "heavyrainandthunder": "Heavy rain and thunder",
+  "heavyrain": "Heavy rain",
+  "heavyrainshowersandthunder_day": "Heavy rain showers and thunder",
+  "heavyrainshowersandthunder_night": "Heavy rain showers and thunder",
+  "heavyrainshowersandthunder_polartwilight": "Heavy rain showers and thunder polar twilight",
+  "heavyrainshowers_day": "Heavy rain showers",
+  "heavyrainshowers_night": "Heavy rain showers",
+  "heavyrainshowers_polartwilight": "Heavy rain showers polar twilight",
+  "heavysleetandthunder": "Heavy sleet and thunder",
+  "heavysleet": "Heavy sleet",
+  "heavysleetshowersandthunder_day": "Heavy sleet showers and thunder",
+  "heavysleetshowersandthunder_night": "Heavy sleet showers and thunder",
+  "heavysleetshowersandthunder_polartwilight": "Heavy sleet showers and thunder polar twilight",
+  "heavysleetshowers_day": "Heavy sleet showers",
+  "heavysleetshowers_night": "Heavy sleet showers",
+  "heavysleetshowers_polartwilight": "Heavy sleet showers polar twilight",
+  "heavysnowandthunder": "Heavy snow and thunder",
+  "heavysnow": "Heavy snow",
+  "heavysnowshowersandthunder_day": "Heavy snow showers and thunder",
+  "heavysnowshowersandthunder_night": "Heavy snow showers and thunder",
+  "heavysnowshowersandthunder_polartwilight": "Heavy snow showers and thunder polar twilight",
+  "heavysnowshowers_day": "Heavy snow showers",
+  "heavysnowshowers_night": "Heavy snow showers",
+  "heavysnowshowers_polartwilight": "Heavy snow showers polar twilight",
+  "lightrainandthunder": "Light rain and thunder",
+  "lightrain": "Light rain",
+  "lightrainshowersandthunder_day": "Light rain showers and thunder",
+  "lightrainshowersandthunder_night": "Light rain showers and thunder",
+  "lightrainshowersandthunder_polartwilight": "Light rain showers and thunder polar twilight",
+  "lightrainshowers_day": "Light rain showers",
+  "lightrainshowers_night": "Light rain showers",
+  "lightrainshowers_polartwilight": "Light rain showers polar twilight",
+  "lightsleetandthunder": "Light sleet and thunder",
+  "lightsleet": "Light sleet",
+  "lightsleetshowers_day": "Light sleet showers",
+  "lightsleetshowers_night": "Light sleet showers",
+  "lightsleetshowers_polartwilight": "Light sleet showers polar twilight",
+  "lightsnowandthunder": "Light snow and thunder",
+  "lightsnow": "Light snow",
+  "lightsnowshowers_day": "Light snow showers",
+  "lightsnowshowers_night": "Light snow showers",
+  "lightsnowshowers_polartwilight": "Light snow showers polar twilight",
+  "lightssleetshowersandthunder_day": "Light sleet showers and thunder",
+  "lightssleetshowersandthunder_night": "Light sleet showers and thunder",
+  "lightssleetshowersandthunder_polartwilight": "Light sleet showers and thunder polar twilight",
+  "lightssnowshowersandthunder_day": "Light snow showers and thunder",
+  "lightssnowshowersandthunder_night": "Light snow showers and thunder",
+  "lightssnowshowersandthunder_polartwilight": "Light snow showers and thunder polar twilight",
+  "partlycloudy_day": "Partly cloudy",
+  "partlycloudy_night": "Partly cloudy",
+  "partlycloudy_polartwilight": "Partly cloudy polar twilight",
+  "rainandthunder": "Rain and thunder",
+  "conditions": {
+    "rain": {
+      "none": {
+        "label": "No rain",
+        "sentence": "No rain expected."
+      },
+      "light": {
+        "label": "Light rain",
+        "sentence": "Light rain expected."
+      },
+      "moderate": {
+        "label": "Rain",
+        "sentence": "Rain expected."
+      },
+      "heavy": {
+        "label": "Heavy rain",
+        "sentence": "Heavy rain expected."
+      }
+    }
+  },
+  "rainshowersandthunder_day": "Rain showers and thunder",
+  "rainshowersandthunder_night": "Rain showers and thunder",
+  "rainshowersandthunder_polartwilight": "Rain showers and thunder polar twilight",
+  "rainshowers_day": "Rain showers",
+  "rainshowers_night": "Rain showers",
+  "rainshowers_polartwilight": "Rain showers polar twilight",
+  "sleetandthunder": "Sleet and thunder",
+  "sleet": "Sleet",
+  "sleetshowersandthunder_day": "Sleet showers and thunder",
+  "sleetshowersandthunder_night": "Sleet showers and thunder",
+  "sleetshowersandthunder_polartwilight": "Sleet showers and thunder polar twilight",
+  "sleetshowers_day": "Sleet showers",
+  "sleetshowers_night": "Sleet showers",
+  "sleetshowers_polartwilight": "Sleet showers polar twilight",
+  "snowandthunder": "Snow and thunder",
+  "snow": "Snow",
+  "snowshowersandthunder_day": "Snow showers and thunder",
+  "snowshowersandthunder_night": "Snow showers and thunder",
+  "snowshowersandthunder_polartwilight": "Snow showers and thunder polar twilight",
+  "snowshowers_day": "Snow showers",
+  "snowshowers_night": "Snow showers",
+  "snowshowers_polartwilight": "Snow showers polar twilight",
+  "wind": {
+    "calm": {
+      "label": "Calm",
+      "sentence": "Calm — safe for boats."
+    },
+    "gentle": {
+      "label": "Gentle",
+      "sentence": "Gentle wind — safe for boats."
+    },
+    "breezy": {
+      "label": "Breezy",
+      "sentence": "Breezy — take care on the water."
+    },
+    "strong": {
+      "label": "Strong wind",
+      "sentence": "Strong wind — dangerous for boats."
+    },
+    "severe": {
+      "label": "Severe wind",
+      "sentence": "Very strong wind — stay off the water."
+    }
+  },
+  "condition": {
+    "clear": "Clear sky",
+    "fair": "Fair",
+    "partlycloudy": "Partly cloudy",
+    "cloudy": "Cloudy",
+    "fog": "Fog",
+    "lightrain": "Light rain",
+    "rain": "Rain",
+    "heavyrain": "Heavy rain",
+    "lightsleet": "Light sleet",
+    "sleet": "Sleet",
+    "heavysleet": "Heavy sleet",
+    "lightsnow": "Light snow",
+    "snow": "Snow",
+    "heavysnow": "Heavy snow",
+    "thunder": "Thunderstorm",
+    "now": "{{condition}} now"
+  },
+  "daypart": {
+    "morning": "morning",
+    "afternoon": "afternoon",
+    "evening": "evening",
+    "night": "tonight"
+  },
+  "summary": {
+    "lead": "{{condition}} in {{location}}.",
+    "morerain": "More rain is coming this {{part}}.",
+    "raineasing": "The rain should ease by this {{part}}.",
+    "coolertonight": "Cooler tonight, about {{temp}}."
+  },
+  "alert": {
+    "lead": {
+      "red": "Danger",
+      "orange": "Warning",
+      "yellow": "Caution",
+      "notice": "Notice"
+    },
+    "tapToSeeWhatToDo": "Tap here to see what to do",
+    "moreWarningsSingular": "+{{count}} more warning · tap to see all",
+    "moreWarningsPlural": "+{{count}} more warnings · tap to see all",
+    "band": {
+      "red": "RED — act now",
+      "orange": "ORANGE — get ready",
+      "yellow": "YELLOW — be careful",
+      "notice": "NOTICE"
+    },
+    "whenLabel": "When",
+    "whereLabel": "Where",
+    "whatToDo": "What to do",
+    "affectedArea": "Affected area",
+    "map": {
+      "attribution": "Map data © OpenStreetMap contributors"
+    },
+    "when": {
+      "now": "now",
+      "range": "From {{start}} until {{end}}.",
+      "fromOnly": "From {{start}}.",
+      "untilOnly": "Until {{end}}."
+    },
+    "listen": "Listen",
+    "stop": "Stop",
+    "missing": "Missing alert! Please go back and try again.",
+    "share": "Share"
+  },
+  "legend": {
+    "title": "What the colours mean",
+    "red": {
+      "label": "Red",
+      "description": "Act now — serious danger is happening or expected very soon."
+    },
+    "orange": {
+      "label": "Orange",
+      "description": "Get ready — a serious risk is expected soon."
+    },
+    "yellow": {
+      "label": "Yellow",
+      "description": "Be careful — bad weather is possible."
+    },
+    "green": {
+      "label": "Green",
+      "description": "No warnings right now."
+    }
+  },
+  "placeholders": {
+    "loremIpsum": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit tempore quod aperiam obcaecati nihil expedita, sint veniam reprehenderit veritatis soluta corporis beatae eligendi quos dicta culpa maxime. Vel, unde tempora.",
+    "appTitle": "ClimWeb Weather App",
+    "appDescription": "ClimWeb Weather App provides accurate and up-to-date weather forecasts for locations across the globe."
+  },
+  "units": {
+    "title": "Units",
+    "temperature": "Temperature",
+    "wind": "Wind speed",
+    "precipitation": "Rain",
+    "celsius": "Celsius (°C)",
+    "fahrenheit": "Fahrenheit (°F)",
+    "kmh": "Kilometres per hour (km/h)",
+    "ms": "Metres per second (m/s)",
+    "knots": "Knots (kn)",
+    "mph": "Miles per hour (mph)",
+    "mm": "Millimetres (mm)",
+    "in": "Inches (in)",
+    "spoken": {
+      "celsius": "{{value}} degrees Celsius",
+      "fahrenheit": "{{value}} degrees Fahrenheit"
+    }
+  },
+  "More": "More",
+  "More conditions": "More conditions",
+  "Favourites": "Favourites",
+  "Go back": "Go back",
+  "more": {
+    "intro": "More weather details for your work.",
+    "favourites": {
+      "description": "Your saved places"
+    }
+  }
+}

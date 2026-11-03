@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect, JSX } from 'react';
 import { Animated } from 'react-native';
 import type { PropsWithChildren } from 'react';
 import type { ViewStyle } from 'react-native';
@@ -6,7 +6,11 @@ import type { ViewStyle } from 'react-native';
 type FadeInProps = PropsWithChildren<{ style: ViewStyle }>;
 
 export const FadeIn: React.FC<FadeInProps> = (props): JSX.Element => {
-  const fadeAnimation = useRef(new Animated.Value(0)).current;
+  // useState's lazy initializer runs exactly once, unlike
+  // useRef(new Animated.Value(0)) — that constructor argument gets
+  // evaluated (and its result immediately discarded) on every re-render,
+  // even though useRef only ever keeps the first one.
+  const [fadeAnimation] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     Animated.timing(fadeAnimation, {

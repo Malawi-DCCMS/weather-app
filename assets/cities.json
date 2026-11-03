@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Addis Ababa",
+    "lat": 9.03,
+    "lon": 38.74
+  },
+  {
+    "name": "Nairobi",
+    "lat": -1.286,
+    "lon": 36.817
+  },
+  {
+    "name": "Dar es Salaam",
+    "lat": -6.792,
+    "lon": 39.208
+  },
+  {
+    "name": "Cairo",
+    "lat": 30.033,
+    "lon": 31.233
+  },
+  {
+    "name": "Johannesburg",
+    "lat": -26.195,
+    "lon": 28.034
+  }
+]

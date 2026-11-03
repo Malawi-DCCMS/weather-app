@@ -1,42 +1,26 @@
-import i18n from 'i18next';
+import i18n, { LanguageDetectorModule } from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { en, chi } from './translations';
+import { storage } from '@/lib/storage';
+import { LANGUAGES } from './translations';
 
 const STORE_LANGUAGE_KEY = 'settings.lang';
 
-const languageDetectorPlugin = {
+// MMKV reads are synchronous, so detection no longer needs the
+// callback-based async detector interface.
+const languageDetectorPlugin: LanguageDetectorModule = {
     type: 'languageDetector',
-    async: true,
-    init: () => { },
-    detect: async function (callback: (lang: string) => void) {
-        try {
-            await AsyncStorage.getItem(STORE_LANGUAGE_KEY).then((language) => {
-                if (language) {
-                    return callback(language);
-                } else {
-                    return callback('en');
-                }
-            });
-        } catch (error) {
-            console.error('There was an error reading the cached language:', error);
-        }
-    },
-    cacheUserLanguage: async function (language: string) {
-        try {
-            await AsyncStorage.setItem(STORE_LANGUAGE_KEY, language);
-        } catch (error) { }
+    detect: () => storage.getString(STORE_LANGUAGE_KEY) ?? 'en',
+    cacheUserLanguage: (language: string) => {
+        storage.set(STORE_LANGUAGE_KEY, language);
     },
 };
-const resources = {
-    en: {
-        translation: en,
-    },
-    chi: {
-        translation: chi,
-    },
-};
+
+// Build resources object from LANGUAGES configuration
+const resources: { [key: string]: { translation: any } } = {};
+Object.entries(LANGUAGES).forEach(([key, { resources: res }]) => {
+  resources[key] = { translation: res };
+});
 
 i18n.use(initReactI18next).use(languageDetectorPlugin).init({
     resources,

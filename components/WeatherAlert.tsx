@@ -1,123 +1,98 @@
 import React from "react";
-import { Image, ImageSourcePropType, StyleProp, StyleSheet, TouchableOpacity, View, ImageBackground } from "react-native";
-import { Text } from "react-native-paper";
-import { DateTime } from "luxon";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Icon, Text } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { CAPAlert, alertLevel } from '@/lib/alerts/alert';
-import { WARNING_COLORS, WEATHER_WARNING_ICONS } from "@/lib/alerts/icons";
-
-const warningBg = require('@/assets/warning-bg.png')
+import { CAPAlert, alertLevel } from '@/lib/alerts/providers/cap-alerts/alert';
+import { ALERT_LEAD_WORD_KEYS, WARNING_BAND_TEXT_COLORS, WARNING_COLORS, WEATHER_WARNING_ICONS } from "@/lib/alerts/providers/cap-alerts/icons";
+import { Fonts, Radius, Spacing } from '@/lib/theme';
 
 type WeatherAlertProps = {
   alert: CAPAlert;
-  style?: StyleProp<{}>,
-  onPress: (alert: {}) => void
+  onPress: () => void;
+  // Number of other active alerts beyond this one — when > 0, the banner
+  // becomes a consolidated "+N more warnings" summary instead of pointing
+  // at this specific alert's detail.
+  extraCount?: number;
 }
-const WeatherAlert = (props: WeatherAlertProps) => {
-  const { alert, onPress } = props;
+
+const WeatherAlert = ({ alert, onPress, extraCount = 0 }: WeatherAlertProps) => {
+  const { t } = useTranslation();
+  const info = alert.info?.[0];
+
+  if (!info) return null;
+
+  const level = alertLevel(info);
+  const leadWord = t(ALERT_LEAD_WORD_KEYS[level]);
+  const backgroundColor = WARNING_COLORS[level];
+  const textColor = WARNING_BAND_TEXT_COLORS[level];
+  const icon = WEATHER_WARNING_ICONS[level.toLowerCase()];
+  const subtext = extraCount > 0
+    ? t(extraCount === 1 ? 'alert.moreWarningsSingular' : 'alert.moreWarningsPlural', { count: extraCount })
+    : t('alert.tapToSeeWhatToDo');
 
   return (
-    <TouchableOpacity style={styles.wrapper} onPress={() => onPress({})}>
-      <View style={styles.glassWrapper}>
-        <View style={{ ...styles.opacity, backgroundColor: getWarningColor(getAlertLevel(alert)) }}>
-          <View style={styles.warning}>
-            <ImageBackground source={warningBg} style={styles.warningIcon}><Image source={getWarningIcon(getAlertLevel(alert) as string)} style={styles.icon} /></ImageBackground>
-            <View style={styles.warningText}>
-              <Text style={styles.header}>
-                {getAlertStatus(alert)}: {getAlertEvent(alert)}{'\n'}Level: {getAlertLevel(alert)?.toLowerCase()}
-              </Text>
-            </View>
-          </View>
+    <TouchableOpacity
+      style={[styles.wrapper, { backgroundColor }]}
+      onPress={onPress}
+      accessibilityLabel={`${leadWord}: ${info.event}. ${subtext}`}
+    >
+      {/* Plain Image, not Paper's Icon: Icon tints image sources to one
+          colour, which flattens the multi-colour warning PNG and hides
+          its exclamation mark. Sits on a white disc so the triangle doesn't
+          blend into a band of its own colour (yellow on yellow, red on red). */}
+      {icon && (
+        <View style={styles.iconDisc}>
+          <Image source={icon} style={styles.icon} resizeMode="contain" />
         </View>
+      )}
+      <View style={styles.textBlock}>
+        <Text style={[styles.headline, { color: textColor }]} numberOfLines={2}>{leadWord}: {info.event}</Text>
+        <Text style={[styles.subtext, { color: textColor }]}>{subtext}</Text>
       </View>
+      <Icon source="chevron-right" size={24} color={textColor} />
     </TouchableOpacity>
   )
 };
 
-
-function getWarningIcon(level: string): ImageSourcePropType {
-  return WEATHER_WARNING_ICONS[level.toLowerCase()];
-}
-
-function getWarningColor(level?: keyof typeof WARNING_COLORS): string | undefined {
-  if (!level) {
-    return;
-  }
-  return WARNING_COLORS[level];
-}
-
-function getAlertStatus(alert: CAPAlert) {
-  if (!alert.info || !alert.info.length) {
-    return;
-  }
-
-  const { onset, effective } = alert.info[0];
-  const start = DateTime.fromISO(onset || effective || alert?.sent);
-  return start <= DateTime.now() ? 'Ongoing' : 'Expected';
-}
-
-function getAlertEvent(alert: CAPAlert) {
-  if (!alert.info || !alert.info.length || !alert.info[0].event) {
-    return;
-  }
-  return alert.info[0].event;
-}
-
-function getAlertLevel(alert: CAPAlert) {
-  if (!alert.info || !alert.info.length) {
-    return;
-  }
-  return alertLevel(alert.info[0]);
-}
-
 const styles = StyleSheet.create({
   wrapper: {
-    width: '100%',
-    marginTop: 0,
-  },
-  glassWrapper: {
-    width: '100%',
-  },
-  opacity: {
-    width: '100%',
-    zIndex: 1,
-    borderRadius: 4,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 10,
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 10,
-    paddingRight: 17,
-    paddingLeft: 17,
-    paddingTop: 7,
-    paddingBottom: 11,
-  },
-  warning: {
     flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    borderRadius: Radius.medium,
+    padding: Spacing.lg,
+    gap: Spacing.md,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.06)',
   },
-  warningIcon: {
-    flex: 1,
-    marginRight: 12,
-    height: 50,
-    width: 50,
+  iconDisc: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
-    width: 35,
-    height: 30,
-    position: 'absolute',
-    top: 6,
-    bottom: 14,
-    left: 7,
-    right: 7,
+    width: 26,
+    height: 26,
   },
-  warningText: {
-    flex: 6,
-    paddingTop: 3,
+  textBlock: {
+    flex: 1,
   },
-  header: {
+  headline: {
     fontSize: 16,
-    fontFamily: 'NotoSans-Regular',
-    color: 'white',
-    fontWeight: "400",
+    fontFamily: Fonts.sans.bold,
+  },
+  subtext: {
+    fontSize: 14,
+    fontFamily: Fonts.sans.regular,
+    marginTop: Spacing.sm,
   },
 });
 

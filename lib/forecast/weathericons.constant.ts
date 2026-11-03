@@ -1,4 +1,4 @@
-import {ImageSourcePropType} from 'react-native/types';
+import { ImageSourcePropType } from 'react-native';
 
 const clearsky_day = require('../../assets/weather_icon/png/clearsky_day.png');
 const clearsky_night = require('../../assets/weather_icon/png/clearsky_night.png');

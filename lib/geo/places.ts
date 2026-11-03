@@ -12,7 +12,7 @@ export type Place = {
 }
 
 export function snapToPlace(location: Location): Place | undefined {
-  if (!insideMalawi(location)) {
+  if (!insideCountry(location)) {
     return;
   }
   return closestPlace(location);
@@ -52,17 +52,15 @@ function getDistance(point1: Location, point2: Location): number {
   return dist;
 }
 
-function insideMalawi(position: Location): boolean {
-  // long downleft, lat downleft, long upperright, lat upperright
-  const bbox = [32.6881653175, -16.8012997372, 35.7719047381, -9.23059905359];
+function insideCountry(position: Location): boolean {
+  // lon_min, lat_min, lon_max, lat_max
+  const raw = process.env.EXPO_PUBLIC_APP_COUNTRY_BBOX ?? '';
+  const bbox = raw.split(',').map(Number);
 
-  if (
+  return (
     position.lat > bbox[1] &&
     position.lat < bbox[3] &&
-    position.long > bbox[0 && position.long < bbox[2]]
-  ) {
-    return true;
-  }
-
-  return false;
+    position.long > bbox[0] &&
+    position.long < bbox[2]
+  );
 }

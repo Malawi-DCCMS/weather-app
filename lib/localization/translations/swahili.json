@@ -1,0 +1,496 @@
+{
+  "settings": {
+    "title": "Mipangilio",
+    "alwaysShowStartPage": "Onyesha Ukurasa wa Kuanza Kila Wakati",
+    "appearance": "Mwonekano",
+    "language": {
+      "title": "Lugha",
+      "english": "Kiingereza",
+      "placeholder": "Chagua lugha"
+    },
+    "sections": {
+      "preferences": "Mapendeleo",
+      "about": "Kuhusu"
+    },
+    "preferences": {
+      "appearance": {
+        "darkMode": "Hali ya giza"
+      },
+      "showOnboarding": "Onyesha ukurasa wa mwanzo"
+    },
+    "about": {
+      "appVersion": "Toleo la programu"
+    },
+    "rateApp": "Kadiria programu hii"
+  },
+  "common": {
+    "actions": {
+      "retry": "Jaribu tena",
+      "dismiss": "Dismiss"
+    },
+    "states": {
+      "notAvailable": "Haipatikani",
+      "loading": "Inapakia"
+    },
+    "alerts": {
+      "title": "Alert"
+    }
+  },
+  "forecast": {
+    "error": {
+      "title": "Imeshindwa kupakia utabiri",
+      "unavailable": "Utabiri haupatikani kwa sasa. Tafadhali jaribu tena baadaye.",
+      "generic": "Kulikuwa na hitilafu katika kupata utabiri"
+    },
+    "lastUpdated": "Utabiri ulisasishwa mara ya mwisho saa {{time}}",
+    "states": {
+      "unavailable": "Utabiri haupatikani"
+    }
+  },
+  "warnings": {
+    "error": {
+      "title": "Imeshindwa kupakia tahadhari"
+    },
+    "title": "Tahadhari",
+    "empty": {
+      "title": "Hakuna tahadhari kwa sasa",
+      "text": "Hakuna tahadhari za hali ya hewa zinazoendelea kwa sasa."
+    },
+    "group": {
+      "yourArea": "Eneo lako",
+      "elsewhere": "Sehemu nyingine nchini"
+    }
+  },
+  "location": {
+    "notSet": {
+      "title": "Hakuna mahali palipowekwa",
+      "text": "Chagua mahali ili kuona utabiri na tahadhari zake.",
+      "action": "Chagua mahali"
+    }
+  },
+  "aboutUs": {
+    "title": "Kuhusu sisi",
+    "partners": {
+      "dccms": "Idara ya Mabadiliko ya Tabianchi na Huduma za Hali ya Hewa (DCCMS)"
+    },
+    "emi": {
+      "title": "Taasisi ya Hali ya Hewa ya Ethiopia",
+      "description": "Taasisi ya Hali ya Hewa ya Ethiopia (EMI) ni mamlaka ya serikali inayohusika na kutoa huduma za hali ya hewa, tabianchi na tahadhari za mapema kote Ethiopia.",
+      "mission": {
+        "title": "Dhamira",
+        "description": "Kufuatilia, kuchambua na kutabiri hali ya hewa, tabianchi na hali ya hewa kwa kilimo ili kusaidia maendeleo endelevu ya taifa na kuhakikisha usalama wa umma."
+      }
+    },
+    "forecastServices": {
+      "title": "Huduma za Utabiri",
+      "products": {
+        "title": "Bidhaa za Hali ya Hewa",
+        "description": "EMI hutumia vituo vya kisasa vya hali ya hewa, data ya satelaiti na mifumo ya kihesabu kutoa utabiri unaolenga mahitaji yako:"
+      },
+      "nowcasting": {
+        "title": "Utabiri wa sasa na wa kila saa",
+        "description": "Tahadhari za papo hapo kwa mabadiliko ya ghafla ya hali ya hewa."
+      },
+      "daily": {
+        "title": "Kila siku na muda wa kati",
+        "description": "Mwelekeo wa siku 1 hadi 10 kwa safari, usalama wa umma na mipango ya jumla."
+      },
+      "seasonal": {
+        "title": "Mwelekeo wa Msimu",
+        "description": "Utabiri muhimu kwa misimu ya kilimo kama Belg na Kiremt."
+      }
+    }
+  },
+  "aboutApp": {
+    "title": "Kuhusu programu",
+    "icons": "Ikoni",
+    "partners": "Washirika wa mradi huu ni pamoja na",
+    "geographicalData": "Data ya Kijiografia",
+    "forecasts": {
+      "title": "The app and its forecasts",
+      "description": "The app development is led by \nWMO-RAF - World Meteorological Organisation, Regional Office for Africa, and Norway MET - Meteorologisk institutt.\n\n All forecasts are issued by Norway MET."
+    }
+  },
+  "privacy": {
+    "title": "Sera ya Faragha",
+    "intro": "Climweb Weather App imetengenezwa na WMO-RAF (Ofisi ya Kanda ya Shirika la Hali ya Hewa Duniani kwa Afrika) na Norway MET (Meteorologisk institutt). Tumejitolea kulinda faragha yako.",
+    "dataCollected": {
+      "title": "Taarifa Tunazokusanya",
+      "text": "Climweb Weather App haikusanyi, kuhifadhi, au kushiriki taarifa zako binafsi. Hauhitaji kujisajili au kutoa maelezo yoyote binafsi ili kutumia programu hii."
+    },
+    "location": {
+      "title": "Matumizi ya Data ya Mahali",
+      "text": "Ili kukuonyesha utabiri sahihi wa hali ya hewa na tahadhari kwa eneo lako, programu hutumia mahali pa kifaa chako. Mahali pako panatumika tu kupata data ya hali ya hewa kwa eneo hilo na hapaunganishwi na utambulisho wako wala kuhifadhiwa kwenye seva zetu."
+    },
+    "favourites": {
+      "title": "Maeneo Yako Uyapendayo",
+      "text": "Ukihifadhi maeneo unayoyapenda, yanahifadhiwa kwenye kifaa chako pekee. Taarifa hii haitumwi kwetu wala kushirikiwa na mtu mwingine yeyote. Unaweza kuongeza, kubadilisha, au kuondoa maeneo yako uyapendayo wakati wowote kutoka kwenye Maeneo Uyapendayo katika kichupo cha Zaidi."
+    },
+    "security": {
+      "title": "Usalama wa Data",
+      "text": "Tunachukulia usalama wa data kwa uzito. Kwa kuwa hatukusanyi wala kuhifadhi data binafsi, lengo letu ni kuhakikisha huduma za utabiri na tahadhari za programu ni sahihi na za kuaminika."
+    },
+    "children": {
+      "title": "Faragha ya Watoto",
+      "text": "Climweb Weather App imeundwa kutumiwa na watu wa umri wote, ikiwemo watoto. Hatukusanyi taarifa binafsi kutoka kwa watoto au watumiaji wengine wowote."
+    },
+    "thirdParty": {
+      "title": "Huduma za Wahusika Wengine",
+      "text": "Programu hii inaweza kuwa na viungo vya tovuti au huduma za wahusika wengine tusizozisimamia. Ukigusa kiungo cha mhusika mwingine, utapelekwa kwenye tovuti ya mhusika huyo. Tunakushauri kusoma sera zao za faragha, kwani hatuwajibiki kwa maudhui au taratibu zao."
+    },
+    "changes": {
+      "title": "Mabadiliko ya Sera Hii",
+      "text": "Tunaweza kusasisha Sera hii ya Faragha mara kwa mara. Mabadiliko yoyote yataonyeshwa kwenye ukurasa huu."
+    },
+    "contact": {
+      "title": "Wasiliana Nasi",
+      "text": "Ikiwa una maswali kuhusu Sera hii ya Faragha, tafadhali wasiliana na WMO-RAF (Ofisi ya Kanda ya Shirika la Hali ya Hewa Duniani kwa Afrika) au Norway MET (Meteorologisk institutt)."
+    }
+  },
+  "time": {
+    "today": "Leo",
+    "fiveDays": "Siku 5",
+    "nextFiveDays": "Siku 5 zijazo",
+    "time": "Muda",
+    "days": {
+      "sun": "Jumapili",
+      "mon": "Jumatatu",
+      "tue": "Jumanne",
+      "wed": "Jumatano",
+      "thu": "Alhamisi",
+      "fri": "Ijumaa",
+      "sat": "Jumamosi"
+    },
+    "periods": {
+      "morning": "Asubuhi",
+      "afternoon": "Mchana",
+      "evening": "Jioni",
+      "night": "Usiku"
+    },
+    "morning": "asubuhi",
+    "afternoon": "mchana",
+    "evening": "jioni",
+    "night": "usiku"
+  },
+  "alerts": {
+    "title": "Tahadhari"
+  },
+  "places": {
+    "title": "Maeneo",
+    "tapToChange": "Gusa kubadilisha mahali",
+    "pickerTitle": "Chagua maeneo unayoyapenda",
+    "pickerSubtitle": "Tafuta na uchague hadi maeneo 5 unayojali.",
+    "selectedCount": "{{count}}/5 zimechaguliwa",
+    "maxReached": "Umechagua idadi kamili ya maeneo 5.",
+    "finish": "Maliza",
+    "removeChip": "Ondoa {{name}}",
+    "empty": {
+      "title": "Hakuna maeneo uliyoyapenda bado",
+      "text": "Ongeza hadi maeneo 5 kuona utabiri wao hapa."
+    },
+    "setFavourites": "Weka maeneo uyapendayo",
+    "edit": "Hariri maeneo uliyoyapenda",
+    "yourPlaces": "Maeneo yako uyapendayo",
+    "searchLocation": "Tafuta mahali",
+    "locationError": {
+      "message": "Not able to use your location to find the closest place."
+    }
+  },
+  "fiveDays": {
+    "footnote": "Data ya utabiri inatolewa na huduma yako ya kitaifa ya hali ya hewa."
+  },
+  "welcome": {
+    "title": "Welcome to ClimWeb Weather App",
+    "subtitle": "Weather forecasts and warnings.",
+    "getStarted": "Anza",
+    "next": "Endelea"
+  },
+  "today": {
+    "tomorrow": "Kesho",
+    "warmer": "joto zaidi",
+    "cooler": "baridi zaidi",
+    "tapToSeeFiveDays": "Gusa kuona siku 5 zijazo",
+    "hourByHour": "Leo, saa kwa saa",
+    "tapToSeeHourly": "Gusa kuona utabiri wa saa kwa saa"
+  },
+  "day": {
+    "conditionWindy": "{{condition}} na upepo mkali sana."
+  },
+  "weather": {
+    "min": "Chini",
+    "max": "Juu",
+    "kmh": "Km/h",
+    "rain": "Mvua",
+    "mm": "mm",
+    "wind": "Upepo",
+    "temp": "Joto"
+  },
+  "how": {
+    "we": {
+      "started": "Jinsi tulivyoanza"
+    }
+  },
+  "our": {
+    "mandate": "Wajibu wetu",
+    "mission": "Dhamira yetu",
+    "vision": "Dira yetu"
+  },
+  "app": {
+    "and": {
+      "forecasts": "Programu na utabiri wake"
+    }
+  },
+  "icons": {
+    "disclaimer": "Ikoni za hali ya hewa zimeidhinishwa na"
+  },
+  "warning": {
+    "icons": {
+      "disclaimer": "Ikoni za tahadhari zimechangiwa na Shirika la Hali ya Hewa Duniani."
+    }
+  },
+  "geographical": {
+    "data": {
+      "disclaimer": "Data ya kijiografia katika programu hii ilipakuliwa kutoka"
+    }
+  },
+  "clearsky_day": "Anga safi mchana",
+  "clearsky_night": "Anga safi usiku",
+  "clearsky_polartwilight": "Anga safi wakati wa giza la nusu la ncha ya dunia",
+  "cloudy": "Mawingu",
+  "fair_day": "Hali njema mchana",
+  "fair_night": "Hali njema usiku",
+  "fair_polartwilight": "Hali njema wakati wa giza la nusu la ncha ya dunia",
+  "fog": "Ukungu",
+  "heavyrainandthunder": "Mvua kubwa na radi",
+  "heavyrain": "Mvua kubwa",
+  "heavyrainshowersandthunder_day": "Manyunyu makubwa ya mvua na radi mchana",
+  "heavyrainshowersandthunder_night": "Manyunyu makubwa ya mvua na radi usiku",
+  "heavyrainshowersandthunder_polartwilight": "Manyunyu makubwa ya mvua na radi wakati wa giza la nusu la ncha ya dunia",
+  "heavyrainshowers_day": "Manyunyu makubwa ya mvua mchana",
+  "heavyrainshowers_night": "Manyunyu makubwa ya mvua usiku",
+  "heavyrainshowers_polartwilight": "Manyunyu makubwa ya mvua wakati wa giza la nusu la ncha ya dunia",
+  "heavysleetandthunder": "Mvua kubwa ya mchanganyiko na radi",
+  "heavysleet": "Mvua kubwa ya mchanganyiko",
+  "heavysleetshowersandthunder_day": "Manyunyu makubwa ya mvua ya mchanganyiko na radi mchana",
+  "heavysleetshowersandthunder_night": "Manyunyu makubwa ya mvua ya mchanganyiko na radi usiku",
+  "heavysleetshowersandthunder_polartwilight": "Manyunyu makubwa ya mvua ya mchanganyiko na radi wakati wa giza la nusu la ncha ya dunia",
+  "heavysleetshowers_day": "Manyunyu makubwa ya mvua ya mchanganyiko mchana",
+  "heavysleetshowers_night": "Manyunyu makubwa ya mvua ya mchanganyiko usiku",
+  "heavysleetshowers_polartwilight": "Manyunyu makubwa ya mvua ya mchanganyiko wakati wa giza la nusu la ncha ya dunia",
+  "heavysnowandthunder": "Theluji kubwa na radi",
+  "heavysnow": "Theluji kubwa",
+  "heavysnowshowersandthunder_day": "Manyunyu makubwa ya theluji na radi mchana",
+  "heavysnowshowersandthunder_night": "Manyunyu makubwa ya theluji na radi usiku",
+  "heavysnowshowersandthunder_polartwilight": "Manyunyu makubwa ya theluji na radi wakati wa giza la nusu la ncha ya dunia",
+  "heavysnowshowers_day": "Manyunyu makubwa ya theluji mchana",
+  "heavysnowshowers_night": "Manyunyu makubwa ya theluji usiku",
+  "heavysnowshowers_polartwilight": "Manyunyu makubwa ya theluji wakati wa giza la nusu la ncha ya dunia",
+  "lightrainandthunder": "Mvua kidogo na radi",
+  "lightrain": "Mvua kidogo",
+  "lightrainshowersandthunder_day": "Manyunyu kidogo ya mvua na radi mchana",
+  "lightrainshowersandthunder_night": "Manyunyu kidogo ya mvua na radi usiku",
+  "lightrainshowersandthunder_polartwilight": "Manyunyu kidogo ya mvua na radi wakati wa giza la nusu la ncha ya dunia",
+  "lightrainshowers_day": "Manyunyu kidogo ya mvua mchana",
+  "lightrainshowers_night": "Manyunyu kidogo ya mvua usiku",
+  "lightrainshowers_polartwilight": "Manyunyu kidogo ya mvua wakati wa giza la nusu la ncha ya dunia",
+  "lightsleetandthunder": "Mvua kidogo ya mchanganyiko na radi",
+  "lightsleet": "Mvua kidogo ya mchanganyiko",
+  "lightsleetshowers_day": "Manyunyu kidogo ya mvua ya mchanganyiko mchana",
+  "lightsleetshowers_night": "Manyunyu kidogo ya mvua ya mchanganyiko usiku",
+  "lightsleetshowers_polartwilight": "Manyunyu kidogo ya mvua ya mchanganyiko wakati wa giza la nusu la ncha ya dunia",
+  "lightsnowandthunder": "Theluji kidogo na radi",
+  "lightsnow": "Theluji kidogo",
+  "lightsnowshowers_day": "Manyunyu kidogo ya theluji mchana",
+  "lightsnowshowers_night": "Manyunyu kidogo ya theluji usiku",
+  "lightsnowshowers_polartwilight": "Manyunyu kidogo ya theluji wakati wa giza la nusu la ncha ya dunia",
+  "lightssleetshowersandthunder_day": "Manyunyu kidogo ya mvua ya mchanganyiko na radi mchana",
+  "lightssleetshowersandthunder_night": "Manyunyu kidogo ya mvua ya mchanganyiko na radi usiku",
+  "lightssleetshowersandthunder_polartwilight": "Manyunyu kidogo ya mvua ya mchanganyiko na radi wakati wa giza la nusu la ncha ya dunia",
+  "lightssnowshowersandthunder_day": "Manyunyu kidogo ya theluji na radi mchana",
+  "lightssnowshowersandthunder_night": "Manyunyu kidogo ya theluji na radi usiku",
+  "lightssnowshowersandthunder_polartwilight": "Manyunyu kidogo ya theluji na radi wakati wa giza la nusu la ncha ya dunia",
+  "partlycloudy_day": "Sehemu ya mawingu mchana",
+  "partlycloudy_night": "Sehemu ya mawingu usiku",
+  "partlycloudy_polartwilight": "Sehemu ya mawingu wakati wa giza la nusu la ncha ya dunia",
+  "rainandthunder": "Mvua na radi",
+  "conditions": {
+    "rain": {
+      "none": {
+        "label": "Hakuna mvua",
+        "sentence": "Hakuna mvua inayotarajiwa."
+      },
+      "light": {
+        "label": "Mvua kidogo",
+        "sentence": "Mvua kidogo inatarajiwa."
+      },
+      "moderate": {
+        "label": "Mvua",
+        "sentence": "Mvua inatarajiwa."
+      },
+      "heavy": {
+        "label": "Mvua kubwa",
+        "sentence": "Mvua kubwa inatarajiwa."
+      }
+    }
+  },
+  "rainshowersandthunder_day": "Manyunyu ya mvua na radi mchana",
+  "rainshowersandthunder_night": "Manyunyu ya mvua na radi usiku",
+  "rainshowersandthunder_polartwilight": "Manyunyu ya mvua na radi wakati wa giza la nusu la ncha ya dunia",
+  "rainshowers_day": "Manyunyu ya mvua mchana",
+  "rainshowers_night": "Manyunyu ya mvua usiku",
+  "rainshowers_polartwilight": "Manyunyu ya mvua wakati wa giza la nusu la ncha ya dunia",
+  "sleetandthunder": "Mvua ya mchanganyiko na radi",
+  "sleet": "Mvua ya mchanganyiko",
+  "sleetshowersandthunder_day": "Manyunyu ya mvua ya mchanganyiko na radi mchana",
+  "sleetshowersandthunder_night": "Manyunyu ya mvua ya mchanganyiko na radi usiku",
+  "sleetshowersandthunder_polartwilight": "Manyunyu ya mvua ya mchanganyiko na radi wakati wa giza la nusu la ncha ya dunia",
+  "sleetshowers_day": "Manyunyu ya mvua ya mchanganyiko mchana",
+  "sleetshowers_night": "Manyunyu ya mvua ya mchanganyiko usiku",
+  "sleetshowers_polartwilight": "Manyunyu ya mvua ya mchanganyiko wakati wa giza la nusu la ncha ya dunia",
+  "snowandthunder": "Theluji na radi",
+  "snow": "Theluji",
+  "snowshowersandthunder_day": "Manyunyu ya theluji na radi mchana",
+  "snowshowersandthunder_night": "Manyunyu ya theluji na radi usiku",
+  "snowshowersandthunder_polartwilight": "Manyunyu ya theluji na radi wakati wa giza la nusu la ncha ya dunia",
+  "snowshowers_day": "Manyunyu ya theluji mchana",
+  "snowshowers_night": "Manyunyu ya theluji usiku",
+  "snowshowers_polartwilight": "Manyunyu ya theluji wakati wa giza la nusu la ncha ya dunia",
+  "wind": {
+    "calm": {
+      "label": "Shwari",
+      "sentence": "Shwari — salama kwa boti."
+    },
+    "gentle": {
+      "label": "Upepo mwanana",
+      "sentence": "Upepo mwanana — salama kwa boti."
+    },
+    "breezy": {
+      "label": "Upepo wa wastani",
+      "sentence": "Upepo wa wastani — kuwa mwangalifu majini."
+    },
+    "strong": {
+      "label": "Upepo mkali",
+      "sentence": "Upepo mkali — hatari kwa boti."
+    },
+    "severe": {
+      "label": "Upepo hatari",
+      "sentence": "Upepo mkali sana — usiende majini."
+    }
+  },
+  "condition": {
+    "clear": "Anga safi",
+    "fair": "Hali njema",
+    "partlycloudy": "Sehemu ya mawingu",
+    "cloudy": "Mawingu",
+    "fog": "Ukungu",
+    "lightrain": "Mvua kidogo",
+    "rain": "Mvua",
+    "heavyrain": "Mvua kubwa",
+    "lightsleet": "Mvua kidogo ya mchanganyiko",
+    "sleet": "Mvua ya mchanganyiko",
+    "heavysleet": "Mvua kubwa ya mchanganyiko",
+    "lightsnow": "Theluji kidogo",
+    "snow": "Theluji",
+    "heavysnow": "Theluji kubwa",
+    "thunder": "Radi",
+    "now": "{{condition}} sasa"
+  },
+  "daypart": {
+    "morning": "asubuhi",
+    "afternoon": "mchana",
+    "evening": "jioni",
+    "night": "usiku wa leo"
+  },
+  "summary": {
+    "lead": "{{condition}} huko {{location}}.",
+    "morerain": "Mvua zaidi inakuja {{part}} hii.",
+    "raineasing": "Mvua itapungua kufikia {{part}} hii.",
+    "coolertonight": "Baridi zaidi usiku wa leo, karibu {{temp}}."
+  },
+  "alert": {
+    "lead": {
+      "red": "Hatari",
+      "orange": "Onyo",
+      "yellow": "Tahadhari",
+      "notice": "Taarifa"
+    },
+    "tapToSeeWhatToDo": "Gusa hapa kuona la kufanya",
+    "moreWarningsSingular": "+{{count}} tahadhari nyingine · gusa kuona zote",
+    "moreWarningsPlural": "+{{count}} tahadhari nyingine · gusa kuona zote",
+    "band": {
+      "red": "NYEKUNDU — chukua hatua sasa",
+      "orange": "CHUNGWA — jiandae",
+      "yellow": "MANJANO — kuwa mwangalifu",
+      "notice": "TAARIFA"
+    },
+    "whenLabel": "Lini",
+    "whereLabel": "Wapi",
+    "whatToDo": "La kufanya",
+    "affectedArea": "Eneo lililoathiriwa",
+    "map": {
+      "attribution": "Data ya ramani © wachangiaji wa OpenStreetMap"
+    },
+    "when": {
+      "now": "sasa",
+      "range": "Kuanzia {{start}} hadi {{end}}.",
+      "fromOnly": "Kuanzia {{start}}.",
+      "untilOnly": "Hadi {{end}}."
+    },
+    "listen": "Sikiliza",
+    "stop": "Simamisha",
+    "missing": "Tahadhari haipatikani! Tafadhali rudi nyuma na ujaribu tena.",
+    "share": "Shiriki"
+  },
+  "legend": {
+    "title": "Maana ya rangi",
+    "red": {
+      "label": "Nyekundu",
+      "description": "Chukua hatua sasa — hatari kubwa inatokea au inatarajiwa hivi karibuni."
+    },
+    "orange": {
+      "label": "Chungwa",
+      "description": "Jiandae — hatari kubwa inatarajiwa hivi karibuni."
+    },
+    "yellow": {
+      "label": "Manjano",
+      "description": "Kuwa mwangalifu — hali mbaya ya hewa inawezekana."
+    },
+    "green": {
+      "label": "Kijani",
+      "description": "Hakuna tahadhari kwa sasa."
+    }
+  },
+  "placeholders": {
+    "loremIpsum": "[Nakala ya muda — itabadilishwa na maelezo kamili baadaye.]",
+    "appTitle": "Programu ya Hali ya Hewa ClimWeb",
+    "appDescription": "Programu ya Hali ya Hewa ClimWeb inatoa utabiri sahihi na wa kisasa wa hali ya hewa kwa maeneo duniani kote."
+  },
+  "units": {
+    "title": "Vipimo",
+    "temperature": "Halijoto",
+    "wind": "Kasi ya upepo",
+    "precipitation": "Mvua",
+    "celsius": "Selsiasi (°C)",
+    "fahrenheit": "Farenhaiti (°F)",
+    "kmh": "Kilomita kwa saa (km/h)",
+    "ms": "Mita kwa sekunde (m/s)",
+    "knots": "Noti (kn)",
+    "mph": "Maili kwa saa (mph)",
+    "mm": "Milimita (mm)",
+    "in": "Inchi (in)",
+    "spoken": {
+      "celsius": "nyuzi {{value}} za Selsiasi",
+      "fahrenheit": "nyuzi {{value}} za Farenhaiti"
+    }
+  },
+  "More": "Zaidi",
+  "More conditions": "Taarifa zaidi",
+  "Favourites": "Maeneo Uyapendayo",
+  "Go back": "Rudi nyuma",
+  "more": {
+    "intro": "Maelezo zaidi ya hali ya hewa kwa ajili ya kazi yako.",
+    "favourites": {
+      "description": "Maeneo uliyohifadhi"
+    }
+  }
+}

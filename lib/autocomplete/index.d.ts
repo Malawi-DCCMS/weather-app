@@ -70,6 +70,6 @@ interface AutocompleteDropdownProps {
   ref?: React.LegacyRef<TextInput> | undefined
 }
 
-export const AutocompleteDropdown: (props: AutocompleteDropdownProps) => JSX.Element
+export declare const AutocompleteDropdown: (props: AutocompleteDropdownProps) => JSX.Element;
 
-export const AutocompleteDropdownContextProvider: FC<any>
+export declare const AutocompleteDropdownContextProvider: FC<any>;

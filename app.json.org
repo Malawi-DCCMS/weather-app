@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Zanyengo",
-    "slug": "zanyengo",
+    "name": "Climweb Weather App",
+    "slug": "climweb.weatherapp",
     "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/urgency.png",
-    "scheme": "zanyengo",
+    "scheme": "climweb.weatherapp",
     "newArchEnabled": true,
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -15,7 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.zanyengo",
+      "bundleIdentifier": "com.climweb.weatherapp",
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
         "NSLocationAlwaysUsageDescription": "Allow $(PRODUCT_NAME) to use your location",
@@ -34,7 +34,7 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCEPT_HANDOVER"
       ],
-      "package": "com.zanyengo"
+      "package": "com.climweb.weatherapp"
     },
     "web": {
       "bundler": "metro",

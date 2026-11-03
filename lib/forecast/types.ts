@@ -1,5 +1,8 @@
+import { DateTime } from "luxon";
 
-export interface Forecast {
+// Yr/MET Norway Locationforecast raw response types
+
+export interface YrForecast {
     type: string;
     geometry: {
       type: 'Point';
@@ -8,8 +11,7 @@ export interface Forecast {
     properties: {
       meta: {
         updated_at: string;
-        units:
-        {
+        units: {
           air_pressure_at_sea_level?: string;
           air_temperature?: string;
           air_temperature_max?: string;
@@ -27,11 +29,11 @@ export interface Forecast {
           wind_speed?: string;
         };
       };
-      timeseries: ForecastTimestep[];
+      timeseries: YrForecastTimestep[];
     };
-  }
-  
-  export interface ForecastDetails {
+}
+
+export interface YrForecastDetails {
     air_temperature_min?: number;
     air_temperature_max?: number;
     precipitation_amount?: number;
@@ -40,16 +42,16 @@ export interface Forecast {
     probability_of_precipitation?: number;
     probability_of_thunder?: number;
     ultraviolet_index_clear_sky_max?: number;
-  }
-  
-  export interface ForecastPeriod {
-    details?: ForecastDetails;
+}
+
+export interface YrForecastPeriod {
+    details?: YrForecastDetails;
     summary?: {
       symbol_code?: string;
     };
-  }
-  
-  export interface ForecastTimestep {
+}
+
+export interface YrForecastTimestep {
     time: string;
     data: {
       instant: {
@@ -68,8 +70,33 @@ export interface Forecast {
           wind_speed?: number;
         };
       };
-      next_1_hours?: ForecastPeriod;
-      next_6_hours?: ForecastPeriod;
-      next_12_hours?: ForecastPeriod;
+      next_1_hours?: YrForecastPeriod;
+      next_6_hours?: YrForecastPeriod;
+      next_12_hours?: YrForecastPeriod;
     };
-  }
+}
+
+// App-facing serializable forecast types stored in Redux
+
+// Values are in canonical units — °C, m/s, mm — whatever the source API
+// sent (see lib/units). Convert for display with useUnits().
+export interface ForecastStepRecord {
+  time: string;                 // ISO string — Redux-safe
+  temperature?: number;         // °C
+  windSpeed?: number;           // m/s
+  precipitation: number | "-";  // mm, pre-computed
+  weatherSymbol: string;        // pre-computed
+}
+
+export interface ForecastDayRecord {
+  day: string;                  // ISO date string (start of day in configured timezone)
+  weatherSymbol?: string;
+  maxTemperature?: number;       // °C
+  minTemperature?: number;       // °C
+  windSpeed?: number;            // m/s, the day's highest
+  steps: ForecastStepRecord[];
+}
+
+export interface ForecastRecord {
+  days: ForecastDayRecord[];
+}

@@ -1,50 +1,44 @@
-import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter, Href, useNavigation } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 import { Search } from '@/components/Search';
 import Alerts from '@/components/Alerts';
 import AppBar from '@/components/AppBar';
 
-import { AutocompleteDropdownContextProvider } from '@/lib/autocomplete';
-import { SCREENS } from '@/lib/layout/constants';
-import { AppDispatch, RootState } from '@/lib/store';
-import { setLocation } from '@/lib/store/location.slice';
+import { useLocationStore } from '@/lib/store/location.store';
 import { Place } from '@/lib/geo/places';
-import { CommonActions } from '@react-navigation/native';
-
-const appBackground = require('@/assets/new-glass-bg.png');
+import { ThemeColors, Spacing } from '@/lib/theme';
+import { useTheme } from '@/lib/hooks/use-theme';
 
 const SearchScreen = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { name, lat, lon } = useSelector((state: RootState) => state.location);
+  const name = useLocationStore(s => s.name);
+  const lat = useLocationStore(s => s.lat);
+  const lon = useLocationStore(s => s.lon);
+  const setLocation = useLocationStore(s => s.setLocation);
   const router = useRouter();
-  const navigation = useNavigation();
+  const colors = useTheme();
+  const styles = useMemo(() => makeStyles(colors), [colors]);
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.wrapper}>
-        <ImageBackground source={appBackground} style={styles.bg}>
+        <View style={styles.bg}>
           <AppBar location={name ? name : 'Search location'} />
-          <Alerts lat={lat} lon={lon} location={name} />
+          <View style={styles.alertsWrapper}>
+            <Alerts lat={lat} lon={lon} location={name} />
+          </View>
           <Search
             location={name}
             setLocation={
               (place: Place) => {
-                console.log('[UI] dispatching setLocation with:', place);
-                dispatch(setLocation({ name: place.name, lat: place.latitude, lon: place.longitude }));
-                navigation.dispatch(
-                  CommonActions.reset({
-                    index: 0,
-                    routes: [{ name: 'index' }],
-                  })
-                );
+                setLocation({ name: place.name, lat: place.latitude, lon: place.longitude });
+                router.replace('/');
               }
             }
           />
-        </ImageBackground>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -52,15 +46,22 @@ const SearchScreen = () => {
 
 export default SearchScreen;
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: ThemeColors) => StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
     height: '100%',
     width: '100%',
     margin: 0,
     padding: 0,
+    backgroundColor: colors.bgAlt,
   },
   bg: {
     height: '100%',
-  }
+    backgroundColor: colors.bgAlt,
+  },
+  alertsWrapper: {
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: Spacing.lg,
+  },
 })

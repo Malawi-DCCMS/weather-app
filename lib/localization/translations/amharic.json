@@ -1,0 +1,496 @@
+{
+  "settings": {
+    "title": "ቅንብሮች",
+    "alwaysShowStartPage": "ሁልጊዜ የመነሻ ገጹን አሳይ",
+    "appearance": "ገጽታ",
+    "language": {
+      "title": "ቋንቋ",
+      "english": "እንግሊዝኛ",
+      "placeholder": "ቋንቋ ይምረጡ"
+    },
+    "sections": {
+      "preferences": "ምርጫዎች",
+      "about": "ስለ"
+    },
+    "preferences": {
+      "appearance": {
+        "darkMode": "ጨለማ ገጽታ"
+      },
+      "showOnboarding": "መነሻ ገጽ አሳይ"
+    },
+    "about": {
+      "appVersion": "የመተግበሪያ ስሪት"
+    },
+    "rateApp": "Rate this app"
+  },
+  "common": {
+    "actions": {
+      "retry": "እንደገና ሞክር",
+      "dismiss": "ዝጋ"
+    },
+    "states": {
+      "notAvailable": "አይገኝም",
+      "loading": "በመጫን ላይ"
+    },
+    "alerts": {
+      "title": "ማንቂያ"
+    }
+  },
+  "forecast": {
+    "error": {
+      "title": "ትንበያውን መጫን አልተቻለም",
+      "unavailable": "በአሁኑ ጊዜ ትንበያ አይገኝም። እባክዎ ቆየት ብለው እንደገና ይሞክሩ።",
+      "generic": "ትንበያውን በማግኘት ላይ ስህተት ተከስቷል"
+    },
+    "lastUpdated": "ትንበያው ለመጨረሻ ጊዜ የዘመነው በ {{time}}",
+    "states": {
+      "unavailable": "ትንበያ አይገኝም"
+    }
+  },
+  "warnings": {
+    "error": {
+      "title": "ማስጠንቀቂያዎችን መጫን አልተቻለም"
+    },
+    "title": "ማስጠንቀቂያዎች",
+    "empty": {
+      "title": "አሁን ምንም ማስጠንቀቂያዎች የሉም",
+      "text": "አሁን ምንም ንቁ የአየር ሁኔታ ማስጠንቀቂያዎች የሉም።"
+    },
+    "group": {
+      "yourArea": "የእርስዎ አካባቢ",
+      "elsewhere": "በሀገሪቱ ሌላ ቦታ"
+    }
+  },
+  "location": {
+    "notSet": {
+      "title": "ቦታ አልተመረጠም",
+      "text": "የአየር ሁኔታ ትንበያዎችን እና ማንቂያዎችን ለማየት ቦታ ይምረጡ።",
+      "action": "ቦታ ይምረጡ"
+    }
+  },
+  "aboutUs": {
+    "title": "ስለ እኛ",
+    "partners": {
+      "dccms": "የአየር ንብረት ለውጥ እና የሜትሮሎጂ አገልግሎቶች መምሪያ (DCCMS)"
+    },
+    "emi": {
+      "title": "የኢትዮጵያ ሚቲዎሮሎጂ ኢንስቲትዩት",
+      "description": "የኢትዮጵያ ሚቲዎሮሎጂ ኢንስቲትዩት (EMI) በመላው ኢትዮጵያ የአየር ሁኔታ፣ የአየር ንብረት እና የቅድመ ማስጠንቀቂያ አገልግሎቶችን የመስጠት ኃላፊነት ያለው የመንግስት ባለስልጣን ነው።",
+      "mission": {
+        "title": "ተልእኮ",
+        "description": "ዘላቂ ብሄራዊ ልማትን ለመደገፍ እና የህዝብን ደህንነት ለማረጋገጥ የአየር ሁኔታን፣ የአየር ንብረትን እና የግብርና-ሚቲዎሮሎጂ ሁኔታዎችን መከታተል፣ መተንተን እና መተንበይ።"
+      }
+    },
+    "forecastServices": {
+      "title": "የትንበያ አገልግሎቶች",
+      "products": {
+        "title": "የሚቲዎሮሎጂ ምርቶች",
+        "description": "EMI የተጣጣሙ ትንበያዎችን ለማቅረብ የላቁ የሚቲዎሮሎጂ ጣቢያዎችን፣ የሳተላይት መረጃዎችን እና የቁጥር ሞዴሎችን ይጠቀማል፦"
+      },
+      "nowcasting": {
+        "title": "የአሁኑ ትንበያ እና በየሰዓቱ",
+        "description": "በአየር ሁኔታ ላይ ለሚከሰቱ ድንገተኛ ለውጦች ቅጽበታዊ ማንቂያዎች።"
+      },
+      "daily": {
+        "title": "ዕለታዊ እና መካከለኛ ክልል",
+        "description": "ለጉዞ፣ ለህዝብ ደህንነት እና ለአጠቃላይ እቅድ ከ1 እስከ 10 ቀናት የሚቆይ እይታ።"
+      },
+      "seasonal": {
+        "title": "ወቅታዊ እይታዎች",
+        "description": "እንደ በልግ እና ክረምት ላሉ የግብርና ወቅቶች ወሳኝ ትንበያዎች።"
+      }
+    }
+  },
+  "aboutApp": {
+    "title": "ስለ መተግበሪያው",
+    "icons": "አዶዎች",
+    "partners": "በዚህ ፕሮጀክት አጋሮች ነበሩ",
+    "geographicalData": "ጂኦግራፊያዊ መረጃ",
+    "forecasts": {
+      "title": "መተግበሪያው እና ትንበያዎቹ",
+      "description": "የመተግበሪያው ልማት የሚመራው በ\nWMO-RAF - የዓለም ሚቲዎሮሎጂ ድርጅት፣ የአፍሪካ ክልላዊ ጽህፈት ቤት እና ኖርዌይ ሜት - ሜትሮሎጂስክ ኢንስቲትዩት ነው።\n\n ሁሉም ትንበያዎች በኖርዌይ ሜት ይሰጣሉ።"
+    }
+  },
+  "privacy": {
+    "title": "የግላዊነት መመሪያ",
+    "intro": "ክሊምዌብ የአየር ሁኔታ መተግበሪያ በ WMO-RAF (ዓለም አቀፍ የሜትሮሎጂ ድርጅት - የአፍሪካ ክልላዊ ጽህፈት ቤት) እና በኖርዌይ MET (የሜትሮሎጂ ተቋም) የተሰራ ነው። የእርስዎን ግላዊነት ለመጠበቅ ቆርጠን ተነስተናል።",
+    "dataCollected": {
+      "title": "የምንሰበስበው መረጃ",
+      "text": "ክሊምዌብ የአየር ሁኔታ መተግበሪያ ማንኛውንም የግል መረጃ አይሰበስብም፣ አያከማችም ወይም አያጋራም። መተግበሪያውን ለመጠቀም መመዝገብ ወይም ምንም አይነት የግል ዝርዝር ማቅረብ አያስፈልግዎትም።"
+    },
+    "location": {
+      "title": "የአካባቢ መረጃ አጠቃቀም",
+      "text": "ትክክለኛ የአየር ሁኔታ ትንበያዎችን እና ማንቂያዎችን ለእርስዎ አካባቢ ለማሳየት መተግበሪያው የመሣሪያዎን አካባቢ ይጠቀማል። የእርስዎ አካባቢ ለዚያ ቦታ የአየር ሁኔታ መረጃን ለማምጣት ብቻ የሚያገለግል ሲሆን ከማንነትዎ ጋር አልተገናኘም ወይም በአገልጋዮቻችን ላይ አይከማችም።"
+    },
+    "favourites": {
+      "title": "ተወዳጅ ቦታዎችዎ",
+      "text": "If you save favourite places, they are stored only on your device. This information is never sent to us or shared with anyone else. You can add, change, or remove your favourite places at any time from Favourites on the More tab."
+    },
+    "security": {
+      "title": "የውሂብ ደህንነት",
+      "text": "የውሂብ ደህንነትን በቁም ነገር እንወስዳለን። የግል መረጃዎችን ስለማንሰበስብ ወይም ስለማናከማች ትኩረታችን የመተግበሪያውን ትንበያ እና የማንቂያ አገልግሎቶች ትክክለኛ እና አስተማማኝ እንዲሆኑ ማድረግ ላይ ነው።"
+    },
+    "children": {
+      "title": "የልጆች ግላዊነት",
+      "text": "ክሊምዌብ የአየር ሁኔታ መተግበሪያ ልጆችን ጨምሮ በሁሉም ዕድሜ ላሉ ሰዎች እንዲውል ታስቦ የተሰራ ነው። ከልጆችም ሆነ ከማንኛውም ሌሎች ተጠቃሚዎች የግል መረጃ አንሰበስብም።"
+    },
+    "thirdParty": {
+      "title": "የሶስተኛ ወገን አገልግሎቶች",
+      "text": "መተግበሪያው እኛ ወደማንሰራቸው የሶስተኛ ወገን ድር ጣቢያዎች ወይም አገልግሎቶች አገናኞችን ሊይዝ ይችላል። የሶስተኛ ወገን አገናኝን መታ ካደረጉ ወደዚያ የሶስተኛ ወገን ጣቢያ ይመራሉ። ለይዘታቸው ወይም ለድርጊታቸው ተጠያቂ ስላልሆንን የግላዊነት መመሪያዎቻቸውን እንዲያነቡ እናበረታታዎታለን።"
+    },
+    "changes": {
+      "title": "በዚህ መመሪያ ላይ የሚደረጉ ለውጦች",
+      "text": "ይህንን የግላዊነት መመሪያ ከጊዜ ወደ ጊዜ ልናዘምነው እንችላለን። ማንኛውም ለውጦች በዚህ ገጽ ላይ ይንጸባረቃሉ።"
+    },
+    "contact": {
+      "title": "ያግኙን",
+      "text": "ስለዚህ የግላዊነት መመሪያ ጥያቄዎች ካሉዎት እባክዎ WMO-RAFን (ዓለም አቀፍ የሜትሮሎጂ ድርጅት - የአፍሪካ ክልላዊ ጽህፈት ቤት) ወይም የኖርዌይ METን (የሜትሮሎጂ ተቋም) ያነጋግሩ።"
+    }
+  },
+  "time": {
+    "today": "ዛሬ",
+    "fiveDays": "5 ቀናት",
+    "nextFiveDays": "ቀጣይ 5 ቀናት",
+    "time": "ሰዓት",
+    "days": {
+      "sun": "እሁድ",
+      "mon": "ሰኞ",
+      "tue": "ማክሰኞ",
+      "wed": "ረቡዕ",
+      "thu": "ሐሙስ",
+      "fri": "አርብ",
+      "sat": "ቅዳሜ"
+    },
+    "periods": {
+      "morning": "ጥዋት",
+      "afternoon": "ከሰዓት",
+      "evening": "ምሽት",
+      "night": "ሌሊት"
+    },
+    "morning": "ጥዋት",
+    "afternoon": "ከሰዓት",
+    "evening": "ምሽት",
+    "night": "ሌሊት"
+  },
+  "alerts": {
+    "title": "ማንቂያዎች"
+  },
+  "places": {
+    "title": "ቦታዎች",
+    "tapToChange": "ቦታ ለመቀየር ይንኩ",
+    "pickerTitle": "ተወዳጅ ቦታዎችዎን ይምረጡ",
+    "pickerSubtitle": "የሚፈልጓቸውን እስከ 5 ቦታዎች ይፈልጉ እና ይምረጡ።",
+    "selectedCount": "{{count}}/5 ተመርጠዋል",
+    "maxReached": "ከፍተኛውን 5 ቦታዎች መርጠዋል።",
+    "finish": "ጨርስ",
+    "removeChip": "{{name}}ን አስወግድ",
+    "empty": {
+      "title": "ገና ምንም ተወዳጅ ቦታዎች የሉም",
+      "text": "የእነሱን ትንበያ እዚህ ለማየት እስከ 5 ቦታዎችን ያክሉ።"
+    },
+    "setFavourites": "ተወዳጅ ቦታዎችን ያዘጋጁ",
+    "edit": "ተወዳጅ ቦታዎችን ያርትዑ",
+    "yourPlaces": "የእርስዎ ቦታዎች",
+    "searchLocation": "ቦታ ይፈልጉ",
+    "locationError": {
+      "message": "በአቅራቢያዎ ያለውን ቦታ ለማግኘት አካባቢዎን መጠቀም አልተቻለም።"
+    }
+  },
+  "fiveDays": {
+    "footnote": "የአየር ሁኔታ ትንበያ መረጃ በብሔራዊ የአየር ሁኔታ አገልግሎት የቀረበ።"
+  },
+  "welcome": {
+    "title": "እንኳን ደህና መጡ ወደ EMI የአየር ሁኔታ መተግበሪያ",
+    "subtitle": "የአየር ሁኔታ ትንበያዎች እና ማስጠንቀቂያዎች በቀላሉ ያግኙ።",
+    "getStarted": "ይጀምሩ",
+    "next": "ቀጣይ"
+  },
+  "today": {
+    "tomorrow": "ነገ",
+    "warmer": "ይሞቃል",
+    "cooler": "ይቀዘቅዛል",
+    "tapToSeeFiveDays": "የቀጣይ 5 ቀናትን ለማየት ይንኩ",
+    "hourByHour": "ዛሬ፣ በየሰዓቱ",
+    "tapToSeeHourly": "በየሰዓቱ ያለውን ትንበያ ለማየት ይንኩ"
+  },
+  "day": {
+    "conditionWindy": "{{condition}} እና በጣም ንፋስ።"
+  },
+  "weather": {
+    "min": "ዝቅተኛ",
+    "max": "ከፍተኛ",
+    "kmh": "ኪ.ሜ/ሰ",
+    "rain": "ዝናብ",
+    "mm": "ሚሜ",
+    "wind": "ንፋስ",
+    "temp": "የሙቀት መጠን"
+  },
+  "how": {
+    "we": {
+      "started": "እንዴት እንደጀመርን"
+    }
+  },
+  "our": {
+    "mandate": "የእኛ ስልጣን",
+    "mission": "የእኛ ተልእኮ",
+    "vision": "የእኛ ራዕይ"
+  },
+  "app": {
+    "and": {
+      "forecasts": "መተግበሪያው እና ትንበያዎቹ"
+    }
+  },
+  "icons": {
+    "disclaimer": "የአየር ሁኔታ አዶዎች ፈቃድ የተሰጣቸው በ"
+  },
+  "warning": {
+    "icons": {
+      "disclaimer": "የማስጠንቀቂያ አዶዎች በዓለም ሜትሮሎጂ ድርጅት የተበረከቱ ናቸው።"
+    }
+  },
+  "geographical": {
+    "data": {
+      "disclaimer": "በመተግበሪያው ውስጥ ያለው ጂኦግራፊያዊ መረጃ የወረደው ከ"
+    }
+  },
+  "clearsky_day": "ግልጽ ሰማይ",
+  "clearsky_night": "ግልጽ ሰማይ",
+  "clearsky_polartwilight": "ግልጽ ሰማይ ዋልታ ድንግዝግዝ",
+  "cloudy": "ደመናማ",
+  "fair_day": "ጥሩ ቀን",
+  "fair_night": "ጥሩ ምሽት",
+  "fair_polartwilight": "ጥሩ የዋልታ ድንግዝግዝ",
+  "fog": "ጭጋግ",
+  "heavyrainandthunder": "ከባድ ዝናብ እና ነጎድጓድ",
+  "heavyrain": "ከባድ ዝናብ",
+  "heavyrainshowersandthunder_day": "የከባድ ዝናብ ዶፍ እና ነጎድጓድ",
+  "heavyrainshowersandthunder_night": "የከባድ ዝናብ ዶፍ እና ነጎድጓድ",
+  "heavyrainshowersandthunder_polartwilight": "የከባድ ዝናብ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "heavyrainshowers_day": "የከባድ ዝናብ ዶፍ",
+  "heavyrainshowers_night": "የከባድ ዝናብ ዶፍ",
+  "heavyrainshowers_polartwilight": "የከባድ ዝናብ ዶፍ የዋልታ ድንግዝግዝ",
+  "heavysleetandthunder": "ከባድ በረዶ የቀላቀለ ዝናብ እና ነጎድጓድ",
+  "heavysleet": "ከባድ በረዶ የቀላቀለ ዝናብ",
+  "heavysleetshowersandthunder_day": "ከባድ በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ",
+  "heavysleetshowersandthunder_night": "ከባድ በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ",
+  "heavysleetshowersandthunder_polartwilight": "ከባድ በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "heavysleetshowers_day": "ከባድ በረዶ የቀላቀለ ዝናብ ዶፍ",
+  "heavysleetshowers_night": "ከባድ በረዶ የቀላቀለ ዝናብ ዶፍ",
+  "heavysleetshowers_polartwilight": "ከባድ በረዶ የቀላቀለ ዝናብ ዶፍ የዋልታ ድንግዝግዝ",
+  "heavysnowandthunder": "ከባድ በረዶ እና ነጎድጓድ",
+  "heavysnow": "ከባድ በረዶ",
+  "heavysnowshowersandthunder_day": "የከባድ በረዶ ዶፍ እና ነጎድጓድ",
+  "heavysnowshowersandthunder_night": "የከባድ በረዶ ዶፍ እና ነጎድጓድ",
+  "heavysnowshowersandthunder_polartwilight": "የከባድ በረዶ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "heavysnowshowers_day": "የከባድ በረዶ ዶፍ",
+  "heavysnowshowers_night": "የከባድ በረዶ ዶፍ",
+  "heavysnowshowers_polartwilight": "የከባድ በረዶ ዶፍ የዋልታ ድንግዝግዝ",
+  "lightrainandthunder": "ቀላል ዝናብ እና ነጎድጓድ",
+  "lightrain": "ቀላል ዝናብ",
+  "lightrainshowersandthunder_day": "የቀላል ዝናብ ዶፍ እና ነጎድጓድ",
+  "lightrainshowersandthunder_night": "የቀላል ዝናብ ዶፍ እና ነጎድጓድ",
+  "lightrainshowersandthunder_polartwilight": "የቀላል ዝናብ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "lightrainshowers_day": "የቀላል ዝናብ ዶፍ",
+  "lightrainshowers_night": "የቀላል ዝናብ ዶፍ",
+  "lightrainshowers_polartwilight": "የቀላል ዝናብ ዶፍ የዋልታ ድንግዝግዝ",
+  "lightsleetandthunder": "ቀላል በረዶ የቀላቀለ ዝናብ እና ነጎድጓድ",
+  "lightsleet": "ቀላል በረዶ የቀላቀለ ዝናብ",
+  "lightsleetshowers_day": "ቀላል በረዶ የቀላቀለ ዝናብ ዶፍ",
+  "lightsleetshowers_night": "ቀላል በረዶ የቀላቀለ ዝናብ ዶፍ",
+  "lightsleetshowers_polartwilight": "ቀላል በረዶ የቀላቀለ ዝናብ ዶፍ የዋልታ ድንግዝግዝ",
+  "lightsnowandthunder": "ቀላል በረዶ እና ነጎድጓድ",
+  "lightsnow": "ቀላል በረዶ",
+  "lightsnowshowers_day": "የቀላል በረዶ ዶፍ",
+  "lightsnowshowers_night": "የቀላል በረዶ ዶፍ",
+  "lightsnowshowers_polartwilight": "የቀላል በረዶ ዶፍ የዋልታ ድንግዝግዝ",
+  "lightssleetshowersandthunder_day": "ቀላል በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ",
+  "lightssleetshowersandthunder_night": "ቀላል በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ",
+  "lightssleetshowersandthunder_polartwilight": "ቀላል በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "lightssnowshowersandthunder_day": "ቀላል በረዶ ዶፍ እና ነጎድጓድ",
+  "lightssnowshowersandthunder_night": "ቀላል በረዶ ዶፍ እና ነጎድጓድ",
+  "lightssnowshowersandthunder_polartwilight": "ቀላል በረዶ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "partlycloudy_day": "በከፊል ደመናማ",
+  "partlycloudy_night": "በከፊል ደመናማ",
+  "partlycloudy_polartwilight": "በከፊል ደመናማ የዋልታ ድንግዝግዝ",
+  "rainandthunder": "ዝናብ እና ነጎድጓድ",
+  "conditions": {
+    "rain": {
+      "none": {
+        "label": "ዝናብ የለም",
+        "sentence": "ዝናብ አይጠበቅም።"
+      },
+      "light": {
+        "label": "ቀላል ዝናብ",
+        "sentence": "ቀላል ዝናብ ይጠበቃል።"
+      },
+      "moderate": {
+        "label": "ዝናብ",
+        "sentence": "ዝናብ ይጠበቃል።"
+      },
+      "heavy": {
+        "label": "ከባድ ዝናብ",
+        "sentence": "ከባድ ዝናብ ይጠበቃል።"
+      }
+    }
+  },
+  "rainshowersandthunder_day": "የዝናብ ዶፍ እና ነጎድጓድ",
+  "rainshowersandthunder_night": "የዝናብ ዶፍ እና ነጎድጓድ",
+  "rainshowersandthunder_polartwilight": "የዝናብ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "rainshowers_day": "የዝናብ ዶፍ",
+  "rainshowers_night": "የዝናብ ዶፍ",
+  "rainshowers_polartwilight": "የዝናብ ዶፍ የዋልታ ድንግዝግዝ",
+  "sleetandthunder": "በረዶ የቀላቀለ ዝናብ እና ነጎድጓድ",
+  "sleet": "በረዶ የቀላቀለ ዝናብ",
+  "sleetshowersandthunder_day": "በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ",
+  "sleetshowersandthunder_night": "በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ",
+  "sleetshowersandthunder_polartwilight": "በረዶ የቀላቀለ ዝናብ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "sleetshowers_day": "በረዶ የቀላቀለ ዝናብ ዶፍ",
+  "sleetshowers_night": "በረዶ የቀላቀለ ዝናብ ዶፍ",
+  "sleetshowers_polartwilight": "በረዶ የቀላቀለ ዝናብ ዶፍ የዋልታ ድንግዝግዝ",
+  "snowandthunder": "በረዶ እና ነጎድጓድ",
+  "snow": "በረዶ",
+  "snowshowersandthunder_day": "የበረዶ ዶፍ እና ነጎድጓድ",
+  "snowshowersandthunder_night": "የበረዶ ዶፍ እና ነጎድጓድ",
+  "snowshowersandthunder_polartwilight": "የበረዶ ዶፍ እና ነጎድጓድ የዋልታ ድንግዝግዝ",
+  "snowshowers_day": "የበረዶ ዶፍ",
+  "snowshowers_night": "የበረዶ ዶፍ",
+  "snowshowers_polartwilight": "የበረዶ ዶፍ የዋልታ ድንግዝግዝ",
+  "wind": {
+    "calm": {
+      "label": "ጸጥ ያለ",
+      "sentence": "ጸጥ ያለ — ለጀልባዎች ደህንነቱ የተጠበቀ።"
+    },
+    "gentle": {
+      "label": "ለስላሳ",
+      "sentence": "ለስላሳ ንፋስ — ለጀልባዎች ደህንነቱ የተጠበቀ።"
+    },
+    "breezy": {
+      "label": "ነፋሻማ",
+      "sentence": "ነፋሻማ — በውሃ ላይ ጥንቃቄ ያድርጉ።"
+    },
+    "strong": {
+      "label": "ኃይለኛ ንፋስ",
+      "sentence": "ኃይለኛ ንፋስ — ለጀልባዎች አደገኛ።"
+    },
+    "severe": {
+      "label": "ከባድ ንፋስ",
+      "sentence": "በጣም ኃይለኛ ንፋስ — ከውሃ ላይ ይራቁ።"
+    }
+  },
+  "condition": {
+    "clear": "ግልጽ ሰማይ",
+    "fair": "ጥሩ",
+    "partlycloudy": "በከፊል ደመናማ",
+    "cloudy": "ደመናማ",
+    "fog": "ጭጋግ",
+    "lightrain": "ቀላል ዝናብ",
+    "rain": "ዝናብ",
+    "heavyrain": "ከባድ ዝናብ",
+    "lightsleet": "ቀላል በረዶ የቀላቀለ ዝናብ",
+    "sleet": "በረዶ የቀላቀለ ዝናብ",
+    "heavysleet": "ከባድ በረዶ የቀላቀለ ዝናብ",
+    "lightsnow": "ቀላል በረዶ",
+    "snow": "በረዶ",
+    "heavysnow": "ከባድ በረዶ",
+    "thunder": "ነጎድጓዳማ ዝናብ",
+    "now": "አሁን {{condition}}"
+  },
+  "daypart": {
+    "morning": "ጥዋት",
+    "afternoon": "ከሰዓት በኋላ",
+    "evening": "ምሽት",
+    "night": "ዛሬ ማታ"
+  },
+  "summary": {
+    "lead": "{{condition}} በ {{location}}።",
+    "morerain": "በዚህ {{part}} ተጨማሪ ዝናብ ይመጣል።",
+    "raineasing": "ዝናቡ በዚህ {{part}} ይቀንሳል ተብሎ ይጠበቃል።",
+    "coolertonight": "ዛሬ ማታ ይቀዘቅዛል፣ ወደ {{temp}} ገደማ።"
+  },
+  "alert": {
+    "lead": {
+      "red": "አደጋ",
+      "orange": "ማስጠንቀቂያ",
+      "yellow": "ጥንቃቄ",
+      "notice": "ማስታወቂያ"
+    },
+    "tapToSeeWhatToDo": "ምን ማድረግ እንዳለብዎ ለማየት እዚህ ይንኩ",
+    "moreWarningsSingular": "+{{count}} ተጨማሪ ማስጠንቀቂያ · ሁሉንም ለማየት ይንኩ",
+    "moreWarningsPlural": "+{{count}} ተጨማሪ ማስጠንቀቂያዎች · ሁሉንም ለማየት ይንኩ",
+    "band": {
+      "red": "ቀይ — አሁን እርምጃ ይውሰዱ",
+      "orange": "ብርቱካናማ — ይዘጋጁ",
+      "yellow": "ቢጫ — ይጠንቀቁ",
+      "notice": "ማስታወቂያ"
+    },
+    "whenLabel": "መቼ",
+    "whereLabel": "የት",
+    "whatToDo": "ምን ማድረግ እንዳለብዎ",
+    "affectedArea": "የተጎዳ አካባቢ",
+    "map": {
+      "attribution": "የካርታ መረጃ © OpenStreetMap አበርካቾች"
+    },
+    "when": {
+      "now": "አሁን",
+      "range": "ከ {{start}} እስከ {{end}}።",
+      "fromOnly": "ከ {{start}} ጀምሮ።",
+      "untilOnly": "እስከ {{end}} ድረስ።"
+    },
+    "listen": "አዳምጥ",
+    "stop": "አቁም",
+    "missing": "የጠፋ ማንቂያ! እባክዎ ይመለሱ እና እንደገና ይሞክሩ።",
+    "share": "አጋራ"
+  },
+  "legend": {
+    "title": "ቀለሞቹ ምን ማለት ናቸው",
+    "red": {
+      "label": "ቀይ",
+      "description": "አሁን እርምጃ ይውሰዱ — ከባድ አደጋ እየተከሰተ ነው ወይም በቅርቡ ይጠበቃል።"
+    },
+    "orange": {
+      "label": "ብርቱካናማ",
+      "description": "ይዘጋጁ — ከባድ አደጋ በቅርቡ ይጠበቃል።"
+    },
+    "yellow": {
+      "label": "ቢጫ",
+      "description": "ይጠንቀቁ — መጥፎ የአየር ሁኔታ ሊከሰት ይችላል።"
+    },
+    "green": {
+      "label": "አረንጓዴ",
+      "description": "አሁን ምንም ማስጠንቀቂያዎች የሉም።"
+    }
+  },
+  "placeholders": {
+    "loremIpsum": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit tempore quod aperiam obcaecati nihil expedita, sint veniam reprehenderit veritatis soluta corporis beatae eligendi quos dicta culpa maxime. Vel, unde tempora.",
+    "appTitle": "ክሊምዌብ የአየር ሁኔታ መተግበሪያ",
+    "appDescription": "ክሊምዌብ የአየር ሁኔታ መተግበሪያ በመላው ዓለም ላሉ ቦታዎች ትክክለኛ እና ወቅታዊ የአየር ሁኔታ ትንበያዎችን ያቀርባል።"
+  },
+  "units": {
+    "title": "Units",
+    "temperature": "Temperature",
+    "wind": "Wind speed",
+    "precipitation": "Rain",
+    "celsius": "Celsius (°C)",
+    "fahrenheit": "Fahrenheit (°F)",
+    "kmh": "Kilometres per hour (km/h)",
+    "ms": "Metres per second (m/s)",
+    "knots": "Knots (kn)",
+    "mph": "Miles per hour (mph)",
+    "mm": "Millimetres (mm)",
+    "in": "Inches (in)",
+    "spoken": {
+      "celsius": "{{value}} degrees Celsius",
+      "fahrenheit": "{{value}} degrees Fahrenheit"
+    }
+  },
+  "More": "More",
+  "More conditions": "More conditions",
+  "Favourites": "Favourites",
+  "Go back": "Go back",
+  "more": {
+    "intro": "More weather details for your work.",
+    "favourites": {
+      "description": "Your saved places"
+    }
+  }
+}

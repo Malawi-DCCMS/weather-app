@@ -1,185 +1,167 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { Icon, Menu } from 'react-native-paper';
-import { ParamListBase, RouteProp, useIsFocused, useRoute } from '@react-navigation/native';
-import { shallowEqual, useSelector } from 'react-redux';
+import React, { useEffect, useMemo, useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-paper';
+
 import { useNavigation, useRouter, Href } from 'expo-router';
 
 import { SCREENS } from '@/lib/layout/constants';
-import { WEATHER_WARNING_ICONS } from '@/lib/alerts/icons';
-import { RootState } from '@/lib/store';
-import { CAPAlert, CAPInfo, alertInLocation, alertLevel } from '@/lib/alerts/alert';
 import { useTranslation } from 'react-i18next';
+import { ThemeColors, Fonts, Spacing, touchTarget } from '@/lib/theme';
+import { useTheme } from '@/lib/hooks/use-theme';
 
 const backArrow = require('@/assets/icons8-back-100_2.png');
 
 type AppBarProps = {
   location: string,
-  route?: RouteProp<ParamListBase>
+  // True only on the Today screen, where the title IS the place name and
+  // should be tappable to switch location — other screens use `location`
+  // as a plain screen title (e.g. "Settings", "Warnings").
+  isPlace?: boolean,
+  hideSettings?: boolean,
+  // Top-level tab screens that must never show a back arrow.
+  hideBack?: boolean,
+  // Icon shown before a plain (non-place) title, same size/colour as the
+  // place pin.
+  titleIcon?: string,
+  onBack?: () => void,
 };
+
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
 
 const AppBar = (props: AppBarProps) => {
   const { t } = useTranslation();
   const router = useRouter();
   const navigation = useNavigation();
+  const colors = useTheme();
+  const styles = useMemo(() => makeStyles(colors), [colors]);
 
-  const { alerts } = useSelector((state: RootState) => state.alerts, shallowEqual);
-  const { lat, lon } = useSelector((state: RootState) => state.location, shallowEqual);
+  // Whether there's anywhere to go back to, kept in state and refreshed on
+  // focus / navigation changes. Reading navigation.canGoBack() during render
+  // went stale: a screen re-rendered while covered (e.g. Today re-rendering
+  // on a language change while Settings was open on top) kept a back arrow
+  // after the cover was popped, and tapping it threw "GO_BACK was not
+  // handled by any navigator".
+  const [canGoBack, setCanGoBack] = useState(() => navigation.canGoBack());
+  useEffect(() => {
+    const update = () => setCanGoBack(navigation.canGoBack());
+    update();
+    const unsubscribeFocus = navigation.addListener('focus', update);
+    const unsubscribeState = navigation.addListener('state', update);
+    return () => {
+      unsubscribeFocus();
+      unsubscribeState();
+    };
+  }, [navigation]);
 
-  const showSearch = useRoute().name !== SCREENS.Search;
-  const [visible, setVisible] = React.useState(false);
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+  const onBack = () => {
+    if (props.onBack) {
+      props.onBack();
+      return;
+    }
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
+  };
 
-  useIsFocused();
-
-  let relevantAlerts: CAPAlert[] = []
-  if (lat && lon) {
-    relevantAlerts = alerts.filter(alert => alertInLocation(alert, { latitude: lat, longitude: lon }))
-  }
+  const titleBlock = (
+    <>
+      {(props.isPlace || props.titleIcon) && <Icon size={18} color={colors.primary} source={props.titleIcon ?? 'map-marker'} />}
+      <View style={styles.titleTextBlock}>
+        <ThemedText type="default" themeColor="textStrong" style={styles.appTitle} numberOfLines={1}>{props.location || "Climweb Weather App"}</ThemedText>
+        {props.isPlace && <ThemedText type="small" themeColor="primary" style={styles.placeSubtitle}>{t("places.tapToChange")}</ThemedText>}
+      </View>
+    </>
+  );
 
   return (
-    <View style={styles.appBar}>
+    <ThemedView type="bg" style={styles.appBar}>
       <View style={styles.appTitleContainer}>
-        {navigation.canGoBack() &&
-          <TouchableOpacity accessible={true} accessibilityLabel='Go back' onPress={() => navigation.goBack()} style={{ paddingRight: 12 }}>
-            <Icon size={28} color='white' source={backArrow} />
+        {!props.hideBack && (canGoBack || !!props.onBack) &&
+          <TouchableOpacity accessible={true} accessibilityLabel={t('Go back')} onPress={onBack} style={styles.backButton}>
+            <Icon size={28} color={colors.primary} source={backArrow} />
           </TouchableOpacity>}
-        <Text style={styles.appTitle} numberOfLines={1}>{props.location || "Zanyengo"}</Text>
-        {getWarningIcons(relevantAlerts)}
+        {props.isPlace
+          ? <TouchableOpacity
+              style={styles.titleTouchable}
+              accessible={true}
+              accessibilityLabel={`${props.location}. ${t("places.tapToChange")}`}
+              onPress={() => router.push(SCREENS.Search.toString() as Href)}
+            >
+              {titleBlock}
+            </TouchableOpacity>
+          : <View style={styles.titleTouchable}>{titleBlock}</View>
+        }
       </View>
 
-      <View style={styles.appNav}>
-        {showSearch &&
-          <TouchableOpacity style={styles.items} accessible={true} accessibilityLabel='Search'
-            onPress={() => router.push(SCREENS.Search.toString() as Href)}>
-            <Icon size={28} color='white' source="magnify" />
-          </TouchableOpacity>
-        }
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
-          <Menu
-            visible={visible}
-            onDismiss={closeMenu} anchor={<TouchableOpacity accessible={true} accessibilityLabel={visible ? 'Close menu' : 'Open menu'} onPress={() => openMenu()}><Icon size={28} color='white' source={visible ? "close" : "menu"} /></TouchableOpacity>}
-            style={{ position: 'absolute', right: 0, width: 185 }}
-            contentStyle={{ backgroundColor: 'rgba(217, 217, 217, .9)', marginTop: 25, padding: 0, shadowColor: 'rgba(217, 217, 217, .9)' }}
-          >
-            <Menu.Item
-              onPress={() => {
-                closeMenu();
-                router.push(SCREENS.AboutUs.toString() as Href);
-              }}
-              style={styles.menuItem}
-              accessibilityLabel='About the developers'
-              titleStyle={styles.menuItemTitle}
-              title={t("About us")}
-            />
-            <Menu.Item
-              onPress={() => {
-                closeMenu();
-                router.push(SCREENS.AboutTheApp.toString() as Href);
-              }}
-              style={styles.menuItem}
-              accessibilityLabel='About the app'
-              titleStyle={styles.menuItemTitle}
-              title={t("About the app")}
-            />
-            <Menu.Item
-              onPress={() => {
-                closeMenu();
-                router.push(SCREENS.Settings.toString() as Href);
-              }}
-              style={styles.menuItem}
-              accessibilityLabel='Settings'
-              titleStyle={styles.menuItemTitle}
-              title={t("Settings")}
-            />
-          </Menu>
-        </View>
-      </View>
-    </View>
+      {!props.hideSettings && (
+        <TouchableOpacity
+          style={styles.settingsButton}
+          accessible={true}
+          accessibilityLabel={t("settings.title")}
+          onPress={() => router.push(SCREENS.Settings.toString() as Href)}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
+          <Icon size={26} color={colors.primary} source="cog-outline" />
+        </TouchableOpacity>
+      )}
+    </ThemedView>
   );
 }
 
-const getWarningIcons = (alerts: Array<CAPAlert>) => {
-  if (alerts && alerts.length) {
-    const icons: Array<React.JSX.Element> = [];
-    for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
-      const capInfo = alerts[i].info as Array<CAPInfo>;
-      const alertColor = alertLevel(capInfo[0]).toLowerCase();
-      const icon = WEATHER_WARNING_ICONS[alertColor];
-      icons.push(
-        <TouchableOpacity key={i} style={{ position: 'relative', top: 0, right: j, zIndex: j }}>
-          <Image style={{ width: 35, height: 30 }} source={icon} />
-        </TouchableOpacity>
-      );
-    }
-    return <View style={styles.warningIcons}>
-      {icons}
-    </View>;
-  }
-};
-
 export default AppBar;
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: ThemeColors) => StyleSheet.create({
   appBar: {
     flexDirection: 'row',
-    alignContent: 'center',
-  },
-  blurBar: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    zIndex: 0,
+    alignItems: 'center',
+    backgroundColor: colors.bg,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    minHeight: touchTarget.nav + Spacing.lg,
   },
   appTitleContainer: {
-    paddingRight: 13,
-    paddingLeft: 13,
-    paddingTop: 17,
-    paddingBottom: 17,
-    flex: 7,
+    paddingLeft: Spacing.md,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    zIndex: 1,
+  },
+  backButton: {
+    minWidth: touchTarget.nav,
+    minHeight: touchTarget.nav,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleTouchable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    flexShrink: 1,
+    minHeight: touchTarget.nav,
+    paddingVertical: Spacing.md,
+    marginLeft: Spacing.md,
+  },
+  titleTextBlock: {
+    flexShrink: 1,
+    marginRight: Spacing.lg,
   },
   appTitle: {
     fontSize: 20,
-    fontFamily: 'NotoSans-Regular',
-    color: 'white',
-    marginRight: 19,
-    flex: 1,
+    fontFamily: Fonts.sans.bold,
+    color: colors.textStrong,
   },
-  appNav: {
-    flex: 2,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+  placeSubtitle: {
+    fontSize: 14,
+    fontFamily: Fonts.sans.regular,
+    color: colors.primary,
+  },
+  settingsButton: {
+    width: touchTarget.nav,
+    height: touchTarget.nav,
     alignItems: 'center',
-    zIndex: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingTop: 12,
-    paddingBottom: 12,
-  },
-  items: {
-    paddingRight: 15,
-  },
-  menuItem: {
-    paddingRight: 50,
-    paddingLeft: 20,
-    color: 'white',
-  },
-  menuItemTitle: {
-    color: 'white',
-  },
-  weatherWarning: {
-    paddingLeft: 12,
+    justifyContent: 'center',
+    marginRight: Spacing.md,
   },
   warningIcons: {
     flexDirection: 'row',
