@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl, useWindowDimensions } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";
 import { ActivityIndicator, Button } from 'react-native-paper';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions } from 'expo-router/react-navigation';
 import { useRouter, useNavigation } from 'expo-router';
 import { isUndefined } from 'lodash';
 
