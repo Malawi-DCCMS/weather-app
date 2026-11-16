@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { ImageBackground, StyleSheet, View, Image, ListRenderItemInfo, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
@@ -24,7 +24,7 @@ function WeatherWarningScreen(): JSX.Element {
   const { alerts } = useSelector((state: RootState) => state.alerts);
   const alert = alerts.find(alert => alert.identifier === alertID)
 
-  type TimePeriods = Array<{key: string, val?: string}>;
+  type TimePeriods = {key: string, val?: string}[];
   const getTimePeriodData = (alert: CAPAlert): TimePeriods => ([
     { key: 'Issued:', val: alert.info && DateTime.fromISO(alert.sent).toFormat('LLL. dd, yyyy, H:mm a') },
     { key: 'Effective:', val: alert.info && alert.info[0].effective && 

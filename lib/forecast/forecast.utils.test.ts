@@ -57,8 +57,8 @@ describe("select correct weather symbol for a single day", () => {
  * 
  * @returns 
  */
-function sampleForecast(): Array<ForecastTimestep> {
-    let ret: Array<ForecastTimestep> = []
+function sampleForecast(): ForecastTimestep[] {
+    let ret: ForecastTimestep[] = []
 
     for (let i = 0; i < 24; i++) {
         const doc = {

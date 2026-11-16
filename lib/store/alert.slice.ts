@@ -17,7 +17,7 @@ const levelYellowAndAbove = (alert: CAPAlert): boolean => {
   };
 }
 
-export const getAlerts = createAsyncThunk('alerts/getActiveAlerts', async (): Promise<Array<CAPAlert>> => {
+export const getAlerts = createAsyncThunk('alerts/getActiveAlerts', async (): Promise<CAPAlert[]> => {
   console.log('[Thunk] getAlerts DISPATCHED');
 
   const collector = new CAPCollector();
@@ -31,7 +31,7 @@ export const getAlerts = createAsyncThunk('alerts/getActiveAlerts', async (): Pr
 type InitialState = {
   loading: boolean;
   error?: string;
-  alerts: Array<CAPAlert> ;
+  alerts: CAPAlert[] ;
 };
 const initialState: InitialState = {
   loading: false,

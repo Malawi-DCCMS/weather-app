@@ -20,7 +20,7 @@ export function getForecastDescription(key: string): string {
  * @param timesteps The forecast timesteps
  * @returns A weather symobl text, or undefined if unable to find a symbol to show.
  */
-export function getForecastSymbolAtTime(t: moment.Moment, timesteps: Array<ForecastTimestep>): string | undefined {
+export function getForecastSymbolAtTime(t: moment.Moment, timesteps: ForecastTimestep[]): string | undefined {
   const today = t.format('YYYY-MM-DD');
 
   if (t.isBefore(moment(`${today} 04:00:00Z`))) {
@@ -49,7 +49,7 @@ export function getForecastSymbolAtTime(t: moment.Moment, timesteps: Array<Forec
  * @param timesteps All available timesteps for a single day. 
  * @returns A weather icon representing the weather for this particular day, or undefined if unable to determine the weather symbol.
  */
-export function getWeatherIconAtDay(timesteps: Array<ForecastTimestep>): string | undefined {
+export function getWeatherIconAtDay(timesteps: ForecastTimestep[]): string | undefined {
   const wantedTimestep = timesteps[0].time.substring(0, 10) + "T06:00:00Z";
   const timestep = timesteps.find(timestep => timestep.time == wantedTimestep);
   let symbol = timestep?.data.next_12_hours?.summary?.symbol_code;

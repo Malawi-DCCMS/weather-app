@@ -104,11 +104,11 @@ const AppBar = (props: AppBarProps) => {
   );
 }
 
-const getWarningIcons = (alerts: Array<CAPAlert>) => {
+const getWarningIcons = (alerts: CAPAlert[]) => {
   if (alerts && alerts.length) {
-    const icons: Array<React.JSX.Element> = [];
+    const icons: React.JSX.Element[] = [];
     for (let i = 0, j = 0; i < alerts.length; i += 1, j += 20) {
-      const capInfo = alerts[i].info as Array<CAPInfo>;
+      const capInfo = alerts[i].info as CAPInfo[];
       const alertColor = alertLevel(capInfo[0]).toLowerCase();
       const icon = WEATHER_WARNING_ICONS[alertColor];
       icons.push(

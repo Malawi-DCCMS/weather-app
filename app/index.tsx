@@ -4,8 +4,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DateTime } from "luxon";
 import { ActivityIndicator, Button } from 'react-native-paper';
-import { CommonActions } from 'expo-router/react-navigation';
-import { useRouter, useNavigation } from 'expo-router';
+import { useRouter, useNavigation, Href } from 'expo-router';
 import { isUndefined } from 'lodash';
 
 import AppBar from '@/components/AppBar';
@@ -74,12 +73,7 @@ const MainScreen = () => {
   useEffect(() => {
     if (locationError && !navigation.canGoBack()) {
       dispatch(resetError());
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: SCREENS.NoLocation }],
-        })
-      );
+      router.replace(SCREENS.NoLocation.toString() as Href);
     }
   }, [locationError]);
 

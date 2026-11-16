@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useCallback, useRef, useState, useEffect, MutableRefObject } from 'react'
 import type { SetStateAction, Dispatch } from 'react'
-import { LayoutChangeEvent, View, ViewProps } from 'react-native'
+import { LayoutChangeEvent, View, ViewProps, ViewInstance } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { fadeInDownShort, fadeInUpShort } from './helpers'
 
@@ -9,7 +9,7 @@ export interface IAutocompleteDropdownContext {
   setContent: Dispatch<SetStateAction<ReactElement | undefined>>
   direction?: 'up' | 'down'
   setDirection: Dispatch<SetStateAction<IAutocompleteDropdownContext['direction']>>
-  activeInputRef?: MutableRefObject<View | null>
+  activeInputRef?: MutableRefObject<ViewInstance | null>
 }
 
 export const AutocompleteDropdownContext = React.createContext<IAutocompleteDropdownContext>({
@@ -32,7 +32,7 @@ export const AutocompleteDropdownContextProvider: FC<any> = ({ headerOffset = 0,
   const [contentStyles, setContentStyles] = useState<
     { top: number; left: number; width?: number } | undefined
   >(undefined)
-  const activeInputRef = useRef<View>(null)
+  const activeInputRef = useRef<ViewInstance>(null)
 
   useEffect(() => {
     if (!inputMeasurements?.height) {

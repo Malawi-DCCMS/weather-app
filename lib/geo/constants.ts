@@ -4,7 +4,7 @@ export type District = {
     lon: number,
   };
   
-  export const DISTRICTS: Array<District> = [
+  export const DISTRICTS: District[] = [
     {
       name: 'Lilongwe',
       lat: -13.96692,
