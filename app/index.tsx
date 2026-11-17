@@ -58,6 +58,9 @@ const MainScreen = () => {
     if (isUndefined(lat) || isUndefined(lon)) {
       dispatch(getPreciseLocation());
     }
+    // Intentionally run only once on mount: lat/lon are omitted so this doesn't re-fire
+    // every time they change (that's handled by the effect below).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update forecast and alerts each time lat/lon changes.
@@ -67,7 +70,7 @@ const MainScreen = () => {
       dispatch(getLocationForecast({ lat, lon }));
       dispatch(getAlerts());
     }
-  }, [lat, lon]);
+  }, [lat, lon, dispatch]);
 
   // Reset navigation and go to list of cities if GPS location results in locationError.
   useEffect(() => {
@@ -75,7 +78,7 @@ const MainScreen = () => {
       dispatch(resetError());
       router.replace(SCREENS.NoLocation.toString() as Href);
     }
-  }, [locationError]);
+  }, [locationError, dispatch, navigation, router]);
 
   // empty page as default content
   let mainContent: React.JSX.Element = (

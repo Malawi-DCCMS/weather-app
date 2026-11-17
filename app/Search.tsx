@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 
 import { Search } from '@/components/Search';
 import Alerts from '@/components/Alerts';
@@ -11,6 +11,7 @@ import AppBar from '@/components/AppBar';
 import { AppDispatch, RootState } from '@/lib/store';
 import { setLocation } from '@/lib/store/location.slice';
 import { Place } from '@/lib/geo/places';
+import { SCREENS } from '@/lib/layout/constants';
 
 const appBackground = require('@/assets/new-glass-bg.png');
 
@@ -31,7 +32,7 @@ const SearchScreen = () => {
               (place: Place) => {
                 console.log('[UI] dispatching setLocation with:', place);
                 dispatch(setLocation({ name: place.name, lat: place.latitude, lon: place.longitude }));
-                router.dismissAll();
+                router.dismissTo(SCREENS.Home.toString() as Href);
               }
             }
           />

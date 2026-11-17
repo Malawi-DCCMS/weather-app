@@ -26,6 +26,7 @@ export const isValidFor = (area: CAPArea, location: { latitude: number; longitud
       }
     }
   }
+
   return false;
 };
 
@@ -242,7 +243,7 @@ export const setNote = (alert: CAPAlert, note: string | undefined): CAPAlert => 
 });
 
 /**
- * Update a CAPAlert with a list of references to previous CAPAlert messages linked to this one. 
+ * Update a CAPAlert with a list of references to previous CAPAlert messages linked to this one.
  * Each reference string must be on the format: "sender,identifier,sent".
  */
 export const setReferences = (alert: CAPAlert, references: string[] | undefined): CAPAlert => {
@@ -367,12 +368,14 @@ export const parseFromXML = async (xmlString: string): Promise<CAPAlert> => {
  * @returns A boolean indicating whether the alert is relevant for the specified location.
  */
 export function alertInLocation(alert: CAPAlert, location: { latitude: number, longitude: number }): boolean {
-  if (!alert.info)
-      return false
+  if (!alert.info) {
+    return false
+  }
 
   const info = alert.info[0]
-  if (!info.area || !isValidFor(info.area, location))
-      return false
-  
+  if (!info.area || !isValidFor(info.area, location)) {
+    return false
+  }
+
   return true
 }

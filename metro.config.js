@@ -5,7 +5,9 @@ config.transformer.minifierPath = 'metro-minify-terser';
 
 config.transformer.minifierConfig = {
   compress: {
-    drop_console: true,
+    // Only strip console.* calls in production builds so console.log is
+    // still usable while debugging in development.
+    drop_console: process.env.NODE_ENV === 'production',
   },
 };
 

@@ -25,6 +25,7 @@ export const getAlerts = createAsyncThunk('alerts/getActiveAlerts', async (): Pr
 
   const filteredMessages = collector.activeMessages()
     .filter(levelYellowAndAbove);
+
   return filteredMessages;
 });
 

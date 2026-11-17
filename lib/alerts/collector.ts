@@ -3,11 +3,11 @@ import { DateTime } from "luxon"
 import { readCapFeedIfModified } from "./rss"
 import { CAPAlert } from './alert';
 import { fetchCAPAlert } from './alert';
-import { APP_ALERTS_SENDER_ID } from '../../config';
+import { APP_ALERTS_SENDER_IDS } from '../../config';
 
 /**
  * CAPCollector keeps track of active CAP alerts.
- * 
+ *
  * In these docs, when we say active, we mean messages that are not cancelled, and are either ongoing or expected.
  */
 export class CAPCollector {
@@ -21,7 +21,7 @@ export class CAPCollector {
 
     /**
      * Refresh local storage of alerts.
-     * 
+     *
      * @returns Any new alerts since last call to update()
      */
     public async update(): Promise<CAPAlert[]> {
@@ -34,8 +34,9 @@ export class CAPCollector {
         }
 
         for (const ref of refs) {
-            if (ref.pubDate <= this._lastUpdate)
+            if (ref.pubDate <= this._lastUpdate) {
                 continue
+            }
             try {
                 const msg = await fetchCAPAlert(ref.link)
 
@@ -49,7 +50,7 @@ export class CAPCollector {
 
                 ret.push(msg)
             } catch (err: any) {
-                console.log(err)
+                console.log(`[Collector] failed to fetch/parse ref "${ref.title}" (${ref.link}):`, err)
             }
         }
 
@@ -60,7 +61,7 @@ export class CAPCollector {
 
     /**
      * Get a list of all active alerts.
-     * 
+     *
      * @returns All active (not canceled) alerts.
      */
     public activeMessages(): CAPAlert[] {
@@ -75,20 +76,32 @@ export class CAPCollector {
 
     /**
      * Check if a message is relevant at a given location and time.
-     * 
+     *
      * @param alert The alert to check
      * @param point The location we are interested in
      * @returns True if the given alert is relevant.
      */
     private isRelevant(alert: CAPAlert): boolean {
-        if (!alert.info) return false;
+        if (!alert.info) {
+            return false;
+        }
         const info = alert.info[0]
 
-        if (alert.sender !== APP_ALERTS_SENDER_ID) return false;
-        if (alert.status !== 'Actual') return false;
-        if (alert.scope !== 'Public') return false;
-        if (info.expires && DateTime.fromISO(info.expires) <= DateTime.now()) return false;
-
+        const isKnownSender = APP_ALERTS_SENDER_IDS.some(
+            id => id.trim().toLowerCase() === alert.sender?.trim().toLowerCase()
+        );
+        if (!isKnownSender) {
+            return false;
+        }
+        if (alert.status !== 'Actual') {
+            return false;
+        }
+        if (alert.scope !== 'Public') {
+            return false;
+        }
+        if (info.expires && DateTime.fromISO(info.expires) <= DateTime.now()) {
+            return false;
+        }
         return true
     }
 }
